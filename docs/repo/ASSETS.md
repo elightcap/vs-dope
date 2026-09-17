@@ -14,7 +14,13 @@ Poppy stages are `assets/vs-dope/shapes/plant/papaver_stage_01_*.json` through s
 
 Coca stages are `assets/vs-dope/shapes/plant/coca_stage_01_*.json` through stage 09.
 
-The papaver stages are the stronger in-repo reference for detailed plant geometry. Coca models are currently much simpler.
+Coca models use a tapered, bent leader, staggered branches, secondary twigs, and individually attached oval leaves. Stage 9 has 12 main branches and 123 leaves. Flowers begin at stage 7; fruit begins at stage 8. Shape and block texture mappings both use the existing four `coca-*-v4.png` textures.
+
+- `tools/build_coca_models.py` regenerates all nine coca shapes deterministically.
+- `tools/preview_coca_models.py` renders the actual shape geometry and mapped textures using Pillow and NumPy; results are in `docs/previews/coca-mature.png` and `coca-growth.png`.
+- `docs/COCA_MODELS.md` records the design and remaining in-game checks.
+
+Keep leaves distributed along branches and secondary twigs, with varied orientations so they remain visible from side views. Petioles overlap the transparent texture margin. Avoid reverting to thick straight trunks, bare horizontal arms, or oversized flowers/fruit.
 
 ## Items
 
