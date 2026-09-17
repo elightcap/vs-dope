@@ -11,6 +11,7 @@ public class DrugConsumableItem : Item
     protected virtual int EffectDurationMs => 2500;
     protected virtual bool Psychedelic => false;
     protected virtual string EffectKey => $"vs-dope-{Code?.Path ?? "drug"}-speed";
+    protected virtual string ToleranceProduct => Code?.Path ?? "drug";
 
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
     {
@@ -34,7 +35,19 @@ public class DrugConsumableItem : Item
     {
         if (byEntity.World.Side != EnumAppSide.Server) return;
         var entity = byEntity;
-        if (HealAmount > 0) entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, HealAmount);
+        float effectMultiplier = 1f;
+        IPlayer player = null;
+
+        if (byEntity is EntityPlayer entityPlayer)
+        {
+            player = byEntity.World.PlayerByUid(entityPlayer.PlayerUID);
+            if (player != null)
+                effectMultiplier = VsDopeModSystem.AddictionSystem.GetEffectMultiplier(player, ToleranceProduct);
+        }
+
+        float effectiveHeal = HealAmount * effectMultiplier;
+        if (effectiveHeal > 0)
+            entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, effectiveHeal);
 
         float currentIntox = entity.WatchedAttributes.GetFloat("intoxication");
         entity.WatchedAttributes.SetFloat("intoxication", GameMath.Clamp(currentIntox + IntoxicationAmount, 0f, 25f));
@@ -44,16 +57,17 @@ public class DrugConsumableItem : Item
             entity.WatchedAttributes.SetFloat("psychedelic", GameMath.Clamp(currentPsych + IntoxicationAmount * 1.5f, 0f, 25f));
         }
 
+        // Tolerance pulls the item's movement modifier back toward neutral (1.0x).
+        float effectiveSpeed = 1f + (SpeedMultiplier - 1f) * effectMultiplier;
         string effectKey = EffectKey;
-        entity.Stats.Set("walkspeed", effectKey, GameMath.Clamp(SpeedMultiplier, 0.3f, 2f));
+        entity.Stats.Set("walkspeed", effectKey, GameMath.Clamp(effectiveSpeed, 0.3f, 2f));
         entity.WatchedAttributes.SetLong(effectKey + "-expires", entity.World.ElapsedMilliseconds + EffectDurationMs);
 
         byEntity.World.RegisterCallback(_ =>
         {
             if (!entity.Alive) return;
             long expires = entity.WatchedAttributes.GetLong(effectKey + "-expires");
-            if (entity.World.ElapsedMilliseconds < expires) return; // a later dose refreshed this effect
-
+            if (entity.World.ElapsedMilliseconds < expires) return;
             entity.Stats.Remove("walkspeed", effectKey);
             entity.WatchedAttributes.RemoveAttribute(effectKey + "-expires");
             float intox = entity.WatchedAttributes.GetFloat("intoxication");
@@ -65,10 +79,10 @@ public class DrugConsumableItem : Item
             }
         }, EffectDurationMs);
 
-        if (byEntity is EntityPlayer entityPlayer)
+        if (player != null)
         {
-            var player = byEntity.World.PlayerByUid(entityPlayer.PlayerUID);
-            if (player != null) VsDopeModSystem.AddictionSystem.RecordUse(player);
+            VsDopeModSystem.AddictionSystem.RecordUse(player);
+            VsDopeModSystem.AddictionSystem.RecordToleranceUse(player, ToleranceProduct);
         }
 
         slot.TakeOut(1);
@@ -82,6 +96,7 @@ public class OpiumItem : DrugConsumableItem
     protected override float SpeedMultiplier => 0.9f;
     protected override float IntoxicationAmount => 3f;
     protected override int EffectDurationMs => 2500;
+    protected override string ToleranceProduct => "opium";
 }
 
 public class MorphineItem : DrugConsumableItem
@@ -90,6 +105,7 @@ public class MorphineItem : DrugConsumableItem
     protected override float SpeedMultiplier => 0.8f;
     protected override float IntoxicationAmount => 6f;
     protected override int EffectDurationMs => 5000;
+    protected override string ToleranceProduct => "morphine";
 }
 
 public class CocaVitaeItem : DrugConsumableItem
@@ -98,4 +114,5 @@ public class CocaVitaeItem : DrugConsumableItem
     protected override float SpeedMultiplier => 1.15f;
     protected override float IntoxicationAmount => 1f;
     protected override int EffectDurationMs => 30000;
+    protected override string ToleranceProduct => "coca-vitae";
 }
