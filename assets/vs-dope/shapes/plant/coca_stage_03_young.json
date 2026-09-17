@@ -1,4 +1,7 @@
 {
+  "editor": {
+    "allAngles": true
+  },
   "textureWidth": 32,
   "textureHeight": 32,
   "textures": {
@@ -9,17 +12,24 @@
   },
   "elements": [
     {
-      "name": "trunk",
+      "name": "leader-0",
       "from": [
-        7.68,
-        0,
-        7.68
+        8.0,
+        -0.0473,
+        7.9527
       ],
       "to": [
-        8.32,
-        6.4,
-        8.32
+        9.2909,
+        0.0473,
+        8.0473
       ],
+      "rotationOrigin": [
+        8.0,
+        0.0,
+        8.0
+      ],
+      "rotationY": -153.43495,
+      "rotationZ": 87.8657,
       "faces": {
         "north": {
           "texture": "#stem",
@@ -78,17 +88,24 @@
       }
     },
     {
-      "name": "branch0",
+      "name": "leader-1",
       "from": [
-        8,
-        2.87,
-        7.84
+        7.957,
+        1.24958,
+        7.98108
       ],
       "to": [
-        9.83,
-        3.13,
-        8.16
+        9.25081,
+        1.33042,
+        8.06192
       ],
+      "rotationOrigin": [
+        7.957,
+        1.29,
+        8.0215
+      ],
+      "rotationY": -17.65012,
+      "rotationZ": 85.59942,
       "faces": {
         "north": {
           "texture": "#stem",
@@ -144,27 +161,27 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        3,
-        8
-      ],
-      "rotationY": 35,
-      "rotationZ": -10
+      }
     },
     {
-      "name": "tipA0-pet",
+      "name": "leader-2",
       "from": [
-        9.476274329924227,
-        3.2627761651304823,
-        6.911301585721569
+        8.0516,
+        2.54646,
+        8.01806
       ],
       "to": [
-        9.893874329924227,
-        3.3727761651304826,
-        7.021301585721568
+        9.34413,
+        2.61354,
+        8.08514
       ],
+      "rotationOrigin": [
+        8.0516,
+        2.58,
+        8.0516
+      ],
+      "rotationY": -154.79888,
+      "rotationZ": 86.41638,
       "faces": {
         "north": {
           "texture": "#stem",
@@ -220,30 +237,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.3177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 5,
-      "rotationZ": 26
+      }
     },
     {
-      "name": "tipA0-blade0",
+      "name": "leader-3",
       "from": [
-        9.821874329924226,
-        3.2577761651304824,
-        6.5487015857215685
+        7.9785,
+        3.84334,
+        8.05934
       ],
       "to": [
-        10.304274329924226,
-        3.3777761651304825,
-        7.383901585721569
+        9.27539,
+        3.89666,
+        8.11266
       ],
+      "rotationOrigin": [
+        7.9785,
+        3.87,
+        8.086
+      ],
+      "rotationY": 14.93142,
+      "rotationZ": 84.09124,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -252,7 +269,7 @@
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -261,7 +278,7 @@
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -270,7 +287,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -279,7 +296,7 @@
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -288,7 +305,7 @@
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -296,30 +313,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.3177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 5,
-      "rotationZ": 26
+      }
     },
     {
-      "name": "tipA0-blade1",
+      "name": "leader-4",
       "from": [
-        10.253874329924226,
-        3.2577761651304824,
-        6.635101585721569
+        8.1075,
+        5.14022,
+        8.03182
       ],
       "to": [
-        10.772274329924226,
-        3.3777761651304825,
-        7.297501585721569
+        8.92676,
+        5.17978,
+        8.07138
       ],
+      "rotationOrigin": [
+        8.1075,
+        5.16,
+        8.0516
+      ],
+      "rotationY": -135.0,
+      "rotationZ": 85.74319,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -328,7 +345,7 @@
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -337,7 +354,7 @@
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -346,7 +363,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -355,7 +372,7 @@
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -364,7 +381,7 @@
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -372,30 +389,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.3177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 5,
-      "rotationZ": 26
+      }
     },
     {
-      "name": "tipA0-blade2",
+      "name": "young-0-petiole",
       "from": [
-        10.714674329924227,
-        3.2577761651304824,
-        6.771901585721569
+        7.957,
+        1.2725,
+        8.004
       ],
       "to": [
-        11.189874329924226,
-        3.3777761651304825,
-        7.160701585721569
+        8.277,
+        1.3075,
+        8.039
       ],
+      "rotationOrigin": [
+        7.957,
+        1.29,
+        8.0215
+      ],
+      "rotationY": -0.0,
+      "rotationZ": 15,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -404,7 +421,7 @@
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -413,7 +430,7 @@
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -422,7 +439,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -431,7 +448,7 @@
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -440,7 +457,7 @@
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -448,30 +465,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.3177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 5,
-      "rotationZ": 26
+      }
     },
     {
-      "name": "tipB0-pet",
+      "name": "young-0-blade",
       "from": [
-        9.476274329924227,
-        3.2627761651304823,
-        6.911301585721569
+        8.05359,
+        0.8948,
+        8.0135
       ],
       "to": [
-        9.870674329924226,
-        3.3727761651304826,
-        7.021301585721568
+        9.50559,
+        1.73696,
+        8.0295
       ],
+      "rotationOrigin": [
+        8.05359,
+        1.31588,
+        8.0215
+      ],
+      "rotationY": -0.0,
+      "rotationZ": 15,
       "faces": {
         "north": {
-          "texture": "#stem",
+          "texture": "#leaf",
           "uv": [
             0,
             0,
@@ -480,43 +497,7 @@
           ]
         },
         "south": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "east": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "west": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "up": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "down": {
-          "texture": "#stem",
+          "texture": "#leaf",
           "uv": [
             0,
             0,
@@ -524,30 +505,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.3177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 73,
-      "rotationZ": 38
+      }
     },
     {
-      "name": "tipB0-blade0",
+      "name": "young-1-petiole",
       "from": [
-        9.802674329924226,
-        3.2577761651304824,
-        6.571901585721569
+        7.98567,
+        1.66341,
+        8.01312
       ],
       "to": [
-        10.258274329924227,
-        3.3777761651304825,
-        7.360701585721569
+        8.30567,
+        1.69841,
+        8.04812
       ],
+      "rotationOrigin": [
+        7.98567,
+        1.68091,
+        8.03062
+      ],
+      "rotationY": -137.5,
+      "rotationZ": 27,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -556,7 +537,7 @@
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -565,7 +546,7 @@
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -574,7 +555,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -583,7 +564,7 @@
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -592,7 +573,7 @@
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -600,27 +581,27 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.3177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 73,
-      "rotationZ": 38
+      }
     },
     {
-      "name": "tipB0-blade1",
+      "name": "young-1-blade",
       "from": [
-        10.210674329924228,
-        3.2577761651304824,
-        6.6535015857215685
+        7.91997,
+        1.30523,
+        8.08282
       ],
       "to": [
-        10.700274329924227,
-        3.3777761651304825,
-        7.279101585721569
+        9.37197,
+        2.14739,
+        8.09882
       ],
+      "rotationOrigin": [
+        7.91997,
+        1.72631,
+        8.09082
+      ],
+      "rotationY": -137.5,
+      "rotationZ": 27,
       "faces": {
         "north": {
           "texture": "#leaf",
@@ -639,67 +620,31 @@
             32,
             32
           ]
-        },
-        "east": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "west": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "up": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "down": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.3177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 73,
-      "rotationZ": 38
+      }
     },
     {
-      "name": "tipB0-blade2",
+      "name": "young-2-petiole",
       "from": [
-        10.645874329924226,
-        3.2577761651304824,
-        6.7827015857215684
+        8.01433,
+        2.05432,
+        8.02224
       ],
       "to": [
-        11.094674329924226,
-        3.3777761651304825,
-        7.149901585721569
+        8.33433,
+        2.08932,
+        8.05724
       ],
+      "rotationOrigin": [
+        8.01433,
+        2.07182,
+        8.03974
+      ],
+      "rotationY": -275.0,
+      "rotationZ": 39,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -708,7 +653,7 @@
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -717,7 +662,7 @@
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -726,7 +671,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -735,7 +680,7 @@
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -744,7 +689,7 @@
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -752,66 +697,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.3177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 73,
-      "rotationZ": 38
+      }
     },
     {
-      "name": "tipC0-pet",
+      "name": "young-2-blade",
       "from": [
-        9.476274329924227,
-        3.3627761651304824,
-        6.911301585721569
+        8.02111,
+        2.12675,
+        7.54124
       ],
       "to": [
-        9.835874329924227,
-        3.4727761651304827,
-        7.021301585721568
+        9.47311,
+        2.14275,
+        8.3834
       ],
+      "rotationOrigin": [
+        8.02111,
+        2.13475,
+        7.96232
+      ],
+      "rotationY": -275.0,
+      "rotationZ": 39,
       "faces": {
-        "north": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "south": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "east": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "west": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
         "up": {
-          "texture": "#stem",
+          "texture": "#leaf",
           "uv": [
             0,
             0,
@@ -820,7 +729,7 @@
           ]
         },
         "down": {
-          "texture": "#stem",
+          "texture": "#leaf",
           "uv": [
             0,
             0,
@@ -828,30 +737,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.4177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 153,
-      "rotationZ": 30
+      }
     },
     {
-      "name": "tipC0-blade0",
+      "name": "young-3-petiole",
       "from": [
-        9.773874329924226,
-        3.3577761651304825,
-        6.606701585721568
+        8.043,
+        2.44523,
+        8.03136
       ],
       "to": [
-        10.189274329924226,
-        3.4777761651304826,
-        7.325901585721569
+        8.363,
+        2.48023,
+        8.06636
       ],
+      "rotationOrigin": [
+        8.043,
+        2.46273,
+        8.04886
+      ],
+      "rotationY": -412.5,
+      "rotationZ": 15,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -860,7 +769,7 @@
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -869,7 +778,7 @@
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -878,7 +787,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -887,7 +796,7 @@
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -896,7 +805,7 @@
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -904,27 +813,27 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.4177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 153,
-      "rotationZ": 30
+      }
     },
     {
-      "name": "tipC0-blade1",
+      "name": "young-3-blade",
       "from": [
-        10.145874329924228,
-        3.3577761651304825,
-        6.681101585721569
+        8.1018,
+        2.06753,
+        8.1175
       ],
       "to": [
-        10.592274329924226,
-        3.4777761651304826,
-        7.251501585721568
+        9.5538,
+        2.90969,
+        8.1335
       ],
+      "rotationOrigin": [
+        8.1018,
+        2.48861,
+        8.1255
+      ],
+      "rotationY": -412.5,
+      "rotationZ": 15,
       "faces": {
         "north": {
           "texture": "#leaf",
@@ -943,67 +852,31 @@
             32,
             32
           ]
-        },
-        "east": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "west": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "up": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "down": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.4177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 153,
-      "rotationZ": 30
+      }
     },
     {
-      "name": "tipC0-blade2",
+      "name": "young-4-petiole",
       "from": [
-        10.542674329924226,
-        3.3577761651304825,
-        6.798901585721569
+        8.03609,
+        2.83614,
+        8.0414
       ],
       "to": [
-        10.951874329924227,
-        3.4777761651304826,
-        7.133701585721568
+        8.35609,
+        2.87114,
+        8.0764
       ],
+      "rotationOrigin": [
+        8.03609,
+        2.85364,
+        8.0589
+      ],
+      "rotationY": -550.0,
+      "rotationZ": 27,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1012,7 +885,7 @@
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1021,7 +894,7 @@
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1030,7 +903,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1039,7 +912,7 @@
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1048,7 +921,7 @@
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1056,30 +929,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        9.476274329924227,
-        3.4177761651304825,
-        6.966301585721569
-      ],
-      "rotationY": 153,
-      "rotationZ": 30
+      }
     },
     {
-      "name": "crownA-pet",
+      "name": "young-4-blade",
       "from": [
-        8,
-        5.925000000000001,
-        7.945
+        7.94835,
+        2.47796,
+        8.03542
       ],
       "to": [
-        8.3944,
-        6.035,
-        8.055
+        9.40035,
+        3.32012,
+        8.05142
       ],
+      "rotationOrigin": [
+        7.94835,
+        2.89904,
+        8.04342
+      ],
+      "rotationY": -550.0,
+      "rotationZ": 27,
       "faces": {
         "north": {
-          "texture": "#stem",
+          "texture": "#leaf",
           "uv": [
             0,
             0,
@@ -1088,43 +961,7 @@
           ]
         },
         "south": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "east": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "west": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "up": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "down": {
-          "texture": "#stem",
+          "texture": "#leaf",
           "uv": [
             0,
             0,
@@ -1132,30 +969,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        5.98,
-        8
-      ],
-      "rotationY": 20,
-      "rotationZ": 55
+      }
     },
     {
-      "name": "crownA-blade0",
+      "name": "young-5-petiole",
       "from": [
-        8.3264,
-        5.920000000000001,
-        7.6056
+        8.01394,
+        3.22705,
+        8.05182
       ],
       "to": [
-        8.782,
-        6.04,
-        8.3944
+        8.33394,
+        3.26205,
+        8.08682
       ],
+      "rotationOrigin": [
+        8.01394,
+        3.24455,
+        8.06932
+      ],
+      "rotationY": -687.5,
+      "rotationZ": 39,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1164,7 +1001,7 @@
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1173,7 +1010,7 @@
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1182,7 +1019,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1191,7 +1028,7 @@
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1200,7 +1037,7 @@
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1208,64 +1045,28 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        5.98,
-        8
-      ],
-      "rotationY": 20,
-      "rotationZ": 55
+      }
     },
     {
-      "name": "crownA-blade1",
+      "name": "young-5-blade",
       "from": [
-        8.7344,
-        5.920000000000001,
-        7.6872
+        8.07949,
+        3.29948,
+        7.60649
       ],
       "to": [
-        9.224,
-        6.04,
-        8.3128
+        9.53149,
+        3.31548,
+        8.44865
       ],
+      "rotationOrigin": [
+        8.07949,
+        3.30748,
+        8.02757
+      ],
+      "rotationY": -687.5,
+      "rotationZ": 39,
       "faces": {
-        "north": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "south": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "east": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "west": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
         "up": {
           "texture": "#leaf",
           "uv": [
@@ -1284,30 +1085,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        5.98,
-        8
-      ],
-      "rotationY": 20,
-      "rotationZ": 55
+      }
     },
     {
-      "name": "crownA-blade2",
+      "name": "young-6-petiole",
       "from": [
-        9.169599999999999,
-        5.920000000000001,
-        7.8164
+        7.99179,
+        3.61795,
+        8.06225
       ],
       "to": [
-        9.6184,
-        6.04,
-        8.1836
+        8.31179,
+        3.65295,
+        8.09725
       ],
+      "rotationOrigin": [
+        7.99179,
+        3.63545,
+        8.07975
+      ],
+      "rotationY": -825.0,
+      "rotationZ": 15,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1316,7 +1117,7 @@
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1325,7 +1126,7 @@
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1334,7 +1135,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1343,7 +1144,7 @@
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1352,7 +1153,7 @@
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1360,30 +1161,30 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        5.98,
-        8
-      ],
-      "rotationY": 20,
-      "rotationZ": 55
+      }
     },
     {
-      "name": "crownB-pet",
+      "name": "young-6-blade",
       "from": [
-        8,
-        5.985,
-        7.945
+        7.96679,
+        3.24026,
+        8.16505
       ],
       "to": [
-        8.3828,
-        6.095,
-        8.055
+        9.41879,
+        4.08242,
+        8.18105
       ],
+      "rotationOrigin": [
+        7.96679,
+        3.66134,
+        8.17305
+      ],
+      "rotationY": -825.0,
+      "rotationZ": 15,
       "faces": {
         "north": {
-          "texture": "#stem",
+          "texture": "#leaf",
           "uv": [
             0,
             0,
@@ -1392,43 +1193,7 @@
           ]
         },
         "south": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "east": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "west": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "up": {
-          "texture": "#stem",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "down": {
-          "texture": "#stem",
+          "texture": "#leaf",
           "uv": [
             0,
             0,
@@ -1436,255 +1201,27 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        6.04,
-        8
-      ],
-      "rotationY": 140,
-      "rotationZ": 52
+      }
     },
     {
-      "name": "crownB-blade0",
+      "name": "young-7-petiole",
       "from": [
-        8.3168,
-        5.98,
-        7.6172
+        7.99414,
+        4.00886,
+        8.06433
       ],
       "to": [
-        8.759,
-        6.1,
-        8.3828
+        8.31414,
+        4.04386,
+        8.09933
       ],
-      "faces": {
-        "north": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "south": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "east": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "west": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "up": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "down": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        }
-      },
       "rotationOrigin": [
-        8,
-        6.04,
-        8
+        7.99414,
+        4.02636,
+        8.08183
       ],
-      "rotationY": 140,
-      "rotationZ": 52
-    },
-    {
-      "name": "crownB-blade1",
-      "from": [
-        8.7128,
-        5.98,
-        7.6964
-      ],
-      "to": [
-        9.188,
-        6.1,
-        8.3036
-      ],
-      "faces": {
-        "north": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "south": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "east": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "west": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "up": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "down": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        }
-      },
-      "rotationOrigin": [
-        8,
-        6.04,
-        8
-      ],
-      "rotationY": 140,
-      "rotationZ": 52
-    },
-    {
-      "name": "crownB-blade2",
-      "from": [
-        9.1352,
-        5.98,
-        7.8218
-      ],
-      "to": [
-        9.5708,
-        6.1,
-        8.1782
-      ],
-      "faces": {
-        "north": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "south": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "east": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "west": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "up": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        },
-        "down": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            0,
-            32,
-            32
-          ]
-        }
-      },
-      "rotationOrigin": [
-        8,
-        6.04,
-        8
-      ],
-      "rotationY": 140,
-      "rotationZ": 52
-    },
-    {
-      "name": "crownC-pet",
-      "from": [
-        8,
-        6.065,
-        7.945
-      ],
-      "to": [
-        8.3712,
-        6.175,
-        8.055
-      ],
+      "rotationY": -962.5,
+      "rotationZ": 27,
       "faces": {
         "north": {
           "texture": "#stem",
@@ -1740,27 +1277,27 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        6.12,
-        8
-      ],
-      "rotationY": 260,
-      "rotationZ": 58
+      }
     },
     {
-      "name": "crownC-blade0",
+      "name": "young-7-blade",
       "from": [
-        8.3072,
-        6.0600000000000005,
-        7.6288
+        7.95299,
+        3.65068,
+        7.9948
       ],
       "to": [
-        8.736,
-        6.18,
-        8.3712
+        9.40499,
+        4.49284,
+        8.0108
       ],
+      "rotationOrigin": [
+        7.95299,
+        4.07176,
+        8.0028
+      ],
+      "rotationY": -962.5,
+      "rotationZ": 27,
       "faces": {
         "north": {
           "texture": "#leaf",
@@ -1779,9 +1316,49 @@
             32,
             32
           ]
+        }
+      }
+    },
+    {
+      "name": "young-8-petiole",
+      "from": [
+        8.03323,
+        4.39977,
+        8.05391
+      ],
+      "to": [
+        8.35323,
+        4.43477,
+        8.08891
+      ],
+      "rotationOrigin": [
+        8.03323,
+        4.41727,
+        8.07141
+      ],
+      "rotationY": -1100.0,
+      "rotationZ": 39,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1790,7 +1367,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1798,6 +1375,46 @@
             32
           ]
         },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      }
+    },
+    {
+      "name": "young-8-blade",
+      "from": [
+        8.10626,
+        4.4722,
+        7.67691
+      ],
+      "to": [
+        9.55826,
+        4.4882,
+        8.51907
+      ],
+      "rotationOrigin": [
+        8.10626,
+        4.4802,
+        8.09799
+      ],
+      "rotationY": -1100.0,
+      "rotationZ": 39,
+      "faces": {
         "up": {
           "texture": "#leaf",
           "uv": [
@@ -1816,27 +1433,103 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        6.12,
-        8
-      ],
-      "rotationY": 260,
-      "rotationZ": 58
+      }
     },
     {
-      "name": "crownC-blade1",
+      "name": "young-9-petiole",
       "from": [
-        8.6912,
-        6.0600000000000005,
-        7.7056000000000004
+        8.07232,
+        4.79068,
+        8.04348
       ],
       "to": [
-        9.152000000000001,
-        6.18,
-        8.2944
+        8.39232,
+        4.82568,
+        8.07848
       ],
+      "rotationOrigin": [
+        8.07232,
+        4.80818,
+        8.06098
+      ],
+      "rotationY": -1237.5,
+      "rotationZ": 15,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      }
+    },
+    {
+      "name": "young-9-blade",
+      "from": [
+        7.98308,
+        4.41298,
+        8.08995
+      ],
+      "to": [
+        9.43508,
+        5.25514,
+        8.10595
+      ],
+      "rotationOrigin": [
+        7.98308,
+        4.83406,
+        8.09795
+      ],
+      "rotationY": -1237.5,
+      "rotationZ": 15,
       "faces": {
         "north": {
           "texture": "#leaf",
@@ -1855,9 +1548,49 @@
             32,
             32
           ]
+        }
+      }
+    },
+    {
+      "name": "young-10-petiole",
+      "from": [
+        8.10544,
+        5.18159,
+        8.03616
+      ],
+      "to": [
+        8.42544,
+        5.21659,
+        8.07116
+      ],
+      "rotationOrigin": [
+        8.10544,
+        5.19909,
+        8.05366
+      ],
+      "rotationY": -1375.0,
+      "rotationZ": 27,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1866,7 +1599,7 @@
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1875,7 +1608,7 @@
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1884,7 +1617,7 @@
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1892,27 +1625,27 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        6.12,
-        8
-      ],
-      "rotationY": 260,
-      "rotationZ": 58
+      }
     },
     {
-      "name": "crownC-blade2",
+      "name": "young-10-blade",
       "from": [
-        9.1008,
-        6.0600000000000005,
-        7.8272
+        8.1431,
+        4.82341,
+        7.9649
       ],
       "to": [
-        9.5232,
-        6.18,
-        8.1728
+        9.5951,
+        5.66557,
+        7.9809
       ],
+      "rotationOrigin": [
+        8.1431,
+        5.24449,
+        7.9729
+      ],
+      "rotationY": -1375.0,
+      "rotationZ": 27,
       "faces": {
         "north": {
           "texture": "#leaf",
@@ -1931,9 +1664,49 @@
             32,
             32
           ]
+        }
+      }
+    },
+    {
+      "name": "crown-0-petiole",
+      "from": [
+        8.0645,
+        5.9595,
+        8.0771
+      ],
+      "to": [
+        8.3845,
+        5.9945,
+        8.1121
+      ],
+      "rotationOrigin": [
+        8.0645,
+        5.977,
+        8.0946
+      ],
+      "rotationY": -20,
+      "rotationZ": 35,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
             0,
@@ -1942,6 +1715,55 @@
           ]
         },
         "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-0-blade",
+      "from": [
+        8.14148,
+        5.89719,
+        8.11462
+      ],
+      "to": [
+        8.61448,
+        6.17153,
+        8.13062
+      ],
+      "rotationOrigin": [
+        8.14148,
+        6.03436,
+        8.12262
+      ],
+      "rotationY": -20,
+      "rotationZ": 35,
+      "faces": {
+        "north": {
           "texture": "#leaf",
           "uv": [
             0,
@@ -1950,6 +1772,229 @@
             32
           ]
         },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-1-petiole",
+      "from": [
+        8.0645,
+        5.9595,
+        8.0771
+      ],
+      "to": [
+        8.3845,
+        5.9945,
+        8.1121
+      ],
+      "rotationOrigin": [
+        8.0645,
+        5.977,
+        8.0946
+      ],
+      "rotationY": -140,
+      "rotationZ": 47,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-1-blade",
+      "from": [
+        8.01226,
+        5.91297,
+        8.13044
+      ],
+      "to": [
+        8.48526,
+        6.18731,
+        8.14644
+      ],
+      "rotationOrigin": [
+        8.01226,
+        6.05014,
+        8.13844
+      ],
+      "rotationY": -140,
+      "rotationZ": 47,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-2-petiole",
+      "from": [
+        8.0645,
+        5.9595,
+        8.0771
+      ],
+      "to": [
+        8.3845,
+        5.9945,
+        8.1121
+      ],
+      "rotationOrigin": [
+        8.0645,
+        5.977,
+        8.0946
+      ],
+      "rotationY": -260,
+      "rotationZ": 59,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-2-blade",
+      "from": [
+        8.05556,
+        6.05472,
+        7.90671
+      ],
+      "to": [
+        8.52856,
+        6.07072,
+        8.18105
+      ],
+      "rotationOrigin": [
+        8.05556,
+        6.06272,
+        8.04388
+      ],
+      "rotationY": -260,
+      "rotationZ": 59,
+      "faces": {
         "up": {
           "texture": "#leaf",
           "uv": [
@@ -1968,14 +2013,7 @@
             32
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        6.12,
-        8
-      ],
-      "rotationY": 260,
-      "rotationZ": 58
+      }
     }
   ]
 }

@@ -13,7 +13,7 @@
   "attributes": { "tickGrowthProbability": 0.05, "onFarmlandVerticalOffset": -0.0625, "sitHeight": 0.9, "handbook": { "include": true } },
   "blockmaterial": "Plant", "sideopaque": { "all": false }, "sidesolid": { "all": false }, "replaceable": 3000, "lightAbsorption": 0,
   "resistance": 0.5, "collisionbox": null, "selectionbox": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 1, "z2": 0.9375 },
-  "textures": { "stem": { "base": "block/coca/coca-stem" }, "leaf": { "base": "block/coca/coca-leaf" }, "flower": { "base": "block/coca/coca-flower" }, "berry": { "base": "block/coca/coca-berry" } },
+  "textures": { "stem": { "base": "block/coca/coca-stem-v4" }, "leaf": { "base": "block/coca/coca-leaf-v4" }, "flower": { "base": "block/coca/coca-flower-v4" }, "berry": { "base": "block/coca/coca-berry-v4" } },
   "dropsByType": {
     "*-9": [{ "type": "item", "code": "vs-dope:coca-leaf", "quantity": { "avg": 5 } }, { "type": "item", "code": "vs-dope:seeds-coca", "quantity": { "avg": 1.25 } }],
     "*": [{ "type": "item", "code": "vs-dope:seeds-coca", "quantity": { "avg": 0.35 } }]
