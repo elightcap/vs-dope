@@ -2,6 +2,7 @@
   "code": "coca-leaf",
   "creativeinventory": { "general": ["*"] },
   "maxstacksize": 64,
-  "texture": { "base": "item/seedpod" },
+  "shape": { "base": "item/coca-leaf" },
+  "texture": { "base": "item/coca-leaf" },
   "attributes": { "handbook": { "include": true } }
 }
