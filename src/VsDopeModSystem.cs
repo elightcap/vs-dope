@@ -17,7 +17,6 @@ public class VsDopeModSystem : ModSystem
         api.RegisterItemClass("vs-dope.drugconsumable", typeof(DrugConsumableItem));
         api.RegisterItemClass("vs-dope.opiumitem", typeof(OpiumItem));
         api.RegisterItemClass("vs-dope.morphineitem", typeof(MorphineItem));
-        api.RegisterItemClass("vs-dope.heroinitem", typeof(HeroinItem));
     }
 
     public override void StartServerSide(ICoreServerAPI api)

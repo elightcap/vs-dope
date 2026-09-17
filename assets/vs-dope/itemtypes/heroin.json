@@ -1,7 +1,38 @@
 {
   "code": "heroin",
-  "class": "vs-dope.heroinitem",
+  "class": "ItemLiquidPortion",
+  "matterState": "liquid",
   "creativeinventory": { "general": ["*"] },
-  "maxStackSize": 8,
-  "texture": { "base": "item/heroin" }
+  "maxStackSize": 5000,
+  "materialDensity": 200,
+  "shape": { "base": "item/liquid" },
+  "texture": { "base": "item/heroin", "alpha": 180 },
+  "attributes": {
+    "waterTightContainerProps": {
+      "containable": true,
+      "itemsPerLitre": 100,
+      "texture": { "base": "item/heroin", "alpha": 180 },
+      "allowSpill": true,
+      "whenSpilled": {
+        "action": "DropContents",
+        "stack": { "type": "item", "code": "vs-dope:heroin" }
+      },
+      "nutritionPropsPerLitre": {
+        "satiety": 0,
+        "health": 24,
+        "intoxication": 1.0,
+        "psychedelic": 1.5,
+        "foodcategory": "NoNutrition"
+      }
+    }
+  },
+  "guiTransform": {
+    "translation": { "x": 0, "y": 1, "z": 0 },
+    "rotation": { "x": 123, "y": -33, "z": -13 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 1.4
+  },
+  "tpHandTransform": {
+    "translation": { "x": -1.5, "y": -1, "z": -1.4 }
+  }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
@@ -6,13 +7,11 @@ namespace VsDope.Systems;
 
 public class AddictionSystem
 {
-    // Server-side persistence (survives relog)
     public const string AttrAddictionLevel = "vs-dope-addiction-level";
     private const string AttrLastUseDay = "vs-dope-last-use-day";
     public const string AttrDaysUsedConsecutively = "vs-dope-days-used";
     private const string AttrWithdrawalStartDay = "vs-dope-withdrawal-start";
 
-    // Client-synced copies (read by the character screen tab)
     public const string WatchAddictionLevel = "vs-dope-addiction-level";
     public const string WatchDaysUsed = "vs-dope-days-used";
     public const string WatchWithdrawal = "vs-dope-withdrawal";
@@ -20,21 +19,27 @@ public class AddictionSystem
     private const int AddictionThreshold = 5;
     private const float WithdrawalSeverityBase = 0.3f;
     private const int DaysPerAddictionDecay = 2;
+    private const float HeroinSlowFactor = 0.4f;
 
     private ICoreServerAPI api;
     private double lastProcessedHour;
+    private readonly Dictionary<string, float> prevPsychedelicLevels = new();
 
     public void Initialize(ICoreServerAPI serverApi)
     {
         api = serverApi;
         api.Event.PlayerJoin += OnPlayerJoin;
+        api.Event.PlayerLeave += (player) => prevPsychedelicLevels.Remove(player.PlayerUID);
         lastProcessedHour = -1;
-        api.Event.Timer(OnTick, 10);
+        api.Event.Timer(OnTick, 5);
     }
 
     private void OnTick()
     {
         if (api.World?.Calendar == null) return;
+
+        WatchHeroinEffects();
+
         double currentHour = api.World.Calendar.ElapsedHours;
         if ((int)currentHour != (int)lastProcessedHour)
         {
@@ -44,6 +49,35 @@ public class AddictionSystem
             {
                 ProcessAllOnlinePlayers();
             }
+        }
+    }
+
+    private void WatchHeroinEffects()
+    {
+        var onlinePlayers = api.Server.Players
+            .Where(p => p.ConnectionState == EnumClientState.Playing);
+
+        foreach (var player in onlinePlayers)
+        {
+            var entity = player.Entity;
+            if (entity == null || !entity.Alive) continue;
+
+            float currentPsych = entity.WatchedAttributes.GetFloat("psychedelic");
+            string uid = player.PlayerUID;
+            prevPsychedelicLevels.TryGetValue(uid, out float prevPsych);
+
+            if (currentPsych > prevPsych && currentPsych > 0.1f)
+            {
+                RecordUse(player);
+                entity.Stats.Set("walkspeed", "vs-dope-heroin-slow", 1f - HeroinSlowFactor);
+            }
+
+            if (currentPsych <= 0.05f && prevPsych > 0.05f)
+            {
+                entity.Stats.Remove("walkspeed", "vs-dope-heroin-slow");
+            }
+
+            prevPsychedelicLevels[uid] = currentPsych;
         }
     }
 
