@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vintagestory.API.Common;
@@ -21,6 +22,14 @@ public class AddictionSystem
     private const int DaysPerAddictionDecay = 2;
     private const float HeroinSlowFactor = 0.4f;
 
+    // Tolerance is per finished product. The first two uses in an in-game day do not
+    // increase tolerance. Heavy same-day use does, and days away from that product recover it.
+    private const int FreeUsesPerDay = 2;
+    private const float TolerancePerExcessUse = 0.08f;
+    private const float MaxTolerance = 0.75f;
+    private const float ToleranceRecoveryPerUnusedDay = 0.18f;
+    private const float MinimumEffectMultiplier = 0.25f;
+
     private ICoreServerAPI api;
     private double lastProcessedHour;
     private readonly Dictionary<string, float> prevPsychedelicLevels = new();
@@ -29,35 +38,70 @@ public class AddictionSystem
     {
         api = serverApi;
         api.Event.PlayerJoin += OnPlayerJoin;
-        api.Event.PlayerLeave += (player) => prevPsychedelicLevels.Remove(player.PlayerUID);
+        api.Event.PlayerLeave += player => prevPsychedelicLevels.Remove(player.PlayerUID);
         lastProcessedHour = -1;
         api.Event.Timer(OnTick, 5);
+    }
+
+    private static string TolKey(string product) => $"vs-dope-tolerance-{product}";
+    private static string TolDayKey(string product) => $"vs-dope-tolerance-day-{product}";
+    private static string TolUsesKey(string product) => $"vs-dope-tolerance-uses-{product}";
+
+    public float GetEffectMultiplier(IPlayer player, string product)
+    {
+        RecoverTolerance(player, product);
+        float tolerance = Math.Clamp(player.Entity.Attributes.GetFloat(TolKey(product)), 0f, MaxTolerance);
+        return Math.Max(MinimumEffectMultiplier, 1f - tolerance);
+    }
+
+    public void RecordToleranceUse(IPlayer player, string product)
+    {
+        RecoverTolerance(player, product);
+        var attrs = player.Entity.Attributes;
+        int today = (int)api.World.Calendar.TotalDays;
+        int storedDay = attrs.GetInt(TolDayKey(product));
+        int uses = storedDay == today ? attrs.GetInt(TolUsesKey(product)) : 0;
+        uses++;
+        attrs.SetInt(TolDayKey(product), today);
+        attrs.SetInt(TolUsesKey(product), uses);
+
+        if (uses > FreeUsesPerDay)
+        {
+            float tolerance = attrs.GetFloat(TolKey(product));
+            float bingeScale = 1f + Math.Min(1.5f, (uses - FreeUsesPerDay - 1) * 0.15f);
+            attrs.SetFloat(TolKey(product), Math.Min(MaxTolerance, tolerance + TolerancePerExcessUse * bingeScale));
+        }
+    }
+
+    private void RecoverTolerance(IPlayer player, string product)
+    {
+        var attrs = player.Entity.Attributes;
+        int today = (int)api.World.Calendar.TotalDays;
+        int lastDay = attrs.GetInt(TolDayKey(product));
+        if (lastDay <= 0 || lastDay >= today) return;
+
+        int unusedDays = today - lastDay;
+        float tolerance = Math.Max(0f, attrs.GetFloat(TolKey(product)) - unusedDays * ToleranceRecoveryPerUnusedDay);
+        attrs.SetFloat(TolKey(product), tolerance);
+        attrs.SetInt(TolDayKey(product), today);
+        attrs.SetInt(TolUsesKey(product), 0);
     }
 
     private void OnTick()
     {
         if (api.World?.Calendar == null) return;
-
         WatchHeroinEffects();
-
         double currentHour = api.World.Calendar.ElapsedHours;
         if ((int)currentHour != (int)lastProcessedHour)
         {
             lastProcessedHour = currentHour;
-            int hourOfDay = api.World.Calendar.FullHourOfDay;
-            if (hourOfDay == 0)
-            {
-                ProcessAllOnlinePlayers();
-            }
+            if (api.World.Calendar.FullHourOfDay == 0) ProcessAllOnlinePlayers();
         }
     }
 
     private void WatchHeroinEffects()
     {
-        var onlinePlayers = api.Server.Players
-            .Where(p => p.ConnectionState == EnumClientState.Playing);
-
-        foreach (var player in onlinePlayers)
+        foreach (var player in api.Server.Players.Where(p => p.ConnectionState == EnumClientState.Playing))
         {
             var entity = player.Entity;
             if (entity == null || !entity.Alive) continue;
@@ -68,14 +112,22 @@ public class AddictionSystem
 
             if (currentPsych > prevPsych && currentPsych > 0.1f)
             {
+                float rawIncrease = currentPsych - prevPsych;
+                float effectMultiplier = GetEffectMultiplier(player, "heroin");
+                if (effectMultiplier < 1f)
+                {
+                    currentPsych = prevPsych + rawIncrease * effectMultiplier;
+                    entity.WatchedAttributes.SetFloat("psychedelic", currentPsych);
+                }
+
                 RecordUse(player);
-                entity.Stats.Set("walkspeed", "vs-dope-heroin-slow", 1f - HeroinSlowFactor);
+                RecordToleranceUse(player, "heroin");
+                float effectiveSlow = HeroinSlowFactor * effectMultiplier;
+                entity.Stats.Set("walkspeed", "vs-dope-heroin-slow", 1f - effectiveSlow);
             }
 
             if (currentPsych <= 0.05f && prevPsych > 0.05f)
-            {
                 entity.Stats.Remove("walkspeed", "vs-dope-heroin-slow");
-            }
 
             prevPsychedelicLevels[uid] = currentPsych;
         }
@@ -84,11 +136,8 @@ public class AddictionSystem
     private void OnPlayerJoin(IServerPlayer player)
     {
         var attrs = player.Entity.Attributes;
-        if (!attrs.HasAttribute(AttrAddictionLevel))
-            attrs.SetInt(AttrAddictionLevel, 0);
-        if (!attrs.HasAttribute(AttrDaysUsedConsecutively))
-            attrs.SetInt(AttrDaysUsedConsecutively, 0);
-
+        if (!attrs.HasAttribute(AttrAddictionLevel)) attrs.SetInt(AttrAddictionLevel, 0);
+        if (!attrs.HasAttribute(AttrDaysUsedConsecutively)) attrs.SetInt(AttrDaysUsedConsecutively, 0);
         SyncAddictionToClient(player);
     }
 
@@ -97,38 +146,21 @@ public class AddictionSystem
         var attrs = player.Entity.Attributes;
         int currentDay = (int)api.World.Calendar.TotalDays;
         int lastUseDay = attrs.GetInt(AttrLastUseDay);
-
-        if (currentDay - lastUseDay <= 1)
-        {
-            attrs.SetInt(AttrDaysUsedConsecutively, attrs.GetInt(AttrDaysUsedConsecutively) + 1);
-        }
-        else
-        {
-            attrs.SetInt(AttrDaysUsedConsecutively, 1);
-        }
-
+        if (currentDay - lastUseDay <= 1) attrs.SetInt(AttrDaysUsedConsecutively, attrs.GetInt(AttrDaysUsedConsecutively) + 1);
+        else attrs.SetInt(AttrDaysUsedConsecutively, 1);
         attrs.SetInt(AttrLastUseDay, currentDay);
 
         int consecutive = attrs.GetInt(AttrDaysUsedConsecutively);
         if (consecutive >= AddictionThreshold)
-        {
-            int level = System.Math.Min(attrs.GetInt(AttrAddictionLevel) + 1, 100);
-            attrs.SetInt(AttrAddictionLevel, level);
-        }
+            attrs.SetInt(AttrAddictionLevel, Math.Min(attrs.GetInt(AttrAddictionLevel) + 1, 100));
 
-        var serverPlayer = player as IServerPlayer;
-        if (serverPlayer != null)
-            ClearWithdrawalEffects(serverPlayer);
-
+        if (player is IServerPlayer serverPlayer) ClearWithdrawalEffects(serverPlayer);
         SyncAddictionToClient(player);
     }
 
     private void ProcessAllOnlinePlayers()
     {
-        var onlinePlayers = api.Server.Players
-            .Where(p => p.ConnectionState == EnumClientState.Playing);
-
-        foreach (var player in onlinePlayers)
+        foreach (var player in api.Server.Players.Where(p => p.ConnectionState == EnumClientState.Playing))
         {
             ProcessWithdrawal(player);
             ProcessAddictionDecay(player);
@@ -141,17 +173,13 @@ public class AddictionSystem
         var attrs = player.Entity.Attributes;
         int addictionLevel = attrs.GetInt(AttrAddictionLevel);
         if (addictionLevel <= 0) return;
-
         int currentDay = (int)api.World.Calendar.TotalDays;
         int lastUseDay = attrs.GetInt(AttrLastUseDay);
-
         if (currentDay - lastUseDay >= 1)
         {
-            float severity = WithdrawalSeverityBase + (addictionLevel / 100f);
+            float severity = WithdrawalSeverityBase + addictionLevel / 100f;
             ApplyWithdrawalEffects(player, severity);
-
-            if (!attrs.HasAttribute(AttrWithdrawalStartDay))
-                attrs.SetInt(AttrWithdrawalStartDay, currentDay);
+            if (!attrs.HasAttribute(AttrWithdrawalStartDay)) attrs.SetInt(AttrWithdrawalStartDay, currentDay);
         }
     }
 
@@ -160,10 +188,8 @@ public class AddictionSystem
         var attrs = player.Entity.Attributes;
         int addictionLevel = attrs.GetInt(AttrAddictionLevel);
         if (addictionLevel <= 0) return;
-
         int currentDay = (int)api.World.Calendar.TotalDays;
         int lastUseDay = attrs.GetInt(AttrLastUseDay);
-
         if (currentDay - lastUseDay >= DaysPerAddictionDecay)
         {
             attrs.SetInt(AttrAddictionLevel, addictionLevel - 1);
@@ -180,57 +206,39 @@ public class AddictionSystem
     {
         var entity = player.Entity;
         if (entity == null || !entity.Alive) return;
-
-        float slowdownMultiplier = 1f - (severity * 0.4f);
-        entity.Stats.Set("walkspeed", "vs-dope-withdrawal", slowdownMultiplier);
-
+        entity.Stats.Set("walkspeed", "vs-dope-withdrawal", 1f - severity * 0.4f);
         if (severity > 0.8f)
-        {
-            entity.ReceiveDamage(new DamageSource()
-            {
-                Source = EnumDamageSource.Internal,
-                Type = EnumDamageType.Poison
-            }, severity * 1.5f);
-        }
+            entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Poison }, severity * 1.5f);
     }
 
     private void ClearWithdrawalEffects(IServerPlayer player)
     {
         var entity = player.Entity;
-        if (entity == null) return;
-
-        entity.Stats.Remove("walkspeed", "vs-dope-withdrawal");
+        if (entity != null) entity.Stats.Remove("walkspeed", "vs-dope-withdrawal");
     }
 
     public bool WithdrawalActive(IPlayer player)
     {
         var attrs = player.Entity.Attributes;
         if (attrs.GetInt(AttrAddictionLevel) <= 0) return false;
-        int currentDay = (int)api.World.Calendar.TotalDays;
-        int lastUseDay = attrs.GetInt(AttrLastUseDay);
-        return currentDay - lastUseDay >= 1;
+        return (int)api.World.Calendar.TotalDays - attrs.GetInt(AttrLastUseDay) >= 1;
     }
 
     public void SyncAddictionToClient(IPlayer player)
     {
         var entity = player.Entity;
         if (entity == null) return;
-
         var attrs = entity.Attributes;
         entity.WatchedAttributes.SetInt(WatchAddictionLevel, attrs.GetInt(AttrAddictionLevel));
         entity.WatchedAttributes.SetInt(WatchDaysUsed, attrs.GetInt(AttrDaysUsedConsecutively));
         entity.WatchedAttributes.SetBool(WatchWithdrawal, WithdrawalActive(player));
     }
 
-    public static int GetAddictionLevel(IPlayer player) =>
-        player.Entity.Attributes.GetInt(AttrAddictionLevel);
-
-    public static bool IsAddicted(IPlayer player) =>
-        player.Entity.Attributes.GetInt(AttrAddictionLevel) > 0;
-
+    public static int GetAddictionLevel(IPlayer player) => player.Entity.Attributes.GetInt(AttrAddictionLevel);
+    public static bool IsAddicted(IPlayer player) => player.Entity.Attributes.GetInt(AttrAddictionLevel) > 0;
     public static float GetWithdrawalSeverity(IPlayer player)
     {
         int level = player.Entity.Attributes.GetInt(AttrAddictionLevel);
-        return level <= 0 ? 0f : WithdrawalSeverityBase + (level / 100f);
+        return level <= 0 ? 0f : WithdrawalSeverityBase + level / 100f;
     }
 }
