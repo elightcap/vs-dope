@@ -1,0 +1,56 @@
+# Repository Structure
+
+## Quick orientation
+
+- Vintage Story target: 1.22.7
+- .NET target: net10.0
+- Mod ID: `vs-dope`
+- Namespace: `VsDope`
+- Entry point: `src/VsDopeModSystem.cs`
+- Build project: `vs-dope.csproj`
+- Gameplay assets: `assets/vs-dope/`
+- Runtime systems: `src/Systems/`
+- Consumables: `src/Items/`
+- Client UI: `src/Client/`
+
+## Tree
+
+```text
+vs-dope/
+├── AGENTS.md
+├── README.md
+├── modinfo.json
+├── vs-dope.csproj
+├── docs/
+│   ├── COCA_VITAE_FIXES.md
+│   └── repo/
+│       ├── README.md
+│       ├── STRUCTURE.md
+│       ├── RUNTIME.md
+│       ├── ASSETS.md
+│       ├── PROCESSING.md
+│       ├── DEPENDENCIES.md
+│       └── MAINTENANCE.md
+├── src/
+│   ├── VsDopeModSystem.cs
+│   ├── Items/DrugConsumableItem.cs
+│   ├── Systems/AddictionSystem.cs
+│   └── Client/
+│       ├── AddictionCharacterTabSystem.cs
+│       └── CocaVitaeEffectHudSystem.cs
+└── assets/vs-dope/
+    ├── blocktypes/
+    ├── itemtypes/
+    ├── lang/
+    ├── recipes/barrel/
+    ├── shapes/block/
+    ├── shapes/plant/
+    ├── statuseffects/
+    └── textures/
+```
+
+## Build
+
+`vs-dope.csproj` references Vintage Story DLLs through the `VINTAGE_STORY` environment variable. Local API-facing changes should be built against the target 1.22.x install.
+
+When changing gameplay, first determine whether the behavior is JSON-driven, C#-driven, or both.
