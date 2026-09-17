@@ -17,7 +17,9 @@ Current subclasses:
 
 Tolerance is keyed by `ToleranceProduct`. Keep product IDs stable unless intentionally resetting/migrating stored player tolerance.
 
-Coca Vitae writes its effect expiry to watched attributes for its client HUD.
+Coca Vitae writes its effect expiry to watched attributes for its client HUD. Its movement boost expires by comparing the calendar's total hours, so it lasts exactly one in-game hour even if the calendar speed changes.
+
+Heroin writes `vs-dope-heroin-slow-expires-gamehour` when detected. The addiction system removes its movement penalty after one in-game calendar hour rather than when the psychedelic attribute ends.
 
 ## Addiction and tolerance
 
