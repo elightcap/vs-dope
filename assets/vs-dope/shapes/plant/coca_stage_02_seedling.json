@@ -1,0 +1,1 @@
+{"textureWidth":16,"textureHeight":16,"textures":{"stem":"#stem","leaf":"#leaf"},"elements":[{"name":"stem","from":[7.5,0,7.5],"to":[8.5,5,8.5],"faces":{"all":{"texture":"#stem"}}},{"name":"leaves-low","from":[4,2.5,7.6],"to":[12,3,8.4],"faces":{"all":{"texture":"#leaf"}}},{"name":"leaves-high","from":[7.6,4,4.5],"to":[8.4,4.5,11.5],"faces":{"all":{"texture":"#leaf"}}}]}
