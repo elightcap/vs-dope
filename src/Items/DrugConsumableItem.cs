@@ -6,10 +6,11 @@ namespace VsDope.Items;
 public class DrugConsumableItem : Item
 {
     protected virtual float HealAmount => 2f;
-    protected virtual float SlowFactor => 0.15f;
+    protected virtual float SpeedMultiplier => 0.85f;
     protected virtual float IntoxicationAmount => 4f;
-    protected virtual int DurationHours => 1;
+    protected virtual int EffectDurationMs => 2500;
     protected virtual bool Psychedelic => false;
+    protected virtual string EffectKey => $"vs-dope-{Code?.Path ?? "drug"}-speed";
 
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
     {
@@ -33,34 +34,68 @@ public class DrugConsumableItem : Item
     {
         if (byEntity.World.Side != EnumAppSide.Server) return;
         var entity = byEntity;
-        if (HealAmount > 0) entity.ReceiveDamage(new DamageSource() { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, HealAmount);
+        if (HealAmount > 0) entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, HealAmount);
+
         float currentIntox = entity.WatchedAttributes.GetFloat("intoxication");
         entity.WatchedAttributes.SetFloat("intoxication", GameMath.Clamp(currentIntox + IntoxicationAmount, 0f, 25f));
-        if (Psychedelic) {
+        if (Psychedelic)
+        {
             float currentPsych = entity.WatchedAttributes.GetFloat("psychedelic");
             entity.WatchedAttributes.SetFloat("psychedelic", GameMath.Clamp(currentPsych + IntoxicationAmount * 1.5f, 0f, 25f));
         }
-        float speedMultiplier = 1f - SlowFactor;
-        entity.Stats.Set("walkspeed", "vs-dope-drug-speed", GameMath.Clamp(speedMultiplier, 0.3f, 2f));
-        int durationMs = DurationHours * 2500;
-        byEntity.World.RegisterCallback((_) => {
+
+        string effectKey = EffectKey;
+        entity.Stats.Set("walkspeed", effectKey, GameMath.Clamp(SpeedMultiplier, 0.3f, 2f));
+        entity.WatchedAttributes.SetLong(effectKey + "-expires", entity.World.ElapsedMilliseconds + EffectDurationMs);
+
+        byEntity.World.RegisterCallback(_ =>
+        {
             if (!entity.Alive) return;
-            entity.Stats.Remove("walkspeed", "vs-dope-drug-speed");
+            long expires = entity.WatchedAttributes.GetLong(effectKey + "-expires");
+            if (entity.World.ElapsedMilliseconds < expires) return; // a later dose refreshed this effect
+
+            entity.Stats.Remove("walkspeed", effectKey);
+            entity.WatchedAttributes.RemoveAttribute(effectKey + "-expires");
             float intox = entity.WatchedAttributes.GetFloat("intoxication");
             entity.WatchedAttributes.SetFloat("intoxication", GameMath.Max(0, intox - IntoxicationAmount));
-            if (Psychedelic) {
+            if (Psychedelic)
+            {
                 float psych = entity.WatchedAttributes.GetFloat("psychedelic");
                 entity.WatchedAttributes.SetFloat("psychedelic", GameMath.Max(0, psych - IntoxicationAmount * 1.5f));
             }
-        }, durationMs);
-        if (byEntity is EntityPlayer entityPlayer) {
+        }, EffectDurationMs);
+
+        if (byEntity is EntityPlayer entityPlayer)
+        {
             var player = byEntity.World.PlayerByUid(entityPlayer.PlayerUID);
             if (player != null) VsDopeModSystem.AddictionSystem.RecordUse(player);
         }
-        slot.TakeOut(1); slot.MarkDirty();
+
+        slot.TakeOut(1);
+        slot.MarkDirty();
     }
 }
 
-public class OpiumItem : DrugConsumableItem { protected override float HealAmount => 2f; protected override float SlowFactor => 0.1f; protected override float IntoxicationAmount => 3f; }
-public class MorphineItem : DrugConsumableItem { protected override float HealAmount => 5f; protected override float SlowFactor => 0.2f; protected override float IntoxicationAmount => 6f; protected override int DurationHours => 2; }
-public class CocaVitaeItem : DrugConsumableItem { protected override float HealAmount => 4f; protected override float SlowFactor => -0.15f; protected override float IntoxicationAmount => 1f; protected override int DurationHours => 1; }
+public class OpiumItem : DrugConsumableItem
+{
+    protected override float HealAmount => 2f;
+    protected override float SpeedMultiplier => 0.9f;
+    protected override float IntoxicationAmount => 3f;
+    protected override int EffectDurationMs => 2500;
+}
+
+public class MorphineItem : DrugConsumableItem
+{
+    protected override float HealAmount => 5f;
+    protected override float SpeedMultiplier => 0.8f;
+    protected override float IntoxicationAmount => 6f;
+    protected override int EffectDurationMs => 5000;
+}
+
+public class CocaVitaeItem : DrugConsumableItem
+{
+    protected override float HealAmount => 4f;
+    protected override float SpeedMultiplier => 1.15f;
+    protected override float IntoxicationAmount => 1f;
+    protected override int EffectDurationMs => 30000;
+}
