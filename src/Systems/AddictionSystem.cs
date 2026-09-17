@@ -21,6 +21,9 @@ public class AddictionSystem
     private const float WithdrawalSeverityBase = 0.3f;
     private const int DaysPerAddictionDecay = 2;
     private const float HeroinSlowFactor = 0.5f;
+    private const double HeroinSpeedDurationGameHours = 1.0;
+    private const string HeroinSpeedEffectKey = "vs-dope-heroin-slow";
+    private const string HeroinSpeedExpiryKey = "vs-dope-heroin-slow-expires-gamehour";
 
     // Tolerance is per finished product. The first two uses in an in-game day do not
     // increase tolerance. Heavy same-day use does, and days away from that product recover it.
@@ -106,6 +109,13 @@ public class AddictionSystem
             var entity = player.Entity;
             if (entity == null || !entity.Alive) continue;
 
+            double heroinSpeedExpires = entity.WatchedAttributes.GetDouble(HeroinSpeedExpiryKey);
+            if (heroinSpeedExpires > 0 && api.World.Calendar.TotalHours >= heroinSpeedExpires)
+            {
+                entity.Stats.Remove("walkspeed", HeroinSpeedEffectKey);
+                entity.WatchedAttributes.RemoveAttribute(HeroinSpeedExpiryKey);
+            }
+
             float currentPsych = entity.WatchedAttributes.GetFloat("psychedelic");
             string uid = player.PlayerUID;
             prevPsychedelicLevels.TryGetValue(uid, out float prevPsych);
@@ -123,11 +133,12 @@ public class AddictionSystem
                 RecordUse(player);
                 RecordToleranceUse(player, "heroin");
                 float effectiveSlow = HeroinSlowFactor * effectMultiplier;
-                entity.Stats.Set("walkspeed", "vs-dope-heroin-slow", -effectiveSlow);
+                entity.Stats.Set("walkspeed", HeroinSpeedEffectKey, -effectiveSlow);
+                entity.WatchedAttributes.SetDouble(
+                    HeroinSpeedExpiryKey,
+                    api.World.Calendar.TotalHours + HeroinSpeedDurationGameHours
+                );
             }
-
-            if (currentPsych <= 0.05f && prevPsych > 0.05f)
-                entity.Stats.Remove("walkspeed", "vs-dope-heroin-slow");
 
             prevPsychedelicLevels[uid] = currentPsych;
         }

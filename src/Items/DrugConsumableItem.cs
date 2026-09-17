@@ -63,19 +63,39 @@ public class DrugConsumableItem : Item
         float effectiveSpeedModifier = (SpeedMultiplier - 1f) * effectMultiplier;
         string effectKey = EffectKey;
         entity.Stats.Set("walkspeed", effectKey, GameMath.Clamp(effectiveSpeedModifier, -0.7f, 1f));
-        long durationMs = EffectDurationGameHours > 0
-            ? (long)(EffectDurationGameHours / entity.World.Calendar.SpeedOfTime * 60000d)
-            : EffectDurationMs;
-        long expiresAtMs = entity.World.ElapsedMilliseconds + durationMs;
+        long expiresAtMs = EffectDurationGameHours > 0
+            ? 0
+            : entity.World.ElapsedMilliseconds + EffectDurationMs;
+        double expiresAtGameHour = EffectDurationGameHours > 0
+            ? entity.World.Calendar.TotalHours + EffectDurationGameHours
+            : 0;
         entity.WatchedAttributes.SetLong(effectKey + "-expires", expiresAtMs);
-        entity.WatchedAttributes.SetDouble(effectKey + "-expires-gamehour",
-            EffectDurationGameHours > 0 ? entity.World.Calendar.TotalHours + EffectDurationGameHours : 0);
+        entity.WatchedAttributes.SetDouble(effectKey + "-expires-gamehour", expiresAtGameHour);
 
-        byEntity.World.RegisterCallback(_ =>
+        void CheckEffectExpiry(float _)
         {
             if (!entity.Alive) return;
-            long expires = entity.WatchedAttributes.GetLong(effectKey + "-expires");
-            if (entity.World.ElapsedMilliseconds < expires) return;
+
+            bool expired;
+            if (EffectDurationGameHours > 0)
+            {
+                double expiry = entity.WatchedAttributes.GetDouble(effectKey + "-expires-gamehour");
+                if (expiry != expiresAtGameHour) return;
+                expired = entity.World.Calendar.TotalHours >= expiry;
+            }
+            else
+            {
+                long expiry = entity.WatchedAttributes.GetLong(effectKey + "-expires");
+                if (expiry != expiresAtMs) return;
+                expired = entity.World.ElapsedMilliseconds >= expiry;
+            }
+
+            if (!expired)
+            {
+                entity.World.RegisterCallback(CheckEffectExpiry, 1000);
+                return;
+            }
+
             entity.Stats.Remove("walkspeed", effectKey);
             entity.WatchedAttributes.RemoveAttribute(effectKey + "-expires");
             entity.WatchedAttributes.RemoveAttribute(effectKey + "-expires-gamehour");
@@ -86,7 +106,9 @@ public class DrugConsumableItem : Item
                 float psych = entity.WatchedAttributes.GetFloat("psychedelic");
                 entity.WatchedAttributes.SetFloat("psychedelic", GameMath.Max(0, psych - IntoxicationAmount * 1.5f));
             }
-        }, (int)durationMs);
+        }
+
+        entity.World.RegisterCallback(CheckEffectExpiry, EffectDurationGameHours > 0 ? 1000 : EffectDurationMs);
 
         if (player != null)
         {
