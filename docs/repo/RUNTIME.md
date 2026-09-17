@@ -34,6 +34,8 @@ Tolerance behavior:
 
 Heroin is a special case: its JSON is not currently a `DrugConsumableItem`. The system infers use from increases to the player's `psychedelic` watched attribute.
 
+Progression timing: the daily withdrawal/decay pass is driven by in-game calendar hours (`Calendar.TotalHours`), not real time; elapsed game hours since the last processed hour are counted on each 5s timer tick (catch-up capped at 24h) and the pass runs when `FullHourOfDay == 0`.
+
 ## Client UI
 
 `src/Client/AddictionCharacterTabSystem.cs` adds the Addiction character tab and reads watched attributes synchronized by `AddictionSystem`.

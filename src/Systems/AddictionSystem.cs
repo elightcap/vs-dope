@@ -34,7 +34,7 @@ public class AddictionSystem
     private const float MinimumEffectMultiplier = 0.25f;
 
     private ICoreServerAPI api;
-    private double lastProcessedHour;
+    private long lastProcessedGameHour = -1;
     private readonly Dictionary<string, float> prevPsychedelicLevels = new();
 
     public void Initialize(ICoreServerAPI serverApi)
@@ -42,7 +42,7 @@ public class AddictionSystem
         api = serverApi;
         api.Event.PlayerJoin += OnPlayerJoin;
         api.Event.PlayerLeave += player => prevPsychedelicLevels.Remove(player.PlayerUID);
-        lastProcessedHour = -1;
+        lastProcessedGameHour = -1;
         api.Event.Timer(OnTick, 5);
     }
 
@@ -94,10 +94,20 @@ public class AddictionSystem
     {
         if (api.World?.Calendar == null) return;
         WatchHeroinEffects();
-        double currentHour = api.World.Calendar.ElapsedHours;
-        if ((int)currentHour != (int)lastProcessedHour)
+
+        // Drive progression from the in-game clock, not real time: TotalHours only
+        // advances with calendar ticks, so paused/offline time counts nothing.
+        long currentGameHour = (long)api.World.Calendar.TotalHours;
+        if (lastProcessedGameHour < 0)
         {
-            lastProcessedHour = currentHour;
+            lastProcessedGameHour = currentGameHour;
+            return;
+        }
+
+        int elapsed = (int)Math.Min(currentGameHour - lastProcessedGameHour, 24);
+        for (int i = 0; i < elapsed; i++)
+        {
+            lastProcessedGameHour++;
             if (api.World.Calendar.FullHourOfDay == 0) ProcessAllOnlinePlayers();
         }
     }
