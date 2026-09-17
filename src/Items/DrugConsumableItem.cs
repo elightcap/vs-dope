@@ -58,10 +58,11 @@ public class DrugConsumableItem : Item
             entity.WatchedAttributes.SetFloat("psychedelic", GameMath.Clamp(currentPsych + IntoxicationAmount * 1.5f, 0f, 25f));
         }
 
-        // Tolerance pulls the item's movement modifier back toward neutral (1.0x).
-        float effectiveSpeed = 1f + (SpeedMultiplier - 1f) * effectMultiplier;
+        // EntityStats movement values are additive: +1.0 doubles speed, -0.5 halves it.
+        // Tolerance scales the item's modifier back toward neutral (0).
+        float effectiveSpeedModifier = (SpeedMultiplier - 1f) * effectMultiplier;
         string effectKey = EffectKey;
-        entity.Stats.Set("walkspeed", effectKey, GameMath.Clamp(effectiveSpeed, 0.3f, 2f));
+        entity.Stats.Set("walkspeed", effectKey, GameMath.Clamp(effectiveSpeedModifier, -0.7f, 1f));
         long durationMs = EffectDurationGameHours > 0
             ? (long)(EffectDurationGameHours / entity.World.Calendar.SpeedOfTime * 60000d)
             : EffectDurationMs;
