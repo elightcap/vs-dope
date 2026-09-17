@@ -1,0 +1,84 @@
+{
+  "textureWidth": 16,
+  "textureHeight": 16,
+  "textures": {
+    "leaf": "item/coca-leaf"
+  },
+  "elements": [
+    {
+      "name": "CocaLeaf",
+      "from": [
+        3,
+        7.65,
+        4
+      ],
+      "to": [
+        13,
+        8.35,
+        12
+      ],
+      "rotationOrigin": [
+        8,
+        8,
+        8
+      ],
+      "rotationZ": -18,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    }
+  ]
+}
