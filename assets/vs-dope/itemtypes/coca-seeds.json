@@ -1,0 +1,9 @@
+{
+  "code": "seeds",
+  "variantgroups": [{ "code": "type", "states": ["coca"] }],
+  "class": "ItemPlantableSeed",
+  "creativeinventory": { "general": ["*"] },
+  "maxstacksize": 64,
+  "texture": { "base": "item/poppy-seeds" },
+  "attributes": { "plantBlockCode": "vs-dope:crop-coca-1" }
+}

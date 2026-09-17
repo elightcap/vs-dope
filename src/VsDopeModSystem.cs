@@ -8,7 +8,6 @@ namespace VsDope;
 public class VsDopeModSystem : ModSystem
 {
     public static AddictionSystem AddictionSystem = null!;
-
     private ICoreServerAPI? sapi;
 
     public override void Start(ICoreAPI api)
@@ -17,6 +16,7 @@ public class VsDopeModSystem : ModSystem
         api.RegisterItemClass("vs-dope.drugconsumable", typeof(DrugConsumableItem));
         api.RegisterItemClass("vs-dope.opiumitem", typeof(OpiumItem));
         api.RegisterItemClass("vs-dope.morphineitem", typeof(MorphineItem));
+        api.RegisterItemClass("vs-dope.cocavitaeitem", typeof(CocaVitaeItem));
     }
 
     public override void StartServerSide(ICoreServerAPI api)
