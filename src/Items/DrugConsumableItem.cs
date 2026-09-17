@@ -80,12 +80,14 @@ public class DrugConsumableItem : Item
             if (EffectDurationGameHours > 0)
             {
                 double expiry = entity.WatchedAttributes.GetDouble(effectKey + "-expires-gamehour");
-                expired = expiry <= 0 || entity.World.Calendar.TotalHours >= expiry;
+                if (expiry != expiresAtGameHour) return;
+                expired = entity.World.Calendar.TotalHours >= expiry;
             }
             else
             {
                 long expiry = entity.WatchedAttributes.GetLong(effectKey + "-expires");
-                expired = expiry <= 0 || entity.World.ElapsedMilliseconds >= expiry;
+                if (expiry != expiresAtMs) return;
+                expired = entity.World.ElapsedMilliseconds >= expiry;
             }
 
             if (!expired)
