@@ -1,0 +1,7 @@
+{
+  "code": "heroin",
+  "class": "vs-dope.heroinitem",
+  "creativeinventory": { "general": ["*"] },
+  "maxStackSize": 8,
+  "texture": { "base": "item/heroin" }
+}

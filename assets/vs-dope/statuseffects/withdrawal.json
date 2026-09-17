@@ -1,0 +1,17 @@
+{
+  "code": "withdrawal",
+  "name": "Withdrawal",
+  "description": "You need another dose. Shaking, sweating, desperate.",
+  "maxDuration": false,
+  "tickPeriodSec": 10,
+  "startSoundCode": "",
+  "endSoundCode": "",
+  "effectsDataByGameMode": [
+    {
+      "gameMode": "Survival",
+      "durationSeconds": -1,
+      "saveDurationToPlayer": true,
+      "tickedEffectsCodes": ["vs-dope:withdrawal-tick"]
+    }
+  ]
+}

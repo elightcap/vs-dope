@@ -1,0 +1,13 @@
+{
+  "code": "seeds",
+  "variantgroups": [
+    { "code": "type", "states": ["poppy"] }
+  ],
+  "class": "ItemPlantableSeed",
+  "creativeinventory": { "general": ["*"], "plants": ["*"] },
+  "maxStackSize": 64,
+  "texture": { "base": "item/poppy-seeds" },
+  "attributes": {
+    "seedingtype": ["flower"]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "modid": "vs-dope",
+  "name": "Poppy & Process",
+  "description": "Grow poppies and process them into opium, morphine, and heroin. Beware addiction.",
+  "version": "0.1.0",
+  "gameVersion": ">=1.22.7",
+  "side": "Code",
+  "author": "",
+  "requireDependencies": []
+}

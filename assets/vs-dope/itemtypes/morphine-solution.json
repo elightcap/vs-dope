@@ -1,0 +1,35 @@
+{
+  "code": "morphine-solution",
+  "class": "ItemLiquidPortion",
+  "matterState": "liquid",
+  "creativeinventory": { "general": ["*"] },
+  "maxStackSize": 5000,
+  "materialDensity": 200,
+  "shape": { "base": "item/liquid" },
+  "texture": { "base": "item/morphine-solution", "alpha": 180 },
+  "attributes": {
+    "distillationProps": {
+      "distilledStack": { "type": "item", "code": "vs-dope:heroin" },
+      "ratio": 0.1
+    },
+    "waterTightContainerProps": {
+      "containable": true,
+      "itemsPerLitre": 100,
+      "texture": { "base": "item/morphine-solution", "alpha": 180 },
+      "allowSpill": true,
+      "whenSpilled": {
+        "action": "DropContents",
+        "stack": { "type": "item", "code": "vs-dope:morphine-solution" }
+      }
+    }
+  },
+  "guiTransform": {
+    "translation": { "x": 0, "y": 1, "z": 0 },
+    "rotation": { "x": 123, "y": -33, "z": -13 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 1.4
+  },
+  "tpHandTransform": {
+    "translation": { "x": -1.5, "y": -1, "z": -1.4 }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "editor": {
+    "allAngles": false,
+    "entityTextureMode": false
+  },
+  "textureWidth": 16,
+  "textureHeight": 32,
+  "textures": {
+    "crop": "block/poppy-plant"
+  },
+  "elements": [
+    {
+      "name": "origin",
+      "from": [8.0, 0.0, 8.0],
+      "to": [8.0, 0.0, 8.0],
+      "rotationOrigin": [8.0, 0.0, 8.0],
+      "faces": {
+        "north": { "texture": "#crop", "uv": [0.0, 0.0, 0.5, 0.5], "enabled": false },
+        "east": { "texture": "#crop", "uv": [0.0, 0.0, 0.5, 0.5], "enabled": false },
+        "south": { "texture": "#crop", "uv": [0.0, 0.0, 0.5, 0.5], "enabled": false },
+        "west": { "texture": "#crop", "uv": [0.0, 0.0, 0.5, 0.5], "enabled": false },
+        "up": { "texture": "#crop", "uv": [0.0, 0.0, 0.5, 0.5], "enabled": false },
+        "down": { "texture": "#crop", "uv": [0.0, 0.0, 0.5, 0.5], "enabled": false }
+      },
+      "children": [
+        {
+          "name": "Diag1",
+          "from": [-8.0, 0.0, -8.0],
+          "to": [24.0, 32.0, -8.0],
+          "shade": false,
+          "rotationOrigin": [8.0, 0.0, -8.0],
+          "rotationY": 45.0,
+          "faces": {
+            "north": { "texture": "#crop", "uv": [0.0, 0.0, 16.0, 32.0], "windMode": [0,0,2,2], "windData": [0,1,1,0] },
+            "south": { "texture": "#crop", "uv": [0.0, 0.0, 16.0, 32.0], "windMode": [0,0,2,2], "windData": [0,1,1,0] }
+          }
+        },
+        {
+          "name": "Diag2",
+          "from": [-8.0, 0.0, 8.0],
+          "to": [24.0, 32.0, 8.0],
+          "shade": false,
+          "rotationOrigin": [8.0, 0.0, 8.0],
+          "rotationY": -45.0,
+          "faces": {
+            "north": { "texture": "#crop", "uv": [0.0, 0.0, 16.0, 32.0], "windMode": [0,0,2,2], "windData": [0,1,1,0] },
+            "south": { "texture": "#crop", "uv": [0.0, 0.0, 16.0, 32.0], "windMode": [0,0,2,2], "windData": [0,1,1,0] }
+          }
+        }
+      ]
+    }
+  ]
+}

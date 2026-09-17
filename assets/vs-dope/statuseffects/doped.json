@@ -1,0 +1,20 @@
+{
+  "code": "doped",
+  "name": "Doped",
+  "description": "Warm and slow. Everything feels distant.",
+  "maxDuration": true,
+  "tickPeriodSec": 5,
+  "effectsDataByGameMode": [
+    {
+      "gameMode": "Survival",
+      "durationSeconds": 120,
+      "saveDurationToPlayer": false,
+      "statModifiers": [
+        {
+          "code": "speed_modplayer",
+          "add": -0.2
+        }
+      ]
+    }
+  ]
+}
