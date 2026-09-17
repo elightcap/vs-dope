@@ -2,6 +2,20 @@
 
 Vintage Story mod (1.22.7): poppy cultivation and drug processing chain with addiction mechanics.
 
+## Repository navigation docs
+
+For future development/agent work, use the focused maps under `docs/repo/` before editing a subsystem:
+
+- `docs/repo/README.md` — navigation index and which map to read.
+- `docs/repo/STRUCTURE.md` — repository tree, entry points, build/layout.
+- `docs/repo/RUNTIME.md` — C# runtime, consumables, addiction/tolerance, client UI.
+- `docs/repo/ASSETS.md` — crops, items, shapes, textures, localization.
+- `docs/repo/PROCESSING.md` — implemented/intended game processing chains and recipe state.
+- `docs/repo/DEPENDENCIES.md` — cross-file dependency maps and common-change lookup.
+- `docs/repo/MAINTENANCE.md` — known debt, safe navigation workflow, search index.
+
+Read only the relevant maps, then verify against the current live tree and implementation. Update the appropriate map whenever a change adds or alters a subsystem, asset family, processing chain, persistent key, or important cross-file dependency.
+
 ## Processing Chain
 
 poppy seeds → grow → harvest seedpods + seeds → quern grind pods → opium → barrel (+ limewater portion, 24h) → morphine → barrel (+ alcohol portion, 12h) → morphine solution → barrel (+ alcohol portion, 6h) → heroin
