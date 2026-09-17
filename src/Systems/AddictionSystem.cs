@@ -20,7 +20,7 @@ public class AddictionSystem
     private const int AddictionThreshold = 5;
     private const float WithdrawalSeverityBase = 0.3f;
     private const int DaysPerAddictionDecay = 2;
-    private const float HeroinSlowFactor = 0.3f;
+    private const float HeroinSlowFactor = 0.6f;
 
     // Tolerance is per finished product. The first two uses in an in-game day do not
     // increase tolerance. Heavy same-day use does, and days away from that product recover it.
