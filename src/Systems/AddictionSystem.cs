@@ -20,7 +20,7 @@ public class AddictionSystem
     private const int AddictionThreshold = 5;
     private const float WithdrawalSeverityBase = 0.3f;
     private const int DaysPerAddictionDecay = 2;
-    private const float HeroinSlowFactor = 0.4f;
+    private const float HeroinSlowFactor = 0.7f;
 
     // Tolerance is per finished product. The first two uses in an in-game day do not
     // increase tolerance. Heavy same-day use does, and days away from that product recover it.
@@ -123,7 +123,7 @@ public class AddictionSystem
                 RecordUse(player);
                 RecordToleranceUse(player, "heroin");
                 float effectiveSlow = HeroinSlowFactor * effectMultiplier;
-                entity.Stats.Set("walkspeed", "vs-dope-heroin-slow", 1f + effectiveSlow);
+                entity.Stats.Set("walkspeed", "vs-dope-heroin-slow", 1f - effectiveSlow);
             }
 
             if (currentPsych <= 0.05f && prevPsych > 0.05f)
