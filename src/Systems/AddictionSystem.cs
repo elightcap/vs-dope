@@ -123,7 +123,7 @@ public class AddictionSystem
                 RecordUse(player);
                 RecordToleranceUse(player, "heroin");
                 float effectiveSlow = HeroinSlowFactor * effectMultiplier;
-                entity.Stats.Set("walkspeed", "vs-dope-heroin-slow", 1f - effectiveSlow);
+                entity.Stats.Set("walkspeed", "vs-dope-heroin-slow", 1f + effectiveSlow);
             }
 
             if (currentPsych <= 0.05f && prevPsych > 0.05f)
