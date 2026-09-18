@@ -49,7 +49,7 @@ public class CocaVitaeEffectHudSystem : ModSystem
 
 public class GuiDialogCocaVitaeEffect : GuiDialog
 {
-    private string remainingText = "Coca Vitae: 1h 00m";
+    private string remainingText = "Cocaine: 1h 00m";
 
     public GuiDialogCocaVitaeEffect(ICoreClientAPI capi) : base(capi) { }
 
@@ -58,7 +58,7 @@ public class GuiDialogCocaVitaeEffect : GuiDialog
     public void SetRemaining(double gameHours)
     {
         int totalMinutes = System.Math.Max(0, (int)System.Math.Ceiling(gameHours * 60));
-        remainingText = $"Coca Vitae: {totalMinutes / 60}h {totalMinutes % 60:00}m";
+        remainingText = $"Cocaine: {totalMinutes / 60}h {totalMinutes % 60:00}m";
         Compose();
     }
 
