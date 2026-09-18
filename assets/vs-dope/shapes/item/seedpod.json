@@ -1,0 +1,956 @@
+{
+  "textureWidth": 32,
+  "textureHeight": 32,
+  "textures": {
+    "capsule": "block/poppy/papaver_atlas",
+    "crown": "block/poppy/papaver_atlas",
+    "stem": "block/poppy/papaver_atlas"
+  },
+  "elements": [
+    {
+      "name": "stem",
+      "from": [
+        7.65,
+        2.8,
+        7.65
+      ],
+      "to": [
+        8.35,
+        6,
+        8.35
+      ],
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "capsule-lower",
+      "from": [
+        6.65,
+        5.6,
+        6.65
+      ],
+      "to": [
+        9.35,
+        7,
+        9.35
+      ],
+      "faces": {
+        "north": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "capsule-body",
+      "from": [
+        5.85,
+        6.7,
+        5.85
+      ],
+      "to": [
+        10.15,
+        10.4,
+        10.15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "capsule-upper",
+      "from": [
+        6.35,
+        10.2,
+        6.35
+      ],
+      "to": [
+        9.65,
+        11.4,
+        9.65
+      ],
+      "faces": {
+        "north": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#capsule",
+          "uv": [
+            8,
+            8,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-disc",
+      "from": [
+        5.7,
+        11.25,
+        5.7
+      ],
+      "to": [
+        10.3,
+        11.65,
+        10.3
+      ],
+      "faces": {
+        "north": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-ray-0",
+      "from": [
+        7.75,
+        11.55,
+        7.75
+      ],
+      "to": [
+        10.75,
+        11.82,
+        8.25
+      ],
+      "rotationOrigin": [
+        8,
+        11.65,
+        8
+      ],
+      "rotationY": 0,
+      "faces": {
+        "north": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-ray-1",
+      "from": [
+        7.75,
+        11.55,
+        7.75
+      ],
+      "to": [
+        10.75,
+        11.82,
+        8.25
+      ],
+      "rotationOrigin": [
+        8,
+        11.65,
+        8
+      ],
+      "rotationY": -45,
+      "faces": {
+        "north": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-ray-2",
+      "from": [
+        7.75,
+        11.55,
+        7.75
+      ],
+      "to": [
+        10.75,
+        11.82,
+        8.25
+      ],
+      "rotationOrigin": [
+        8,
+        11.65,
+        8
+      ],
+      "rotationY": -90,
+      "faces": {
+        "north": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-ray-3",
+      "from": [
+        7.75,
+        11.55,
+        7.75
+      ],
+      "to": [
+        10.75,
+        11.82,
+        8.25
+      ],
+      "rotationOrigin": [
+        8,
+        11.65,
+        8
+      ],
+      "rotationY": -135,
+      "faces": {
+        "north": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-ray-4",
+      "from": [
+        7.75,
+        11.55,
+        7.75
+      ],
+      "to": [
+        10.75,
+        11.82,
+        8.25
+      ],
+      "rotationOrigin": [
+        8,
+        11.65,
+        8
+      ],
+      "rotationY": -180,
+      "faces": {
+        "north": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-ray-5",
+      "from": [
+        7.75,
+        11.55,
+        7.75
+      ],
+      "to": [
+        10.75,
+        11.82,
+        8.25
+      ],
+      "rotationOrigin": [
+        8,
+        11.65,
+        8
+      ],
+      "rotationY": -225,
+      "faces": {
+        "north": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-ray-6",
+      "from": [
+        7.75,
+        11.55,
+        7.75
+      ],
+      "to": [
+        10.75,
+        11.82,
+        8.25
+      ],
+      "rotationOrigin": [
+        8,
+        11.65,
+        8
+      ],
+      "rotationY": -270,
+      "faces": {
+        "north": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "crown-ray-7",
+      "from": [
+        7.75,
+        11.55,
+        7.75
+      ],
+      "to": [
+        10.75,
+        11.82,
+        8.25
+      ],
+      "rotationOrigin": [
+        8,
+        11.65,
+        8
+      ],
+      "rotationY": -315,
+      "faces": {
+        "north": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#crown",
+          "uv": [
+            16,
+            8,
+            24,
+            16
+          ]
+        }
+      }
+    }
+  ]
+}
