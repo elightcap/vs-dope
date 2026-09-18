@@ -3,233 +3,33 @@
   "textureHeight": 32,
   "textures": {
     "dirt": "block/poppy/papaver_atlas",
+    "stem": "block/poppy/papaver_atlas",
+    "leaf": "block/poppy/papaver_atlas",
     "petal": "block/poppy/papaver_atlas",
     "bud": "block/poppy/papaver_atlas",
-    "leaf": "block/poppy/papaver_atlas",
     "capsule": "block/poppy/papaver_atlas",
-    "crown": "block/poppy/papaver_atlas",
-    "stem": "block/poppy/papaver_atlas"
+    "crown": "block/poppy/papaver_atlas"
   },
   "elements": [
     {
-      "name": "Earth",
+      "name": "stem-0",
       "from": [
-        2,
+        8,
+        -0.08,
+        7.92
+      ],
+      "to": [
+        8.39035,
+        0.08,
+        8.08
+      ],
+      "rotationOrigin": [
+        8,
         0,
-        2
-      ],
-      "to": [
-        14,
-        3,
-        14
-      ],
-      "faces": {
-        "north": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "south": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "east": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "west": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "up": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "down": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        }
-      }
-    },
-    {
-      "name": "ClodL",
-      "from": [
-        1,
-        1,
-        4
-      ],
-      "to": [
-        5,
-        4,
         8
       ],
-      "faces": {
-        "north": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "south": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "east": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "west": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "up": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "down": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        }
-      }
-    },
-    {
-      "name": "ClodR",
-      "from": [
-        11,
-        1,
-        9
-      ],
-      "to": [
-        15,
-        4,
-        13
-      ],
-      "faces": {
-        "north": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "south": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "east": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "west": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "up": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "down": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        }
-      }
-    },
-    {
-      "name": "Stem",
-      "from": [
-        7.4,
-        3,
-        7.4
-      ],
-      "to": [
-        8.6,
-        7,
-        8.6
-      ],
+      "rotationY": -26.56505,
+      "rotationZ": 73.35651,
       "faces": {
         "north": {
           "texture": "#stem",
@@ -288,131 +88,384 @@
       }
     },
     {
-      "name": "Leaf1",
+      "name": "stem-1",
       "from": [
-        3,
-        6,
-        7
+        8.1,
+        0.3065,
+        7.9825
       ],
       "to": [
-        8,
-        7.4,
-        8.2
+        8.54645,
+        0.4415,
+        8.1175
       ],
-      "faces": {
-        "north": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            8,
-            8,
-            16
-          ]
-        },
-        "south": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            8,
-            8,
-            16
-          ]
-        },
-        "east": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            8,
-            8,
-            16
-          ]
-        },
-        "west": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            8,
-            8,
-            16
-          ]
-        },
-        "up": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            8,
-            8,
-            16
-          ]
-        },
-        "down": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            8,
-            8,
-            16
-          ]
-        }
-      },
       "rotationOrigin": [
-        3,
-        6,
-        7
+        8.1,
+        0.374,
+        8.05
       ],
-      "rotationX": 0,
-      "rotationY": 0,
-      "rotationZ": -18
-    },
-    {
-      "name": "Leaf2",
-      "from": [
-        8,
-        7,
-        7
-      ],
-      "to": [
-        12.5,
-        8.4,
-        8.2
-      ],
+      "rotationY": -157.16635,
+      "rotationZ": 62.49878,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "stem-2",
+      "from": [
+        7.91,
+        0.715,
+        8.075
+      ],
+      "to": [
+        8.30674,
+        0.825,
+        8.185
+      ],
+      "rotationOrigin": [
+        7.91,
+        0.77,
+        8.13
+      ],
+      "rotationY": 2.60256,
+      "rotationZ": 56.28264,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "soil-0",
+      "from": [
+        7.15,
+        0,
+        7.95
+      ],
+      "to": [
+        8.05,
+        0.14,
+        8.85
+      ],
+      "faces": {
+        "north": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "south": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "east": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "west": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "up": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "down": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "name": "soil-1",
+      "from": [
+        8.15,
+        0,
+        7.45
+      ],
+      "to": [
+        8.85,
+        0.14,
+        8.15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "south": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "east": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "west": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "up": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "down": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "name": "soil-2",
+      "from": [
+        7.25,
+        0,
+        7.45
+      ],
+      "to": [
+        7.75,
+        0.14,
+        7.95
+      ],
+      "faces": {
+        "north": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "south": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "east": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "west": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "up": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "down": {
+          "texture": "#dirt",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-0",
+      "from": [
+        8.07487,
+        0.271,
+        7.9843
+      ],
+      "to": [
+        8.18957,
+        0.289,
+        8.09057
+      ],
+      "rotationOrigin": [
+        8.07487,
+        0.28,
+        8.03743
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
         "up": {
           "texture": "#leaf",
           "uv": [
@@ -431,15 +484,1871 @@
             16
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        7,
-        7
+      }
+    },
+    {
+      "name": "rosette-0-lobe-1",
+      "from": [
+        8.173,
+        0.29402,
+        7.94371
       ],
-      "rotationX": 0,
-      "rotationY": 0,
-      "rotationZ": 20
+      "to": [
+        8.2877,
+        0.31202,
+        8.22268
+      ],
+      "rotationOrigin": [
+        8.173,
+        0.30302,
+        8.08319
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-2",
+      "from": [
+        8.27114,
+        0.31703,
+        7.90313
+      ],
+      "to": [
+        8.38584,
+        0.33503,
+        8.35478
+      ],
+      "rotationOrigin": [
+        8.27114,
+        0.32603,
+        8.12896
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-3",
+      "from": [
+        8.36927,
+        0.34005,
+        8.01199
+      ],
+      "to": [
+        8.48397,
+        0.35805,
+        8.33745
+      ],
+      "rotationOrigin": [
+        8.36927,
+        0.34905,
+        8.17472
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-4",
+      "from": [
+        8.46741,
+        0.36306,
+        7.95812
+      ],
+      "to": [
+        8.58211,
+        0.38106,
+        8.48284
+      ],
+      "rotationOrigin": [
+        8.46741,
+        0.37206,
+        8.22048
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-5",
+      "from": [
+        8.56555,
+        0.38608,
+        8.0703
+      ],
+      "to": [
+        8.68025,
+        0.40408,
+        8.46218
+      ],
+      "rotationOrigin": [
+        8.56555,
+        0.39508,
+        8.26624
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-6",
+      "from": [
+        8.66368,
+        0.40909,
+        8.07953
+      ],
+      "to": [
+        8.77838,
+        0.42709,
+        8.54447
+      ],
+      "rotationOrigin": [
+        8.66368,
+        0.41809,
+        8.312
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-7",
+      "from": [
+        8.76182,
+        0.43211,
+        8.19836
+      ],
+      "to": [
+        8.87652,
+        0.45011,
+        8.51717
+      ],
+      "rotationOrigin": [
+        8.76182,
+        0.44111,
+        8.35776
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-8",
+      "from": [
+        8.85995,
+        0.45513,
+        8.29725
+      ],
+      "to": [
+        8.97465,
+        0.47313,
+        8.5098
+      ],
+      "rotationOrigin": [
+        8.85995,
+        0.46413,
+        8.40353
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-9",
+      "from": [
+        8.95809,
+        0.47814,
+        8.40943
+      ],
+      "to": [
+        9.07279,
+        0.49614,
+        8.48914
+      ],
+      "rotationOrigin": [
+        8.95809,
+        0.48714,
+        8.44929
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-midrib",
+      "from": [
+        8.07487,
+        0.2625,
+        8.01993
+      ],
+      "to": [
+        9.07117,
+        0.2975,
+        8.05493
+      ],
+      "rotationOrigin": [
+        8.07487,
+        0.28,
+        8.03743
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-0",
+      "from": [
+        8.09759,
+        0.356,
+        7.99177
+      ],
+      "to": [
+        8.22039,
+        0.374,
+        8.10582
+      ],
+      "rotationOrigin": [
+        8.09759,
+        0.365,
+        8.0488
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-1",
+      "from": [
+        7.99046,
+        0.39468,
+        7.93287
+      ],
+      "to": [
+        8.11326,
+        0.41268,
+        8.23225
+      ],
+      "rotationOrigin": [
+        7.99046,
+        0.40368,
+        8.08256
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-2",
+      "from": [
+        7.88333,
+        0.43335,
+        7.87397
+      ],
+      "to": [
+        8.00613,
+        0.45135,
+        8.35867
+      ],
+      "rotationOrigin": [
+        7.88333,
+        0.44235,
+        8.11632
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-3",
+      "from": [
+        7.77619,
+        0.47203,
+        7.97545
+      ],
+      "to": [
+        7.89899,
+        0.49003,
+        8.32472
+      ],
+      "rotationOrigin": [
+        7.77619,
+        0.48103,
+        8.15008
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-4",
+      "from": [
+        7.66906,
+        0.51071,
+        7.90229
+      ],
+      "to": [
+        7.79186,
+        0.52871,
+        8.4654
+      ],
+      "rotationOrigin": [
+        7.66906,
+        0.51971,
+        8.18385
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-5",
+      "from": [
+        7.56193,
+        0.54939,
+        8.00733
+      ],
+      "to": [
+        7.68473,
+        0.56739,
+        8.42789
+      ],
+      "rotationOrigin": [
+        7.56193,
+        0.55839,
+        8.21761
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-6",
+      "from": [
+        7.45479,
+        0.58806,
+        8.00189
+      ],
+      "to": [
+        7.57759,
+        0.60606,
+        8.50085
+      ],
+      "rotationOrigin": [
+        7.45479,
+        0.59706,
+        8.25137
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-7",
+      "from": [
+        7.34766,
+        0.62674,
+        8.11406
+      ],
+      "to": [
+        7.47046,
+        0.64474,
+        8.45621
+      ],
+      "rotationOrigin": [
+        7.34766,
+        0.63574,
+        8.28514
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-8",
+      "from": [
+        7.24053,
+        0.66542,
+        8.20485
+      ],
+      "to": [
+        7.36333,
+        0.68342,
+        8.43295
+      ],
+      "rotationOrigin": [
+        7.24053,
+        0.67442,
+        8.3189
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-9",
+      "from": [
+        7.13339,
+        0.7041,
+        8.30989
+      ],
+      "to": [
+        7.25619,
+        0.7221,
+        8.39543
+      ],
+      "rotationOrigin": [
+        7.13339,
+        0.7131,
+        8.35266
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-midrib",
+      "from": [
+        8.09759,
+        0.3475,
+        8.0313
+      ],
+      "to": [
+        9.16679,
+        0.3825,
+        8.0663
+      ],
+      "rotationOrigin": [
+        8.09759,
+        0.365,
+        8.0488
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-0",
+      "from": [
+        8.06354,
+        0.38909,
+        8.05635
+      ],
+      "to": [
+        8.19444,
+        0.51091,
+        8.07435
+      ],
+      "rotationOrigin": [
+        8.06354,
+        0.45,
+        8.06535
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-1",
+      "from": [
+        8.12059,
+        0.34574,
+        7.95759
+      ],
+      "to": [
+        8.25149,
+        0.66552,
+        7.97559
+      ],
+      "rotationOrigin": [
+        8.12059,
+        0.50563,
+        7.96659
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-2",
+      "from": [
+        8.17765,
+        0.30238,
+        7.85883
+      ],
+      "to": [
+        8.30855,
+        0.82013,
+        7.87683
+      ],
+      "rotationOrigin": [
+        8.17765,
+        0.56126,
+        7.86783
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-3",
+      "from": [
+        8.2347,
+        0.43034,
+        7.76007
+      ],
+      "to": [
+        8.3656,
+        0.80343,
+        7.77807
+      ],
+      "rotationOrigin": [
+        8.2347,
+        0.61689,
+        7.76907
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-4",
+      "from": [
+        8.29176,
+        0.37176,
+        7.66131
+      ],
+      "to": [
+        8.42266,
+        0.97327,
+        7.67931
+      ],
+      "rotationOrigin": [
+        8.29176,
+        0.67252,
+        7.67031
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-5",
+      "from": [
+        8.34882,
+        0.50353,
+        7.56255
+      ],
+      "to": [
+        8.47972,
+        0.95276,
+        7.58055
+      ],
+      "rotationOrigin": [
+        8.34882,
+        0.72815,
+        7.57155
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-6",
+      "from": [
+        8.40587,
+        0.51729,
+        7.46379
+      ],
+      "to": [
+        8.53677,
+        1.05027,
+        7.48179
+      ],
+      "rotationOrigin": [
+        8.40587,
+        0.78378,
+        7.47279
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-7",
+      "from": [
+        8.46293,
+        0.65667,
+        7.36503
+      ],
+      "to": [
+        8.59383,
+        1.02214,
+        7.38303
+      ],
+      "rotationOrigin": [
+        8.46293,
+        0.83941,
+        7.37403
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-8",
+      "from": [
+        8.51998,
+        0.77321,
+        7.26627
+      ],
+      "to": [
+        8.65088,
+        1.01686,
+        7.28427
+      ],
+      "rotationOrigin": [
+        8.51998,
+        0.89503,
+        7.27527
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-9",
+      "from": [
+        8.57704,
+        0.90498,
+        7.16751
+      ],
+      "to": [
+        8.70794,
+        0.99635,
+        7.18551
+      ],
+      "rotationOrigin": [
+        8.57704,
+        0.95066,
+        7.17651
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-midrib",
+      "from": [
+        8.06354,
+        0.4325,
+        8.04785
+      ],
+      "to": [
+        9.20564,
+        0.4675,
+        8.08285
+      ],
+      "rotationOrigin": [
+        8.06354,
+        0.45,
+        8.06535
+      ],
+      "rotationY": 59.984,
+      "rotationZ": 26.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-0",
+      "from": [
+        8.02275,
+        0.526,
+        8.01773
+      ],
+      "to": [
+        8.16175,
+        0.544,
+        8.14733
+      ],
+      "rotationOrigin": [
+        8.02275,
+        0.535,
+        8.08253
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-1",
+      "from": [
+        8.05128,
+        0.55407,
+        8.04136
+      ],
+      "to": [
+        8.19028,
+        0.57207,
+        8.38156
+      ],
+      "rotationOrigin": [
+        8.05128,
+        0.56307,
+        8.21146
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-2",
+      "from": [
+        8.07981,
+        0.58214,
+        8.06499
+      ],
+      "to": [
+        8.21881,
+        0.60014,
+        8.61579
+      ],
+      "rotationOrigin": [
+        8.07981,
+        0.59114,
+        8.34039
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-3",
+      "from": [
+        8.10833,
+        0.6102,
+        8.27087
+      ],
+      "to": [
+        8.24733,
+        0.6282,
+        8.66777
+      ],
+      "rotationOrigin": [
+        8.10833,
+        0.6192,
+        8.46932
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-4",
+      "from": [
+        8.13686,
+        0.63827,
+        8.2783
+      ],
+      "to": [
+        8.27586,
+        0.65627,
+        8.9182
+      ],
+      "rotationOrigin": [
+        8.13686,
+        0.64727,
+        8.59825
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-5",
+      "from": [
+        8.16539,
+        0.66634,
+        8.48823
+      ],
+      "to": [
+        8.30439,
+        0.68434,
+        8.96613
+      ],
+      "rotationOrigin": [
+        8.16539,
+        0.67534,
+        8.72718
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-6",
+      "from": [
+        8.19391,
+        0.69441,
+        8.57262
+      ],
+      "to": [
+        8.33291,
+        0.71241,
+        9.13962
+      ],
+      "rotationOrigin": [
+        8.19391,
+        0.70341,
+        8.85612
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-7",
+      "from": [
+        8.22244,
+        0.72248,
+        8.79065
+      ],
+      "to": [
+        8.36144,
+        0.74048,
+        9.17945
+      ],
+      "rotationOrigin": [
+        8.22244,
+        0.73148,
+        8.98505
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-8",
+      "from": [
+        8.25097,
+        0.75054,
+        8.98438
+      ],
+      "to": [
+        8.38997,
+        0.76854,
+        9.24358
+      ],
+      "rotationOrigin": [
+        8.25097,
+        0.75954,
+        9.11398
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-9",
+      "from": [
+        8.27949,
+        0.77861,
+        9.19431
+      ],
+      "to": [
+        8.41849,
+        0.79661,
+        9.29151
+      ],
+      "rotationOrigin": [
+        8.27949,
+        0.78761,
+        9.24291
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-midrib",
+      "from": [
+        8.02275,
+        0.5175,
+        8.06503
+      ],
+      "to": [
+        9.23775,
+        0.5525,
+        8.10003
+      ],
+      "rotationOrigin": [
+        8.02275,
+        0.535,
+        8.08253
+      ],
+      "rotationY": -77.524,
+      "rotationZ": 12.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
     }
   ]
 }

@@ -3,233 +3,33 @@
   "textureHeight": 32,
   "textures": {
     "dirt": "block/poppy/papaver_atlas",
+    "stem": "block/poppy/papaver_atlas",
+    "leaf": "block/poppy/papaver_atlas",
     "petal": "block/poppy/papaver_atlas",
     "bud": "block/poppy/papaver_atlas",
-    "leaf": "block/poppy/papaver_atlas",
     "capsule": "block/poppy/papaver_atlas",
-    "crown": "block/poppy/papaver_atlas",
-    "stem": "block/poppy/papaver_atlas"
+    "crown": "block/poppy/papaver_atlas"
   },
   "elements": [
     {
-      "name": "Earth",
+      "name": "stem-0",
       "from": [
-        2,
+        8,
+        -0.08,
+        7.92
+      ],
+      "to": [
+        10.99409,
+        0.08,
+        8.08
+      ],
+      "rotationOrigin": [
+        8,
         0,
-        2
-      ],
-      "to": [
-        14,
-        3,
-        14
-      ],
-      "faces": {
-        "north": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "south": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "east": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "west": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "up": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "down": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        }
-      }
-    },
-    {
-      "name": "ClodL",
-      "from": [
-        1,
-        1,
-        4
-      ],
-      "to": [
-        5,
-        4,
         8
       ],
-      "faces": {
-        "north": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "south": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "east": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "west": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "up": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "down": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        }
-      }
-    },
-    {
-      "name": "ClodR",
-      "from": [
-        11,
-        1,
-        9
-      ],
-      "to": [
-        15,
-        4,
-        13
-      ],
-      "faces": {
-        "north": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "south": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "east": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "west": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "up": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        },
-        "down": {
-          "texture": "#dirt",
-          "uv": [
-            0,
-            0,
-            8,
-            8
-          ]
-        }
-      }
-    },
-    {
-      "name": "Stem",
-      "from": [
-        7.4,
-        3,
-        7.4
-      ],
-      "to": [
-        8.6,
-        15,
-        8.6
-      ],
+      "rotationY": -26.56505,
+      "rotationZ": 87.86,
       "faces": {
         "north": {
           "texture": "#stem",
@@ -288,439 +88,384 @@
       }
     },
     {
-      "name": "Leaf1",
+      "name": "stem-1",
       "from": [
-        3,
-        6,
-        7
+        8.1,
+        2.9245,
+        7.9825
       ],
       "to": [
-        8,
-        7.4,
-        8.2
+        11.2747,
+        3.0595,
+        8.1175
       ],
+      "rotationOrigin": [
+        8.1,
+        2.992,
+        8.05
+      ],
+      "rotationY": -157.16635,
+      "rotationZ": 86.27677,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         }
-      },
-      "rotationOrigin": [
-        3,
-        6,
-        7
-      ],
-      "rotationX": 0,
-      "rotationY": 0,
-      "rotationZ": -18
+      }
     },
     {
-      "name": "Leaf2",
+      "name": "stem-2",
       "from": [
-        8,
-        7,
-        7
+        7.91,
+        6.105,
+        8.075
       ],
       "to": [
-        12.5,
-        8.4,
-        8.2
+        10.55917,
+        6.215,
+        8.185
       ],
+      "rotationOrigin": [
+        7.91,
+        6.16,
+        8.13
+      ],
+      "rotationY": 2.60256,
+      "rotationZ": 85.23146,
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#stem",
           "uv": [
             0,
+            16,
             8,
-            8,
-            16
+            24
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        7,
-        7
-      ],
-      "rotationX": 0,
-      "rotationY": 0,
-      "rotationZ": 20
+      }
     },
     {
-      "name": "Leaf3",
+      "name": "soil-0",
       "from": [
-        3.5,
-        9,
-        7
+        7.15,
+        0,
+        7.95
       ],
       "to": [
-        8.0,
-        10.4,
-        8.2
+        8.05,
+        0.14,
+        8.85
       ],
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         }
-      },
-      "rotationOrigin": [
-        3.5,
-        9,
-        7
-      ],
-      "rotationX": 0,
-      "rotationY": 0,
-      "rotationZ": -26
+      }
     },
     {
-      "name": "Leaf4",
+      "name": "soil-1",
       "from": [
-        8,
-        10,
-        7
+        8.15,
+        0,
+        7.45
       ],
       "to": [
-        12,
-        11.4,
-        8.2
+        8.85,
+        0.14,
+        8.15
       ],
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        10,
-        7
-      ],
-      "rotationX": 0,
-      "rotationY": 0,
-      "rotationZ": 25
+      }
     },
     {
-      "name": "Leaf5",
+      "name": "soil-2",
       "from": [
-        4.5,
-        12,
-        7
+        7.25,
+        0,
+        7.45
       ],
       "to": [
-        8.0,
-        13.4,
-        8.2
+        7.75,
+        0.14,
+        7.95
       ],
       "faces": {
         "north": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "south": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "east": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "west": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "up": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         },
         "down": {
-          "texture": "#leaf",
+          "texture": "#dirt",
           "uv": [
             0,
+            0,
             8,
-            8,
-            16
+            8
           ]
         }
-      },
-      "rotationOrigin": [
-        4.5,
-        12,
-        7
-      ],
-      "rotationX": 0,
-      "rotationY": 0,
-      "rotationZ": -30
+      }
     },
     {
-      "name": "Leaf6",
+      "name": "rosette-0-lobe-0",
       "from": [
-        8,
-        12,
-        7
+        8.00936,
+        0.271,
+        7.88463
       ],
       "to": [
-        11,
-        13.4,
-        8.2
+        8.26346,
+        0.289,
+        8.12473
       ],
+      "rotationOrigin": [
+        8.00936,
+        0.28,
+        8.00468
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
       "faces": {
-        "north": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            8,
-            8,
-            16
-          ]
-        },
-        "south": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            8,
-            8,
-            16
-          ]
-        },
-        "east": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            8,
-            8,
-            16
-          ]
-        },
-        "west": {
-          "texture": "#leaf",
-          "uv": [
-            0,
-            8,
-            8,
-            16
-          ]
-        },
         "up": {
           "texture": "#leaf",
           "uv": [
@@ -739,15 +484,8059 @@
             16
           ]
         }
-      },
-      "rotationOrigin": [
-        8,
-        12,
-        7
+      }
+    },
+    {
+      "name": "rosette-0-lobe-1",
+      "from": [
+        8.23107,
+        0.323,
+        7.79294
       ],
-      "rotationX": 0,
-      "rotationY": 0,
-      "rotationZ": 28
+      "to": [
+        8.48517,
+        0.341,
+        8.42319
+      ],
+      "rotationOrigin": [
+        8.23107,
+        0.332,
+        8.10807
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-2",
+      "from": [
+        8.45279,
+        0.375,
+        7.70125
+      ],
+      "to": [
+        8.70689,
+        0.393,
+        8.72166
+      ],
+      "rotationOrigin": [
+        8.45279,
+        0.384,
+        8.21145
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-3",
+      "from": [
+        8.6745,
+        0.427,
+        7.94719
+      ],
+      "to": [
+        8.9286,
+        0.445,
+        8.68249
+      ],
+      "rotationOrigin": [
+        8.6745,
+        0.436,
+        8.31484
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-4",
+      "from": [
+        8.89622,
+        0.47899,
+        7.82549
+      ],
+      "to": [
+        9.15032,
+        0.49699,
+        9.01096
+      ],
+      "rotationOrigin": [
+        8.89622,
+        0.48799,
+        8.41823
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-5",
+      "from": [
+        9.11793,
+        0.53099,
+        8.07894
+      ],
+      "to": [
+        9.37203,
+        0.54899,
+        8.96429
+      ],
+      "rotationOrigin": [
+        9.11793,
+        0.53999,
+        8.52161
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-6",
+      "from": [
+        9.33964,
+        0.58299,
+        8.09979
+      ],
+      "to": [
+        9.59374,
+        0.60099,
+        9.15021
+      ],
+      "rotationOrigin": [
+        9.33964,
+        0.59199,
+        8.625
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-7",
+      "from": [
+        9.56136,
+        0.63499,
+        8.36824
+      ],
+      "to": [
+        9.81546,
+        0.65299,
+        9.08853
+      ],
+      "rotationOrigin": [
+        9.56136,
+        0.64399,
+        8.72839
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-8",
+      "from": [
+        9.78307,
+        0.68699,
+        8.59168
+      ],
+      "to": [
+        10.03717,
+        0.70499,
+        9.07187
+      ],
+      "rotationOrigin": [
+        9.78307,
+        0.69599,
+        8.83178
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-lobe-9",
+      "from": [
+        10.00479,
+        0.73899,
+        8.84513
+      ],
+      "to": [
+        10.25889,
+        0.75699,
+        9.0252
+      ],
+      "rotationOrigin": [
+        10.00479,
+        0.74799,
+        8.93516
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-0-midrib",
+      "from": [
+        8.00936,
+        0.2625,
+        7.98718
+      ],
+      "to": [
+        10.26026,
+        0.2975,
+        8.02218
+      ],
+      "rotationOrigin": [
+        8.00936,
+        0.28,
+        8.00468
+      ],
+      "rotationY": -25.0,
+      "rotationZ": 12.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-0",
+      "from": [
+        8.0122,
+        0.356,
+        7.87727
+      ],
+      "to": [
+        8.2846,
+        0.374,
+        8.13493
+      ],
+      "rotationOrigin": [
+        8.0122,
+        0.365,
+        8.0061
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-1",
+      "from": [
+        7.77016,
+        0.44338,
+        7.74419
+      ],
+      "to": [
+        8.04256,
+        0.46138,
+        8.42056
+      ],
+      "rotationOrigin": [
+        7.77016,
+        0.45238,
+        8.08238
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-2",
+      "from": [
+        7.52811,
+        0.53076,
+        7.61112
+      ],
+      "to": [
+        7.80051,
+        0.54876,
+        8.70619
+      ],
+      "rotationOrigin": [
+        7.52811,
+        0.53976,
+        8.15866
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-3",
+      "from": [
+        7.28607,
+        0.61815,
+        7.84039
+      ],
+      "to": [
+        7.55847,
+        0.63615,
+        8.62948
+      ],
+      "rotationOrigin": [
+        7.28607,
+        0.62715,
+        8.23494
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-4",
+      "from": [
+        7.04403,
+        0.70553,
+        7.67511
+      ],
+      "to": [
+        7.31643,
+        0.72353,
+        8.94732
+      ],
+      "rotationOrigin": [
+        7.04403,
+        0.71453,
+        8.31121
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-5",
+      "from": [
+        6.80199,
+        0.79291,
+        7.91242
+      ],
+      "to": [
+        7.07439,
+        0.81091,
+        8.86256
+      ],
+      "rotationOrigin": [
+        6.80199,
+        0.80191,
+        8.38749
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-6",
+      "from": [
+        6.55995,
+        0.88029,
+        7.90013
+      ],
+      "to": [
+        6.83235,
+        0.89829,
+        9.02741
+      ],
+      "rotationOrigin": [
+        6.55995,
+        0.88929,
+        8.46377
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-7",
+      "from": [
+        6.3179,
+        0.96768,
+        8.15355
+      ],
+      "to": [
+        6.5903,
+        0.98568,
+        8.92654
+      ],
+      "rotationOrigin": [
+        6.3179,
+        0.97668,
+        8.54005
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-8",
+      "from": [
+        6.07586,
+        1.05506,
+        8.35866
+      ],
+      "to": [
+        6.34826,
+        1.07306,
+        8.87399
+      ],
+      "rotationOrigin": [
+        6.07586,
+        1.06406,
+        8.61633
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-lobe-9",
+      "from": [
+        5.83382,
+        1.14244,
+        8.59598
+      ],
+      "to": [
+        6.10622,
+        1.16044,
+        8.78923
+      ],
+      "rotationOrigin": [
+        5.83382,
+        1.15144,
+        8.69261
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-1-midrib",
+      "from": [
+        8.0122,
+        0.3475,
+        7.9886
+      ],
+      "to": [
+        10.4278,
+        0.3825,
+        8.0236
+      ],
+      "rotationOrigin": [
+        8.0122,
+        0.365,
+        8.0061
+      ],
+      "rotationY": -162.508,
+      "rotationZ": 19.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-0",
+      "from": [
+        8.01504,
+        0.31238,
+        7.99852
+      ],
+      "to": [
+        8.30574,
+        0.58762,
+        8.01652
+      ],
+      "rotationOrigin": [
+        8.01504,
+        0.45,
+        8.00752
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-1",
+      "from": [
+        8.14394,
+        0.21444,
+        7.77539
+      ],
+      "to": [
+        8.43464,
+        0.93692,
+        7.79339
+      ],
+      "rotationOrigin": [
+        8.14394,
+        0.57568,
+        7.78439
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-2",
+      "from": [
+        8.27285,
+        0.11649,
+        7.55227
+      ],
+      "to": [
+        8.56355,
+        1.28623,
+        7.57027
+      ],
+      "rotationOrigin": [
+        8.27285,
+        0.70136,
+        7.56127
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-3",
+      "from": [
+        8.40175,
+        0.40559,
+        7.32914
+      ],
+      "to": [
+        8.69245,
+        1.24849,
+        7.34714
+      ],
+      "rotationOrigin": [
+        8.40175,
+        0.82704,
+        7.33814
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-4",
+      "from": [
+        8.53066,
+        0.27325,
+        7.10602
+      ],
+      "to": [
+        8.82136,
+        1.6322,
+        7.12402
+      ],
+      "rotationOrigin": [
+        8.53066,
+        0.95272,
+        7.11502
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-5",
+      "from": [
+        8.65956,
+        0.57095,
+        6.88289
+      ],
+      "to": [
+        8.95026,
+        1.58586,
+        6.90089
+      ],
+      "rotationOrigin": [
+        8.65956,
+        1.07841,
+        6.89189
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-6",
+      "from": [
+        8.78847,
+        0.60202,
+        6.65977
+      ],
+      "to": [
+        9.07917,
+        1.80616,
+        6.67777
+      ],
+      "rotationOrigin": [
+        8.78847,
+        1.20409,
+        6.66877
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-7",
+      "from": [
+        8.91737,
+        0.91692,
+        6.43664
+      ],
+      "to": [
+        9.20807,
+        1.74262,
+        6.45464
+      ],
+      "rotationOrigin": [
+        8.91737,
+        1.32977,
+        6.44564
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-8",
+      "from": [
+        9.04628,
+        1.18022,
+        6.21352
+      ],
+      "to": [
+        9.33698,
+        1.73068,
+        6.23152
+      ],
+      "rotationOrigin": [
+        9.04628,
+        1.45545,
+        6.22252
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-lobe-9",
+      "from": [
+        9.17518,
+        1.47792,
+        5.99039
+      ],
+      "to": [
+        9.46588,
+        1.68434,
+        6.00839
+      ],
+      "rotationOrigin": [
+        9.17518,
+        1.58113,
+        5.99939
+      ],
+      "rotationY": -300.016,
+      "rotationZ": 26,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-2-midrib",
+      "from": [
+        8.01504,
+        0.4325,
+        7.99002
+      ],
+      "to": [
+        10.59534,
+        0.4675,
+        8.02502
+      ],
+      "rotationOrigin": [
+        8.01504,
+        0.45,
+        8.00752
+      ],
+      "rotationY": 59.984,
+      "rotationZ": 26.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-0",
+      "from": [
+        8.01788,
+        0.526,
+        7.86254
+      ],
+      "to": [
+        8.32688,
+        0.544,
+        8.15534
+      ],
+      "rotationOrigin": [
+        8.01788,
+        0.535,
+        8.00894
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-1",
+      "from": [
+        8.08233,
+        0.58941,
+        7.91593
+      ],
+      "to": [
+        8.39133,
+        0.60741,
+        8.68453
+      ],
+      "rotationOrigin": [
+        8.08233,
+        0.59841,
+        8.30023
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-2",
+      "from": [
+        8.14678,
+        0.65283,
+        7.96932
+      ],
+      "to": [
+        8.45578,
+        0.67083,
+        9.21372
+      ],
+      "rotationOrigin": [
+        8.14678,
+        0.66183,
+        8.59152
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-3",
+      "from": [
+        8.21123,
+        0.71624,
+        8.43446
+      ],
+      "to": [
+        8.52023,
+        0.73424,
+        9.33116
+      ],
+      "rotationOrigin": [
+        8.21123,
+        0.72524,
+        8.88281
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-4",
+      "from": [
+        8.27568,
+        0.77965,
+        8.45125
+      ],
+      "to": [
+        8.58468,
+        0.79765,
+        9.89695
+      ],
+      "rotationOrigin": [
+        8.27568,
+        0.78865,
+        9.1741
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-5",
+      "from": [
+        8.34013,
+        0.84307,
+        8.92554
+      ],
+      "to": [
+        8.64913,
+        0.86107,
+        10.00524
+      ],
+      "rotationOrigin": [
+        8.34013,
+        0.85207,
+        9.46539
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-6",
+      "from": [
+        8.40458,
+        0.90648,
+        9.11618
+      ],
+      "to": [
+        8.71358,
+        0.92448,
+        10.39718
+      ],
+      "rotationOrigin": [
+        8.40458,
+        0.91548,
+        9.75668
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-7",
+      "from": [
+        8.46903,
+        0.96989,
+        9.60877
+      ],
+      "to": [
+        8.77803,
+        0.98789,
+        10.48717
+      ],
+      "rotationOrigin": [
+        8.46903,
+        0.97889,
+        10.04797
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-8",
+      "from": [
+        8.53348,
+        1.0333,
+        10.04646
+      ],
+      "to": [
+        8.84248,
+        1.0513,
+        10.63206
+      ],
+      "rotationOrigin": [
+        8.53348,
+        1.0423,
+        10.33926
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-lobe-9",
+      "from": [
+        8.59793,
+        1.09672,
+        10.52075
+      ],
+      "to": [
+        8.90693,
+        1.11472,
+        10.74035
+      ],
+      "rotationOrigin": [
+        8.59793,
+        1.10572,
+        10.63055
+      ],
+      "rotationY": -437.524,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-3-midrib",
+      "from": [
+        8.01788,
+        0.5175,
+        7.99144
+      ],
+      "to": [
+        10.76288,
+        0.5525,
+        8.02644
+      ],
+      "rotationOrigin": [
+        8.01788,
+        0.535,
+        8.00894
+      ],
+      "rotationY": -77.524,
+      "rotationZ": 12.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-lobe-0",
+      "from": [
+        8.02072,
+        0.611,
+        7.89031
+      ],
+      "to": [
+        8.27482,
+        0.629,
+        8.13041
+      ],
+      "rotationOrigin": [
+        8.02072,
+        0.62,
+        8.01036
+      ],
+      "rotationY": -575.032,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-lobe-1",
+      "from": [
+        7.82709,
+        0.69242,
+        7.55949
+      ],
+      "to": [
+        8.08119,
+        0.71042,
+        8.18974
+      ],
+      "rotationOrigin": [
+        7.82709,
+        0.70142,
+        7.87462
+      ],
+      "rotationY": -575.032,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-lobe-2",
+      "from": [
+        7.63346,
+        0.77385,
+        7.22867
+      ],
+      "to": [
+        7.88756,
+        0.79185,
+        8.24908
+      ],
+      "rotationOrigin": [
+        7.63346,
+        0.78285,
+        7.73887
+      ],
+      "rotationY": -575.032,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-lobe-3",
+      "from": [
+        7.43982,
+        0.85527,
+        7.23548
+      ],
+      "to": [
+        7.69392,
+        0.87327,
+        7.97078
+      ],
+      "rotationOrigin": [
+        7.43982,
+        0.86427,
+        7.60313
+      ],
+      "rotationY": -575.032,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-lobe-4",
+      "from": [
+        7.24619,
+        0.9367,
+        6.87465
+      ],
+      "to": [
+        7.50029,
+        0.9547,
+        8.06012
+      ],
+      "rotationOrigin": [
+        7.24619,
+        0.9457,
+        7.46738
+      ],
+      "rotationY": -575.032,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-lobe-5",
+      "from": [
+        7.05256,
+        1.01812,
+        6.88896
+      ],
+      "to": [
+        7.30666,
+        1.03612,
+        7.77432
+      ],
+      "rotationOrigin": [
+        7.05256,
+        1.02712,
+        7.33164
+      ],
+      "rotationY": -575.032,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-lobe-6",
+      "from": [
+        6.85893,
+        1.09955,
+        6.67069
+      ],
+      "to": [
+        7.11303,
+        1.11755,
+        7.72111
+      ],
+      "rotationOrigin": [
+        6.85893,
+        1.10855,
+        7.1959
+      ],
+      "rotationY": -575.032,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-lobe-7",
+      "from": [
+        6.66529,
+        1.18097,
+        6.70001
+      ],
+      "to": [
+        6.91939,
+        1.19897,
+        7.4203
+      ],
+      "rotationOrigin": [
+        6.66529,
+        1.18997,
+        7.06015
+      ],
+      "rotationY": -575.032,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-lobe-8",
+      "from": [
+        6.47166,
+        1.2624,
+        6.68431
+      ],
+      "to": [
+        6.72576,
+        1.2804,
+        7.1645
+      ],
+      "rotationOrigin": [
+        6.47166,
+        1.2714,
+        6.92441
+      ],
+      "rotationY": -575.032,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-lobe-9",
+      "from": [
+        6.27803,
+        1.34382,
+        6.69863
+      ],
+      "to": [
+        6.53213,
+        1.36182,
+        6.8787
+      ],
+      "rotationOrigin": [
+        6.27803,
+        1.35282,
+        6.78866
+      ],
+      "rotationY": -575.032,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-4-midrib",
+      "from": [
+        8.02072,
+        0.6025,
+        7.99286
+      ],
+      "to": [
+        10.27162,
+        0.6375,
+        8.02786
+      ],
+      "rotationOrigin": [
+        8.02072,
+        0.62,
+        8.01036
+      ],
+      "rotationY": 144.968,
+      "rotationZ": 19.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-lobe-0",
+      "from": [
+        8.02356,
+        0.696,
+        7.88295
+      ],
+      "to": [
+        8.29596,
+        0.714,
+        8.14061
+      ],
+      "rotationOrigin": [
+        8.02356,
+        0.705,
+        8.01178
+      ],
+      "rotationY": -712.54,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-lobe-1",
+      "from": [
+        8.26276,
+        0.81366,
+        7.64228
+      ],
+      "to": [
+        8.53516,
+        0.83166,
+        8.31864
+      ],
+      "rotationOrigin": [
+        8.26276,
+        0.82266,
+        7.98046
+      ],
+      "rotationY": -712.54,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-lobe-2",
+      "from": [
+        8.50195,
+        0.93132,
+        7.4016
+      ],
+      "to": [
+        8.77435,
+        0.94932,
+        8.49668
+      ],
+      "rotationOrigin": [
+        8.50195,
+        0.94032,
+        7.94914
+      ],
+      "rotationY": -712.54,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-lobe-3",
+      "from": [
+        8.74115,
+        1.04898,
+        7.52327
+      ],
+      "to": [
+        9.01355,
+        1.06698,
+        8.31237
+      ],
+      "rotationOrigin": [
+        8.74115,
+        1.05798,
+        7.91782
+      ],
+      "rotationY": -712.54,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-lobe-4",
+      "from": [
+        8.98034,
+        1.16664,
+        7.25039
+      ],
+      "to": [
+        9.25274,
+        1.18464,
+        8.52261
+      ],
+      "rotationOrigin": [
+        8.98034,
+        1.17564,
+        7.8865
+      ],
+      "rotationY": -712.54,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-lobe-5",
+      "from": [
+        9.21954,
+        1.28429,
+        7.38011
+      ],
+      "to": [
+        9.49194,
+        1.30229,
+        8.33025
+      ],
+      "rotationOrigin": [
+        9.21954,
+        1.29329,
+        7.85518
+      ],
+      "rotationY": -712.54,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-lobe-6",
+      "from": [
+        9.45873,
+        1.40195,
+        7.26022
+      ],
+      "to": [
+        9.73113,
+        1.41995,
+        8.3875
+      ],
+      "rotationOrigin": [
+        9.45873,
+        1.41095,
+        7.82386
+      ],
+      "rotationY": -712.54,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-lobe-7",
+      "from": [
+        9.69792,
+        1.51961,
+        7.40604
+      ],
+      "to": [
+        9.97032,
+        1.53761,
+        8.17903
+      ],
+      "rotationOrigin": [
+        9.69792,
+        1.52861,
+        7.79254
+      ],
+      "rotationY": -712.54,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-lobe-8",
+      "from": [
+        9.93712,
+        1.63727,
+        7.50355
+      ],
+      "to": [
+        10.20952,
+        1.65527,
+        8.01888
+      ],
+      "rotationOrigin": [
+        9.93712,
+        1.64627,
+        7.76122
+      ],
+      "rotationY": -712.54,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-lobe-9",
+      "from": [
+        10.17631,
+        1.75493,
+        7.63327
+      ],
+      "to": [
+        10.44871,
+        1.77293,
+        7.82652
+      ],
+      "rotationOrigin": [
+        10.17631,
+        1.76393,
+        7.7299
+      ],
+      "rotationY": -712.54,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-5-midrib",
+      "from": [
+        8.02356,
+        0.6875,
+        7.99428
+      ],
+      "to": [
+        10.43916,
+        0.7225,
+        8.02928
+      ],
+      "rotationOrigin": [
+        8.02356,
+        0.705,
+        8.01178
+      ],
+      "rotationY": 7.46,
+      "rotationZ": 26.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-lobe-0",
+      "from": [
+        8.0264,
+        0.65238,
+        8.0042
+      ],
+      "to": [
+        8.3171,
+        0.92762,
+        8.0222
+      ],
+      "rotationOrigin": [
+        8.0264,
+        0.79,
+        8.0132
+      ],
+      "rotationY": -850.048,
+      "rotationZ": 12,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-lobe-1",
+      "from": [
+        7.84596,
+        0.48837,
+        8.21888
+      ],
+      "to": [
+        8.13666,
+        1.21085,
+        8.23688
+      ],
+      "rotationOrigin": [
+        7.84596,
+        0.84961,
+        8.22788
+      ],
+      "rotationY": -850.048,
+      "rotationZ": 12,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-lobe-2",
+      "from": [
+        7.66552,
+        0.32435,
+        8.43355
+      ],
+      "to": [
+        7.95622,
+        1.49408,
+        8.45155
+      ],
+      "rotationOrigin": [
+        7.66552,
+        0.90922,
+        8.44255
+      ],
+      "rotationY": -850.048,
+      "rotationZ": 12,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-lobe-3",
+      "from": [
+        7.48508,
+        0.54738,
+        8.64823
+      ],
+      "to": [
+        7.77578,
+        1.39027,
+        8.66623
+      ],
+      "rotationOrigin": [
+        7.48508,
+        0.96882,
+        8.65723
+      ],
+      "rotationY": -850.048,
+      "rotationZ": 12,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-lobe-4",
+      "from": [
+        7.30464,
+        0.34895,
+        8.8629
+      ],
+      "to": [
+        7.59534,
+        1.70791,
+        8.8809
+      ],
+      "rotationOrigin": [
+        7.30464,
+        1.02843,
+        8.8719
+      ],
+      "rotationY": -850.048,
+      "rotationZ": 12,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-lobe-5",
+      "from": [
+        7.1242,
+        0.58058,
+        9.07757
+      ],
+      "to": [
+        7.4149,
+        1.5955,
+        9.09557
+      ],
+      "rotationOrigin": [
+        7.1242,
+        1.08804,
+        9.08657
+      ],
+      "rotationY": -850.048,
+      "rotationZ": 12,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-lobe-6",
+      "from": [
+        6.94376,
+        0.54558,
+        9.29225
+      ],
+      "to": [
+        7.23446,
+        1.74972,
+        9.31025
+      ],
+      "rotationOrigin": [
+        6.94376,
+        1.14765,
+        9.30125
+      ],
+      "rotationY": -850.048,
+      "rotationZ": 12,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-lobe-7",
+      "from": [
+        6.76332,
+        0.79441,
+        9.50692
+      ],
+      "to": [
+        7.05402,
+        1.62011,
+        9.52492
+      ],
+      "rotationOrigin": [
+        6.76332,
+        1.20726,
+        9.51592
+      ],
+      "rotationY": -850.048,
+      "rotationZ": 12,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-lobe-8",
+      "from": [
+        6.58288,
+        0.99163,
+        9.7216
+      ],
+      "to": [
+        6.87358,
+        1.5421,
+        9.7396
+      ],
+      "rotationOrigin": [
+        6.58288,
+        1.26687,
+        9.7306
+      ],
+      "rotationY": -850.048,
+      "rotationZ": 12,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-lobe-9",
+      "from": [
+        6.40244,
+        1.22326,
+        9.93627
+      ],
+      "to": [
+        6.69314,
+        1.42969,
+        9.95427
+      ],
+      "rotationOrigin": [
+        6.40244,
+        1.32647,
+        9.94527
+      ],
+      "rotationY": -850.048,
+      "rotationZ": 12,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-6-midrib",
+      "from": [
+        8.0264,
+        0.7725,
+        7.9957
+      ],
+      "to": [
+        10.6067,
+        0.8075,
+        8.0307
+      ],
+      "rotationOrigin": [
+        8.0264,
+        0.79,
+        8.0132
+      ],
+      "rotationY": -130.048,
+      "rotationZ": 12.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-lobe-0",
+      "from": [
+        8.02924,
+        0.866,
+        7.86822
+      ],
+      "to": [
+        8.33824,
+        0.884,
+        8.16102
+      ],
+      "rotationOrigin": [
+        8.02924,
+        0.875,
+        8.01462
+      ],
+      "rotationY": -987.556,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-lobe-1",
+      "from": [
+        8.01695,
+        0.9653,
+        7.3422
+      ],
+      "to": [
+        8.32595,
+        0.9833,
+        8.1108
+      ],
+      "rotationOrigin": [
+        8.01695,
+        0.9743,
+        7.7265
+      ],
+      "rotationY": -987.556,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-lobe-2",
+      "from": [
+        8.00465,
+        1.0646,
+        6.81618
+      ],
+      "to": [
+        8.31365,
+        1.0826,
+        8.06058
+      ],
+      "rotationOrigin": [
+        8.00465,
+        1.0736,
+        7.43838
+      ],
+      "rotationY": -987.556,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-lobe-3",
+      "from": [
+        7.99235,
+        1.16389,
+        6.70191
+      ],
+      "to": [
+        8.30135,
+        1.18189,
+        7.59861
+      ],
+      "rotationOrigin": [
+        7.99235,
+        1.17289,
+        7.15026
+      ],
+      "rotationY": -987.556,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-lobe-4",
+      "from": [
+        7.98005,
+        1.26319,
+        6.13929
+      ],
+      "to": [
+        8.28905,
+        1.28119,
+        7.58499
+      ],
+      "rotationOrigin": [
+        7.98005,
+        1.27219,
+        6.86214
+      ],
+      "rotationY": -987.556,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-lobe-5",
+      "from": [
+        7.96776,
+        1.36249,
+        6.03417
+      ],
+      "to": [
+        8.27676,
+        1.38049,
+        7.11387
+      ],
+      "rotationOrigin": [
+        7.96776,
+        1.37149,
+        6.57402
+      ],
+      "rotationY": -987.556,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-lobe-6",
+      "from": [
+        7.95546,
+        1.46179,
+        5.6454
+      ],
+      "to": [
+        8.26446,
+        1.47979,
+        6.9264
+      ],
+      "rotationOrigin": [
+        7.95546,
+        1.47079,
+        6.2859
+      ],
+      "rotationY": -987.556,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-lobe-7",
+      "from": [
+        7.94316,
+        1.56109,
+        5.55858
+      ],
+      "to": [
+        8.25216,
+        1.57909,
+        6.43698
+      ],
+      "rotationOrigin": [
+        7.94316,
+        1.57009,
+        5.99778
+      ],
+      "rotationY": -987.556,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-lobe-8",
+      "from": [
+        7.93086,
+        1.66039,
+        5.41686
+      ],
+      "to": [
+        8.23986,
+        1.67839,
+        6.00246
+      ],
+      "rotationOrigin": [
+        7.93086,
+        1.66939,
+        5.70966
+      ],
+      "rotationY": -987.556,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-lobe-9",
+      "from": [
+        7.91857,
+        1.75968,
+        5.31173
+      ],
+      "to": [
+        8.22757,
+        1.77768,
+        5.53133
+      ],
+      "rotationOrigin": [
+        7.91857,
+        1.76868,
+        5.42153
+      ],
+      "rotationY": -987.556,
+      "rotationZ": 19,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-7-midrib",
+      "from": [
+        8.02924,
+        0.8575,
+        7.99712
+      ],
+      "to": [
+        10.77424,
+        0.8925,
+        8.03212
+      ],
+      "rotationOrigin": [
+        8.02924,
+        0.875,
+        8.01462
+      ],
+      "rotationY": 92.444,
+      "rotationZ": 19.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-lobe-0",
+      "from": [
+        8.03209,
+        0.951,
+        7.89599
+      ],
+      "to": [
+        8.28619,
+        0.969,
+        8.13609
+      ],
+      "rotationOrigin": [
+        8.03209,
+        0.96,
+        8.01604
+      ],
+      "rotationY": -1125.064,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-lobe-1",
+      "from": [
+        8.19086,
+        1.06064,
+        7.86004
+      ],
+      "to": [
+        8.44496,
+        1.07864,
+        8.4903
+      ],
+      "rotationOrigin": [
+        8.19086,
+        1.06964,
+        8.17517
+      ],
+      "rotationY": -1125.064,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-lobe-2",
+      "from": [
+        8.34963,
+        1.17027,
+        7.82409
+      ],
+      "to": [
+        8.60373,
+        1.18827,
+        8.8445
+      ],
+      "rotationOrigin": [
+        8.34963,
+        1.17927,
+        8.3343
+      ],
+      "rotationY": -1125.064,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-lobe-3",
+      "from": [
+        8.5084,
+        1.27991,
+        8.12578
+      ],
+      "to": [
+        8.7625,
+        1.29791,
+        8.86107
+      ],
+      "rotationOrigin": [
+        8.5084,
+        1.28891,
+        8.49342
+      ],
+      "rotationY": -1125.064,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-lobe-4",
+      "from": [
+        8.66717,
+        1.38955,
+        8.05981
+      ],
+      "to": [
+        8.92127,
+        1.40755,
+        9.24529
+      ],
+      "rotationOrigin": [
+        8.66717,
+        1.39855,
+        8.65255
+      ],
+      "rotationY": -1125.064,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-lobe-5",
+      "from": [
+        8.82594,
+        1.49918,
+        8.369
+      ],
+      "to": [
+        9.08004,
+        1.51718,
+        9.25435
+      ],
+      "rotationOrigin": [
+        8.82594,
+        1.50818,
+        8.81168
+      ],
+      "rotationY": -1125.064,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-lobe-6",
+      "from": [
+        8.98472,
+        1.60882,
+        8.44559
+      ],
+      "to": [
+        9.23882,
+        1.62682,
+        9.49601
+      ],
+      "rotationOrigin": [
+        8.98472,
+        1.61782,
+        8.9708
+      ],
+      "rotationY": -1125.064,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-lobe-7",
+      "from": [
+        9.14349,
+        1.71846,
+        8.76979
+      ],
+      "to": [
+        9.39759,
+        1.73646,
+        9.49007
+      ],
+      "rotationOrigin": [
+        9.14349,
+        1.72746,
+        9.12993
+      ],
+      "rotationY": -1125.064,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-lobe-8",
+      "from": [
+        9.30226,
+        1.82809,
+        9.04896
+      ],
+      "to": [
+        9.55636,
+        1.84609,
+        9.52915
+      ],
+      "rotationOrigin": [
+        9.30226,
+        1.83709,
+        9.28906
+      ],
+      "rotationY": -1125.064,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-lobe-9",
+      "from": [
+        9.46103,
+        1.93773,
+        9.35815
+      ],
+      "to": [
+        9.71513,
+        1.95573,
+        9.53822
+      ],
+      "rotationOrigin": [
+        9.46103,
+        1.94673,
+        9.44818
+      ],
+      "rotationY": -1125.064,
+      "rotationZ": 26,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-8-midrib",
+      "from": [
+        8.03209,
+        0.9425,
+        7.99854
+      ],
+      "to": [
+        10.28299,
+        0.9775,
+        8.03354
+      ],
+      "rotationOrigin": [
+        8.03209,
+        0.96,
+        8.01604
+      ],
+      "rotationY": -45.064,
+      "rotationZ": 26.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-lobe-0",
+      "from": [
+        8.03493,
+        1.036,
+        7.88863
+      ],
+      "to": [
+        8.30733,
+        1.054,
+        8.1463
+      ],
+      "rotationOrigin": [
+        8.03493,
+        1.045,
+        8.01746
+      ],
+      "rotationY": -1262.572,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-lobe-1",
+      "from": [
+        7.77266,
+        1.0918,
+        7.6675
+      ],
+      "to": [
+        8.04506,
+        1.1098,
+        8.34387
+      ],
+      "rotationOrigin": [
+        7.77266,
+        1.1008,
+        8.00568
+      ],
+      "rotationY": -1262.572,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-lobe-2",
+      "from": [
+        7.51039,
+        1.14761,
+        7.44636
+      ],
+      "to": [
+        7.78279,
+        1.16561,
+        8.54144
+      ],
+      "rotationOrigin": [
+        7.51039,
+        1.15661,
+        7.9939
+      ],
+      "rotationY": -1262.572,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-lobe-3",
+      "from": [
+        7.24812,
+        1.20341,
+        7.58757
+      ],
+      "to": [
+        7.52052,
+        1.22141,
+        8.37667
+      ],
+      "rotationOrigin": [
+        7.24812,
+        1.21241,
+        7.98212
+      ],
+      "rotationY": -1262.572,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-lobe-4",
+      "from": [
+        6.98585,
+        1.25921,
+        7.33423
+      ],
+      "to": [
+        7.25825,
+        1.27721,
+        8.60645
+      ],
+      "rotationOrigin": [
+        6.98585,
+        1.26821,
+        7.97034
+      ],
+      "rotationY": -1262.572,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-lobe-5",
+      "from": [
+        6.72357,
+        1.31502,
+        7.48349
+      ],
+      "to": [
+        6.99597,
+        1.33302,
+        8.43363
+      ],
+      "rotationOrigin": [
+        6.72357,
+        1.32402,
+        7.95856
+      ],
+      "rotationY": -1262.572,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-lobe-6",
+      "from": [
+        6.4613,
+        1.37082,
+        7.38314
+      ],
+      "to": [
+        6.7337,
+        1.38882,
+        8.51042
+      ],
+      "rotationOrigin": [
+        6.4613,
+        1.37982,
+        7.94678
+      ],
+      "rotationY": -1262.572,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-lobe-7",
+      "from": [
+        6.19903,
+        1.42662,
+        7.5485
+      ],
+      "to": [
+        6.47143,
+        1.44462,
+        8.32149
+      ],
+      "rotationOrigin": [
+        6.19903,
+        1.43562,
+        7.93499
+      ],
+      "rotationY": -1262.572,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-lobe-8",
+      "from": [
+        5.93676,
+        1.48243,
+        7.66555
+      ],
+      "to": [
+        6.20916,
+        1.50043,
+        8.18088
+      ],
+      "rotationOrigin": [
+        5.93676,
+        1.49143,
+        7.92321
+      ],
+      "rotationY": -1262.572,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-lobe-9",
+      "from": [
+        5.67449,
+        1.53823,
+        7.81481
+      ],
+      "to": [
+        5.94689,
+        1.55623,
+        8.00806
+      ],
+      "rotationOrigin": [
+        5.67449,
+        1.54723,
+        7.91143
+      ],
+      "rotationY": -1262.572,
+      "rotationZ": 12,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "rosette-9-midrib",
+      "from": [
+        8.03493,
+        1.0275,
+        7.99996
+      ],
+      "to": [
+        10.45053,
+        1.0625,
+        8.03496
+      ],
+      "rotationOrigin": [
+        8.03493,
+        1.045,
+        8.01746
+      ],
+      "rotationY": 177.428,
+      "rotationZ": 12.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-lobe-0",
+      "from": [
+        8.06471,
+        1.927,
+        7.92035
+      ],
+      "to": [
+        8.30204,
+        1.945,
+        8.14435
+      ],
+      "rotationOrigin": [
+        8.06471,
+        1.936,
+        8.03235
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-lobe-1",
+      "from": [
+        8.13817,
+        2.01817,
+        7.94018
+      ],
+      "to": [
+        8.3755,
+        2.03617,
+        8.52818
+      ],
+      "rotationOrigin": [
+        8.13817,
+        2.02717,
+        8.23418
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-lobe-2",
+      "from": [
+        8.21163,
+        2.10934,
+        7.96002
+      ],
+      "to": [
+        8.44896,
+        2.12734,
+        8.91202
+      ],
+      "rotationOrigin": [
+        8.21163,
+        2.11834,
+        8.43602
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-lobe-3",
+      "from": [
+        8.28509,
+        2.20051,
+        8.29485
+      ],
+      "to": [
+        8.52242,
+        2.21851,
+        8.98085
+      ],
+      "rotationOrigin": [
+        8.28509,
+        2.20951,
+        8.63785
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-lobe-4",
+      "from": [
+        8.35855,
+        2.29168,
+        8.28668
+      ],
+      "to": [
+        8.59588,
+        2.30968,
+        9.39268
+      ],
+      "rotationOrigin": [
+        8.35855,
+        2.30068,
+        8.83968
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-lobe-5",
+      "from": [
+        8.43201,
+        2.38285,
+        8.62851
+      ],
+      "to": [
+        8.66934,
+        2.40085,
+        9.45451
+      ],
+      "rotationOrigin": [
+        8.43201,
+        2.39185,
+        9.04151
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-lobe-6",
+      "from": [
+        8.50547,
+        2.47402,
+        8.75334
+      ],
+      "to": [
+        8.7428,
+        2.49202,
+        9.73334
+      ],
+      "rotationOrigin": [
+        8.50547,
+        2.48302,
+        9.24334
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-lobe-7",
+      "from": [
+        8.57893,
+        2.56519,
+        9.10917
+      ],
+      "to": [
+        8.81626,
+        2.58319,
+        9.78117
+      ],
+      "rotationOrigin": [
+        8.57893,
+        2.57419,
+        9.44517
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-lobe-8",
+      "from": [
+        8.65239,
+        2.65636,
+        9.423
+      ],
+      "to": [
+        8.88972,
+        2.67436,
+        9.871
+      ],
+      "rotationOrigin": [
+        8.65239,
+        2.66536,
+        9.647
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-lobe-9",
+      "from": [
+        8.72585,
+        2.74754,
+        9.76484
+      ],
+      "to": [
+        8.96318,
+        2.76554,
+        9.93284
+      ],
+      "rotationOrigin": [
+        8.72585,
+        2.75654,
+        9.84884
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-0-midrib",
+      "from": [
+        8.06471,
+        1.9185,
+        8.01485
+      ],
+      "to": [
+        10.16471,
+        1.9535,
+        8.04985
+      ],
+      "rotationOrigin": [
+        8.06471,
+        1.936,
+        8.03235
+      ],
+      "rotationY": -70.0,
+      "rotationZ": 23.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-lobe-0",
+      "from": [
+        8.08882,
+        2.5532,
+        8.03541
+      ],
+      "to": [
+        8.31032,
+        2.762,
+        8.05341
+      ],
+      "rotationOrigin": [
+        8.08882,
+        2.6576,
+        8.04441
+      ],
+      "rotationY": -207.508,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-lobe-1",
+      "from": [
+        7.92889,
+        2.50517,
+        7.95213
+      ],
+      "to": [
+        8.15039,
+        3.05327,
+        7.97013
+      ],
+      "rotationOrigin": [
+        7.92889,
+        2.77922,
+        7.96113
+      ],
+      "rotationY": -207.508,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-lobe-2",
+      "from": [
+        7.76896,
+        2.45715,
+        7.86885
+      ],
+      "to": [
+        7.99046,
+        3.34455,
+        7.88685
+      ],
+      "rotationOrigin": [
+        7.76896,
+        2.90085,
+        7.87785
+      ],
+      "rotationY": -207.508,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-lobe-3",
+      "from": [
+        7.60903,
+        2.70275,
+        7.78556
+      ],
+      "to": [
+        7.83053,
+        3.3422,
+        7.80356
+      ],
+      "rotationOrigin": [
+        7.60903,
+        3.02247,
+        7.79456
+      ],
+      "rotationY": -207.508,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-lobe-4",
+      "from": [
+        7.4491,
+        2.62862,
+        7.70228
+      ],
+      "to": [
+        7.6706,
+        3.65957,
+        7.72028
+      ],
+      "rotationOrigin": [
+        7.4491,
+        3.1441,
+        7.71128
+      ],
+      "rotationY": -207.508,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-lobe-5",
+      "from": [
+        7.28917,
+        2.88075,
+        7.619
+      ],
+      "to": [
+        7.51067,
+        3.6507,
+        7.637
+      ],
+      "rotationOrigin": [
+        7.28917,
+        3.26572,
+        7.628
+      ],
+      "rotationY": -207.508,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-lobe-6",
+      "from": [
+        7.12924,
+        2.9306,
+        7.53571
+      ],
+      "to": [
+        7.35074,
+        3.8441,
+        7.55371
+      ],
+      "rotationOrigin": [
+        7.12924,
+        3.38735,
+        7.54471
+      ],
+      "rotationY": -207.508,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-lobe-7",
+      "from": [
+        6.96931,
+        3.19577,
+        7.45243
+      ],
+      "to": [
+        7.19081,
+        3.82217,
+        7.47043
+      ],
+      "rotationOrigin": [
+        6.96931,
+        3.50897,
+        7.46143
+      ],
+      "rotationY": -207.508,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-lobe-8",
+      "from": [
+        6.80938,
+        3.4218,
+        7.36915
+      ],
+      "to": [
+        7.03088,
+        3.8394,
+        7.38715
+      ],
+      "rotationOrigin": [
+        6.80938,
+        3.6306,
+        7.37815
+      ],
+      "rotationY": -207.508,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-lobe-9",
+      "from": [
+        6.64945,
+        3.67392,
+        7.28587
+      ],
+      "to": [
+        6.87095,
+        3.83052,
+        7.30387
+      ],
+      "rotationOrigin": [
+        6.64945,
+        3.75222,
+        7.29487
+      ],
+      "rotationY": -207.508,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-1-midrib",
+      "from": [
+        8.08882,
+        2.6401,
+        8.02691
+      ],
+      "to": [
+        10.04632,
+        2.6751,
+        8.06191
+      ],
+      "rotationOrigin": [
+        8.08882,
+        2.6576,
+        8.04441
+      ],
+      "rotationY": 152.492,
+      "rotationZ": 34.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-lobe-0",
+      "from": [
+        8.07678,
+        3.2824,
+        8.05078
+      ],
+      "to": [
+        8.28244,
+        3.476,
+        8.06878
+      ],
+      "rotationOrigin": [
+        8.07678,
+        3.3792,
+        8.05978
+      ],
+      "rotationY": -345.016,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-lobe-1",
+      "from": [
+        8.21453,
+        3.2677,
+        8.01391
+      ],
+      "to": [
+        8.4202,
+        3.7759,
+        8.03191
+      ],
+      "rotationOrigin": [
+        8.21453,
+        3.5218,
+        8.02291
+      ],
+      "rotationY": -345.016,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-lobe-2",
+      "from": [
+        8.35228,
+        3.253,
+        7.97704
+      ],
+      "to": [
+        8.55795,
+        4.0758,
+        7.99504
+      ],
+      "rotationOrigin": [
+        8.35228,
+        3.6644,
+        7.98604
+      ],
+      "rotationY": -345.016,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-lobe-3",
+      "from": [
+        8.49003,
+        3.51055,
+        7.94017
+      ],
+      "to": [
+        8.6957,
+        4.10345,
+        7.95817
+      ],
+      "rotationOrigin": [
+        8.49003,
+        3.807,
+        7.94917
+      ],
+      "rotationY": -345.016,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-lobe-4",
+      "from": [
+        8.62778,
+        3.47165,
+        7.9033
+      ],
+      "to": [
+        8.83345,
+        4.42755,
+        7.9213
+      ],
+      "rotationOrigin": [
+        8.62778,
+        3.9496,
+        7.9123
+      ],
+      "rotationY": -345.016,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-lobe-5",
+      "from": [
+        8.76553,
+        3.73525,
+        7.86643
+      ],
+      "to": [
+        8.9712,
+        4.44915,
+        7.88443
+      ],
+      "rotationOrigin": [
+        8.76553,
+        4.0922,
+        7.87543
+      ],
+      "rotationY": -345.016,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-lobe-6",
+      "from": [
+        8.90328,
+        3.8113,
+        7.82956
+      ],
+      "to": [
+        9.10895,
+        4.6583,
+        7.84756
+      ],
+      "rotationOrigin": [
+        8.90328,
+        4.2348,
+        7.83856
+      ],
+      "rotationY": -345.016,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-lobe-7",
+      "from": [
+        9.04104,
+        4.087,
+        7.79269
+      ],
+      "to": [
+        9.2467,
+        4.6678,
+        7.81069
+      ],
+      "rotationOrigin": [
+        9.04104,
+        4.3774,
+        7.80169
+      ],
+      "rotationY": -345.016,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-lobe-8",
+      "from": [
+        9.17879,
+        4.3264,
+        7.75583
+      ],
+      "to": [
+        9.38445,
+        4.7136,
+        7.77383
+      ],
+      "rotationOrigin": [
+        9.17879,
+        4.52,
+        7.76483
+      ],
+      "rotationY": -345.016,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-lobe-9",
+      "from": [
+        9.31654,
+        4.59,
+        7.71896
+      ],
+      "to": [
+        9.52221,
+        4.7352,
+        7.73696
+      ],
+      "rotationOrigin": [
+        9.31654,
+        4.6626,
+        7.72796
+      ],
+      "rotationY": -345.016,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-2-midrib",
+      "from": [
+        8.07678,
+        3.3617,
+        8.04228
+      ],
+      "to": [
+        9.89178,
+        3.3967,
+        8.07728
+      ],
+      "rotationOrigin": [
+        8.07678,
+        3.3792,
+        8.05978
+      ],
+      "rotationY": 14.984,
+      "rotationZ": 45.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-lobe-0",
+      "from": [
+        8.0335,
+        4.0918,
+        7.9888
+      ],
+      "to": [
+        8.22333,
+        4.1098,
+        8.1672
+      ],
+      "rotationOrigin": [
+        8.0335,
+        4.1008,
+        8.078
+      ],
+      "rotationY": -482.524,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-lobe-1",
+      "from": [
+        7.94153,
+        4.16441,
+        7.98808
+      ],
+      "to": [
+        8.13136,
+        4.18241,
+        8.45638
+      ],
+      "rotationOrigin": [
+        7.94153,
+        4.17341,
+        8.22223
+      ],
+      "rotationY": -482.524,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-lobe-2",
+      "from": [
+        7.84956,
+        4.23702,
+        7.98736
+      ],
+      "to": [
+        8.03939,
+        4.25502,
+        8.74556
+      ],
+      "rotationOrigin": [
+        7.84956,
+        4.24602,
+        8.36646
+      ],
+      "rotationY": -482.524,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-lobe-3",
+      "from": [
+        7.75759,
+        4.30963,
+        8.23752
+      ],
+      "to": [
+        7.94742,
+        4.32763,
+        8.78387
+      ],
+      "rotationOrigin": [
+        7.75759,
+        4.31863,
+        8.5107
+      ],
+      "rotationY": -482.524,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-lobe-4",
+      "from": [
+        7.66562,
+        4.38224,
+        8.2145
+      ],
+      "to": [
+        7.85545,
+        4.40024,
+        9.09535
+      ],
+      "rotationOrigin": [
+        7.66562,
+        4.39124,
+        8.65493
+      ],
+      "rotationY": -482.524,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-lobe-5",
+      "from": [
+        7.57364,
+        4.45485,
+        8.47024
+      ],
+      "to": [
+        7.76348,
+        4.47285,
+        9.12809
+      ],
+      "rotationOrigin": [
+        7.57364,
+        4.46385,
+        8.79916
+      ],
+      "rotationY": -482.524,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-lobe-6",
+      "from": [
+        7.48167,
+        4.52747,
+        8.55314
+      ],
+      "to": [
+        7.67151,
+        4.54547,
+        9.33364
+      ],
+      "rotationOrigin": [
+        7.48167,
+        4.53647,
+        8.94339
+      ],
+      "rotationY": -482.524,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-lobe-7",
+      "from": [
+        7.3897,
+        4.60008,
+        8.82003
+      ],
+      "to": [
+        7.57954,
+        4.61808,
+        9.35523
+      ],
+      "rotationOrigin": [
+        7.3897,
+        4.60908,
+        9.08763
+      ],
+      "rotationY": -482.524,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-lobe-8",
+      "from": [
+        7.29773,
+        4.67269,
+        9.05346
+      ],
+      "to": [
+        7.48756,
+        4.69069,
+        9.41026
+      ],
+      "rotationOrigin": [
+        7.29773,
+        4.68169,
+        9.23186
+      ],
+      "rotationY": -482.524,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-lobe-9",
+      "from": [
+        7.20576,
+        4.7453,
+        9.30919
+      ],
+      "to": [
+        7.39559,
+        4.7633,
+        9.44299
+      ],
+      "rotationOrigin": [
+        7.20576,
+        4.7543,
+        9.37609
+      ],
+      "rotationY": -482.524,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-3-midrib",
+      "from": [
+        8.0335,
+        4.0833,
+        8.0605
+      ],
+      "to": [
+        9.706,
+        4.1183,
+        8.0955
+      ],
+      "rotationOrigin": [
+        8.0335,
+        4.1008,
+        8.078
+      ],
+      "rotationY": -122.524,
+      "rotationZ": 23.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-lobe-0",
+      "from": [
+        7.99022,
+        4.7408,
+        8.08722
+      ],
+      "to": [
+        8.16422,
+        4.904,
+        8.10522
+      ],
+      "rotationOrigin": [
+        7.99022,
+        4.8224,
+        8.09622
+      ],
+      "rotationY": -620.032,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-lobe-1",
+      "from": [
+        7.96583,
+        4.70326,
+        7.94841
+      ],
+      "to": [
+        8.13983,
+        5.13166,
+        7.96641
+      ],
+      "rotationOrigin": [
+        7.96583,
+        4.91746,
+        7.95741
+      ],
+      "rotationY": -620.032,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-lobe-2",
+      "from": [
+        7.94143,
+        4.66573,
+        7.8096
+      ],
+      "to": [
+        8.11543,
+        5.35933,
+        7.8276
+      ],
+      "rotationOrigin": [
+        7.94143,
+        5.01253,
+        7.8186
+      ],
+      "rotationY": -620.032,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-lobe-3",
+      "from": [
+        7.91703,
+        4.85769,
+        7.6708
+      ],
+      "to": [
+        8.09103,
+        5.35749,
+        7.6888
+      ],
+      "rotationOrigin": [
+        7.91703,
+        5.10759,
+        7.6798
+      ],
+      "rotationY": -620.032,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-lobe-4",
+      "from": [
+        7.89264,
+        4.79975,
+        7.53199
+      ],
+      "to": [
+        8.06664,
+        5.60555,
+        7.54999
+      ],
+      "rotationOrigin": [
+        7.89264,
+        5.20265,
+        7.54099
+      ],
+      "rotationY": -620.032,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-lobe-5",
+      "from": [
+        7.86824,
+        4.99681,
+        7.39318
+      ],
+      "to": [
+        8.04224,
+        5.59861,
+        7.41118
+      ],
+      "rotationOrigin": [
+        7.86824,
+        5.29771,
+        7.40218
+      ],
+      "rotationY": -620.032,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-lobe-6",
+      "from": [
+        7.84385,
+        5.03578,
+        7.25437
+      ],
+      "to": [
+        8.01785,
+        5.74978,
+        7.27237
+      ],
+      "rotationOrigin": [
+        7.84385,
+        5.39278,
+        7.26337
+      ],
+      "rotationY": -620.032,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-lobe-7",
+      "from": [
+        7.81945,
+        5.24304,
+        7.11556
+      ],
+      "to": [
+        7.99345,
+        5.73264,
+        7.13356
+      ],
+      "rotationOrigin": [
+        7.81945,
+        5.48784,
+        7.12456
+      ],
+      "rotationY": -620.032,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-lobe-8",
+      "from": [
+        7.79506,
+        5.4197,
+        6.97675
+      ],
+      "to": [
+        7.96906,
+        5.7461,
+        6.99475
+      ],
+      "rotationOrigin": [
+        7.79506,
+        5.5829,
+        6.98575
+      ],
+      "rotationY": -620.032,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-lobe-9",
+      "from": [
+        7.77066,
+        5.61677,
+        6.83794
+      ],
+      "to": [
+        7.94466,
+        5.73917,
+        6.85594
+      ],
+      "rotationOrigin": [
+        7.77066,
+        5.67797,
+        6.84694
+      ],
+      "rotationY": -620.032,
+      "rotationZ": 34,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-4-midrib",
+      "from": [
+        7.99022,
+        4.8049,
+        8.07872
+      ],
+      "to": [
+        9.52022,
+        4.8399,
+        8.11372
+      ],
+      "rotationOrigin": [
+        7.99022,
+        4.8224,
+        8.09622
+      ],
+      "rotationY": 99.968,
+      "rotationZ": 34.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-lobe-0",
+      "from": [
+        7.94694,
+        5.47,
+        8.10544
+      ],
+      "to": [
+        8.10511,
+        5.618,
+        8.12344
+      ],
+      "rotationOrigin": [
+        7.94694,
+        5.544,
+        8.11444
+      ],
+      "rotationY": -757.54,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-lobe-1",
+      "from": [
+        8.03338,
+        5.45876,
+        8.17187
+      ],
+      "to": [
+        8.19155,
+        5.84726,
+        8.18987
+      ],
+      "rotationOrigin": [
+        8.03338,
+        5.65301,
+        8.18087
+      ],
+      "rotationY": -757.54,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-lobe-2",
+      "from": [
+        8.11982,
+        5.44752,
+        8.23829
+      ],
+      "to": [
+        8.27799,
+        6.07652,
+        8.25629
+      ],
+      "rotationOrigin": [
+        8.11982,
+        5.76202,
+        8.24729
+      ],
+      "rotationY": -757.54,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-lobe-3",
+      "from": [
+        8.20626,
+        5.64441,
+        8.30471
+      ],
+      "to": [
+        8.36443,
+        6.09766,
+        8.32271
+      ],
+      "rotationOrigin": [
+        8.20626,
+        5.87104,
+        8.31371
+      ],
+      "rotationY": -757.54,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-lobe-4",
+      "from": [
+        8.2927,
+        5.61467,
+        8.37114
+      ],
+      "to": [
+        8.45087,
+        6.34542,
+        8.38914
+      ],
+      "rotationOrigin": [
+        8.2927,
+        5.98005,
+        8.38014
+      ],
+      "rotationY": -757.54,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-lobe-5",
+      "from": [
+        8.37914,
+        5.81619,
+        8.43756
+      ],
+      "to": [
+        8.53731,
+        6.36194,
+        8.45556
+      ],
+      "rotationOrigin": [
+        8.37914,
+        6.08906,
+        8.44656
+      ],
+      "rotationY": -757.54,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-lobe-6",
+      "from": [
+        8.46558,
+        5.87432,
+        8.50398
+      ],
+      "to": [
+        8.62374,
+        6.52182,
+        8.52198
+      ],
+      "rotationOrigin": [
+        8.46558,
+        6.19807,
+        8.51298
+      ],
+      "rotationY": -757.54,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-lobe-7",
+      "from": [
+        8.55202,
+        6.08509,
+        8.5704
+      ],
+      "to": [
+        8.71018,
+        6.52909,
+        8.5884
+      ],
+      "rotationOrigin": [
+        8.55202,
+        6.30709,
+        8.5794
+      ],
+      "rotationY": -757.54,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-lobe-8",
+      "from": [
+        8.63846,
+        6.2681,
+        8.63683
+      ],
+      "to": [
+        8.79662,
+        6.5641,
+        8.65483
+      ],
+      "rotationOrigin": [
+        8.63846,
+        6.4161,
+        8.64583
+      ],
+      "rotationY": -757.54,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-lobe-9",
+      "from": [
+        8.72489,
+        6.46961,
+        8.70325
+      ],
+      "to": [
+        8.88306,
+        6.58061,
+        8.72125
+      ],
+      "rotationOrigin": [
+        8.72489,
+        6.52511,
+        8.71225
+      ],
+      "rotationY": -757.54,
+      "rotationZ": 45,
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-5-midrib",
+      "from": [
+        7.94694,
+        5.5265,
+        8.09694
+      ],
+      "to": [
+        9.33444,
+        5.5615,
+        8.13194
+      ],
+      "rotationOrigin": [
+        7.94694,
+        5.544,
+        8.11444
+      ],
+      "rotationY": -37.54,
+      "rotationZ": 45.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-lobe-0",
+      "from": [
+        7.9188,
+        6.2566,
+        8.0632
+      ],
+      "to": [
+        8.06113,
+        6.2746,
+        8.196
+      ],
+      "rotationOrigin": [
+        7.9188,
+        6.2656,
+        8.1296
+      ],
+      "rotationY": -895.048,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-lobe-1",
+      "from": [
+        7.79194,
+        6.31065,
+        7.96629
+      ],
+      "to": [
+        7.93427,
+        6.32865,
+        8.31489
+      ],
+      "rotationOrigin": [
+        7.79194,
+        6.31965,
+        8.14059
+      ],
+      "rotationY": -895.048,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-lobe-2",
+      "from": [
+        7.66508,
+        6.3647,
+        7.86938
+      ],
+      "to": [
+        7.80741,
+        6.3827,
+        8.43378
+      ],
+      "rotationOrigin": [
+        7.66508,
+        6.3737,
+        8.15158
+      ],
+      "rotationY": -895.048,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-lobe-3",
+      "from": [
+        7.53822,
+        6.41875,
+        7.95923
+      ],
+      "to": [
+        7.68055,
+        6.43675,
+        8.36593
+      ],
+      "rotationOrigin": [
+        7.53822,
+        6.42775,
+        8.16258
+      ],
+      "rotationY": -895.048,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-lobe-4",
+      "from": [
+        7.41136,
+        6.4728,
+        7.84572
+      ],
+      "to": [
+        7.55369,
+        6.4908,
+        8.50142
+      ],
+      "rotationOrigin": [
+        7.41136,
+        6.4818,
+        8.17357
+      ],
+      "rotationY": -895.048,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-lobe-5",
+      "from": [
+        7.28449,
+        6.52686,
+        7.93971
+      ],
+      "to": [
+        7.42683,
+        6.54486,
+        8.42941
+      ],
+      "rotationOrigin": [
+        7.28449,
+        6.53586,
+        8.18456
+      ],
+      "rotationY": -895.048,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-lobe-6",
+      "from": [
+        7.15763,
+        6.58091,
+        7.90505
+      ],
+      "to": [
+        7.29997,
+        6.59891,
+        8.48605
+      ],
+      "rotationOrigin": [
+        7.15763,
+        6.58991,
+        8.19555
+      ],
+      "rotationY": -895.048,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-lobe-7",
+      "from": [
+        7.03077,
+        6.63496,
+        8.00734
+      ],
+      "to": [
+        7.1731,
+        6.65296,
+        8.40574
+      ],
+      "rotationOrigin": [
+        7.03077,
+        6.64396,
+        8.20654
+      ],
+      "rotationY": -895.048,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-lobe-8",
+      "from": [
+        6.90391,
+        6.68901,
+        8.08473
+      ],
+      "to": [
+        7.04624,
+        6.70701,
+        8.35033
+      ],
+      "rotationOrigin": [
+        6.90391,
+        6.69801,
+        8.21753
+      ],
+      "rotationY": -895.048,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-lobe-9",
+      "from": [
+        6.77705,
+        6.74306,
+        8.17873
+      ],
+      "to": [
+        6.91938,
+        6.76106,
+        8.27833
+      ],
+      "rotationOrigin": [
+        6.77705,
+        6.75206,
+        8.22853
+      ],
+      "rotationY": -895.048,
+      "rotationZ": 23,
+      "faces": {
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            8,
+            8,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "cauline-6-midrib",
+      "from": [
+        7.9188,
+        6.2481,
+        8.1121
+      ],
+      "to": [
+        9.1638,
+        6.2831,
+        8.1471
+      ],
+      "rotationOrigin": [
+        7.9188,
+        6.2656,
+        8.1296
+      ],
+      "rotationY": -175.048,
+      "rotationZ": 23.0,
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            0,
+            16,
+            8,
+            24
+          ]
+        }
+      }
     }
   ]
 }
