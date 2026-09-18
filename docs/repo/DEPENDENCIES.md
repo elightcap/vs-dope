@@ -32,6 +32,22 @@ Heroin psychedelic watcher ─────┘
                                   AddictionCharacterTabSystem
 ```
 
+## Overdose
+
+```text
+DrugConsumableItem.Consume() ── +IntoxicationAmount ─┐
+Heroin psychedelic watcher ─── +HeroinDoseLoad ──────┤
+                                                     ▼
+                              watched attr  vs-dope-load-<product>
+                                                     │
+AddictionSystem.MetabolizeAndCheckOverdose() (OnTick)┤  metabolism -MetabolismPerTick/tick
+   threshold = base + min(tol,plateau)*scale         │
+   severity  = (load-threshold)/threshold            ▼
+        ├── stats walkspeed slow "vs-dope-overdose"
+        ├── poison ReceiveDamage (sev > gate)
+        └── watched bool vs-dope-overdose
+```
+
 ## Crops
 
 ```text
@@ -53,5 +69,7 @@ seed item -> plantBlockCode -> crop blocktype
 | Crop drops | crop blocktype | item definitions |
 | Addiction UI | `AddictionCharacterTabSystem.cs` | watched attribute sync |
 | Coca countdown | `CocaVitaeEffectHudSystem.cs` | Coca expiry writes |
+| Overdose threshold/severity | `AddictionSystem.cs` (`MetabolizeAndCheckOverdose`, overdose consts) | per-product load attrs, tolerance plateau |
+| Overdose dose accumulation | `DrugConsumableItem.Consume()` + heroin watcher | product IDs must match `OverdoseProducts` |
 | Processing | `assets/vs-dope/recipes/` | input/output item JSON |
 | Localization | `assets/vs-dope/lang/en.json` | exact asset codes |

@@ -36,6 +36,14 @@ Heroin is a special case: its JSON is not currently a `DrugConsumableItem`. The 
 
 Progression timing: the daily withdrawal/decay pass is driven by in-game calendar hours (`Calendar.TotalHours`), not real time; elapsed game hours since the last processed hour are counted on each 5s timer tick (catch-up capped at 24h) and the pass runs when `FullHourOfDay == 0`.
 
+## Overdose
+
+Per-product overdose lives in `AddictionSystem`. Each dose accumulates a watched attribute `vs-dope-load-<product>` (opium, morphine, coca-vitae via `DrugConsumableItem.Consume`; heroin via the psychedelic watcher with `HeroinDoseLoad`). Load is raw (`IntoxicationAmount`), not tolerance-scaled.
+
+`MetabolizeAndCheckOverdose()` runs from `OnTick` for online players: it burns down each product's load by `MetabolismPerTick` (natural metabolism — no antidote), computes severity when load exceeds a threshold, and applies effects. Threshold = `OverdoseBaseThreshold + min(tolerance, TolerancePlateau) * ThresholdPerTolerancePoint`, so the threshold rises with tolerance then plateaus flat beyond it. Severity scales `(load-threshold)/threshold` clamped 0–1.
+
+Effects while overdosing: additive walkspeed slow (`-min(0.85, severity)` under stats key `vs-dope-overdose`) plus escalating poison damage only above `OverdoseDamageSeverityGate`. This is deliberately near-death but recoverable — stopping dosing lets metabolism drop load below threshold and clears the effects. Syncs watched bool `vs-dope-overdose` for future UI.
+
 ## Client UI
 
 `src/Client/AddictionCharacterTabSystem.cs` adds the Addiction character tab and reads watched attributes synchronized by `AddictionSystem`.
