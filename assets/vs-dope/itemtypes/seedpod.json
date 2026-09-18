@@ -15,7 +15,8 @@
   "grindingProps": {
     "groundStack": {
       "type": "item",
-      "code": "vs-dope:opium"
+      "code": "vs-dope:opium",
+      "stackSize": 2
     }
   }
 }
