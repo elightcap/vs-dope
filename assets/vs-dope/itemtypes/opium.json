@@ -1,9 +1,18 @@
 {
   "code": "opium",
   "class": "vs-dope.opiumitem",
-  "creativeinventory": { "general": ["*"] },
-  "maxStackSize": 16,
-  "texture": { "base": "item/opium" },
+  "creativeinventory": {
+    "general": [
+      "*"
+    ]
+  },
+  "maxStackSize": 64,
+  "shape": {
+    "base": "item/opium-pile"
+  },
+  "texture": {
+    "base": "item/opium"
+  },
   "attributes": {
     "lyeTubRecipe": false
   }

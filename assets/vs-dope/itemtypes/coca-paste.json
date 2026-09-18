@@ -1,0 +1,36 @@
+{
+  "code": "coca-paste",
+  "creativeinventory": {
+    "general": [
+      "*"
+    ]
+  },
+  "maxStackSize": 64,
+  "shape": {
+    "base": "item/coca-paste"
+  },
+  "texture": {
+    "base": "item/opium"
+  },
+  "transitionableProps": [
+    {
+      "type": "Dry",
+      "freshHours": {
+        "avg": 0
+      },
+      "transitionHours": {
+        "avg": 12
+      },
+      "transitionedStack": {
+        "type": "item",
+        "code": "vs-dope:coca-vitae"
+      },
+      "transitionRatio": 1
+    }
+  ],
+  "attributes": {
+    "handbook": {
+      "include": true
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "code": "coca-leaf-to-paste",
+  "sealHours": 12,
+  "ingredients": [
+    {
+      "type": "item",
+      "code": "vs-dope:coca-leaf",
+      "quantity": 1
+    },
+    {
+      "type": "item",
+      "code": "game:aquavitaeportion",
+      "litres": 1
+    }
+  ],
+  "output": {
+    "type": "item",
+    "code": "vs-dope:coca-paste",
+    "stackSize": 1
+  }
+}

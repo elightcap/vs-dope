@@ -1,8 +1,21 @@
 {
   "code": "coca-vitae",
   "class": "vs-dope.cocavitaeitem",
-  "creativeinventory": { "general": ["*"] },
-  "maxstacksize": 16,
-  "texture": { "base": "item/heroin" },
-  "attributes": { "handbook": { "include": true } }
+  "creativeinventory": {
+    "general": [
+      "*"
+    ]
+  },
+  "maxStackSize": 64,
+  "shape": {
+    "base": "item/coca-vitae-pile"
+  },
+  "texture": {
+    "base": "item/heroin"
+  },
+  "attributes": {
+    "handbook": {
+      "include": true
+    }
+  }
 }
