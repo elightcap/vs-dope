@@ -1,38 +1,34 @@
 # Processing Chains
 
-This file describes game mechanics, not real-world processing instructions.
+This file describes fictional game mechanics, not real-world processing instructions.
 
 ## Poppy chain
-
-Conceptual game flow:
 
 ```text
 Poppy crop
   -> seedpod
+  -> quern (1 seedpod -> 2 opium)
   -> opium
   -> morphine
   -> morphine solution
   -> heroin
 ```
 
-Current repository recipe files include:
-
-```text
-assets/vs-dope/recipes/barrel/opium-to-morphine.json
-assets/vs-dope/recipes/barrel/morphine-to-solution.json
-```
-
-Do not assume older README diagrams correspond to implemented files. Inspect `assets/vs-dope/recipes/` before modifying processing.
+Seedpods use Vintage Story grinding properties, so the conversion appears as a quern recipe.
 
 ## Coca chain
 
 ```text
 Coca crop
   -> coca leaf
-  -> [fictional game processing path still requires validated recipe support]
+  -> sealed barrel with equal game-units of distilled spirits
+  -> coca paste
+  -> Dry transition
   -> Coca Vitae
 ```
 
-Coca Vitae exists as an item/runtime effect, but the leaf-to-finished-product recipe path still needs a validated Vintage Story-compatible implementation.
+The barrel recipe is defined at a 1:1 game ratio: one coca leaf plus one litre of the game's generic alcohol portion produces one coca paste. Barrel recipes scale, so 50 leaves plus 50 litres produce 50 paste. Coca paste then uses the game's `Dry` transition to become Coca Vitae at a 1:1 ratio.
 
-Keep any future processing fictional and game-mechanical; do not document real-world extraction chemistry.
+The repository currently uses vanilla `game:alcoholportion` as the distilled-spirit liquid because base Vintage Story 1.22.7 does not provide a liquid item named `aqua-vitae`.
+
+Keep processing fictional and game-mechanical; do not document real-world extraction chemistry.
