@@ -1,9 +1,21 @@
 {
   "code": "seedpod",
-  "creativeinventory": { "general": ["*"] },
-  "maxStackSize": 32,
-  "texture": { "base": "item/seedpod" },
+  "creativeinventory": {
+    "general": [
+      "*"
+    ]
+  },
+  "maxStackSize": 64,
+  "shape": {
+    "base": "item/seedpod"
+  },
+  "texture": {
+    "base": "item/seedpod"
+  },
   "grindingProps": {
-    "groundStack": { "type": "item", "code": "vs-dope:opium" }
+    "groundStack": {
+      "type": "item",
+      "code": "vs-dope:opium"
+    }
   }
 }
