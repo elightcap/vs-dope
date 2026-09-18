@@ -21,14 +21,14 @@ Seedpods use Vintage Story grinding properties, so the conversion appears as a q
 ```text
 Coca crop
   -> coca leaf
-  -> sealed barrel with equal game-units of distilled spirits
+  -> sealed barrel with an equal amount of Aqua Vitae
   -> coca paste
   -> Dry transition
   -> Coca Vitae
 ```
 
-The barrel recipe is defined at a 1:1 game ratio: one coca leaf plus one litre of the game's generic alcohol portion produces one coca paste. Barrel recipes scale, so 50 leaves plus 50 litres produce 50 paste. Coca paste then uses the game's `Dry` transition to become Coca Vitae at a 1:1 ratio.
+The barrel recipe is defined at a 1:1 game ratio: one coca leaf plus one litre of Aqua Vitae produces one coca paste. Barrel recipes scale, so 50 leaves plus 50 litres produce 50 paste. Coca paste then uses the game's `Dry` transition to become Coca Vitae at a 1:1 ratio.
 
-The repository currently uses vanilla `game:alcoholportion` as the distilled-spirit liquid because base Vintage Story 1.22.7 does not provide a liquid item named `aqua-vitae`.
+The barrel recipe uses Vintage Story's Aqua Vitae liquid (`game:aquavitaeportion`).
 
 Keep processing fictional and game-mechanical; do not document real-world extraction chemistry.
