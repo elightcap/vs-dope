@@ -8,31 +8,24 @@
   "block-crop-coca-7": "Flowering Coca Shrub",
   "block-crop-coca-8": "Fruiting Coca Shrub",
   "block-crop-coca-9": "Harvestable Coca Shrub",
-
   "item-seeds-poppy": "Poppy Seeds",
   "item-seeds-poppy-desc": "Tiny oil-rich seeds of the poppy plant. Sow them on farmland to raise a crop of narcotic poppies.",
-
   "item-seedpod": "Poppy Seedpod",
   "item-seedpod-desc": "The dried bulbous capsule of the poppy. Scored and scraped, its latex can be ground down into raw opium.",
-
-  "item-opium": "Raw Opium",
-  "item-opium-desc": "A sticky, pungent resin harvested from poppy seedpods. Numbing to eat, and the crude starting point for finer distillates.",
-
+  "item-opium": "Opium",
+  "item-opium-desc": "A small pile of brownish-white powder produced by grinding harvested poppy seedpods.",
   "item-morphine": "Morphine",
   "item-morphine-desc": "Opium refined with limewater into a pale, bitter powder. A potent painkiller that binds swiftly and leaves the user craving more.",
-
   "item-morphine-solution": "Morphine Solution",
   "item-morphine-solution-desc": "Morphine dissolved in alcohol to form an unstable tincture. Further treatment with spirits coaxes it toward something far stronger.",
-
   "item-heroin": "Heroin",
   "item-heroin-desc": "The final, devastating distillate of the poppy chain. A small taste brings euphoria beyond any other; its grip is absolute and ruinous.",
-
   "item-coca-leaf": "Coca Leaf",
   "item-coca-leaf-desc": "A glossy green leaf chewed for its bitter, numbing vigor. It wards off hunger and fatigue in the high country, at a slow cost.",
-
   "item-seeds-coca": "Coca Seeds",
   "item-seeds-coca-desc": "Hard reddish seeds of the coca shrub. Plant them to grow your own supply of leaves.",
-
   "item-coca-vitae": "Coca Vitae",
-  "item-coca-vitae-desc": "A potent spirit infused with coca essence. One dram sharpens the senses and drives back weariness, but tempts dependence."
+  "item-coca-vitae-desc": "A fine white powder made by drying coca paste.",
+  "item-coca-paste": "Coca Paste",
+  "item-coca-paste-desc": "A pale beige paste produced by sealing coca leaves with distilled spirits. It dries into Coca Vitae."
 }
