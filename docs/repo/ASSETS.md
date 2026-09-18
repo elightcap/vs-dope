@@ -10,7 +10,11 @@ Crop naming convention: `crop` + type variant + stage -> `vs-dope:crop-{type}-{s
 
 ## Plant models
 
-Poppy stages are `assets/vs-dope/shapes/plant/papaver_stage_01_*.json` through stage 09.
+Poppy stages are `assets/vs-dope/shapes/plant/papaver_stage_01_*.json` through stage 09. They use thin lobed leaves, a connected tapered stem, small buds, cupped four-petal flowers and rounded crowned capsules. Stage 8 flowers; stage 9 is harvestable. The existing 32×32 `block/poppy/papaver_atlas.png` and its seven texture keys are retained.
+
+- `tools/build_poppy_models.py` regenerates all nine poppy models, reusing the coca segment geometry helper.
+- `tools/preview_poppy_models.py` uses the coca software renderer for `docs/previews/poppy-growth.png` and `poppy-mature.png`.
+- `docs/POPPY_MODELS.md` records the stage progression, texture contract and in-game checks.
 
 Coca stages are `assets/vs-dope/shapes/plant/coca_stage_01_*.json` through stage 09.
 
