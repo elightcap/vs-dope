@@ -157,19 +157,36 @@ public class AddictionSystem
                     entity.WatchedAttributes.SetFloat("psychedelic", currentPsych);
                 }
 
-                RecordUse(player);
-                RecordToleranceUse(player, "heroin");
-                entity.WatchedAttributes.SetFloat(LoadKey("heroin"), entity.WatchedAttributes.GetFloat(LoadKey("heroin")) + HeroinDoseLoad);
-                float effectiveSlow = HeroinSlowFactor * effectMultiplier;
-                entity.Stats.Set("walkspeed", HeroinSpeedEffectKey, -effectiveSlow);
-                entity.WatchedAttributes.SetDouble(
-                    HeroinSpeedExpiryKey,
-                    api.World.Calendar.TotalHours + HeroinSpeedDurationGameHours
-                );
+                RecordHeroinDose(player, effectMultiplier);
             }
 
             prevPsychedelicLevels[uid] = currentPsych;
         }
+    }
+
+    // Syringes report doses directly: rapid repeat doses and capped psychedelic
+    // values must still count exactly once. First settle any pending vessel use.
+    public void ApplyHeroinSyringeDose(IPlayer player)
+    {
+        WatchHeroinEffects();
+        var entity = player.Entity;
+        float multiplier = GetEffectMultiplier(player, "heroin");
+        entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, 2.4f * multiplier);
+        entity.WatchedAttributes.SetFloat("intoxication", Math.Clamp(entity.WatchedAttributes.GetFloat("intoxication") + 0.1f, 0f, 25f));
+        float psych = Math.Clamp(entity.WatchedAttributes.GetFloat("psychedelic") + 0.15f * multiplier, 0f, 25f);
+        entity.WatchedAttributes.SetFloat("psychedelic", psych);
+        prevPsychedelicLevels[player.PlayerUID] = psych;
+        RecordHeroinDose(player, multiplier);
+    }
+
+    private void RecordHeroinDose(IPlayer player, float effectMultiplier)
+    {
+        var entity = player.Entity;
+        RecordUse(player);
+        RecordToleranceUse(player, "heroin");
+        entity.WatchedAttributes.SetFloat(LoadKey("heroin"), entity.WatchedAttributes.GetFloat(LoadKey("heroin")) + HeroinDoseLoad);
+        entity.Stats.Set("walkspeed", HeroinSpeedEffectKey, -HeroinSlowFactor * effectMultiplier);
+        entity.WatchedAttributes.SetDouble(HeroinSpeedExpiryKey, api.World.Calendar.TotalHours + HeroinSpeedDurationGameHours);
     }
 
     private void MetabolizeAndCheckOverdose()

@@ -1,0 +1,37 @@
+{
+  "ingredientPattern": "_R_,_Q_,_P_",
+  "width": 3,
+  "height": 3,
+  "ingredients": {
+    "R": {
+      "type": "item",
+      "code": "game:rod-*",
+      "name": "rodmetal",
+      "allowedVariants": [
+        "copper",
+        "tin",
+        "brass",
+        "gold",
+        "iron",
+        "steel"
+      ],
+      "quantity": 1
+    },
+    "Q": {
+      "type": "item",
+      "code": "game:clearquartz",
+      "quantity": 1
+    },
+    "P": {
+      "type": "item",
+      "code": "game:metalplate-*",
+      "name": "platemetal",
+      "quantity": 1
+    }
+  },
+  "output": {
+    "type": "item",
+    "code": "vs-dope:syringe-empty",
+    "quantity": 1
+  }
+}

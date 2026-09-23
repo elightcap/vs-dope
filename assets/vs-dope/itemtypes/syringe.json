@@ -1,0 +1,47 @@
+{
+  "code": "syringe",
+  "class": "vs-dope.syringe",
+  "variantgroups": [
+    {
+      "code": "contents",
+      "states": [
+        "empty",
+        "heroin",
+        "morphine"
+      ]
+    }
+  ],
+  "creativeinventory": {
+    "general": [
+      "*"
+    ]
+  },
+  "maxStackSize": 1,
+  "textureByType": {
+    "*-empty": {
+      "base": "vs-dope:item/syringe-empty"
+    },
+    "*-heroin": {
+      "base": "vs-dope:item/syringe-heroin"
+    },
+    "*-morphine": {
+      "base": "vs-dope:item/syringe-morphine"
+    }
+  },
+  "attributes": {
+    "handleLiquidContainerInteract": true
+  },
+  "guiTransform": {
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "scale": 1
+  }
+}

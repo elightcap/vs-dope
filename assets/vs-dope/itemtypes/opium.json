@@ -7,11 +7,8 @@
     ]
   },
   "maxStackSize": 64,
-  "shape": {
-    "base": "item/opium-pile"
-  },
   "texture": {
-    "base": "item/opium"
+    "base": "vs-dope:item/opium-paste-icon"
   },
   "attributes": {
     "lyeTubRecipe": false
