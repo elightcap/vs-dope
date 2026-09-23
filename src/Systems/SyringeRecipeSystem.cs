@@ -61,8 +61,9 @@ public class SyringeRecipeSystem : ModSystem
         // Vanilla liquid crafting divides portions across stacked vessels. Require one
         // vessel so integer division cannot round down and create free liquid.
         if (vessels.Length != 1 || vessels[0].StackSize != 1) return false;
-        var source = (BlockLiquidContainerBase)vessels[0].Itemstack.Collectible;
-        var content = source.GetContent(vessels[0].Itemstack);
+        var vesselStack = vessels[0].Itemstack!;
+        var source = (BlockLiquidContainerBase)vesselStack.Collectible;
+        var content = source.GetContent(vesselStack);
         string kind = recipe.Output!.Code!.Path == "syringe-heroin" ? "heroin" : "morphine";
         var props = BlockLiquidContainerBase.GetContainableProps(content);
         return props != null && System.Math.Abs(props.ItemsPerLitre - SyringeItem.Capacity) < 0.001f

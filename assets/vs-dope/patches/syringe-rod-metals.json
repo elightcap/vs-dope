@@ -1,0 +1,78 @@
+[
+  {
+    "op": "add",
+    "file": "game:itemtypes/part/rod.json",
+    "path": "/variantgroups/0/states/-",
+    "value": "tin"
+  },
+  {
+    "op": "add",
+    "file": "game:recipes/smithing/rod.json",
+    "path": "/ingredient/allowedVariants/-",
+    "value": "tin"
+  },
+  {
+    "op": "add",
+    "file": "game:itemtypes/part/rod.json",
+    "path": "/materialDensityByType/*-tin",
+    "value": 7260
+  },
+  {
+    "op": "add",
+    "file": "game:itemtypes/part/rod.json",
+    "path": "/combustiblePropsByType/rod-tin",
+    "value": {
+      "meltingPoint": 232,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltedStack": {
+        "type": "item",
+        "code": "game:ingot-tin"
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:lang/en.json",
+    "path": "/item-rod-tin",
+    "value": "Tin rod"
+  },
+  {
+    "op": "add",
+    "file": "game:itemtypes/part/rod.json",
+    "path": "/variantgroups/0/states/-",
+    "value": "brass"
+  },
+  {
+    "op": "add",
+    "file": "game:recipes/smithing/rod.json",
+    "path": "/ingredient/allowedVariants/-",
+    "value": "brass"
+  },
+  {
+    "op": "add",
+    "file": "game:itemtypes/part/rod.json",
+    "path": "/materialDensityByType/*-brass",
+    "value": 8500
+  },
+  {
+    "op": "add",
+    "file": "game:itemtypes/part/rod.json",
+    "path": "/combustiblePropsByType/rod-brass",
+    "value": {
+      "meltingPoint": 920,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltedStack": {
+        "type": "item",
+        "code": "game:ingot-brass"
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:lang/en.json",
+    "path": "/item-rod-brass",
+    "value": "Brass rod"
+  }
+]

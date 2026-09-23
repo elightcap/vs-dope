@@ -5,7 +5,7 @@
   "ingredients": {
     "R": {
       "type": "item",
-      "code": "game:metalrod-*",
+      "code": "game:rod-*",
       "name": "rodmetal",
       "allowedVariants": [
         "copper",

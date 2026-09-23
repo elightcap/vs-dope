@@ -36,10 +36,12 @@ Keep processing fictional and game-mechanical; do not document real-world extrac
 
 ## Syringes
 
-Centre column, top to bottom: one `game:metalrod-*` (copper/tin/brass/gold/iron/steel), one `game:clearquartz`, one `game:metalplate-*` of any metal -> one `vs-dope:syringe-empty`. Rod and plate metals are independent.
+Centre column, top to bottom: one `game:rod-*` (copper/tin/brass/gold/iron/steel), one `game:clearquartz`, one `game:metalplate-*` of any metal -> one `vs-dope:syringe-empty`. Rod and plate metals are independent.
 
 Empty syringe + one portable vessel containing at least 1 litre of heroin or morphine solution -> full syringe. The vessel remains, with exactly 1 litre removed. Native filling recipes are registered for liquid-container blocks that permit held transfers. A single vessel is required, not a stack of vessels.
 
 Alternatively right-click a placed liquid source (including an unsealed barrel), or sneak-right-click with a single vessel in the off hand. This fills to at most 1 litre, accepts partial fills, and permits same-liquid top-ups. Mixing heroin and morphine is rejected. Morphine means the existing `vs-dope:morphine-solution` liquid, not the solid morphine item.
 
 Hold right-click for 1.5 seconds to apply 0.1 litre. Ten applications empty a full syringe; the empty item can then be refilled with either supported liquid. Remaining volume and complete dose count appear in the tooltip.
+
+Tin and brass rods are added to the vanilla rod variants and rod smithing recipe by `patches/syringe-rod-metals.json`; the other four requested rod metals already exist in 1.22.7.

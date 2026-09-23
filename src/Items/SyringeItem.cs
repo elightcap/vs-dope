@@ -15,7 +15,7 @@ public class SyringeItem : Item
     public const int Dose = 10;
     public string Contents => Variant["contents"];
 
-    public static int Portions(ItemStack stack)
+    public static int Portions(ItemStack? stack)
     {
         if (stack?.Collectible is not SyringeItem syringe || syringe.Contents == "empty") return 0;
         return Math.Clamp(stack.Attributes.GetInt(PortionsKey, Capacity), 0, Capacity);
@@ -69,15 +69,15 @@ public class SyringeItem : Item
         byEntity.AnimManager.StartAnimation("interactstatic");
     }
 
-    private void Fill(ItemSlot slot, ItemStack? liquid, Func<int, ItemStack> take)
+    private void Fill(ItemSlot slot, ItemStack? liquid, System.Func<int, ItemStack> take)
     {
         string? kind = LiquidKind(liquid);
-        if (kind == null || liquid == null) return;
+        if (kind == null || liquid == null || slot.Itemstack == null) return;
         int current = Portions(slot.Itemstack);
         if (current > 0 && Contents != kind) return;
         var props = BlockLiquidContainerBase.GetContainableProps(liquid);
         if (props == null || Math.Abs(props.ItemsPerLitre - Capacity) > 0.001f) return;
-        Item target = api.World.GetItem(new AssetLocation("vs-dope", "syringe-" + kind));
+        Item? target = api.World.GetItem(new AssetLocation("vs-dope", "syringe-" + kind));
         if (target == null) return;
         int requested = Math.Min(Capacity - current, liquid.StackSize);
         if (requested <= 0) return;
@@ -105,7 +105,7 @@ public class SyringeItem : Item
         int remaining = Portions(slot.Itemstack);
         if (remaining < Dose) return;
         IPlayer player = byEntity.World.PlayerByUid(ep.PlayerUID);
-        Item empty = api.World.GetItem(new AssetLocation("vs-dope:syringe-empty"));
+        Item? empty = api.World.GetItem(new AssetLocation("vs-dope:syringe-empty"));
         if (player == null || empty == null) return;
 
         if (Contents == "heroin") VsDopeModSystem.AddictionSystem.ApplyHeroinSyringeDose(player);
@@ -113,6 +113,17 @@ public class SyringeItem : Item
             morphine.ApplyDose(byEntity);
         else return;
 
+        ConsumeDoseVolume(slot);
+    }
+
+    // Keep the volume transition separate from effects so it can be integration-tested
+    // against real game ItemStacks without a connected player.
+    internal bool ConsumeDoseVolume(ItemSlot slot)
+    {
+        int remaining = Portions(slot.Itemstack);
+        if (remaining < Dose || slot.Itemstack == null) return false;
+        Item? empty = api.World.GetItem(new AssetLocation("vs-dope:syringe-empty"));
+        if (empty == null) return false;
         remaining -= Dose;
         if (remaining == 0)
         {
@@ -123,6 +134,7 @@ public class SyringeItem : Item
         }
         else slot.Itemstack.Attributes.SetInt(PortionsKey, remaining);
         slot.MarkDirty();
+        return true;
     }
 
     public override bool OnHeldInteractCancel(float secondsUsed, ItemSlot slot, EntityAgent byEntity,

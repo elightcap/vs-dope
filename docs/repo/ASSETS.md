@@ -57,3 +57,5 @@ Follow the JSON/texture conventions in `AGENTS.md`.
 `itemtypes/syringe.json` registers empty, heroin and morphine variants with matching 64x64 RGBA item textures and a stack limit of one. `recipes/grid/syringe-empty.json` crafts one empty syringe from a rod, clear quartz, and plate in the centre column. Rod and plate wildcard names are independent, so their metals need not match.
 
 `itemtypes/opium.json` now uses `textures/item/opium-paste-icon.png` as an extruded inventory sprite. The existing item code, quern yield, processing and effects are preserved; no separate paste ingredient is added. Legacy opium shape/texture assets remain available. The new artwork was generated with the built-in image generator and normalized to power-of-two 64px textures; see `docs/SYRINGES.md` for the prompt set.
+
+`patches/syringe-rod-metals.json` adds tin and brass variants to the vanilla `game:rod-*` item family and smithing recipe so all six requested metals are available on 1.22.7. It adds their density, recycling properties and English names.

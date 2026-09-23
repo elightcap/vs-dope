@@ -2,7 +2,7 @@
 
 ## Player use
 
-- Craft one empty syringe using the centre column: metal rod, clear quartz, metal plate. Rods accept copper, tin, brass, gold, iron or steel. The plate may be any metal and need not match the rod.
+- Craft one empty syringe using the centre column: metal rod, clear quartz, metal plate. Rods accept copper, tin, brass, gold, iron or steel. The plate may be any metal and need not match the rod. Vintage Story 1.22.7 uses `game:rod-*`; a small patch adds tin and brass rods to the vanilla rod item and smithing recipe, with matching density, recycling and English names.
 - Craft an empty syringe together with one portable liquid vessel holding at least 1 L of heroin or morphine solution. The vessel remains and loses 1 L.
 - For partial refills or top-ups, right-click a placed liquid vessel, or sneak-right-click with one vessel in the off hand. Sealed barrels must be opened first. A partially filled syringe only accepts the same liquid.
 - Hold right-click for 1.5 seconds to apply one 0.1 L dose. A full syringe holds 10 doses. The tenth use returns the empty, reusable syringe. Cancelled interactions consume nothing.
@@ -25,7 +25,9 @@ Generated using the built-in image tool, then nearest-neighbour normalized to th
 
 JSON parsing, recipe/variant/texture/localization cross-checks and PNG dimensions/alpha were checked in the development workspace. The implementation was reviewed against the public Vintage Story liquid-container and recipe APIs.
 
-**Compilation and in-game testing remain pending:** this workspace does not contain the .NET SDK or Vintage Story assemblies/runtime. Build on the supported game installation with `VINTAGE_STORY` pointing at its root, using `dotnet build`. The project references `VintagestoryAPI.dll`, `VintagestoryLib.dll`, and `Mods/VSSurvivalMod.dll`.
+Compiled successfully against the official Vintage Story 1.22.7 server assemblies using .NET SDK 10.0.401 (zero errors; six existing nullable warnings). The isolated server reached RunGame and all new JSON patches applied without errors. All 53 runtime integration checks passed for the registered recipes, both liquid types, volume transitions, refill conservation and serialization. Build with `VINTAGE_STORY` pointing at the installation root and `dotnet build`. References are `VintagestoryAPI.dll`, `VintagestoryLib.dll`, and `Mods/VSSurvivalMod.dll`.
+
+Client interaction, animation, movement-effect timing and multiplayer playtesting remain pending. Server startup reports the existing unrelated coca recipe reference to `game:aquavitaeportion`; this change does not alter that processing recipe.
 
 ## In-game acceptance checks
 
@@ -36,3 +38,9 @@ JSON parsing, recipe/variant/texture/localization cross-checks and PNG dimension
 5. Move/drop/pick up the partly used syringe, then save/reload and reconnect in multiplayer. Confirm content and volume persist, and no dose is applied twice.
 6. At zero tolerance, check heroin halves movement speed for one calendar hour; dose again to restart the timer. Check heavier use updates tolerance and overdose exactly once per application, including rapid repeat uses. Verify morphine matches its existing effect.
 7. Inspect all four sprites in the inventory, hotbar and hand. Confirm readable silhouettes, transparent backgrounds, and distinct empty/heroin/morphine states.
+
+## Reproducing the server integration checks
+
+`tests/SyringeProbe` is a test-only mod that runs against loaded game items and recipes at server RunGame. Build it with `dotnet build tests/SyringeProbe/SyringeProbe.csproj` and the same `VINTAGE_STORY` environment variable. In a disposable, localhost-only test server, install the built vs-dope mod normally, then install the probe DLL and its `modinfo.json` in a separate Mods/syringeprobe directory. Look for `SYRINGE TEST SUMMARY` in the server log, or `SYRINGE TEST FAILED` for a failed assertion. Do not include the probe in a normal mod distribution.
+
+Checks use the real registered items, native container implementation and native recipe consumption, not substitutes. They verify all six rods, recipe placement and mixed metals; both liquids' fill cap, conservation, ten dose-volume transitions, empty conversion and eleventh-dose rejection; partial refill, serialization roundtrip, mixing rejection, top-up conservation, and crafting vessel retention/volume consumption/stack guard. Player effects and input handling still require the client playtest above.
