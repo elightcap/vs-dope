@@ -35,6 +35,15 @@ public class DrugConsumableItem : Item
     protected virtual void Consume(ItemSlot slot, EntityAgent byEntity)
     {
         if (byEntity.World.Side != EnumAppSide.Server) return;
+        ApplyDose(byEntity);
+        slot.TakeOut(1);
+        slot.MarkDirty();
+    }
+
+    // Shared by the original consumable and reusable morphine syringes.
+    public void ApplyDose(EntityAgent byEntity)
+    {
+        if (byEntity.World.Side != EnumAppSide.Server) return;
         var entity = byEntity;
         float effectMultiplier = 1f;
         IPlayer player = null;
@@ -120,8 +129,6 @@ public class DrugConsumableItem : Item
             VsDopeModSystem.AddictionSystem.RecordToleranceUse(player, ToleranceProduct);
         }
 
-        slot.TakeOut(1);
-        slot.MarkDirty();
     }
 }
 

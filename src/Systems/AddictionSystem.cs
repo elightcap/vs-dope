@@ -25,22 +25,6 @@ public class AddictionSystem
     private const string HeroinSpeedEffectKey = "vs-dope-heroin-slow";
     private const string HeroinSpeedExpiryKey = "vs-dope-heroin-slow-expires-gamehour";
 
-    // Overdose: each product accumulates a per-product "load" (watched attribute) on use.
-    // When load exceeds a tolerance-scaled threshold the player is overdosing: heavy slow +
-    // escalating poison damage until metabolism brings load back down. Near-death but survivable.
-    public const string WatchOverdose = "vs-dope-overdose";
-    private const float OverdoseBaseThreshold = 15f;
-    private const float TolerancePlateau = 0.5f;          // beyond this tolerance, threshold stops rising
-    private const float ThresholdPerTolerancePoint = 20f; // +10 max bonus at the plateau
-    private const float MetabolismPerTick = 1.5f;         // load units cleared per 5s tick while not overdosing-driven
-    private const float OverdoseDamageAtMaxSeverity = 1.0f;
-    private const float OverdoseDamageSeverityGate = 0.35f;
-    private const string OverdoseEffectKey = "vs-dope-overdose";
-    private const float HeroinDoseLoad = 5f;              // load added per detected heroin dose (not a DrugConsumableItem)
-    private static readonly string[] OverdoseProducts = { "opium", "morphine", "heroin", "coca-vitae" };
-
-    private static string LoadKey(string product) => $"vs-dope-load-{product}";
-
     // Tolerance is per finished product. The first two uses in an in-game day do not
     // increase tolerance. Heavy same-day use does, and days away from that product recover it.
     private const int FreeUsesPerDay = 2;
@@ -173,19 +157,36 @@ public class AddictionSystem
                     entity.WatchedAttributes.SetFloat("psychedelic", currentPsych);
                 }
 
-                RecordUse(player);
-                RecordToleranceUse(player, "heroin");
-                entity.WatchedAttributes.SetFloat(LoadKey("heroin"), entity.WatchedAttributes.GetFloat(LoadKey("heroin")) + HeroinDoseLoad);
-                float effectiveSlow = HeroinSlowFactor * effectMultiplier;
-                entity.Stats.Set("walkspeed", HeroinSpeedEffectKey, -effectiveSlow);
-                entity.WatchedAttributes.SetDouble(
-                    HeroinSpeedExpiryKey,
-                    api.World.Calendar.TotalHours + HeroinSpeedDurationGameHours
-                );
+                RecordHeroinDose(player, effectMultiplier);
             }
 
             prevPsychedelicLevels[uid] = currentPsych;
         }
+    }
+
+    // Syringes report doses directly: rapid repeat doses and capped psychedelic
+    // values must still count exactly once. First settle any pending vessel use.
+    public void ApplyHeroinSyringeDose(IPlayer player)
+    {
+        WatchHeroinEffects();
+        var entity = player.Entity;
+        float multiplier = GetEffectMultiplier(player, "heroin");
+        entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, 2.4f * multiplier);
+        entity.WatchedAttributes.SetFloat("intoxication", Math.Clamp(entity.WatchedAttributes.GetFloat("intoxication") + 0.1f, 0f, 25f));
+        float psych = Math.Clamp(entity.WatchedAttributes.GetFloat("psychedelic") + 0.15f * multiplier, 0f, 25f);
+        entity.WatchedAttributes.SetFloat("psychedelic", psych);
+        prevPsychedelicLevels[player.PlayerUID] = psych;
+        RecordHeroinDose(player, multiplier);
+    }
+
+    private void RecordHeroinDose(IPlayer player, float effectMultiplier)
+    {
+        var entity = player.Entity;
+        RecordUse(player);
+        RecordToleranceUse(player, "heroin");
+        entity.WatchedAttributes.SetFloat(LoadKey("heroin"), entity.WatchedAttributes.GetFloat(LoadKey("heroin")) + HeroinDoseLoad);
+        entity.Stats.Set("walkspeed", HeroinSpeedEffectKey, -HeroinSlowFactor * effectMultiplier);
+        entity.WatchedAttributes.SetDouble(HeroinSpeedExpiryKey, api.World.Calendar.TotalHours + HeroinSpeedDurationGameHours);
     }
 
     private void MetabolizeAndCheckOverdose()
@@ -337,3 +338,4 @@ public class AddictionSystem
         return level <= 0 ? 0f : WithdrawalSeverityBase + level / 100f;
     }
 }
+

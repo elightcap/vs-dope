@@ -78,3 +78,7 @@ seed item -> plantBlockCode -> crop blocktype
 | Overdose dose accumulation | `DrugConsumableItem.Consume()` + heroin watcher | product IDs must match `OverdoseProducts` |
 | Processing | `assets/vs-dope/recipes/` | input/output item JSON |
 | Localization | `assets/vs-dope/lang/en.json` | exact asset codes |
+
+## Syringes
+
+`itemtypes/syringe.json` -> `VsDopeModSystem` registration -> `Items/SyringeItem.cs` -> `MorphineItem.ApplyDose` / `AddictionSystem.ApplyHeroinSyringeDose`. `SyringeRecipeSystem` discovers liquid-container blocks and registers filling recipes; empty crafting is JSON. Content variants map to the three syringe texture PNGs and English localization. Liquid volume relies on the current heroin and morphine-solution `itemsPerLitre: 100` contract; unsupported densities are rejected. Native container types require the VSSurvivalMod assembly reference.

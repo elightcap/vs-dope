@@ -32,7 +32,7 @@ Tolerance behavior:
 - unused days recover tolerance;
 - tolerance is capped and effects retain a minimum effectiveness.
 
-Heroin is a special case: its JSON is not currently a `DrugConsumableItem`. The system infers use from increases to the player's `psychedelic` watched attribute.
+Heroin liquid remains an `ItemLiquidPortion`. Vessel use is inferred from increases to the player's `psychedelic` attribute. Syringe use calls `AddictionSystem.ApplyHeroinSyringeDose` directly, updating the watcher baseline to avoid recording the injection twice. Both routes share `RecordHeroinDose`.
 
 Progression timing: the daily withdrawal/decay pass is driven by in-game calendar hours (`Calendar.TotalHours`), not real time; elapsed game hours since the last processed hour are counted on each 5s timer tick (catch-up capped at 24h) and the pass runs when `FullHourOfDay == 0`.
 
@@ -51,3 +51,14 @@ Per-product concentration overdose, separate from tolerance and from the vanilla
 `src/Client/CocaVitaeEffectHudSystem.cs` displays the Coca Vitae countdown from the watched calendar-hour expiry written by `CocaVitaeItem`.
 
 If the Coca Vitae effect key or expiry attribute changes, update both server/item behavior and HUD.
+
+
+## Reusable syringes
+
+`Items/SyringeItem.cs` handles the empty/heroin/morphine variants, server-side liquid transfer and held use. Each non-stackable syringe stores integer liquid portions in `ItemStack.Attributes["vs-dope-syringe-portions"]`: 100 portions = 1 litre, 10 portions = one dose. Filled creative/crafted variants default to 100; an empty variant always reads zero. These stack attributes persist through inventory moves, drops and saves. The transient `TempAttributes["vs-dope-syringe-applying"]` flag prevents cancelled/fill interactions from applying doses.
+
+Morphine syringes call the existing `MorphineItem.ApplyDose`, extracted from `DrugConsumableItem.Consume` without changing oral item effects. Heroin syringes explicitly record each dose, including rapid repeats and capped psychedelic values; the calendar-hour effect key is shared with vessel consumption. Syringe health/intoxication/psychedelic additions use the existing heroin liquid's per-litre values multiplied by 0.1; tolerance and overdose remain product-specific.
+
+`Systems/SyringeRecipeSystem.cs` registers exact vessel-code shapeless filling recipes at AssetsLoaded (order 1.1). Uses vanilla liquid-container recipe attributes to remove 1 litre and preserve the vessel. A client/server recipe-matching guard requires a single vessel to avoid rounding losses from the vanilla stacked-vessel consumption path. Placed refill and off-hand refill use `ILiquidSource`; sealed barrels and claimed blocks are protected.
+
+The project now references `Mods/VSSurvivalMod.dll` for the game's liquid-container interfaces and classes. See `docs/SYRINGES.md` for build and in-game acceptance checks.
