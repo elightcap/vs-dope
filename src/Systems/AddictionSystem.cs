@@ -39,7 +39,7 @@ public class AddictionSystem
     private const float HeroinDoseLoad = 5f;              // load added per detected heroin dose (not a DrugConsumableItem)
     private static readonly string[] OverdoseProducts = { "opium", "morphine", "heroin", "coca-vitae" };
 
-    private static string LoadKey(string product) => $"vs-dope-load-{product}";
+    public static string LoadKey(string product) => $"vs-dope-load-{product}";
 
     // Tolerance is per finished product. The first two uses in an in-game day do not
     // increase tolerance. Heavy same-day use does, and days away from that product recover it.
@@ -48,21 +48,6 @@ public class AddictionSystem
     private const float MaxTolerance = 0.75f;
     private const float ToleranceRecoveryPerUnusedDay = 0.18f;
     private const float MinimumEffectMultiplier = 0.25f;
-
-    // Overdose tracks a separate per-product concentration (raw, not tolerance-scaled).
-    // It accumulates with each dose and metabolizes down over time on the tick timer.
-    // Crossing the threshold slows hard and, past a gate, deals escalating poison damage.
-    // Tolerance raises the threshold but only up to a plateau, so it can't be farmed forever.
-    private const float OverdoseBaseThreshold = 15f;
-    private const float TolerancePlateau = 0.5f;
-    private const float ThresholdPerTolerancePoint = 20f;
-    private const float MetabolismPerTick = 1.5f;
-    private const float OverdoseDamageAtMaxSeverity = 1.0f;
-    private const float OverdoseDamageSeverityGate = 0.35f;
-    private const float HeroinDoseLoad = 5f;
-    private const string OverdoseEffectKey = "vs-dope-overdose";
-    public const string WatchOverdose = "vs-dope-overdose";
-    private static readonly string[] OverdoseProducts = { "opium", "morphine", "heroin", "coca-vitae" };
 
     private ICoreServerAPI api;
     private long lastProcessedGameHour = -1;
@@ -80,7 +65,6 @@ public class AddictionSystem
     private static string TolKey(string product) => $"vs-dope-tolerance-{product}";
     private static string TolDayKey(string product) => $"vs-dope-tolerance-day-{product}";
     private static string TolUsesKey(string product) => $"vs-dope-tolerance-uses-{product}";
-    public static string LoadKey(string product) => $"vs-dope-load-{product}";
 
     public float GetEffectMultiplier(IPlayer player, string product)
     {
