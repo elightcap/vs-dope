@@ -38,7 +38,7 @@ Keep leaves distributed along branches and secondary twigs, with varied orientat
 | `opium.json` | poppy product | `OpiumItem` |
 | `morphine.json` | poppy product | `MorphineItem` |
 | `morphine-solution.json` | intermediate liquid | liquid behavior |
-| `heroin.json` | poppy final product | special watcher path |
+| `heroin.json` | poppy final product | explicit vessel/syringe dose path |
 
 For custom items, inspect both JSON and C# class registration.
 
