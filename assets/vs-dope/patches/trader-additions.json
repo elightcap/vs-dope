@@ -1,0 +1,2486 @@
+[
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 10,
+          "var": 2.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 35,
+          "var": 8.75
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 30,
+          "var": 7.5
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 50,
+          "var": 12.5
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-agriculture.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/buying/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 1.5,
+          "var": 0.38
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 6,
+          "var": 1.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 5,
+          "var": 1.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 17,
+          "var": 4.25
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 15,
+          "var": 3.75
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-agriculture.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 10,
+          "var": 2.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 35,
+          "var": 8.75
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 30,
+          "var": 7.5
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 50,
+          "var": 12.5
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-artisan.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/buying/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 1.5,
+          "var": 0.38
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 6,
+          "var": 1.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 5,
+          "var": 1.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 17,
+          "var": 4.25
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 15,
+          "var": 3.75
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-artisan.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 10,
+          "var": 2.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 35,
+          "var": 8.75
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 30,
+          "var": 7.5
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 50,
+          "var": 12.5
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-buildmaterials.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/buying/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 1.5,
+          "var": 0.38
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 6,
+          "var": 1.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 5,
+          "var": 1.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 17,
+          "var": 4.25
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 15,
+          "var": 3.75
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-buildmaterials.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 10,
+          "var": 2.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 35,
+          "var": 8.75
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 30,
+          "var": 7.5
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 50,
+          "var": 12.5
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-clothing.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/buying/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 1.5,
+          "var": 0.38
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 6,
+          "var": 1.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 5,
+          "var": 1.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 17,
+          "var": 4.25
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 15,
+          "var": 3.75
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-clothing.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 10,
+          "var": 2.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 35,
+          "var": 8.75
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 30,
+          "var": 7.5
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 50,
+          "var": 12.5
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-commodities.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/buying/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 1.5,
+          "var": 0.38
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 6,
+          "var": 1.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 5,
+          "var": 1.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 17,
+          "var": 4.25
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 15,
+          "var": 3.75
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-commodities.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 10,
+          "var": 2.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 35,
+          "var": 8.75
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 30,
+          "var": 7.5
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 50,
+          "var": 12.5
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-furniture.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/buying/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 1.5,
+          "var": 0.38
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 6,
+          "var": 1.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 5,
+          "var": 1.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 17,
+          "var": 4.25
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 15,
+          "var": 3.75
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-furniture.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 10,
+          "var": 2.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 35,
+          "var": 8.75
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 30,
+          "var": 7.5
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 50,
+          "var": 12.5
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-luxuries.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/buying/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 1.5,
+          "var": 0.38
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 6,
+          "var": 1.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 5,
+          "var": 1.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 17,
+          "var": 4.25
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 15,
+          "var": 3.75
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-luxuries.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 10,
+          "var": 2.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 35,
+          "var": 8.75
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 30,
+          "var": 7.5
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 50,
+          "var": 12.5
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-survivalgoods.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/buying/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 1.5,
+          "var": 0.38
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 6,
+          "var": 1.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 5,
+          "var": 1.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 17,
+          "var": 4.25
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 15,
+          "var": 3.75
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-survivalgoods.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/selling/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 3,
+          "var": 0.75
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 10,
+          "var": 2.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 35,
+          "var": 8.75
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 30,
+          "var": 7.5
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 50,
+          "var": 12.5
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-treasurehunter.json",
+    "side": "Server"
+  },
+  {
+    "op": "addeach",
+    "path": "/buying/list/-",
+    "value": [
+      {
+        "code": "vs-dope:seeds-poppy",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 6,
+          "var": 1.5
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seeds-coca",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 5,
+          "var": 1.25
+        },
+        "price": {
+          "avg": 1,
+          "var": 0.25
+        }
+      },
+      {
+        "code": "vs-dope:seedpod",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 4,
+          "var": 1.0
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-leaf",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 3,
+          "var": 0.75
+        },
+        "price": {
+          "avg": 1.5,
+          "var": 0.38
+        }
+      },
+      {
+        "code": "vs-dope:opium",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 2,
+          "var": 0.5
+        },
+        "price": {
+          "avg": 6,
+          "var": 1.5
+        }
+      },
+      {
+        "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 5,
+          "var": 1.25
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 12,
+          "var": 3.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine-solution",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 17,
+          "var": 4.25
+        }
+      },
+      {
+        "code": "vs-dope:coca-vitae",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 15,
+          "var": 3.75
+        }
+      },
+      {
+        "code": "vs-dope:heroin",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 25,
+          "var": 6.25
+        }
+      }
+    ],
+    "file": "game:config/tradelists/trader-treasurehunter.json",
+    "side": "Server"
+  }
+]

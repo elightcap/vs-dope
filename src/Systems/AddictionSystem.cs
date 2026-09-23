@@ -49,24 +49,6 @@ public class AddictionSystem
     private const float ToleranceRecoveryPerUnusedDay = 0.18f;
     private const float MinimumEffectMultiplier = 0.25f;
 
-<<<<<<< Updated upstream
-=======
-    // Overdose tracks a separate per-product concentration (raw, not tolerance-scaled).
-    // It accumulates with each dose and metabolizes down over time on the tick timer.
-    // Crossing the threshold slows hard and, past a gate, deals escalating poison damage.
-    // Tolerance raises the threshold but only up to a plateau, so it can't be farmed forever.
-    private const float OverdoseBaseThreshold = 15f;
-    private const float TolerancePlateau = 0.5f;
-    private const float ThresholdPerTolerancePoint = 20f;
-    private const float MetabolismPerTick = 0.5f;
-    private const float OverdoseDamageAtMaxSeverity = 1.0f;
-    private const float OverdoseDamageSeverityGate = 0.35f;
-    private const float HeroinDoseLoad = 8f;
-    private const string OverdoseEffectKey = "vs-dope-overdose";
-    public const string WatchOverdose = "vs-dope-overdose";
-    private static readonly string[] OverdoseProducts = { "opium", "morphine", "heroin", "coca-vitae" };
-
->>>>>>> Stashed changes
     private ICoreServerAPI api;
     private long lastProcessedGameHour = -1;
     private readonly Dictionary<string, float> prevPsychedelicLevels = new();
