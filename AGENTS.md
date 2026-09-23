@@ -16,6 +16,19 @@ For future development/agent work, use the focused maps under `docs/repo/` befor
 
 Read only the relevant maps, then verify against the current live tree and implementation. Update the appropriate map whenever a change adds or alters a subsystem, asset family, processing chain, persistent key, or important cross-file dependency.
 
+## Git Workflow (always follow)
+
+- **Fresh branch per task.** Never work directly on `main`/`master`. At the start of each task create a new branch off an up-to-date base named `<type>/<short-slug>` (e.g. `feat/trader-drug-lists`, `fix/addiction-dup-members`).
+- **Use git worktrees.** Give each concurrent task its own worktree so branches don't collide and the build stays isolated:
+  ```bash
+  git fetch origin && git switch main && git pull
+  git worktree add ../vs-dope-<short-slug> -b <type>/<short-slug>
+  cd ../vs-dope-<short-slug>   # do all edits/builds here
+  ```
+  Remove the worktree when done: `git worktree remove ../vs-dope-<short-slug>`.
+- **Commit always.** Commit completed, verified work before wrapping up — stage only intended files (no build artifacts / secrets). Do not leave changes uncommitted.
+- **Ask before pushing.** When finished, ask the user whether to push the branch to GitHub and open a new PR/branch. Never force-push or push without that confirmation.
+
 ## Processing Chain
 
 poppy seeds → grow → harvest seedpods + seeds → quern grind pods → opium → barrel (+ limewater portion, 24h) → morphine → barrel (+ alcohol portion, 12h) → morphine solution → barrel (+ alcohol portion, 6h) → heroin
