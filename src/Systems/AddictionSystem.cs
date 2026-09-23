@@ -25,6 +25,22 @@ public class AddictionSystem
     private const string HeroinSpeedEffectKey = "vs-dope-heroin-slow";
     private const string HeroinSpeedExpiryKey = "vs-dope-heroin-slow-expires-gamehour";
 
+    // Overdose: each product accumulates a per-product "load" (watched attribute) on use.
+    // When load exceeds a tolerance-scaled threshold the player is overdosing: heavy slow +
+    // escalating poison damage until metabolism brings load back down. Near-death but survivable.
+    public const string WatchOverdose = "vs-dope-overdose";
+    private const float OverdoseBaseThreshold = 15f;
+    private const float TolerancePlateau = 0.5f;          // beyond this tolerance, threshold stops rising
+    private const float ThresholdPerTolerancePoint = 20f; // +10 max bonus at the plateau
+    private const float MetabolismPerTick = 1.5f;         // load units cleared per 5s tick while not overdosing-driven
+    private const float OverdoseDamageAtMaxSeverity = 1.0f;
+    private const float OverdoseDamageSeverityGate = 0.35f;
+    private const string OverdoseEffectKey = "vs-dope-overdose";
+    private const float HeroinDoseLoad = 5f;              // load added per detected heroin dose (not a DrugConsumableItem)
+    private static readonly string[] OverdoseProducts = { "opium", "morphine", "heroin", "coca-vitae" };
+
+    private static string LoadKey(string product) => $"vs-dope-load-{product}";
+
     // Tolerance is per finished product. The first two uses in an in-game day do not
     // increase tolerance. Heavy same-day use does, and days away from that product recover it.
     private const int FreeUsesPerDay = 2;
