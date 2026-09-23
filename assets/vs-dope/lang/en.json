@@ -31,7 +31,10 @@
   "item-syringe-empty": "Empty Syringe",
   "item-syringe-heroin": "Heroin Syringe",
   "item-syringe-morphine": "Morphine Syringe",
-  "syringe-volume": "{0:0.00} / 1.00 L \u2014 {1} doses remaining",
+  "syringe-volume": "{0:0.00} / 1.00 L — {1} doses remaining",
   "syringe-help": "Hold right-click to apply 0.1 L. Right-click an open vessel to refill, or sneak-right-click with a vessel in your off hand. Refill with the same liquid until empty.",
-  "item-syringe-empty-desc": "Reusable quartz and metal syringe. Holds 1 litre of heroin or morphine solution (10 doses)."
+  "item-syringe-empty-desc": "Reusable quartz and metal syringe. Holds 1 litre of heroin or morphine solution (10 doses).",
+  "overdose-warning": "High drug load\nFurther doses risk an overdose.",
+  "overdose-active": "Overdose — movement impaired\nStop dosing to recover.",
+  "overdose-severe": "Severe overdose — taking damage\nStop dosing to recover."
 }

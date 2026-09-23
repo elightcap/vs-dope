@@ -27,4 +27,10 @@ public class VsDopeModSystem : ModSystem
         AddictionSystem = new AddictionSystem();
         AddictionSystem.Initialize(api);
     }
+
+    public override void Dispose()
+    {
+        if (sapi != null) AddictionSystem.Dispose();
+        base.Dispose();
+    }
 }

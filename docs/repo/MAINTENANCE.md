@@ -5,7 +5,7 @@
 1. **README drift:** historical processing/layout details do not exactly match the current tree. Code/assets are authoritative.
 2. **Coca processing gap:** Coca Vitae exists, but leaf-to-finished-product processing is not yet implemented with a validated recipe path.
 3. **Coca art quality:** coca stage models are simpler than papaver stages and use placeholder/reused textures.
-4. **Heroin special case:** tolerance/use is inferred through psychedelic changes rather than the shared consumable base.
+4. **Native drinking hook:** `HeroinVesselDoseSystem` patches the 1.22.7 liquid-container drinking method for heroin only. Re-run `tests/OverdoseProbe` when upgrading the game.
 5. **Effect synchronization:** server expiry and client watched attributes must stay consistent.
 6. **Build dependency:** local builds require `VINTAGE_STORY` pointing at the target installation.
 
@@ -28,7 +28,9 @@ Before modifying a subsystem:
 - `vs-dope-coca-vitae-speed`: Coca movement effect key
 - `ToleranceProduct`: per-product tolerance routing
 - `RecordToleranceUse`, `GetEffectMultiplier`: tolerance API
-- `psychedelic`: heroin watcher path
+- `RecordDrugDose`: shared consumption accounting
+- `OverdoseSystem`: combined risk, recovery, damage
+- `HeroinVesselDoseSystem`: native volume-based drinking hook
 - `crop-coca`, `crop-poppy`: crop codes
 - `plantBlockCode`: seed-to-crop linkage
 - `shapeByType`: stage shape mapping
