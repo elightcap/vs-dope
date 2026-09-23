@@ -29,24 +29,27 @@ Heroin psychedelic watcher ─────┘
                                       └── watched attributes
                                                │
                                                ▼
-                                  AddictionCharacterTabSystem
+                                   AddictionCharacterTabSystem
 ```
 
 ## Overdose
 
 ```text
-DrugConsumableItem.Consume() ── +IntoxicationAmount ─┐
-Heroin psychedelic watcher ─── +HeroinDoseLoad ──────┤
-                                                     ▼
-                              watched attr  vs-dope-load-<product>
-                                                     │
-AddictionSystem.MetabolizeAndCheckOverdose() (OnTick)┤  metabolism -MetabolismPerTick/tick
-   threshold = base + min(tol,plateau)*scale         │
-   severity  = (load-threshold)/threshold            ▼
-        ├── stats walkspeed slow "vs-dope-overdose"
-        ├── poison ReceiveDamage (sev > gate)
-        └── watched bool vs-dope-overdose
+DrugConsumableItem.Consume() ─┐ (raw IntoxicationAmount)
+Heroin watcher (HeroinDoseLoad)┼──> vs-dope-load-<product>  (watched)
+                               │          │
+                               │          ▼
+                               │   MetabolizeAndCheckOverdose()  [5s tick]
+                               │     ├── threshold = base + min(tol, plateau)*perPoint
+                               │     ├── walkspeed slow (-min(0.85, severity))
+                               │     └── poison damage past OverdoseDamageSeverityGate
+                               │          │
+                               │          ▼
+                               │   vs-dope-overdose (watched bool)
 ```
+
+Products tracked: opium, morphine, heroin, coca-vitae. Adding a new overdose-able product requires adding it to `OverdoseProducts` in `AddictionSystem.cs`.
+
 
 ## Crops
 
@@ -63,6 +66,8 @@ seed item -> plantBlockCode -> crop blocktype
 | --- | --- | --- |
 | Coca Vitae stats | `DrugConsumableItem.cs` | Coca HUD, tolerance |
 | Tolerance balance | `AddictionSystem.cs` | all finished products |
+| Overdose threshold/balance | `AddictionSystem.cs` (Overdose* consts) | `LoadKey`, product load writes |
+| New overdose-able product | `AddictionSystem.cs` (`OverdoseProducts`) | item's `IntoxicationAmount`, tolerance key |
 | New consumed product | item JSON + consumable C# | mod registration, lang, texture |
 | New crop | blocktype + seed item | shapes, textures, lang, drops |
 | Crop appearance | `shapes/plant/` | blocktype texture aliases |

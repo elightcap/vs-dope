@@ -49,6 +49,21 @@ public class AddictionSystem
     private const float ToleranceRecoveryPerUnusedDay = 0.18f;
     private const float MinimumEffectMultiplier = 0.25f;
 
+    // Overdose tracks a separate per-product concentration (raw, not tolerance-scaled).
+    // It accumulates with each dose and metabolizes down over time on the tick timer.
+    // Crossing the threshold slows hard and, past a gate, deals escalating poison damage.
+    // Tolerance raises the threshold but only up to a plateau, so it can't be farmed forever.
+    private const float OverdoseBaseThreshold = 15f;
+    private const float TolerancePlateau = 0.5f;
+    private const float ThresholdPerTolerancePoint = 20f;
+    private const float MetabolismPerTick = 1.5f;
+    private const float OverdoseDamageAtMaxSeverity = 1.0f;
+    private const float OverdoseDamageSeverityGate = 0.35f;
+    private const float HeroinDoseLoad = 5f;
+    private const string OverdoseEffectKey = "vs-dope-overdose";
+    public const string WatchOverdose = "vs-dope-overdose";
+    private static readonly string[] OverdoseProducts = { "opium", "morphine", "heroin", "coca-vitae" };
+
     private ICoreServerAPI api;
     private long lastProcessedGameHour = -1;
     private readonly Dictionary<string, float> prevPsychedelicLevels = new();
@@ -65,6 +80,7 @@ public class AddictionSystem
     private static string TolKey(string product) => $"vs-dope-tolerance-{product}";
     private static string TolDayKey(string product) => $"vs-dope-tolerance-day-{product}";
     private static string TolUsesKey(string product) => $"vs-dope-tolerance-uses-{product}";
+    public static string LoadKey(string product) => $"vs-dope-load-{product}";
 
     public float GetEffectMultiplier(IPlayer player, string product)
     {
@@ -177,43 +193,40 @@ public class AddictionSystem
         foreach (var player in api.Server.Players.Where(p => p.ConnectionState == EnumClientState.Playing))
         {
             var entity = player.Entity;
-            if (entity == null || !entity.Alive) continue;
+            if (entity == null) continue;
 
-            float worstSeverity = 0f;
+            bool anyOverdose = false;
             foreach (string product in OverdoseProducts)
             {
                 string key = LoadKey(product);
                 float load = entity.WatchedAttributes.GetFloat(key);
                 if (load <= 0f) continue;
 
-                // Natural metabolism: burn the load down every tick. No antidote - just stop dosing and wait.
                 load = Math.Max(0f, load - MetabolismPerTick);
-                entity.WatchedAttributes.SetFloat(key, load);
+                if (load <= 0f) entity.WatchedAttributes.RemoveAttribute(key);
+                else entity.WatchedAttributes.SetFloat(key, load);
 
                 float tolerance = Math.Clamp(entity.Attributes.GetFloat(TolKey(product)), 0f, MaxTolerance);
-                // Threshold rises with tolerance but plateaus: past TolerancePlateau more tolerance changes nothing.
                 float threshold = OverdoseBaseThreshold + Math.Min(tolerance, TolerancePlateau) * ThresholdPerTolerancePoint;
+                if (load <= threshold) continue;
 
-                if (load > threshold)
-                    worstSeverity = Math.Max(worstSeverity, Math.Clamp((load - threshold) / threshold, 0f, 1f));
+                anyOverdose = true;
+                if (!entity.Alive) continue;
+
+                float severity = Math.Clamp((load - threshold) / threshold, 0f, 1f);
+                entity.Stats.Set("walkspeed", OverdoseEffectKey, -Math.Min(0.85f, severity));
+                if (severity > OverdoseDamageSeverityGate)
+                    entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Poison }, severity * OverdoseDamageAtMaxSeverity);
             }
 
-            bool overdosing = worstSeverity > 0.05f;
-            entity.WatchedAttributes.SetBool(WatchOverdose, overdosing);
-
-            if (overdosing)
-            {
-                // Additive walkspeed: negative slows. Cap so it never fully locks movement.
-                entity.Stats.Set("walkspeed", OverdoseEffectKey, -Math.Min(0.85f, worstSeverity));
-                if (worstSeverity > OverdoseDamageSeverityGate)
-                    entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Poison }, worstSeverity * OverdoseDamageAtMaxSeverity);
-            }
-            else
-            {
+            if (!anyOverdose && entity.WatchedAttributes.GetBool(WatchOverdose))
                 entity.Stats.Remove("walkspeed", OverdoseEffectKey);
-            }
+
+            entity.WatchedAttributes.SetBool(WatchOverdose, anyOverdose);
         }
     }
+
+    public static bool IsOverdosing(IPlayer player) => player.Entity?.WatchedAttributes.GetBool(WatchOverdose) ?? false;
 
     private void OnPlayerJoin(IServerPlayer player)
     {

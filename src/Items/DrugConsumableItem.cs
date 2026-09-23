@@ -58,8 +58,8 @@ public class DrugConsumableItem : Item
             entity.WatchedAttributes.SetFloat("psychedelic", GameMath.Clamp(currentPsych + IntoxicationAmount * 1.5f, 0f, 25f));
         }
 
-        // Per-product overdose load accumulates on every dose (raw, not tolerance-scaled).
-        string loadKey = "vs-dope-load-" + ToleranceProduct;
+        // Overdose load accumulates raw (not tolerance-scaled) per product; AddictionSystem metabolizes it.
+        string loadKey = VsDope.Systems.AddictionSystem.LoadKey(ToleranceProduct);
         entity.WatchedAttributes.SetFloat(loadKey, entity.WatchedAttributes.GetFloat(loadKey) + IntoxicationAmount);
 
         // EntityStats movement values are additive: +1.0 doubles speed, -0.5 halves it.

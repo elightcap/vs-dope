@@ -36,13 +36,13 @@ Heroin is a special case: its JSON is not currently a `DrugConsumableItem`. The 
 
 Progression timing: the daily withdrawal/decay pass is driven by in-game calendar hours (`Calendar.TotalHours`), not real time; elapsed game hours since the last processed hour are counted on each 5s timer tick (catch-up capped at 24h) and the pass runs when `FullHourOfDay == 0`.
 
+Withdrawal applies a movement **slow** via additive walkspeed `-severity * 0.4f` (not a speedup); poison damage above severity 0.8.
+
 ## Overdose
 
-Per-product overdose lives in `AddictionSystem`. Each dose accumulates a watched attribute `vs-dope-load-<product>` (opium, morphine, coca-vitae via `DrugConsumableItem.Consume`; heroin via the psychedelic watcher with `HeroinDoseLoad`). Load is raw (`IntoxicationAmount`), not tolerance-scaled.
+Per-product concentration overdose, separate from tolerance and from the vanilla `intoxication`/`psychedelic` attributes. Each dose adds raw `IntoxicationAmount` to a watched attribute `vs-dope-load-<product>` (written by `DrugConsumableItem.Consume`; heroin is incremented in the watcher with `HeroinDoseLoad`). Products tracked: opium, morphine, heroin, coca-vitae.
 
-`MetabolizeAndCheckOverdose()` runs from `OnTick` for online players: it burns down each product's load by `MetabolismPerTick` (natural metabolism — no antidote), computes severity when load exceeds a threshold, and applies effects. Threshold = `OverdoseBaseThreshold + min(tolerance, TolerancePlateau) * ThresholdPerTolerancePoint`, so the threshold rises with tolerance then plateaus flat beyond it. Severity scales `(load-threshold)/threshold` clamped 0–1.
-
-Effects while overdosing: additive walkspeed slow (`-min(0.85, severity)` under stats key `vs-dope-overdose`) plus escalating poison damage only above `OverdoseDamageSeverityGate`. This is deliberately near-death but recoverable — stopping dosing lets metabolism drop load below threshold and clears the effects. Syncs watched bool `vs-dope-overdose` for future UI.
+`AddictionSystem.MetabolizeAndCheckOverdose()` runs on every 5s tick (not game-hour gated): it metabolizes each load down by `MetabolismPerTick`, then if a product's load exceeds its threshold applies a hard walkspeed slow and, past `OverdoseDamageSeverityGate`, escalating poison damage. Threshold = `OverdoseBaseThreshold + min(tolerance, TolerancePlateau) * ThresholdPerTolerancePoint` — tolerance raises it only up to the plateau. Near-death but recoverable: no antidote; stopping dosing lets metabolism clear it. Watched bool `vs-dope-overdose` (const `WatchOverdose`) flags active overdose for clients.
 
 ## Client UI
 
