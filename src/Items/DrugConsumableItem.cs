@@ -41,7 +41,7 @@ public class DrugConsumableItem : Item
 
     protected virtual void Consume(ItemSlot slot, EntityAgent byEntity)
     {
-        if (byEntity.World.Side != EnumAppSide.Server) return;
+        if (byEntity.World.Side != EnumAppSide.Server || !byEntity.Alive || slot.Empty) return;
         ApplyDose(byEntity);
         slot.TakeOut(1);
         slot.MarkDirty();
@@ -50,10 +50,10 @@ public class DrugConsumableItem : Item
     // Shared by the original consumable and reusable morphine syringes.
     public void ApplyDose(EntityAgent byEntity)
     {
-        if (byEntity.World.Side != EnumAppSide.Server) return;
+        if (byEntity.World.Side != EnumAppSide.Server || !byEntity.Alive) return;
         var entity = byEntity;
         float effectMultiplier = 1f;
-        IPlayer player = null;
+        IPlayer? player = null;
 
         if (byEntity is EntityPlayer entityPlayer)
         {
@@ -61,10 +61,6 @@ public class DrugConsumableItem : Item
             if (player != null)
                 effectMultiplier = VsDopeModSystem.AddictionSystem.GetEffectMultiplier(player, ToleranceProduct);
         }
-
-        float effectiveHeal = HealAmount * effectMultiplier;
-        if (effectiveHeal > 0)
-            entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, effectiveHeal);
 
         float currentIntox = entity.WatchedAttributes.GetFloat("intoxication");
         entity.WatchedAttributes.SetFloat("intoxication", GameMath.Clamp(currentIntox + IntoxicationAmount, 0f, 25f));
@@ -74,15 +70,16 @@ public class DrugConsumableItem : Item
             entity.WatchedAttributes.SetFloat("psychedelic", GameMath.Clamp(currentPsych + IntoxicationAmount * 1.5f, 0f, 25f));
         }
 
-        // Overdose load accumulates raw (not tolerance-scaled) per product; AddictionSystem metabolizes it.
-        string loadKey = VsDope.Systems.AddictionSystem.LoadKey(ToleranceProduct);
-        entity.WatchedAttributes.SetFloat(loadKey, entity.WatchedAttributes.GetFloat(loadKey) + IntoxicationAmount);
-
         // EntityStats movement values are additive: +1.0 doubles speed, -0.5 halves it.
         // Tolerance scales the item's modifier back toward neutral (0).
         float effectiveSpeedModifier = (SpeedMultiplier - 1f) * effectMultiplier;
         string effectKey = EffectKey;
         entity.Stats.Set("walkspeed", effectKey, GameMath.Clamp(effectiveSpeedModifier, -0.7f, 1f));
+        if (player != null) VsDopeModSystem.AddictionSystem.RecordDrugDose(player, ToleranceProduct);
+        float effectiveHeal = HealAmount * effectMultiplier;
+        if (effectiveHeal > 0 && (player == null || !VsDope.Systems.AddictionSystem.IsOverdosing(player)))
+            entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, effectiveHeal);
+
         long expiresAtMs = EffectDurationGameHours > 0
             ? 0
             : entity.World.ElapsedMilliseconds + EffectDurationMs;
@@ -129,13 +126,6 @@ public class DrugConsumableItem : Item
         }
 
         entity.World.RegisterCallback(CheckEffectExpiry, EffectDurationGameHours > 0 ? 1000 : EffectDurationMs);
-
-        if (player != null)
-        {
-            VsDopeModSystem.AddictionSystem.RecordUse(player);
-            VsDopeModSystem.AddictionSystem.RecordToleranceUse(player, ToleranceProduct);
-        }
-
     }
 }
 

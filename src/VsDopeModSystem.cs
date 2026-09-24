@@ -35,4 +35,10 @@ public class VsDopeModSystem : ModSystem
         var tradeSystem = new AddictTradeSystem();
         tradeSystem.Initialize(api);
     }
+
+    public override void Dispose()
+    {
+        if (sapi != null) AddictionSystem.Dispose();
+        base.Dispose();
+    }
 }

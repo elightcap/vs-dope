@@ -8,7 +8,7 @@
 - Hold right-click for 1.5 seconds to apply one 0.1 L dose. A full syringe holds 10 doses. The tenth use returns the empty, reusable syringe. Cancelled interactions consume nothing.
 - The tooltip reports litres and complete doses remaining. A fractional remainder below 0.1 L is retained but cannot be applied until topped up.
 
-Morphine filling uses the existing **morphine solution** liquid. The solid morphine item remains unchanged. Heroin applies the existing tolerance-scaled 50% slowdown for one in-game hour; repeat applications restart that duration. Morphine retains its existing heal, slow, intoxication, duration, tolerance and overdose behavior.
+Morphine filling uses the existing **morphine solution** liquid. The solid morphine item remains unchanged. Heroin applies the existing tolerance-scaled 50% slowdown for one in-game hour; repeat applications restart that duration. Morphine retains its existing base effects and tolerance. Both syringe types feed the shared overdose system; repeated injections can suppress drug healing and cause overdose. See `OVERDOSE.md`.
 
 ## Inventory artwork
 

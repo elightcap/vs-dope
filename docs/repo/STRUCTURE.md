@@ -23,6 +23,8 @@ vs-dope/
 ├── vs-dope.csproj
 ├── docs/
 │   ├── COCA_VITAE_FIXES.md
+│   ├── OVERDOSE.md
+│   ├── SYRINGES.md
 │   └── repo/
 │       ├── README.md
 │       ├── STRUCTURE.md
@@ -34,10 +36,15 @@ vs-dope/
 ├── src/
 │   ├── VsDopeModSystem.cs
 │   ├── Items/DrugConsumableItem.cs
+│   ├── Items/SyringeItem.cs
 │   ├── Systems/AddictionSystem.cs
+│   ├── Systems/OverdoseSystem.cs
+│   ├── Systems/HeroinVesselDoseSystem.cs
+│   ├── Systems/SyringeRecipeSystem.cs
 │   └── Client/
 │       ├── AddictionCharacterTabSystem.cs
-│       └── CocaVitaeEffectHudSystem.cs
+│       ├── CocaVitaeEffectHudSystem.cs
+│       └── OverdoseHudSystem.cs
 └── assets/vs-dope/
     ├── blocktypes/
     ├── itemtypes/
@@ -54,3 +61,5 @@ vs-dope/
 `vs-dope.csproj` references Vintage Story DLLs through the `VINTAGE_STORY` environment variable. Local API-facing changes should be built against the target 1.22.x install.
 
 When changing gameplay, first determine whether the behavior is JSON-driven, C#-driven, or both.
+
+`tests/OverdoseProbe` and `tests/SyringeProbe` are separate server test mods, excluded from production compilation. Overdose uses the game-bundled `Lib/0Harmony.dll`; liquid APIs use `Mods/VSSurvivalMod.dll`.

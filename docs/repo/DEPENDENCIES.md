@@ -24,7 +24,7 @@ src/Client/CocaVitaeEffectHudSystem.cs
 ```text
 DrugConsumableItem subclasses ──┐
                                 ├──> AddictionSystem
-Heroin psychedelic watcher ─────┘
+Heroin vessel/syringe dose ─────┘
                                       │
                                       └── watched attributes
                                                │
@@ -34,22 +34,11 @@ Heroin psychedelic watcher ─────┘
 
 ## Overdose
 
-```text
-DrugConsumableItem.Consume() ─┐ (raw IntoxicationAmount)
-Heroin watcher (HeroinDoseLoad)┼──> vs-dope-load-<product>  (watched)
-                               │          │
-                               │          ▼
-                               │   MetabolizeAndCheckOverdose()  [5s tick]
-                               │     ├── threshold = base + min(tol, plateau)*perPoint
-                               │     ├── walkspeed slow (-min(0.85, severity))
-                               │     └── poison damage past OverdoseDamageSeverityGate
-                               │          │
-                               │          ▼
-                               │   vs-dope-overdose (watched bool)
-```
+`DrugConsumableItem.ApplyDose` and `AddictionSystem.ApplyHeroinDose` -> `RecordDrugDose` -> `OverdoseSystem.RecordDose`. `HeroinVesselDoseSystem` hooks native `BlockLiquidContainerBase.tryEatStop` with game-bundled Harmony and reports exact consumed volume. It delegates all other liquids to the original method.
 
-Products tracked: opium, morphine, heroin, coca-vitae. Adding a new overdose-able product requires adding it to `OverdoseProducts` in `AddictionSystem.cs`.
+`OverdoseSystem.Tick` -> calendar-based load decay -> combined normalized risk -> one movement correction and poison damage -> watched risk/severity/active keys -> `Client/OverdoseHudSystem`.
 
+Products: opium, morphine, heroin, coca-vitae. Adding a product requires its explicit load and inclusion in `OverdoseSystem.Products`. See `docs/OVERDOSE.md` for persistence and balance.
 
 ## Crops
 
@@ -66,16 +55,16 @@ seed item -> plantBlockCode -> crop blocktype
 | --- | --- | --- |
 | Coca Vitae stats | `DrugConsumableItem.cs` | Coca HUD, tolerance |
 | Tolerance balance | `AddictionSystem.cs` | all finished products |
-| Overdose threshold/balance | `AddictionSystem.cs` (Overdose* consts) | `LoadKey`, product load writes |
-| New overdose-able product | `AddictionSystem.cs` (`OverdoseProducts`) | item's `IntoxicationAmount`, tolerance key |
+| Overdose threshold/balance | `OverdoseSystem.cs` | `RecordDrugDose`, HUD stages |
+| New overdose-able product | `OverdoseSystem.cs` | explicit dose load, tolerance key |
 | New consumed product | item JSON + consumable C# | mod registration, lang, texture |
 | New crop | blocktype + seed item | shapes, textures, lang, drops |
 | Crop appearance | `shapes/plant/` | blocktype texture aliases |
 | Crop drops | crop blocktype | item definitions |
 | Addiction UI | `AddictionCharacterTabSystem.cs` | watched attribute sync |
 | Coca countdown | `CocaVitaeEffectHudSystem.cs` | Coca expiry writes |
-| Overdose threshold/severity | `AddictionSystem.cs` (`MetabolizeAndCheckOverdose`, overdose consts) | per-product load attrs, tolerance plateau |
-| Overdose dose accumulation | `DrugConsumableItem.Consume()` + heroin watcher | product IDs must match `OverdoseProducts` |
+| Overdose threshold/severity | `OverdoseSystem.cs` (`Refresh`) | per-product load attrs, tolerance plateau |
+| Overdose dose accumulation | `RecordDrugDose`, `HeroinVesselDoseSystem` | consumed volume, product IDs in `OverdoseSystem` |
 | Processing | `assets/vs-dope/recipes/` | input/output item JSON |
 | Localization | `assets/vs-dope/lang/en.json` | exact asset codes |
 
