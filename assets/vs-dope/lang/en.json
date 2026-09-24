@@ -46,6 +46,7 @@
   "addict-leaving": "The addict pockets their fix, mumbles something that might be thanks, and shuffles off.",
   "addict-busy-leaving": "The addict waves you off. They've got what they came for.",
   "overdose-warning": "High drug load\nFurther doses risk an overdose.",
+  "overdose-warning": "High drug load\nNext dose: {0}% overdose risk.",
   "overdose-active": "Overdose — movement impaired\nStop dosing to recover.",
   "overdose-severe": "Severe overdose — taking damage\nStop dosing to recover."
 }

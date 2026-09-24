@@ -1,117 +1,217 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Vintagestory.API.Common;
+using Vintagestory.API.Datastructures;
 
 namespace VsDope.Systems;
 
-/// <summary>Server-owned drug load. These are game balance units, independent of visual intoxication.</summary>
+/// <summary>
+/// Server-owned overdose state. Every dose rolls a random overdose chance: a per-drug base
+/// chance plus a per-drug increase for each other dose (any drug) taken inside a rolling
+/// game-hour window, reduced by the product's tolerance. A successful roll starts (or worsens)
+/// an overdose whose severity recovers over game time. While overdosing the player is slowed,
+/// drug healing is blocked, and above a severity gate the player takes poison damage.
+/// </summary>
 public sealed class OverdoseSystem
 {
     public const string WatchActive = "vs-dope-overdose";
+    /// <summary>Chance (0..1) that the next dose of the last-used product overdoses. Drives the HUD warning.</summary>
     public const string WatchRisk = "vs-dope-overdose-risk";
     public const string WatchSeverity = "vs-dope-overdose-severity";
-    private const string ClockKey = "vs-dope-load-gamehour";
+    public const string WatchRecentDoses = "vs-dope-recent-doses";
+
+    /// <summary>Persistent (server-only) calendar hours of recent doses, oldest first.</summary>
+    public const string AttrRecentDoseHours = "vs-dope-recent-dose-hours";
+    private const string AttrLastProduct = "vs-dope-last-dose-product";
+    private const string ClockKey = "vs-dope-overdose-gamehour";
     private const string EffectKey = "vs-dope-overdose";
-    private static readonly string[] Products = { "opium", "morphine", "heroin", "coca-vitae" };
-    private const float MetabolismPerGameHour = 5f;
-    private const float DamagePerSecond = 0.2f;
 
-    public static string LoadKey(string product) => $"vs-dope-load-{product}";
+    // Keys written by the previous load/threshold model. Removed on join/clear.
+    private const string LegacyClockKey = "vs-dope-load-gamehour";
+    private static string LegacyLoadKey(string product) => $"vs-dope-load-{product}";
 
-    public void RecordDose(IPlayer player, string product, double gameHour, float doses = 1f)
+    // ---- Balance -------------------------------------------------------------------------
+    /// <summary>Doses (of any drug) inside this many in-game hours stack overdose risk.
+    /// At default calendar speed one game hour is two real minutes.</summary>
+    public const double RecentDoseWindowGameHours = 2.0;
+    private const int MaxTrackedDoses = 32;
+    /// <summary>No single roll can be more likely than this.</summary>
+    public const float MaxChance = 0.9f;
+    /// <summary>Chance multiplier is 1 - tolerance * this. Tolerance caps at 0.75, so at most -30%.</summary>
+    public const float ToleranceRiskReduction = 0.4f;
+    /// <summary>Severity added per recent dose on top of the drug's base overdose severity.</summary>
+    public const float SeverityPerRecentDose = 0.05f;
+    public const float SeverityRecoveryPerGameHour = 0.5f;
+    public const float DamageSeverityGate = 0.35f;
+    public const float DamagePerSecondAtFullSeverity = 0.1f;
+    /// <summary>HUD shows a warning once the next dose's chance reaches this.</summary>
+    public const float WarningChance = 0.15f;
+    private const float MaxSpeedWhileOverdosing = 0.75f;
+    private const float SpeedLossAtFullSeverity = 0.6f;
+    private const float MinimumSpeed = 0.1f;
+
+    public readonly record struct DrugRisk(float BaseChance, float ChancePerRecentDose, float BaseSeverity);
+
+    /// <summary>Per-drug risk. Heroin is the most dangerous, opium the least.</summary>
+    public static readonly IReadOnlyDictionary<string, DrugRisk> Risks = new Dictionary<string, DrugRisk>
     {
-        float doseLoad = product switch
-        {
-            "opium" => 3f,
-            "morphine" => 6f,
-            "heroin" => 5f,
-            "coca-vitae" => 5f,
-            _ => 0f
-        };
-        if (doseLoad == 0 || !float.IsFinite(doses) || doses <= 0 || !player.Entity.Alive) return;
+        ["opium"] = new(0.005f, 0.015f, 0.30f),
+        ["coca-vitae"] = new(0.010f, 0.030f, 0.40f),
+        ["morphine"] = new(0.015f, 0.040f, 0.45f),
+        ["heroin"] = new(0.020f, 0.050f, 0.55f),
+    };
+
+    /// <summary>Uniform [0,1) source for the overdose roll. Replaceable by integration tests.</summary>
+    public Func<double> Roll { get; set; } = Random.Shared.NextDouble;
+
+    /// <summary>Pure chance formula, shared by the roll and the HUD risk.</summary>
+    public static float ChanceFor(string product, int recentDoses, float tolerance)
+    {
+        if (!Risks.TryGetValue(product, out var risk)) return 0f;
+        if (!float.IsFinite(tolerance)) tolerance = 0f;
+        float raw = risk.BaseChance + risk.ChancePerRecentDose * Math.Max(0, recentDoses);
+        float reduction = 1f - Math.Clamp(tolerance, 0f, 1f) * ToleranceRiskReduction;
+        return Math.Clamp(raw * reduction, 0f, MaxChance);
+    }
+
+    public static float SeverityFor(string product, int recentDoses)
+        => Risks.TryGetValue(product, out var risk)
+            ? Math.Clamp(risk.BaseSeverity + SeverityPerRecentDose * Math.Max(0, recentDoses), 0f, 1f)
+            : 0f;
+
+    /// <summary>Record one consumption event. <paramref name="doses"/> above 1 (a big vessel drink)
+    /// rolls once per whole dose. Returns true if this event started or worsened an overdose.</summary>
+    public bool RecordDose(IPlayer player, string product, double gameHour, float tolerance, float doses = 1f)
+    {
+        if (!Risks.ContainsKey(product) || !float.IsFinite(doses) || doses <= 0 || player.Entity?.Alive != true) return false;
 
         Advance(player, gameHour);
-        var watched = player.Entity.WatchedAttributes;
-        string key = LoadKey(product);
-        watched.SetFloat(key, Math.Min(1000f, ReadLoad(player, product) + doseLoad * doses));
-        Refresh(player, 0);
+        var hours = RecentDoseHours(player).ToList();
+        int rolls = Math.Max(1, (int)Math.Round(doses));
+        bool overdosed = false;
+        for (int i = 0; i < rolls; i++)
+        {
+            int recent = hours.Count;
+            if (Roll() < ChanceFor(product, recent, tolerance))
+            {
+                Worsen(player, SeverityFor(product, recent));
+                overdosed = true;
+            }
+            hours.Add(gameHour);
+        }
+
+        SaveRecentDoseHours(player, hours);
+        player.Entity.Attributes.SetString(AttrLastProduct, product);
+        Apply(player, 0);
+        return overdosed;
     }
 
     public void Tick(IPlayer player, double gameHour, float seconds)
     {
         if (!player.Entity.Alive) { Clear(player); return; }
         Advance(player, gameHour);
-        Refresh(player, Math.Clamp(seconds, 0f, 5f));
+        Apply(player, Math.Clamp(seconds, 0f, 5f));
     }
 
-    // Resume the saved load without granting offline metabolism or generating a dose.
+    // Resume saved state without granting offline recovery. Drops the old load-model keys.
     public void OnJoin(IPlayer player, double gameHour)
     {
+        RemoveLegacyKeys(player.Entity);
         player.Entity.Attributes.SetDouble(ClockKey, gameHour);
         if (!player.Entity.Alive) { Clear(player); return; }
-        Refresh(player, 0);
+        Apply(player, 0);
     }
 
-    private static float ReadLoad(IPlayer player, string product)
+    public static bool IsOverdosing(IPlayer player) => player.Entity?.WatchedAttributes.GetBool(WatchActive) ?? false;
+
+    public static IReadOnlyList<double> RecentDoseHours(IPlayer player)
+        => (player.Entity.Attributes[AttrRecentDoseHours] as DoubleArrayAttribute)?.value ?? Array.Empty<double>();
+
+    private static void SaveRecentDoseHours(IPlayer player, List<double> hours)
     {
-        float value = player.Entity.WatchedAttributes.GetFloat(LoadKey(product));
-        return float.IsFinite(value) ? Math.Clamp(value, 0f, 1000f) : 0f;
+        if (hours.Count > MaxTrackedDoses) hours.RemoveRange(0, hours.Count - MaxTrackedDoses);
+        if (hours.Count == 0) player.Entity.Attributes.RemoveAttribute(AttrRecentDoseHours);
+        else player.Entity.Attributes.SetAttribute(AttrRecentDoseHours, new DoubleArrayAttribute(hours.ToArray()));
     }
 
+    private static void Worsen(IPlayer player, float addedSeverity)
+    {
+        var watched = player.Entity.WatchedAttributes;
+        float current = watched.GetBool(WatchActive) ? watched.GetFloat(WatchSeverity) : 0f;
+        watched.SetFloat(WatchSeverity, Math.Clamp(current + addedSeverity, 0f, 1f));
+        watched.SetBool(WatchActive, true);
+    }
+
+    // Prune the dose window and recover severity by elapsed calendar time.
     private static void Advance(IPlayer player, double gameHour)
     {
         var attrs = player.Entity.Attributes;
         double previous = attrs.GetDouble(ClockKey, gameHour);
         double elapsed = Math.Max(0, gameHour - previous);
         attrs.SetDouble(ClockKey, gameHour);
-        foreach (string product in Products)
+
+        var hours = RecentDoseHours(player);
+        if (hours.Count > 0 && hours[0] <= gameHour - RecentDoseWindowGameHours)
+            SaveRecentDoseHours(player, hours.Where(h => h > gameHour - RecentDoseWindowGameHours).ToList());
+
+        var watched = player.Entity.WatchedAttributes;
+        if (!watched.GetBool(WatchActive)) return;
+        float severity = watched.GetFloat(WatchSeverity);
+        if (!float.IsFinite(severity)) severity = 0f;
+        severity -= (float)elapsed * SeverityRecoveryPerGameHour;
+        if (severity <= 0f)
         {
-            float load = Math.Max(0f, ReadLoad(player, product) - (float)elapsed * MetabolismPerGameHour);
-            if (load == 0) player.Entity.WatchedAttributes.RemoveAttribute(LoadKey(product));
-            else player.Entity.WatchedAttributes.SetFloat(LoadKey(product), load);
+            watched.SetBool(WatchActive, false);
+            watched.SetFloat(WatchSeverity, 0f);
         }
+        else watched.SetFloat(WatchSeverity, Math.Min(1f, severity));
     }
 
-    // Sum normalized exposure so changing products cannot bypass overdose.
-    // Tolerance raises each threshold from 15 to at most 25 load units.
-    private static void Refresh(IPlayer player, float seconds)
+    // Publish next-dose risk and apply the overdose slow/damage.
+    private static void Apply(IPlayer player, float seconds)
     {
         var entity = player.Entity;
-        float risk = 0f;
-        foreach (string product in Products)
-        {
-            float tolerance = entity.Attributes.GetFloat($"vs-dope-tolerance-{product}");
-            if (!float.IsFinite(tolerance)) tolerance = 0;
-            float threshold = 15f + Math.Clamp(tolerance, 0f, 0.5f) * 20f;
-            risk += ReadLoad(player, product) / threshold;
-        }
+        var watched = entity.WatchedAttributes;
+        int recent = RecentDoseHours(player).Count;
+        string product = entity.Attributes.GetString(AttrLastProduct) ?? "";
+        float risk = recent == 0 ? 0f : ChanceFor(product, recent, entity.Attributes.GetFloat(AddictionSystem.ToleranceKey(product)));
+        watched.SetFloat(WatchRisk, risk);
+        watched.SetInt(WatchRecentDoses, recent);
 
-        bool active = risk > 1f;
-        float severity = Math.Clamp(risk - 1f, 0f, 1f);
-        entity.WatchedAttributes.SetFloat(WatchRisk, risk);
-        entity.WatchedAttributes.SetFloat(WatchSeverity, severity);
-        entity.WatchedAttributes.SetBool(WatchActive, active);
+        bool active = watched.GetBool(WatchActive);
+        float severity = active ? Math.Clamp(watched.GetFloat(WatchSeverity), 0f, 1f) : 0f;
         entity.Stats.Remove("walkspeed", EffectKey);
         if (!active) return;
 
         // Apply once, after other modifiers. Stimulants cannot cancel the slow,
         // and combining opioid modifiers cannot produce negative/reversed movement.
         float speed = entity.Stats.GetBlended("walkspeed");
-        float target = Math.Max(0.1f, Math.Min(speed, 0.75f - 0.6f * severity));
+        float target = Math.Max(MinimumSpeed, Math.Min(speed, MaxSpeedWhileOverdosing - SpeedLossAtFullSeverity * severity));
         entity.Stats.Set("walkspeed", EffectKey, target - speed);
 
-        if (severity > 0.35f && seconds > 0)
+        if (severity > DamageSeverityGate && seconds > 0)
             entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Poison },
-                severity * DamagePerSecond * seconds);
+                severity * DamagePerSecondAtFullSeverity * seconds);
     }
 
     public void Clear(IPlayer player)
     {
         var entity = player.Entity;
-        foreach (string product in Products) entity.WatchedAttributes.RemoveAttribute(LoadKey(product));
+        RemoveLegacyKeys(entity);
         entity.Attributes.RemoveAttribute(ClockKey);
+        entity.Attributes.RemoveAttribute(AttrRecentDoseHours);
+        entity.Attributes.RemoveAttribute(AttrLastProduct);
         entity.WatchedAttributes.SetBool(WatchActive, false);
         entity.WatchedAttributes.SetFloat(WatchRisk, 0f);
         entity.WatchedAttributes.SetFloat(WatchSeverity, 0f);
+        entity.WatchedAttributes.SetInt(WatchRecentDoses, 0);
         entity.Stats.Remove("walkspeed", EffectKey);
+    }
+
+    private static void RemoveLegacyKeys(EntityPlayer entity)
+    {
+        foreach (string product in Risks.Keys) entity.WatchedAttributes.RemoveAttribute(LegacyLoadKey(product));
+        entity.Attributes.RemoveAttribute(LegacyClockKey);
     }
 }

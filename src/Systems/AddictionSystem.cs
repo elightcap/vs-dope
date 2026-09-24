@@ -23,9 +23,11 @@ public class AddictionSystem : IDisposable
     private const double HeroinSpeedDurationGameHours = 1.0;
     private const string HeroinSpeedEffectKey = "vs-dope-heroin-slow";
     private const string HeroinSpeedExpiryKey = "vs-dope-heroin-slow-expires-gamehour";
+    /// <summary>One syringe application; also the unit for vessel drinking.</summary>
+    public const float HeroinLitresPerDose = 0.1f;
+    private const float HeroinHealPerLitre = 24f;
 
     public const string WatchOverdose = OverdoseSystem.WatchActive;
-    public static string LoadKey(string product) => OverdoseSystem.LoadKey(product);
     public OverdoseSystem Overdose { get; } = new();
 
     // Tolerance is per finished product. The first two uses in an in-game day do not
@@ -51,7 +53,8 @@ public class AddictionSystem : IDisposable
         tickId = api.Event.RegisterGameTickListener(OnTick, 1000);
     }
 
-    private static string TolKey(string product) => $"vs-dope-tolerance-{product}";
+    public static string ToleranceKey(string product) => $"vs-dope-tolerance-{product}";
+    private static string TolKey(string product) => ToleranceKey(product);
     private static string TolDayKey(string product) => $"vs-dope-tolerance-day-{product}";
     private static string TolUsesKey(string product) => $"vs-dope-tolerance-uses-{product}";
 
@@ -133,7 +136,7 @@ public class AddictionSystem : IDisposable
         }
     }
 
-    public void ApplyHeroinSyringeDose(IPlayer player) => ApplyHeroinDose(player, 0.1f);
+    public void ApplyHeroinSyringeDose(IPlayer player) => ApplyHeroinDose(player, HeroinLitresPerDose);
 
     // Both injection and native vessel drinking report actual consumed volume here.
     // Never infer consumption from psychedelic levels: they decay, cap, and survive relogs.
@@ -142,23 +145,25 @@ public class AddictionSystem : IDisposable
         if (!float.IsFinite(litres) || litres <= 0 || !player.Entity.Alive) return;
         var entity = player.Entity;
         float multiplier = GetEffectMultiplier(player, "heroin");
+        float doses = litres / HeroinLitresPerDose;
         entity.Stats.Set("walkspeed", HeroinSpeedEffectKey, -HeroinSlowFactor * multiplier);
         entity.WatchedAttributes.SetDouble(HeroinSpeedExpiryKey, api.World.Calendar.TotalHours + HeroinSpeedDurationGameHours);
-        RecordDrugDose(player, "heroin", litres / 0.1f);
+        RecordDrugDose(player, "heroin", doses);
         if (!IsOverdosing(player))
-            entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, 24f * litres * multiplier);
-        entity.WatchedAttributes.SetFloat("intoxication", Math.Clamp(entity.WatchedAttributes.GetFloat("intoxication") + litres, 0f, 25f));
-        entity.WatchedAttributes.SetFloat("psychedelic", Math.Clamp(entity.WatchedAttributes.GetFloat("psychedelic") + 1.5f * litres * multiplier, 0f, 25f));
+            entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, HeroinHealPerLitre * litres * multiplier);
+        DrugVisualEffects.Apply(entity, "heroin", doses, multiplier);
     }
 
+    /// <summary>The single entry point for every consumption route (items, syringes, vessels).
+    /// Rolls the overdose chance against the tolerance the player had *before* this dose,
+    /// then records addiction and tolerance.</summary>
     public void RecordDrugDose(IPlayer player, string product, float doses = 1f)
     {
-        // Settle tolerance for this consumption event before evaluating its load.
-        // All routes update the same overdose state immediately.
         RecoverTolerance(player, product);
+        float tolerance = Math.Clamp(player.Entity.Attributes.GetFloat(TolKey(product)), 0f, MaxTolerance);
+        Overdose.RecordDose(player, product, api.World.Calendar.TotalHours, tolerance, doses);
         RecordUse(player);
         RecordToleranceUse(player, product);
-        Overdose.RecordDose(player, product, api.World.Calendar.TotalHours, doses);
     }
 
     private void OnPlayerNowPlaying(IServerPlayer player)
@@ -166,6 +171,13 @@ public class AddictionSystem : IDisposable
         if (player.Entity == null) return;
         ExpireHeroinEffect(player);
         Overdose.OnJoin(player, api.World.Calendar.TotalHours);
+        // Older builds stacked screen effects up to 25 (morphine added 6 per dose). Bring saved
+        // players back inside the vanilla range so the effect does not linger for many minutes.
+        var watched = player.Entity.WatchedAttributes;
+        if (watched.GetFloat("intoxication") > DrugVisualEffects.IntoxicationCap)
+            watched.SetFloat("intoxication", DrugVisualEffects.IntoxicationCap);
+        if (watched.GetFloat("psychedelic") > DrugVisualEffects.PsychedelicCap)
+            watched.SetFloat("psychedelic", DrugVisualEffects.PsychedelicCap);
     }
 
     private void OnPlayerDeath(IServerPlayer player, DamageSource damageSource) => ClearAcuteEffects(player);
@@ -192,7 +204,7 @@ public class AddictionSystem : IDisposable
         api.Event.PlayerDeath -= OnPlayerDeath;
     }
 
-    public static bool IsOverdosing(IPlayer player) => player.Entity?.WatchedAttributes.GetBool(WatchOverdose) ?? false;
+    public static bool IsOverdosing(IPlayer player) => OverdoseSystem.IsOverdosing(player);
 
     private void OnPlayerJoin(IServerPlayer player)
     {
