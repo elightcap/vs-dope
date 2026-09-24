@@ -39,6 +39,7 @@ vs-dope/
 │   ├── Items/SyringeItem.cs
 │   ├── Systems/AddictionSystem.cs
 │   ├── Systems/OverdoseSystem.cs
+│   ├── Systems/DrugVisualEffects.cs
 │   ├── Systems/HeroinVesselDoseSystem.cs
 │   ├── Systems/SyringeRecipeSystem.cs
 │   └── Client/

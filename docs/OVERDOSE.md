@@ -1,59 +1,59 @@
 # Overdose behavior (Vintage Story 1.22.7)
 
-The old implementation inferred vessel doses from increases in `psychedelic`, used visual intoxication as dose strength, removed load every five real seconds, and overwrote the movement penalty when several products were active. This missed capped/rapid vessel uses and made Coca Vitae's low load difficult to accumulate. Drug healing could also mask overdose damage.
+Every dose rolls a random overdose chance (issue #28). The earlier model added "load" per dose and only overdosed once load crossed a tolerance-scaled threshold. It was deterministic, the load metabolised between spaced-out doses, and a binge raised its own threshold through tolerance, so rapid injections often never tripped it.
 
-## Consumption and balance
+## The roll
 
-All supported routes record one consumption event immediately on the server. Liquid heroin exposure uses the actual litres removed, independent of vessel size and visual-effect caps. Syringes retain their 1 L capacity and ten 0.1 L applications.
+All consumption routes call `AddictionSystem.RecordDrugDose` once per event on the server: consumable items (opium, morphine, coca vitae), morphine and heroin syringes (0.1 L each) and heroin drunk from vessels (one roll per 0.1 L consumed). The roll uses the product's tolerance from *before* this dose, so a binge does not protect itself.
 
-| Product / route | Added load |
-| --- | ---: |
-| Opium item | 3 |
-| Morphine item or 0.1 L morphine injection | 6 |
-| Heroin injection or vessel consumption | 5 per 0.1 L consumed |
-| Coca Vitae item | 5 |
+```
+chance = min(0.9, (base + perRecentDose * recentDoses) * (1 - 0.4 * tolerance))
+```
 
-Each product retains its own tolerance and existing saved load key. Its threshold is `15 + min(tolerance, 0.5) * 20`, capped at 25. Overall risk is the **sum** of the product load/threshold ratios, so switching drugs cannot evade overdose.
+`recentDoses` is the number of doses of **any** drug in the last 2 in-game hours (4 real minutes at default calendar speed). Switching drugs does not reset the risk.
 
-- Risk at least 0.75: yellow high-load warning.
-- Risk above 1: red overdose warning and reduced movement.
-- Severity is `clamp(risk - 1, 0, 1)`. Above 0.35 severity, poison damage is `0.2 * severity` health per active second, evaluated on the game thread.
-- The movement correction caps total speed at `0.75 - 0.6 * severity`, with a 0.1 floor. It accounts for active drug/stat bonuses and never produces reverse movement.
-- These drug items no longer heal while the player is overdosing, including the dose which crosses the threshold.
-- Each product clears 5 load units per elapsed in-game hour while online. Recovery removes the overdose penalty without removing another active effect. Severe overdose can be fatal; survival depends on accumulated load and remaining health.
+| Product | Base chance | + per recent dose | Base severity | P(OD) 1 dose | 3 rapid | 5 rapid | 10 rapid |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Opium | 0.5% | 1.5% | 0.30 | 0.5% | 6% | 16% | 46% |
+| Coca Vitae | 1% | 3% | 0.40 | 1% | 12% | 30% | 73% |
+| Morphine (item or 0.1 L injection) | 1.5% | 4% | 0.45 | 1.5% | 16% | 39% | 83% |
+| Heroin (0.1 L) | 2% | 5% | 0.55 | 2% | 20% | 47% | 90% |
 
-As a quick check with a fresh player and negligible elapsed game time, four heroin injections or four Coca Vitae items trigger overdose even after their new tolerance is included. Eight heroin injections cross the damage gate. Timing and prior tolerance alter the exact count.
+Cumulative probabilities assume a fresh player with no prior tolerance; the tolerance built up by the binge itself is included. Tolerance can cut the chance by at most 30% (tolerance caps at 0.75).
 
-Heroin's base -50% and Coca Vitae's base +100% movement effects still last one in-game hour, refreshed by another use, with tolerance scaling strength. Their normal effects remain separate from overdose penalties.
+## Outcome
+
+A successful roll adds `baseSeverity + 0.05 * recentDoses` (cap 1) to the current overdose severity. Severity recovers 0.5 per in-game hour.
+
+- Overdosing: red HUD, speed capped at `0.75 - 0.6 * severity` (floor 0.1). Stimulant bonuses cannot cancel it. Drug healing is blocked, including the dose that caused it.
+- Severity above 0.35: poison damage `0.1 * severity` per second. A full-severity overdose deals about 10 HP before it drops below the damage gate. That is survivable from full health but lethal if you keep dosing.
+- Creative and spectator players take no damage (vanilla `EntityPlayer.ShouldReceiveDamage`). Test overdose damage in survival.
+- The yellow HUD warning appears when the next dose of the last-used drug has at least a 15% chance, and shows the percentage.
 
 ## Persistence and lifecycle
 
-- Existing watched `vs-dope-load-{opium,morphine,heroin,coca-vitae}` values remain compatible.
-- Watched `vs-dope-overdose` remains the active flag. New watched `vs-dope-overdose-risk` and `vs-dope-overdose-severity` drive the HUD.
-- Persistent entity attribute `vs-dope-load-gamehour` is the last metabolism timestamp.
-- Joining resumes saved load, resets that timestamp and creates no artificial dose. Offline time grants no recovery.
-- Death and respawn clear acute load and this mod's drug movement effects. Addiction and tolerance history remain.
-- Paused game time does not clear load. Metabolism depends on elapsed calendar time, not callback count. Damage uses active callback time with a five-second catch-up cap.
+- Entity `Attributes` (server, saved): `vs-dope-recent-dose-hours` (double array of calendar hours, max 32), `vs-dope-last-dose-product`, `vs-dope-overdose-gamehour` (recovery clock).
+- `WatchedAttributes` (synced): `vs-dope-overdose`, `vs-dope-overdose-severity`, `vs-dope-overdose-risk`, `vs-dope-recent-doses`.
+- Joining resets only the recovery clock (no offline recovery) and removes the old `vs-dope-load-*` keys.
+- Death and respawn clear the overdose, the recent-dose window and this mod's movement effects. Tolerance and addiction stay.
+
+## Screen effects (issue #29)
+
+See `src/Systems/DrugVisualEffects.cs`. Per dose, scaled by the tolerance effect multiplier and capped at the vanilla limits of intoxication 1.1 and psychedelic 2.0. Vanilla detox fades them.
+
+| Product | Intoxication before | Psychedelic before | Intoxication now | Psychedelic now |
+| --- | ---: | ---: | ---: | ---: |
+| Coca Vitae | 1.0 | 0 | 0.05 | 0.15 |
+| Opium | 3.0 | 0 | 0.15 | 0.10 |
+| Morphine (item or injection) | 6.0 | 0 | 0.25 | 0.20 |
+| Heroin (0.1 L) | 0.1 | 0.15 | 0.35 | 0.40 |
+
+Before, values were clamped at 25 instead of the vanilla 1.1 and 2.0. Item effects were removed again after 2.5 to 5 seconds, so morphine gave a short, violent sway of about five times vanilla's maximum drunkenness.
 
 ## Native liquid hook
 
-`HeroinVesselDoseSystem` patches `BlockLiquidContainerBase.tryEatStop` server-side with the game's bundled `Lib/0Harmony.dll`. It replaces only heroin drinking, uses native `SplitStackAndPerformAction`/`TryTakeLiquid` for vessel handling, and reports the exact removed portions. Cancelled uses do nothing. Other liquids execute the original method. Morphine solution remains a syringe source, not a newly added drink.
-
-The patch is removed on mod disposal. Verify this hook when upgrading Vintage Story or using another mod that replaces native liquid drinking.
+`HeroinVesselDoseSystem` patches `BlockLiquidContainerBase.tryEatStop` server-side with the game's bundled `Lib/0Harmony.dll`. It replaces only heroin drinking, uses native `SplitStackAndPerformAction`/`TryTakeLiquid`, and reports the exact removed portions. Cancelled uses do nothing.
 
 ## Verification
 
-Verified on Vintage Story 1.22.7: mod builds with zero errors; the headless server probe passes 54 assertions. Four existing nullable warnings remain in the older Coca Vitae HUD and Addiction tab.
-
-Build the mod and separate probe with a 1.22.7 installation:
-
-```bash
-VINTAGE_STORY=/path/to/vintagestory dotnet build
-VINTAGE_STORY=/path/to/vintagestory dotnet build tests/OverdoseProbe
-```
-
-Install the mod normally on a disposable server. Add a separate test-mod folder containing `tests/OverdoseProbe/modinfo.json` and `tests/OverdoseProbe/bin/Debug/net10.0/OverdoseProbe.dll`. The probe runs at GameReady and logs `OVERDOSE TEST PASS`, `OVERDOSE TEST FAILED`, and a summary. Do not ship the probe on a production server.
-
-The probe uses actual loaded items, native container operations, the installed Harmony hook, server dose methods, and syringe interaction handlers. Player/network endpoints are stand-ins; damage is captured at `ReceiveDamage`. It checks repeated doses for every product, mixed exposure, stimulant interaction, movement bounds, suppressed healing, game-clock recovery, callback-frequency independence, relog state, death/respawn cleanup, capped psychedelic values, exact and partial vessel consumption, stacked vessels, and ten syringe applications.
-
-Client acceptance still requires an actual game session: confirm the three HUD stages render without capturing input; check health decreases and movement slows in survival mode; confirm warnings clear on recovery/death and verify relog/restart persistence with a saved player. Repeat with a connected multiplayer client.
+`tests/OverdoseProbe` is a test-only server mod (75 checks). Build it with `VINTAGE_STORY=/opt/vintagestory dotnet build tests/OverdoseProbe/OverdoseProbe.csproj`. Run it on a disposable server with its own data path, for example `VintagestoryServer --dataPath /tmp/srv --ip 127.0.0.1 --port 42491`, with `Mods/vs-dope/` (modinfo.json, vs-dope.dll, assets/vs-dope) and `Mods/overdoseprobe/` (modinfo.json, OverdoseProbe.dll). Look for `OVERDOSE TEST SUMMARY` or `OVERDOSE TEST FAILED` in `Logs/server-main.log`. It replaces the roll with fixed values, then checks the chance math, every consumption route, the window, recovery, heal blocking, damage, movement bounds, join/respawn and the screen-effect caps. Never ship the probe.

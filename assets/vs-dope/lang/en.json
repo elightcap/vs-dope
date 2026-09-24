@@ -43,7 +43,7 @@
   "vs-dope:addict-overdose": "The addict's eyes roll back. They crumple to the ground, still clutching their fix.",
   "vs-dope:addict-robbed": "The addict snatches what they can from your grip and swings at you before running off!",
   "vs-dope:addict-mugged": "\"Should've had something for me!\" The addict swings wildly and takes off.",
-  "overdose-warning": "High drug load\nFurther doses risk an overdose.",
+  "overdose-warning": "High drug load\nNext dose: {0}% overdose risk.",
   "overdose-active": "Overdose — movement impaired\nStop dosing to recover.",
   "overdose-severe": "Severe overdose — taking damage\nStop dosing to recover."
 }

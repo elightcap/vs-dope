@@ -24,12 +24,15 @@ public sealed class OverdoseHudSystem : ModSystem
     private void OnTick(float dt)
     {
         var entity = capi.World.Player?.Entity;
-        float risk = entity?.WatchedAttributes.GetFloat(OverdoseSystem.WatchRisk) ?? 0;
-        if (entity?.Alive != true || risk < 0.75f) { Close(); return; }
+        if (entity?.Alive != true) { Close(); return; }
+        float risk = entity.WatchedAttributes.GetFloat(OverdoseSystem.WatchRisk);
         bool active = entity.WatchedAttributes.GetBool(OverdoseSystem.WatchActive);
+        if (!active && risk < OverdoseSystem.WarningChance) { Close(); return; }
         float severity = entity.WatchedAttributes.GetFloat(OverdoseSystem.WatchSeverity);
-        string key = !active ? "overdose-warning" : severity > 0.35f ? "overdose-severe" : "overdose-active";
-        dialog!.Update(Lang.Get("vs-dope:" + key), active);
+        string text = !active
+            ? Lang.Get("vs-dope:overdose-warning", (int)Math.Round(risk * 100))
+            : Lang.Get("vs-dope:" + (severity > OverdoseSystem.DamageSeverityGate ? "overdose-severe" : "overdose-active"));
+        dialog!.Update(text, active);
         if (!dialog.IsOpened()) dialog.TryOpen();
     }
 
