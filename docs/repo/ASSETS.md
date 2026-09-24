@@ -37,10 +37,16 @@ Keep leaves distributed along branches and secondary twigs, with varied orientat
 | `seedpod.json` | poppy harvest/input | processing properties |
 | `opium.json` | poppy product | `OpiumItem` |
 | `morphine.json` | poppy product | `MorphineItem` |
-| `morphine-solution.json` | intermediate liquid | liquid behavior |
-| `heroin.json` | poppy final product | explicit vessel/syringe dose path |
+| `morphine-solution.json` | intermediate liquid | `ItemLiquidPortion`; distils to heroin; creative bucket/barrel stacks |
+| `heroin.json` | poppy final product | `ItemLiquidPortion`; explicit vessel/syringe dose path; creative bucket/barrel stacks |
 
 For custom items, inspect both JSON and C# class registration.
+
+### Liquids in the creative inventory
+
+The two liquids follow the vanilla liquid pattern (`$VINTAGE_STORY/assets/survival/itemtypes/liquid/*.json`): the liquid itemtype itself declares `creativeinventoryStacks` holding a filled container. Vanilla containers do not list their own filled variants. Each liquid lists `game:woodbucket` and `game:barrel` with `attributes.ucontents: [{ type: "item", code: "vs-dope:<liquid>", makefull: true }]` in the `general` and `liquids` tabs. `BlockContainer.ResolveUcontents` resolves `ucontents` with the **container's** domain (`game`), so the liquid code must keep the `vs-dope:` prefix. `makefull` fills to the container's `CapacityLitres` (bucket 10 L, barrel 50 L, so 5000 portions at 100/L, which equals `maxStackSize`). A barrel places the single content stack into its solid slot, and `BlockEntityBarrel.OnBlockPlaced` then moves it to the liquid slot. The raw portion items remain listed through `creativeinventory`.
+
+The liquid shape must be `game:item/liquid`. A bare `item/liquid` resolves to `vs-dope:shapes/item/liquid.json`, which does not exist.
 
 ## Other assets
 

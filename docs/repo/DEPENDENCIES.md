@@ -58,6 +58,7 @@ seed item -> plantBlockCode -> crop blocktype
 | Overdose threshold/balance | `OverdoseSystem.cs` | `RecordDrugDose`, HUD stages |
 | New overdose-able product | `OverdoseSystem.cs` | explicit dose load, tolerance key |
 | New consumed product | item JSON + consumable C# | mod registration, lang, texture |
+| New liquid / creative filled vessel | liquid itemtype `creativeinventoryStacks` (`game:woodbucket`, `game:barrel`, `ucontents` with `vs-dope:` code) | `waterTightContainerProps`, shape `game:item/liquid`, lang |
 | New crop | blocktype + seed item | shapes, textures, lang, drops |
 | Crop appearance | `shapes/plant/` | blocktype texture aliases |
 | Crop drops | crop blocktype | item definitions |

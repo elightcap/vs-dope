@@ -16,6 +16,10 @@ Poppy crop
 
 Seedpods use Vintage Story grinding properties, so the conversion appears as a quern recipe.
 
+Recipe locations: opium -> morphine is `recipes/barrel/opium-to-morphine.json` (1 opium + 1 L limewater, 24 h). Morphine -> morphine solution is `recipes/barrel/morphine-to-solution.json` (1 morphine + 1 L alcohol, 12 h). Morphine solution -> heroin is **not** a barrel recipe. It is `distillationProps` on `itemtypes/morphine-solution.json` (still, ratio 0.1, like vanilla cider -> spirit). A "morphine solution + alcohol" barrel recipe cannot work, because a barrel has one solid slot (`ItemSlotBarrelInput`) and one liquid slot (`ItemSlotLiquidOnly`), so it cannot hold two different liquids.
+
+Filled buckets and barrels of heroin and morphine solution appear in creative (see `ASSETS.md`, "Liquids in the creative inventory").
+
 ## Coca chain
 
 ```text
