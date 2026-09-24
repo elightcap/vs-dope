@@ -48,6 +48,7 @@ vs-dope/
 │       └── OverdoseHudSystem.cs
 └── assets/vs-dope/
     ├── blocktypes/
+    ├── entities/          drugaddict.json (vanilla seraph shape + our skin)
     ├── itemtypes/
     ├── lang/
     ├── recipes/barrel/

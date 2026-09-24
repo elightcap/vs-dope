@@ -1,15 +1,17 @@
 {
   "code": "drugaddict",
   "class": "vs-dope.drugaddict",
-  "collisionBoxSize": { "x": 0.6, "y": 1.8 },
-  "selectionBoxSize": { "x": 0.6, "y": 1.8 },
+  "collisionBoxSize": { "x": 0.6, "y": 1.85 },
+  "selectionBoxSize": { "x": 0.6, "y": 1.85 },
   "deadHitboxSize": { "x": 0.75, "y": 0.5 },
-  "eyeHeight": 1.5,
+  "eyeHeight": 1.7,
   "client": {
     "renderer": "Shape",
-    "shape": { "base": "entity/drugaddict" },
+    "pitchStep": false,
+    "shape": { "base": "game:entity/humanoid/seraph" },
     "textures": {
-      "skin": { "base": "entity/drugaddict" }
+      "seraph": { "base": "entity/drugaddict" },
+      "hair": { "base": "game:entity/humanoid/seraphskinparts/hair/rust3" }
     },
     "behaviors": [
       { "code": "repulseagents" },
@@ -18,19 +20,56 @@
     ],
     "animations": [
       {
+        "code": "walk",
+        "animation": "walk",
+        "blendMode": "Average",
+        "mulWithWalkSpeed": true,
+        "animationSpeed": 1.1,
+        "triggeredBy": { "onControls": ["Move"], "matchExact": true }
+      },
+      {
+        "code": "sprint",
+        "animation": "sprint",
+        "blendMode": "Average",
+        "mulWithWalkSpeed": true,
+        "animationSpeed": 0.6,
+        "triggeredBy": { "onControls": ["Move", "SprintMode"], "matchExact": true }
+      },
+      {
+        "code": "idle",
+        "animation": "coldidle",
+        "blendMode": "Average",
+        "triggeredBy": { "onControls": ["Idle"], "matchExact": true, "defaultAnim": true }
+      },
+      {
+        "code": "jump",
+        "animation": "newjump",
+        "blendMode": "Average",
+        "triggeredBy": { "onControls": ["Idle", "Jump"], "matchExact": true }
+      },
+      {
+        "code": "swim",
+        "animation": "swim",
+        "blendMode": "Average",
+        "triggeredBy": { "onControls": ["Move", "Swim"], "matchExact": true }
+      },
+      {
+        "code": "swimidle",
+        "animation": "swimidle",
+        "blendMode": "Average",
+        "triggeredBy": { "onControls": ["Idle", "Swim"], "matchExact": true }
+      },
+      {
         "code": "hurt",
         "animation": "hurt",
-        "animationSpeed": 2,
-        "weight": 10,
-        "blendMode": "AddAverage"
+        "blendMode": "Average"
       },
       {
         "code": "die",
         "animation": "die",
-        "animationSpeed": 1.25,
-        "weight": 10,
+        "animationSpeed": 1.5,
         "blendMode": "Average",
-        "triggeredBy": { "onControls": ["dead"] }
+        "triggeredBy": { "onControls": ["Dead"] }
       }
     ]
   },
