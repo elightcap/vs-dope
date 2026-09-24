@@ -8,7 +8,13 @@
   "client": {
     "renderer": "Shape",
     "pitchStep": false,
-    "shape": { "base": "game:entity/humanoid/seraph" },
+    "shape": {
+      "base": "game:entity/humanoid/seraph-faceless",
+      "overlays": [
+        { "base": "game:entity/humanoid/seraphskinparts/face/tired" },
+        { "base": "game:entity/humanoid/seraphskinparts/hair-base/messy2" }
+      ]
+    },
     "textures": {
       "seraph": { "base": "entity/drugaddict" },
       "hair": { "base": "game:entity/humanoid/seraphskinparts/hair/rust3" }
