@@ -98,9 +98,7 @@ public sealed class MarijuanaProbe : ModSystem
             StonedSystem.Apply(e,300); e.Alive=false; StonedSystem.Tick(e,300.5);
             Check(Near(e.Healing,0) && !e.WatchedAttributes.HasAttribute(StonedSystem.ExpiryKey), "death stops healing and clears effect");
 
-            var shapeAsset=api.Assets.Get(new AssetLocation("game:shapes/entity/humanoid/seraph-faceless.json"));
-            var shape=shapeAsset.ToObject<Shape>();
-            Check(shape.Animations.Any(a=>a.Code==JointItem.AnimationCode) && shape.Animations.Any(a=>a.Code==JointItem.AnimationCode+"-fp"), "actual patched player shape contains first- and third-person smoking animations");
+            VsDope.Tests.SmokingAnimationChecks.Verify(api, Check);
             Check(api.Assets.TryGet(new AssetLocation("vs-dope:sounds/player/joint-drag.ogg"))!=null, "drag sound packaged");
             api.Logger.Notification("MARIJUANA TEST SUMMARY: " + checks + " checks passed");
         }

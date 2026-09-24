@@ -130,6 +130,7 @@ Each of these was checked by decompiling or by a failed build/playtest in this r
 - Barrel recipes: `"ingredients"` array, `"sealHours"`, liquids specified with `"litres"`. Vanilla liquids have bare codes: `waterportion`, `limewaterportion`, `alcoholportion` (there is no `aqua-vitae`).
 - Our codes are always prefixed `vs-dope:`. Vanilla codes can be bare or `game:`.
 - Modify vanilla files (e.g. trader lists) with JSON patches in `assets/vs-dope/patches/`, never by copying the vanilla file.
+- Animation keyframe offsets, rotations and stretches must specify all three XYZ axes whenever any axis in that group is present. In 1.22.7, `Animation.lerpKeyFrameElement` dereferences all three nullable values; a partial vector crashes on first playback. Validate custom animations with `Shape.InitForAnimations` followed by `Animation.GenerateAllFrames`, not just JSON parsing (see `tests/MarijuanaProbe/SmokingAnimationChecks.cs`).
 - Currency is `game:gear-rusty`.
 
 **C# API**

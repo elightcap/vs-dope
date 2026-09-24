@@ -85,6 +85,7 @@ seed item -> plantBlockCode -> crop blocktype
 - Stage/count/growth/drop changes: `blocktypes/marijuana-plant.json`, `itemtypes/marijuana-seeds.json`, `tools/build_marijuana_models.py`, language, previews.
 - Bud/joint meshes: `shapes/item/{marijuana-buds,joint}.json`, matching itemtypes and shared marijuana atlas.
 - Smoking hold time: `JointItem.SmokeSeconds`, player animation patch frame duration, synthesized audio duration/trigger, `tests/MarijuanaProbe`, `docs/MARIJUANA.md`. Current user requirement: **5 seconds**.
+- Smoking pose/keyframes: `patches/marijuana-player.json` (both Seraph shapes, both camera variants) and `tests/MarijuanaProbe/SmokingAnimationChecks.cs`. Supply complete XYZ transform groups and run native frame generation to catch first-playback failures.
 - Stoned keys/timing: `Systems/StonedSystem.cs`, `Client/StonedHudSystem.cs`, `Client/StonedEyesBehavior.cs`, localization.
 - Seed access: separate `patches/marijuana-seed-traders.json`, using the same vanilla lists as coca seeds.
 - Eye cosmetics: register behavior in `VsDopeModSystem`, append after skin/inventory in player patch; retain VSEssentials reference and exact sclera mask.
