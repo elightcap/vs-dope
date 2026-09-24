@@ -26,7 +26,7 @@ Cumulative probabilities assume a fresh player with no prior tolerance; the tole
 A successful roll adds `baseSeverity + 0.05 * recentDoses` (cap 1) to the current overdose severity. Severity recovers 0.5 per in-game hour.
 
 - Overdosing: red HUD, speed capped at `0.75 - 0.6 * severity` (floor 0.1). Stimulant bonuses cannot cancel it. Drug healing is blocked, including the dose that caused it.
-- Severity above 0.35: poison damage `0.1 * severity` per second. A full-severity overdose deals about 10 HP before it drops below the damage gate. That is survivable from full health but lethal if you keep dosing.
+- Severity above 0.25: poison damage `0.5 * severity` per second, applied every second. Totals before severity recovers below the gate (default calendar speed): opium ~1.7 HP, coca vitae ~6 HP, morphine ~8 HP, a single heroin overdose ~14 HP, full severity ~56 HP. A heroin overdose from full health is barely survivable; anything stacked on top is lethal.
 - Creative and spectator players take no damage (vanilla `EntityPlayer.ShouldReceiveDamage`). Test overdose damage in survival.
 - The yellow HUD warning appears when the next dose of the last-used drug has at least a 15% chance, and shows the percentage.
 
