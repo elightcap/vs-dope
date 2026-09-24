@@ -1,5 +1,6 @@
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
+using VsDope.Entities;
 using VsDope.Items;
 using VsDope.Systems;
 
@@ -18,6 +19,7 @@ public class VsDopeModSystem : ModSystem
         api.RegisterItemClass("vs-dope.morphineitem", typeof(MorphineItem));
         api.RegisterItemClass("vs-dope.cocavitaeitem", typeof(CocaVitaeItem));
         api.RegisterItemClass("vs-dope.syringe", typeof(SyringeItem));
+        api.RegisterEntity("vs-dope.drugaddict", typeof(EntityDrugAddict));
     }
 
     public override void StartServerSide(ICoreServerAPI api)
@@ -26,5 +28,11 @@ public class VsDopeModSystem : ModSystem
         sapi = api;
         AddictionSystem = new AddictionSystem();
         AddictionSystem.Initialize(api);
+
+        var spawnSystem = new DrugAddictSpawnSystem();
+        spawnSystem.Initialize(api);
+
+        var tradeSystem = new AddictTradeSystem();
+        tradeSystem.Initialize(api);
     }
 }

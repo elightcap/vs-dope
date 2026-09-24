@@ -16,6 +16,13 @@ public class DrugConsumableItem : Item
 
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
     {
+        // A right-click aimed at an interactable entity belongs to that entity, not to what
+        // we are holding. The client drops the entity interaction entirely once the held item
+        // claims the click (SystemMouseInWorldInteractions.HandleMouseInteractionsNoBlockSelected),
+        // so leaving `handling` alone here is what lets the addict's trade window open while
+        // the player is holding the very drugs they came to sell.
+        if (entitySel?.Entity?.IsInteractable == true) return;
+
         if (byEntity.World.Side == EnumAppSide.Client) byEntity.AnimManager.StartAnimation("eat");
         handling = EnumHandHandling.PreventDefault;
     }

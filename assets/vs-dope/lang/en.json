@@ -33,5 +33,14 @@
   "item-syringe-morphine": "Morphine Syringe",
   "syringe-volume": "{0:0.00} / 1.00 L \u2014 {1} doses remaining",
   "syringe-help": "Hold right-click to apply 0.1 L. Right-click an open vessel to refill, or sneak-right-click with a vessel in your off hand. Refill with the same liquid until empty.",
-  "item-syringe-empty-desc": "Reusable quartz and metal syringe. Holds 1 litre of heroin or morphine solution (10 doses)."
-}
+  "item-syringe-empty-desc": "Reusable quartz and metal syringe. Holds 1 litre of heroin or morphine solution (10 doses).",
+
+  "entity-type-drugaddict": "Drug Addict",
+  "drugaddict-name": "Drug Addict",
+  "vs-dope:addict-greet": "A gaunt figure sidles up, eyes darting. \"Psst... you got any drugs? I'll pay well.\"",
+  "vs-dope:addict-nodrugs": "The addict's face falls. \"No drugs? Then what're you wasting my time for.\" They shamble away.",
+  "vs-dope:addict-trade-thanks": "\"Ha! You're an angel... here, more than we agreed.\" The addict presses coins into your hands, already eyeing your pack for more.",
+  "vs-dope:addict-overdose": "The addict's eyes roll back. They crumple to the ground, still clutching their fix.",
+  "vs-dope:addict-robbed": "The addict snatches what they can from your grip and swings at you before running off!",
+  "vs-dope:addict-mugged": "\"Should've had something for me!\" The addict swings wildly and takes off."}
+

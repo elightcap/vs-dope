@@ -5,7 +5,7 @@
   "creativeinventory": { "general": ["*"] },
   "maxStackSize": 5000,
   "materialDensity": 200,
-  "shape": { "base": "item/liquid" },
+  "shape": { "base": "game:item/liquid" },
   "texture": { "base": "item/heroin", "alpha": 180 },
   "attributes": {
     "waterTightContainerProps": {
