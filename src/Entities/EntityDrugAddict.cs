@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
@@ -16,13 +17,22 @@ public class EntityDrugAddict : EntityAgent
     private enum AddictState { Approach, WaitInteract, Flee, Leave }
 
     // Tuning.
-    // WalkVector is a *unit direction* scaled by a move speed, the same convention vanilla
-    // AI tasks use (see Essentials' StraightLineTraverser). For scale, vanilla humanoids
-    // walk at 0.035, a trader strolls at 0.01 and a wolf chases at 0.052 — so these are
-    // roughly "jogging" and "sprinting" for a person.
-    private const float WalkSpeed = 0.04f;          // closing on the player
-    private const float FleeSpeed = 0.055f;         // running away
-    private const float LeaveSpeed = 0.03f;         // strolling off after a deal
+    // WalkVector is a *unit direction* scaled by a move speed w, the same convention vanilla AI
+    // tasks use (Essentials' WaypointsTraverser). Real ground speed, from the 1.22.7 physics
+    // (PModuleOnGround: per 1/60 s sub-step motion += w, motion *= 0.7; PModuleMotionDrag 0.983;
+    // server physics ticks at 1/30 s and moves motion * dt * 60):
+    //     server entity speed ~= 135 * w blocks/s
+    // A player's WalkVector is dt * BaseMoveSpeed(1.5) = 0.025 at the client's 1/60 s tick, so
+    //     player walk ~= 3.4 b/s (w-equivalent 0.025), sprint (x2) ~= 6.8 b/s (w-equivalent 0.05).
+    // The old 0.04 / 0.055 / 0.03 were 5.4 / 7.4 / 4.0 b/s: fleeing addicts outran a sprinting
+    // player (issue #38). Block walk-speed multipliers apply to both equally. See
+    // .planning/2026-09-24-addict-inventory/findings.md for the derivation.
+    private const float WalkSpeed = 0.025f;         // closing on the player: ~3.4 b/s, about player walk
+    private const float FleeSpeed = 0.034f;         // running away: ~4.6 b/s net, beats a walker, a sprinter catches it
+    // Fleeing sets Controls.Sprint so the shape plays its run animation. Sprint also multiplies
+    // ground speed by GlobalConstants.SprintSpeedMultiplier (2.0) in EntityAgent.GetWalkSpeedMultiplier
+    // for *any* EntityAgent, so Walk() divides it back out: the speeds above are always net speeds.
+    private const float LeaveSpeed = 0.018f;        // strolling off after a deal: ~2.4 b/s
     private const float EngageDistance = 2.4f;      // stop-and-talk range
     private const float GiveUpDistance = 38;       // target too far -> leave
     private const float FleeDistance = 30;         // put this much ground between us and player, then vanish
@@ -53,6 +63,8 @@ public class EntityDrugAddict : EntityAgent
     private const string AttrFriendly = "vs-dope-addict-friendly";
     private const string AttrLeaveHeading = "vs-dope-addict-leave-heading";
     private const string AttrLeaveStartHours = "vs-dope-addict-leave-hours";
+    // Server-only (Entity.Attributes, saved with the entity, never synced): the addict's pockets.
+    private const string AttrPockets = "vs-dope-addict-inv";
 
     private static readonly Random Rng = new();
 
@@ -71,6 +83,8 @@ public class EntityDrugAddict : EntityAgent
     private double stuckCheckTimer;
     private double stuckCheckX, stuckCheckZ;
 
+    private AddictPockets? pockets;       // server only; loaded lazily, see Pockets
+
     public bool Friendly { get; private set; }
     public string? TargetPlayerUid => targetUid;
 
@@ -78,6 +92,48 @@ public class EntityDrugAddict : EntityAgent
     public bool AcceptsTrade =>
         Alive && Friendly &&
         (state == AddictState.WaitInteract || (state == AddictState.Leave && !leaveWalking && ageSeconds < lingerUntil));
+
+    /// <summary>
+    /// The addict's inventory (server only, null on the client). Loaded on first access rather
+    /// than in Initialize so it always runs after FromBytes has restored Attributes. A fresh
+    /// addict has no saved pockets and rolls its starting stock here.
+    /// </summary>
+    public AddictPockets? Pockets
+    {
+        get
+        {
+            if (pockets != null || World == null || World.Side != EnumAppSide.Server) return pockets;
+            pockets = new AddictPockets();
+            if (Attributes.GetTreeAttribute(AttrPockets) is { } saved) pockets.Load(saved, World);
+            else
+            {
+                pockets.RollStartingStock(World, Rng);
+                SavePockets();
+            }
+            return pockets;
+        }
+    }
+
+    /// <summary>Write the pockets back into the persisted attributes. Call after every change.</summary>
+    public void SavePockets()
+    {
+        if (pockets != null) Attributes[AttrPockets] = pockets.ToTree();
+    }
+
+    // Entity.Die calls this only for EnumDespawnReason.Death (player kill or Overdose()), so a
+    // despawn never drops anything. The pockets are emptied so nothing can drop twice.
+    public override ItemStack[] GetDrops(IWorldAccessor world, BlockPos pos, IPlayer byPlayer)
+    {
+        var drops = new List<ItemStack>();
+        var baseDrops = base.GetDrops(world, pos, byPlayer);
+        if (baseDrops != null) drops.AddRange(baseDrops);
+        if (world.Side == EnumAppSide.Server && Pockets is { } p)
+        {
+            drops.AddRange(p.TakeAll());
+            SavePockets();
+        }
+        return drops.ToArray();
+    }
 
     public override void Initialize(EntityProperties properties, ICoreAPI api, long InChunkIndex3d)
     {
@@ -147,6 +203,7 @@ public class EntityDrugAddict : EntityAgent
         if (World.Side != EnumAppSide.Server || !Alive) return;
 
         ageSeconds += dt;
+        _ = Pockets; // roll/load the inventory early so it exists before anyone trades or kills us
 
         if (ageSeconds > MaxLifetimeSeconds) { DespawnSelf(); return; }
 
@@ -198,7 +255,7 @@ public class EntityDrugAddict : EntityAgent
 
             case AddictState.Flee:
                 if (distSq > FleeDistance * FleeDistance) { DespawnSelf(); return; }
-                MoveAway(target.Pos.X, target.Pos.Z, FleeSpeed);
+                MoveAway(target.Pos.X, target.Pos.Z, FleeSpeed, sprint: true);
                 break;
         }
 
@@ -408,8 +465,14 @@ public class EntityDrugAddict : EntityAgent
         if (hand?.Itemstack != null)
         {
             int qty = hand.Itemstack.StackSize;
-            hand.TakeOut(qty);
+            var stolen = hand.TakeOut(qty);
             hand.MarkDirty();
+            // The loot goes into the mugger's pockets, so catching and killing it gets it back.
+            if (stolen != null && Pockets is { } p)
+            {
+                p.Add(World, stolen);
+                SavePockets();
+            }
             robbedSomething = true;
         }
 
@@ -459,22 +522,26 @@ public class EntityDrugAddict : EntityAgent
         Face(tx, tz);
     }
 
-    private void MoveAway(double tx, double tz, float speed)
+    private void MoveAway(double tx, double tz, float speed, bool sprint = false)
     {
         double dx = Pos.X - tx;
         double dz = Pos.Z - tz;
         double len = Math.Sqrt(dx * dx + dz * dz);
         if (len < 1e-3) { StopMoving(); return; }
-        Walk(dx / len, dz / len, speed);
+        Walk(dx / len, dz / len, speed, sprint);
         Face(tx, tz); // keep eyes on the threat while backing off
     }
 
-    private void Walk(double dirX, double dirZ, float speed)
+    // `speed` is the net WalkVector magnitude (see the tuning notes at the top).
+    private void Walk(double dirX, double dirZ, float speed, bool sprint = false)
     {
-        float scaled = speed * GlobalConstants.OverallSpeedMultiplier;
+        double scaled = speed * GlobalConstants.OverallSpeedMultiplier;
+        if (sprint) scaled /= GlobalConstants.SprintSpeedMultiplier;
         ServerControls.WalkVector.Set(dirX * scaled, 0, dirZ * scaled);
         ServerControls.Forward = true;
         Controls.Forward = true;
+        ServerControls.Sprint = sprint;
+        Controls.Sprint = sprint;
     }
 
     private void StopMoving()
@@ -482,8 +549,10 @@ public class EntityDrugAddict : EntityAgent
         ServerControls.WalkVector.Set(0, 0, 0);
         ServerControls.Forward = false;
         ServerControls.Jump = false;
+        ServerControls.Sprint = false;
         Controls.Forward = false;
         Controls.Jump = false;
+        Controls.Sprint = false;
     }
 
     private void Face(double tx, double tz)
