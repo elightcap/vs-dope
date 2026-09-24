@@ -66,7 +66,7 @@ Watched keys: `vs-dope-overdose` (bool), `vs-dope-overdose-severity`, `vs-dope-o
 
 `src/Client/AddictionCharacterTabSystem.cs` adds the Addiction character tab and reads watched attributes synchronized by `AddictionSystem`.
 
-`src/Client/CocaVitaeEffectHudSystem.cs` displays the Coca Vitae countdown from the watched calendar-hour expiry written by `CocaVitaeItem`.
+`src/Client/CocaVitaeEffectHudSystem.cs` displays the Coca Vitae and crash countdowns from watched calendar-hour expiries. It inherits `HudElement`, cannot take focus, and receives no mouse events. Using `GuiDialog` here releases mouse-look through the engine's open-dialog count. It closes on death, missing player, world exit and disposal; composition only changes when the displayed text changes, disposing the old composer. `tests/HudInputProbe` checks the native input/lifecycle contract without a rendered client.
 
 If the Coca Vitae effect key or expiry attribute changes, update both server/item behavior and HUD.
 
