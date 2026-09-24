@@ -3,24 +3,43 @@
   "class": "vs-dope.drugaddict",
   "collisionBoxSize": { "x": 0.6, "y": 1.8 },
   "selectionBoxSize": { "x": 0.6, "y": 1.8 },
+  "deadHitboxSize": { "x": 0.75, "y": 0.5 },
   "eyeHeight": 1.5,
-  "attributes": {
-    "maxhealth": 20
-  },
   "client": {
     "renderer": "Shape",
     "shape": { "base": "entity/drugaddict" },
+    "textures": {
+      "skin": { "base": "entity/drugaddict" }
+    },
     "behaviors": [
       { "code": "repulseagents" },
       { "code": "controlledphysics", "stepHeight": 1.05 },
       { "code": "interpolateposition" }
+    ],
+    "animations": [
+      {
+        "code": "hurt",
+        "animation": "hurt",
+        "animationSpeed": 2,
+        "weight": 10,
+        "blendMode": "AddAverage"
+      },
+      {
+        "code": "die",
+        "animation": "die",
+        "animationSpeed": 1.25,
+        "weight": 10,
+        "blendMode": "Average",
+        "triggeredBy": { "onControls": ["dead"] }
+      }
     ]
   },
   "server": {
     "behaviors": [
       { "code": "repulseagents" },
       { "code": "controlledphysics", "stepHeight": 1.05 },
-      { "code": "health", "currenthealth": 20, "maxhealth": 20 }
+      { "code": "health", "currenthealth": 15, "maxhealth": 15 },
+      { "code": "deaddecay", "hoursToDecay": 3 }
     ]
   }
 }

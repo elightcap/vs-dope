@@ -20,7 +20,9 @@ public class AddictTradeUiSystem : ModSystem
         var channel = api.Network.RegisterChannel("vs-dope.addicttrade");
         channel.RegisterMessageType<SellToAddictPacket>();
         channel.RegisterMessageType<OpenAddictTradePacket>();
+        channel.RegisterMessageType<CloseAddictTradePacket>();
         channel.SetMessageHandler<OpenAddictTradePacket>((packet) => dialog.Open(packet));
+        channel.SetMessageHandler<CloseAddictTradePacket>((packet) => dialog.CloseFor(packet.AddictEntityId));
 
         dialog = new GuiDialogAddictTrade(api);
     }
@@ -52,6 +54,12 @@ public class GuiDialogAddictTrade : GuiDialog
 
         Compose();
         TryOpen();
+    }
+
+    // Server says this addict is done trading; close only if the window belongs to it.
+    public void CloseFor(long addictEntityId)
+    {
+        if (IsOpened() && data != null && data.AddictEntityId == addictEntityId) TryClose();
     }
 
     private void BuildDisplayInventories()

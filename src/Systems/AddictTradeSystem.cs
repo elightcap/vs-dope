@@ -44,7 +44,19 @@ public class AddictTradeSystem
         channel = api.Network.RegisterChannel("vs-dope.addicttrade");
         channel.RegisterMessageType<SellToAddictPacket>();
         channel.RegisterMessageType<OpenAddictTradePacket>();
+        channel.RegisterMessageType<CloseAddictTradePacket>();
         channel.SetMessageHandler<SellToAddictPacket>(OnSell);
+    }
+
+    // Tell the addict's current customer to close its trade window (the addict died,
+    // fled or is walking away). Safe to call when no window is open.
+    public void CloseTradeFor(EntityDrugAddict addict)
+    {
+        if (addict == null || string.IsNullOrEmpty(addict.TargetPlayerUid)) return;
+        if (api.World.PlayerByUid(addict.TargetPlayerUid) is not IServerPlayer player) return;
+        if (player.ConnectionState != EnumClientState.Playing) return;
+
+        channel.SendPacket(new CloseAddictTradePacket { AddictEntityId = addict.EntityId }, new[] { player });
     }
 
     public void OpenTradeFor(IServerPlayer player, EntityDrugAddict addict)
@@ -91,6 +103,12 @@ public class AddictTradeSystem
             Tell(player, "They're not dealing with you.");
             return;
         }
+        // After a sale the addict only lingers briefly before walking off.
+        if (!addict.AcceptsTrade)
+        {
+            player.SendLocalisedMessage(0, "vs-dope:addict-busy-leaving", Array.Empty<object>());
+            return;
+        }
 
         var code = new AssetLocation(packet.DrugCode);
         bool liquid = IsLiquid(packet.DrugCode);
@@ -128,10 +146,11 @@ public class AddictTradeSystem
 
         string unit = liquid ? (taken == 1 ? " litre" : " litres") : "";
         Tell(player, $"Sold {taken}{unit} for {gears} rusty gears.");
+        // Thanks the player and starts the leave timer: the addict lingers briefly (each sale
+        // resets it) so the player can keep selling, then walks off and despawns out of sight.
         addict.OnPurchaseCompleted();
 
-        // Chance the addict ODs on the high after a deal. Otherwise it stays put so the
-        // player can keep selling from the same window.
+        // Chance the addict ODs on the high after a deal; it then dies on the spot instead.
         if (rng.NextDouble() < OverdoseChancePerSale) addict.Overdose();
     }
 
