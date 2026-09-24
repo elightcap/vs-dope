@@ -1,4 +1,6 @@
+using System.Text;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using VsDope.Systems;
 
@@ -16,6 +18,24 @@ public class DrugConsumableItem : Item
 
     /// <summary>Walkspeed stat key (and watched-attribute expiry prefix) for an item's movement effect.</summary>
     public static string SpeedEffectKeyFor(string itemPath) => $"vs-dope-{itemPath}-speed";
+
+    public override void GetHeldItemInfo(ItemSlot slot, StringBuilder description, IWorldAccessor world, bool withDebugInfo)
+    {
+        base.GetHeldItemInfo(slot, description, world, withDebugInfo);
+        if (ToleranceProduct == "coca-vitae")
+            description.AppendLine(Lang.Get("vs-dope:drug-tools-coca", DrugToolEffects.CocaHours,
+                DrugToolEffects.CocaMining * 100, -DrugToolEffects.CocaHunger * 100,
+                DrugToolEffects.CrashHours, -DrugToolEffects.CrashSpeed * 100, DrugToolEffects.CrashSatiety));
+        else if (ToleranceProduct is "opium" or "morphine")
+        {
+            bool morphine = ToleranceProduct == "morphine";
+            description.AppendLine(Lang.Get("vs-dope:drug-tools-opiate", morphine ? DrugToolEffects.MorphineHours : DrugToolEffects.OpiumHours,
+                (morphine ? DrugToolEffects.MorphineHealing : DrugToolEffects.OpiumHealing) * 100,
+                (morphine ? DrugToolEffects.MorphineResistance : DrugToolEffects.OpiumResistance) * 100,
+                -(morphine ? DrugToolEffects.MorphineAccuracy : DrugToolEffects.OpiumAccuracy) * 100,
+                (morphine ? DrugToolEffects.MorphineDetection : DrugToolEffects.OpiumDetection) * 100));
+        }
+    }
 
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
     {
@@ -67,6 +87,10 @@ public class DrugConsumableItem : Item
         // Screen effects are per product (see DrugVisualEffects) and fade through vanilla detox,
         // so they are not removed again when the movement effect expires.
         DrugVisualEffects.Apply(byEntity, ToleranceProduct, 1f, effectMultiplier);
+
+        // Practical effects share the pre-dose tolerance strength. Settle any old
+        // coca effect before installing this dose's speed/timer below.
+        DrugToolEffects.Apply(byEntity, ToleranceProduct, effectMultiplier);
 
         // EntityStats movement values are additive: +1.0 doubles speed, -0.5 halves it.
         // Tolerance scales the item's modifier back toward neutral (0).

@@ -54,4 +54,4 @@ Tin and brass rods are added to the vanilla rod variants and rod smithing recipe
 
 Trader/creative marijuana seeds -> native nine-stage crop -> stage-9 Marijuana buds + seeds -> shapeless grid (one bud + one `game:paper-parchment`) -> one Joint. Both finished item models are 3D.
 
-Hold right-click for **five seconds** to smoke one Joint. Stoned: two calendar hours, -20% base movement, +0.5 HP per game minute. Reuse refreshes without stacking. There is no extra drying step, tolerance reduction or overdose roll in this new chain. See `docs/MARIJUANA.md`.
+Hold right-click for **five seconds** to smoke one Joint. Stoned: two calendar hours, -20% base movement, +0.5 HP per game minute, +25% hunger and -25% creature detection factor. Marijuana-specific tolerance scales these magnitudes; reuse refreshes without stacking. There is no extra drying step or overdose roll in this chain. See `docs/MARIJUANA.md` and `docs/DRUG_TOOLS.md`.

@@ -21,6 +21,14 @@ Coca Vitae writes its effect expiry to watched attributes for its client HUD. It
 
 Heroin writes `vs-dope-heroin-slow-expires-gamehour` on consumption. The addiction system removes its movement penalty after one in-game calendar hour rather than when the psychedelic attribute ends.
 
+## Practical drug effects
+
+`Systems/DrugToolEffects.cs` adds calendar-timed mining/hunger benefits and a coca crash, and opium/morphine bandage healing, accuracy, detection and physical-attack trade-offs. `DrugConsumableItem.ApplyDose` passes its pre-dose tolerance strength, including the morphine-syringe path. Named constants define balance. The server system restores saved strength/expiry on reconnect and clears only its own stat sources on death/expiry. Coca's one-time crash cost floors satiety at zero; its half-hour movement penalty cannot be erased by another dose.
+
+Persistent watched keys: `vs-dope-tool-{coca-vitae,opium,morphine}-expires-gamehour` and `-strength`; `vs-dope-coca-crash-expires-gamehour` and `-strength`. Stat sources are `vs-dope-tool-<product>` and `vs-dope-coca-crash`. The Coca HUD shows the crash countdown as well as the established active timer.
+
+The server-only health Harmony hook reduces physical Entity/Player attacks; strongest active opiate protection wins. It does not reduce overdose poison or environmental damage. It also increases the amount of internal scheduled healing (live 1.22.7 bandages/poultices) once, without multiplying delivered ticks again. `healingeffectivness` affects their application time and legacy poultice amount. Vanilla `animalSeekingRange` still respects AI configuration and outer search radii. Balance, lifecycle, exact native stat semantics, regression tests and client acceptance are documented in `docs/DRUG_TOOLS.md`.
+
 ## Addiction and tolerance
 
 `src/Systems/AddictionSystem.cs` owns addiction level, consecutive-use tracking, withdrawal, decay, product-specific tolerance, tolerance recovery, and heroin dose effects.
@@ -93,6 +101,6 @@ The project now references `Mods/VSSurvivalMod.dll` for the game's liquid-contai
 
 `BongItem` (`vs-dope.bong`) provides non-stackable `bong-empty`/`bong-loaded` variants. Loading is a grid recipe. Five-second use shares the tested smoking animations and `StonedSystem`, but broadcasts `bong-bubbles` and replaces the loaded item with an empty bong in the same slot. Only completed server-side use performs the replacement; full inventory, cancellation, death and duplicate callbacks are covered by `tests/MarijuanaProbe/BongChecks.cs`. See `docs/BONG.md`.
 
-`StonedSystem` is an auto-loaded ModSystem with a 250ms server tick for fully playing players. Watched `vs-dope-stoned-expires-gamehour` persists a two-hour calendar expiry; entity `Attributes` key `vs-dope-stoned-last-gamehour` tracks the last healing interval. It applies additive walkspeed -0.2 under `vs-dope-stoned`, heals 0.5 HP/game minute including fractional intervals and final expiry, refreshes without stacking, and clears on death/respawn. `PlayerNowPlaying` resets the healing cursor, preventing offline grants. This separate effect does not roll marijuana tolerance/overdose.
+`StonedSystem` is an auto-loaded ModSystem with a 250ms server tick for fully playing players. Watched `vs-dope-stoned-expires-gamehour` persists a two-hour calendar expiry; entity `Attributes` key `vs-dope-stoned-last-gamehour` tracks the last healing interval. Baseline effects under `vs-dope-stoned` are additive walkspeed -0.2, hunger +0.25, detection factor -0.25, and 0.5 HP/game minute including fractional intervals and final expiry. It refreshes without stacking and clears all its sources on death/respawn. Watched `vs-dope-stoned-strength` stores the marijuana-specific pre-dose tolerance multiplier (missing legacy values default to 1); speed, healing, hunger and detection magnitudes all scale. `RecordToleranceUse` records marijuana without opiate addiction/overdose. `PlayerNowPlaying` resets the healing cursor, preventing offline grants. The HUD displays actual movement/healing strength.
 
 `StonedHudSystem` reads expiry and displays a noninteractive localized HUD. `StonedEyesBehavior` is appended after the vanilla client inventory/skin behaviors; it hooks `EntityBehaviorTexturedClothing.OnReloadSkin`, overlays vanilla sclera and requests recomposition on expiry changes, without altering saved customization. `VSEssentials.dll` is required for that public behavior API. Custom player atlases are skipped. See `docs/MARIJUANA.md` and `tests/MarijuanaProbe`.

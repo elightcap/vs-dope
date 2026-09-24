@@ -211,6 +211,8 @@ public class OverdoseProbe : ModSystem
                 ((SyringeItem)syringeSlot.Itemstack!.Collectible).OnHeldInteractStop(1.5f, syringeSlot, p.Entity, null!, null!);
                 Check(!AddictionSystem.IsOverdosing(p) && Recent(p) == 10, liquid + " empty syringe cannot apply another dose");
             }
+            Never();
+            ToolEffectChecks.Run(api, Check, () => MakePlayer(api));
             api.Logger.Notification("OVERDOSE TEST SUMMARY: " + checks + " checks passed");
         }
         catch (Exception ex) { api.Logger.Error("OVERDOSE TEST FAILED: " + ex); }
@@ -220,6 +222,7 @@ public class OverdoseProbe : ModSystem
     private static IServerPlayer MakePlayer(ICoreServerAPI api)
     {
         var entity = new ProbePlayer { Api = api, Alive = true };
+        entity.SetProperties(api.World.GetEntityType(new AssetLocation("game:player"))!.Clone());
         entity.WatchedAttributes.SetString("playerUID", Guid.NewGuid().ToString());
         entity.Stats = new EntityStats(entity);
         entity.AnimManager = Proxy<IAnimationManager>.Create((m, args) => Default(m.ReturnType));
@@ -235,6 +238,7 @@ public class OverdoseProbe : ModSystem
         {
             "PlayerByUid" => player,
             "RegisterCallback" => 0L,
+            "RegisterGameTickListener" => 0L,
             _ => m.Invoke(api.World, args)
         });
         return player;
@@ -245,11 +249,14 @@ public class OverdoseProbe : ModSystem
 
 public class ProbePlayer : EntityPlayer
 {
+    public void SetProperties(Vintagestory.API.Common.Entities.EntityProperties properties) => Properties = properties;
     public override IAnimationManager AnimManager { get; set; } = null!;
     public float Healing;
     public float PoisonDamage;
+    public EntityBehaviorHealth? NativeHealth;
     public override bool ReceiveDamage(DamageSource source, float amount)
     {
+        if (NativeHealth != null) { NativeHealth.OnEntityReceiveDamage(source, ref amount); return true; }
         if (source.Type == EnumDamageType.Heal) Healing += amount;
         if (source.Type == EnumDamageType.Poison) PoisonDamage += amount;
         return true;
