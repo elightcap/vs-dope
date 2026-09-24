@@ -1,0 +1,52 @@
+{
+  "editor": {
+    "allAngles": false,
+    "entityTextureMode": true
+  },
+  "textureWidth": 16,
+  "textureHeight": 32,
+  "textures": {
+    "skin": "entity/drugaddict"
+  },
+  "elements": [
+    {
+      "name": "root",
+      "from": [4.0, 0.0, 6.0],
+      "to": [12.0, 12.0, 10.0],
+      "faces": {
+        "north": { "texture": "#skin", "uv": [0.0, 0.0, 8.0, 12.0] },
+        "east": { "texture": "#skin", "uv": [0.0, 0.0, 4.0, 12.0] },
+        "south": { "texture": "#skin", "uv": [0.0, 0.0, 8.0, 12.0] },
+        "west": { "texture": "#skin", "uv": [0.0, 0.0, 4.0, 12.0] },
+        "up": { "texture": "#skin", "uv": [0.0, 0.0, 8.0, 4.0] },
+        "down": { "texture": "#skin", "uv": [0.0, 0.0, 8.0, 4.0] }
+      }
+    },
+    {
+      "name": "torso",
+      "from": [3.0, 12.0, 5.0],
+      "to": [13.0, 26.0, 11.0],
+      "faces": {
+        "north": { "texture": "#skin", "uv": [0.0, 12.0, 10.0, 26.0] },
+        "east": { "texture": "#skin", "uv": [0.0, 12.0, 6.0, 26.0] },
+        "south": { "texture": "#skin", "uv": [0.0, 12.0, 10.0, 26.0] },
+        "west": { "texture": "#skin", "uv": [0.0, 12.0, 6.0, 26.0] },
+        "up": { "texture": "#skin", "uv": [0.0, 12.0, 10.0, 18.0] },
+        "down": { "texture": "#skin", "uv": [0.0, 12.0, 10.0, 18.0] }
+      }
+    },
+    {
+      "name": "head",
+      "from": [4.5, 26.0, 5.5],
+      "to": [11.5, 33.0, 12.5],
+      "faces": {
+        "north": { "texture": "#skin", "uv": [8.0, 0.0, 15.0, 7.0] },
+        "east": { "texture": "#skin", "uv": [8.0, 0.0, 15.0, 7.0] },
+        "south": { "texture": "#skin", "uv": [8.0, 0.0, 15.0, 7.0] },
+        "west": { "texture": "#skin", "uv": [8.0, 0.0, 15.0, 7.0] },
+        "up": { "texture": "#skin", "uv": [8.0, 0.0, 15.0, 7.0] },
+        "down": { "texture": "#skin", "uv": [8.0, 0.0, 15.0, 7.0] }
+      }
+    }
+  ]
+}

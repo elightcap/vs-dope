@@ -35,6 +35,11 @@ public class SyringeItem : Item
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel,
         EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
     {
+        // Right-clicking an interactable entity is for that entity, not for the syringe.
+        // Claiming the click here made an empty syringe in hand silently eat every attempt
+        // to talk to the drug addict. See DrugConsumableItem.OnHeldInteractStart.
+        if (entitySel?.Entity?.IsInteractable == true) return;
+
         handling = EnumHandHandling.PreventDefault;
         if (!firstEvent || slot.Empty || slot.StackSize != 1 || byEntity is not EntityPlayer ep) return;
         slot.Itemstack.TempAttributes.SetBool(ApplyingKey, false);
