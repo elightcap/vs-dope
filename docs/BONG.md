@@ -16,7 +16,7 @@ Combine **one Bong + one Marijuana buds** anywhere in a crafting grid to produce
 
 Hold right-click for **five seconds** to smoke. The existing tested first-/third-person smoking animations raise the hand, and a distinct bubbling/inhalation sound starts after 0.9 seconds. Completing use replaces the loaded item with **one empty Bong in the same inventory slot**, including with a full inventory. The returned bong can immediately be loaded again. Releasing early, cancelling, dying or changing the held item grants no effect and does not consume the load. Repeated stop callbacks cannot return extra vessels.
 
-The effect is the same **Stoned** effect as a joint: **two in-game hours**, **-20% base movement speed** and **0.5 HP per in-game minute**. Subsequent uses refresh the expiry without stacking the rate or speed penalty. Bloodshot eyes and the Stoned HUD use the existing shared systems. Balance and animation fixes for joints also apply to this route.
+The effect is the same **Stoned** effect as a joint: **two in-game hours**, **-20% base movement speed**, **0.5 HP per in-game minute**, **+25% hunger**, and **-25% creature detection factor**. Joints and bongs share marijuana-specific tolerance, which scales all these magnitudes. Subsequent uses refresh the expiry without stacking the rate or speed penalty. Bloodshot eyes and the Stoned HUD use the existing shared systems. Balance and animation fixes for joints also apply to this route. See `DRUG_TOOLS.md` for detection limits and tolerance checks.
 
 ## Implementation and assets
 

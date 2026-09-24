@@ -2,6 +2,7 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using VsDope.Items;
+using VsDope.Systems;
 
 namespace VsDope.Client;
 
@@ -29,10 +30,11 @@ public class CocaVitaeEffectHudSystem : ModSystem
 
         double expires = entity.WatchedAttributes.GetDouble(DrugConsumableItem.SpeedEffectKeyFor("coca-vitae") + "-expires-gamehour");
         double remaining = expires - capi.World.Calendar.TotalHours;
+        double crashRemaining = entity.WatchedAttributes.GetDouble(DrugToolEffects.CrashExpiryKey) - capi.World.Calendar.TotalHours;
 
-        if (remaining > 0)
+        if (remaining > 0 || crashRemaining > 0)
         {
-            dialog.SetRemaining(remaining);
+            dialog.SetRemaining(remaining, crashRemaining);
             if (!dialog.IsOpened()) dialog.TryOpen();
         }
         else if (dialog.IsOpened())
@@ -57,16 +59,22 @@ public class GuiDialogCocaVitaeEffect : GuiDialog
 
     public override string ToggleKeyCombinationCode => null!;
 
-    public void SetRemaining(double gameHours)
+    public void SetRemaining(double gameHours, double crashHours)
     {
         int totalMinutes = Math.Max(0, (int)Math.Ceiling(gameHours * 60));
-        remainingText = Lang.Get("vs-dope:coca-vitae-hud-remaining", totalMinutes / 60, (totalMinutes % 60).ToString("00"));
+        remainingText = gameHours > 0 ? Lang.Get("vs-dope:coca-vitae-hud-remaining", totalMinutes / 60, (totalMinutes % 60).ToString("00")) : "";
+        if (crashHours > 0)
+        {
+            int crashMinutes = Math.Max(0, (int)Math.Ceiling(crashHours * 60));
+            if (remainingText.Length > 0) remainingText += "\n";
+            remainingText += Lang.Get("vs-dope:coca-crash-hud", crashMinutes);
+        }
         Compose();
     }
 
     private void Compose()
     {
-        ElementBounds textBounds = ElementBounds.FixedSize(220, 30);
+        ElementBounds textBounds = ElementBounds.FixedSize(250, remainingText.Contains('\n') ? 55 : 30);
         ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog
             .WithAlignment(EnumDialogArea.RightTop)
             .WithFixedAlignmentOffset(-20, 90);

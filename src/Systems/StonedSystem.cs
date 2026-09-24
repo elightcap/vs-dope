@@ -9,9 +9,12 @@ public sealed class StonedSystem : ModSystem
     public const string EffectKey = "vs-dope-stoned";
     public const string ExpiryKey = EffectKey + "-expires-gamehour";
     private const string LastHourKey = EffectKey + "-last-gamehour";
+    public const string StrengthKey = EffectKey + "-strength";
     public const double DurationHours = 2;
     public const float SpeedModifier = -0.2f;
     public const float HealPerGameMinute = 0.5f;
+    public const float HungerModifier = 0.25f;
+    public const float DetectionModifier = -0.25f;
     private ICoreServerAPI? sapi;
     private long tickId;
 
@@ -32,9 +35,13 @@ public sealed class StonedSystem : ModSystem
     {
         if (entity.World.Side != EnumAppSide.Server || !entity.Alive) return;
         Tick(entity, now); // Settle the old interval before refreshing it.
+        var player = entity is EntityPlayer ep ? entity.World.PlayerByUid(ep.PlayerUID) : null;
+        float strength = player == null ? 1 : VsDopeModSystem.AddictionSystem.GetEffectMultiplier(player, "marijuana");
+        if (player != null) VsDopeModSystem.AddictionSystem.RecordToleranceUse(player, "marijuana");
         entity.WatchedAttributes.SetDouble(ExpiryKey, now + DurationHours);
+        entity.WatchedAttributes.SetFloat(StrengthKey, strength);
         entity.Attributes.SetDouble(LastHourKey, now);
-        entity.Stats.Set("walkspeed", EffectKey, SpeedModifier, true);
+        ApplyStats(entity);
     }
 
     public static void Tick(EntityAgent entity, double now)
@@ -49,7 +56,7 @@ public sealed class StonedSystem : ModSystem
         double elapsed = Math.Max(0, through - last);
         if (elapsed > 0)
             entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal },
-                (float)(elapsed * 60 * HealPerGameMinute));
+                (float)(elapsed * 60 * HealPerGameMinute * Strength(entity)));
         entity.Attributes.SetDouble(LastHourKey, now);
         if (now >= expiry) Clear(entity);
     }
@@ -59,12 +66,29 @@ public sealed class StonedSystem : ModSystem
         // World time can pass while disconnected; expiry persists but offline healing is not banked.
         entity.Attributes.SetDouble(LastHourKey, now);
         if (!IsActive(entity, now)) Clear(entity);
-        else entity.Stats.Set("walkspeed", EffectKey, SpeedModifier, true);
+        else ApplyStats(entity);
+    }
+
+    public static float Strength(EntityAgent entity)
+    {
+        float strength = entity.WatchedAttributes.GetFloat(StrengthKey, 1);
+        return float.IsFinite(strength) ? Math.Clamp(strength, 0, 1) : 0;
+    }
+
+    private static void ApplyStats(EntityAgent entity)
+    {
+        float strength = Strength(entity);
+        entity.Stats.Set("walkspeed", EffectKey, SpeedModifier * strength, true);
+        entity.Stats.Set("hungerrate", EffectKey, HungerModifier * strength, true);
+        entity.Stats.Set("animalSeekingRange", EffectKey, DetectionModifier * strength, true);
     }
 
     public static void Clear(EntityAgent entity)
     {
         entity.Stats.Remove("walkspeed", EffectKey);
+        entity.Stats.Remove("hungerrate", EffectKey);
+        entity.Stats.Remove("animalSeekingRange", EffectKey);
+        entity.WatchedAttributes.RemoveAttribute(StrengthKey);
         if (entity.WatchedAttributes.HasAttribute(ExpiryKey)) entity.WatchedAttributes.RemoveAttribute(ExpiryKey);
         entity.Attributes.RemoveAttribute(LastHourKey);
     }

@@ -14,7 +14,7 @@ An alternative reusable route is the **Bong**: craft it with clear quartz in the
 - `Stoned` lasts **two in-game calendar hours**, applies **-0.20 additive walkspeed** (80% normal speed on an otherwise unmodified character) and heals **0.5 HP per in-game minute**. Fractional minutes accrue smoothly. This is 60 HP over a full uninterrupted effect, capped by normal maximum health.
 - A second joint refreshes the two-hour expiry. Rates never stack. Other sources of movement modifiers remain intact.
 - The calendar controls timing even when its speed changes or pauses. No offline healing is banked. A surviving effect resumes on reconnect; one that expired while offline is removed. Death/respawn removes it.
-- This effect does not add an unrequested marijuana tolerance or overdose roll. Its healing rate is fixed, including during other status effects.
+- Issue #55 adds marijuana-specific tolerance through the existing product tolerance rules. Speed, healing, +25% hunger and -25% creature detection factor all scale by the pre-dose multiplier. It does not add opiate addiction or overdose rolls. See `DRUG_TOOLS.md` for native detection limits and lifecycle checks.
 - HUD shows `Stoned`, remaining game hours/minutes and effect values.
 
 ## Artwork and model files

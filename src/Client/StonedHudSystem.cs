@@ -22,7 +22,10 @@ public sealed class StonedHudSystem : ModSystem
         var entity = capi!.World.Player?.Entity;
         if (entity == null || !StonedSystem.IsActive(entity, capi.World.Calendar.TotalHours)) { Close(); return; }
         int minutes = (int)Math.Ceiling((entity.WatchedAttributes.GetDouble(StonedSystem.ExpiryKey) - capi.World.Calendar.TotalHours) * 60);
-        hud!.Update(Lang.Get("vs-dope:stoned-hud", minutes / 60, (minutes % 60).ToString("00")));
+        float strength = StonedSystem.Strength(entity);
+        hud!.Update(Lang.Get("vs-dope:stoned-hud", minutes / 60, (minutes % 60).ToString("00"),
+            (-StonedSystem.SpeedModifier * strength * 100).ToString("0.#"),
+            (StonedSystem.HealPerGameMinute * strength).ToString("0.###")));
         if (!hud.IsOpened()) hud.TryOpen();
     }
     private void Close() => hud?.TryClose();
