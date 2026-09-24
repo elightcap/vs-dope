@@ -2,6 +2,8 @@
 
 Fictional Vintage Story 1.22.7 game content. Smoke a joint by holding right-click for **five seconds**.
 
+An alternative reusable route is the **Bong**: craft it with clear quartz in the centre and bottom-centre slots, combine with one bud, and smoke for five seconds to get the same Stoned effect and the empty bong back. See `docs/BONG.md` for recipes, artwork, audio and acceptance checks.
+
 ## Gameplay
 
 - Seeds use the native `BlockCrop`/`ItemPlantableSeed` path, matching the coca crop: nine stages, nitrogen, 30 nutrient consumption, three growth months at native calendar/farmland rates.
@@ -61,6 +63,8 @@ The original synthesized `sounds/player/joint-drag.ogg` plays once from the serv
 Automated server probe: `tests/MarijuanaProbe`. It uses the real 1.22.7 asset registry, actual recipe matcher/consumer and real ItemStacks. Player health, animation-start and network endpoints are stand-ins for item interactions. Separately, `SmokingAnimationChecks` resolves the actual patched Seraph shapes with `Shape.InitForAnimations` and calls the native `Animation.GenerateAllFrames` for both camera variants. This exercises the frame-generation code used by `ClientAnimator` without a graphical client. Build with `VINTAGE_STORY` set, copy its DLL and `modinfo.json` to a **test** server's separate Mods folder alongside the built mod, then start the server. Search its log for `MARIJUANA TEST SUMMARY` and ensure no `MARIJUANA TEST FAILED` appears. Never ship the probe inside the mod.
 
 Current result: **61 checks passed** on 1.22.7 with the smoking-crash fix based on merged master `474916c`; 58 JSON patches applied without errors. The new frame-generation test first reproduced the original nullable exception at `Animation.cs:225` against the unfixed assets, then passed for all four patched animations after the offset fix.
+
+The reusable bong addition extends this probe to **101 passing checks**, including 40 recipe/use/reuse/asset checks documented in `docs/BONG.md`.
 
 Verified: nine crop registrations and shape references, maturity-only bud drops, seed target, native shapeless ingredient matching and exact consumption, cancelled/short/duplicate held-use safety, five-second completion, 80% baseline speed, paused calendar, fractional-minute healing, late-tick expiry capped to 60 HP, non-stacking refresh, reconnect/expiry/death handling, preservation of unrelated speed modifiers, native first-/third-person animation frame generation on both Seraph shapes and packaged sound. Build is clean.
 

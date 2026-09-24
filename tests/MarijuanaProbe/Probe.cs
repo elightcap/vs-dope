@@ -99,6 +99,7 @@ public sealed class MarijuanaProbe : ModSystem
             Check(Near(e.Healing,0) && !e.WatchedAttributes.HasAttribute(StonedSystem.ExpiryKey), "death stops healing and clears effect");
 
             VsDope.Tests.SmokingAnimationChecks.Verify(api, Check);
+            VsDope.Tests.BongChecks.Verify(api, MakePlayer(api), Check);
             Check(api.Assets.TryGet(new AssetLocation("vs-dope:sounds/player/joint-drag.ogg"))!=null, "drag sound packaged");
             api.Logger.Notification("MARIJUANA TEST SUMMARY: " + checks + " checks passed");
         }
