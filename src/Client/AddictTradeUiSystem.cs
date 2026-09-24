@@ -1,5 +1,6 @@
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using VsDope.Network;
 
 namespace VsDope.Client;
@@ -10,13 +11,10 @@ namespace VsDope.Client;
 /// </summary>
 public class AddictTradeUiSystem : ModSystem
 {
-    private ICoreClientAPI capi;
-    private GuiDialogAddictTrade dialog;
+    private GuiDialogAddictTrade dialog = null!;
 
     public override void StartClientSide(ICoreClientAPI api)
     {
-        capi = api;
-
         var channel = api.Network.RegisterChannel("vs-dope.addicttrade");
         channel.RegisterMessageType<SellToAddictPacket>();
         channel.RegisterMessageType<OpenAddictTradePacket>();
@@ -33,12 +31,12 @@ public class GuiDialogAddictTrade : GuiDialog
     private const float RowHeight = 44f;
     private const float Width = 390f;
 
-    private OpenAddictTradePacket data;
-    private InventoryBase[] displayInventories;
+    private OpenAddictTradePacket? data;
+    private InventoryBase[] displayInventories = Array.Empty<InventoryBase>();
 
     public GuiDialogAddictTrade(ICoreClientAPI capi) : base(capi) { }
 
-    public override string ToggleKeyCombinationCode => null;
+    public override string ToggleKeyCombinationCode => null!;
 
     public void Open(OpenAddictTradePacket packet)
     {
@@ -64,7 +62,8 @@ public class GuiDialogAddictTrade : GuiDialog
 
     private void BuildDisplayInventories()
     {
-        int count = data?.DrugCodes?.Length ?? 0;
+        if (data == null) return;
+        int count = data.DrugCodes.Length;
         displayInventories = new InventoryBase[count];
         for (int i = 0; i < count; i++)
         {
@@ -77,7 +76,8 @@ public class GuiDialogAddictTrade : GuiDialog
 
     private void Compose()
     {
-        int rows = data?.DrugCodes?.Length ?? 0;
+        if (data == null) return;
+        int rows = data.DrugCodes.Length;
         float bodyHeight = 34f + rows * RowHeight + 8f;
 
         ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog
@@ -90,7 +90,7 @@ public class GuiDialogAddictTrade : GuiDialog
         var compo = capi.Gui.CreateCompo("addicttrade", dialogBounds)
             .AddShadedDialogBG(fill, false)
             .AddDialogTitleBarWithBg(
-                "Drug Addict",
+                Lang.Get("vs-dope:item-creature-drugaddict"),
                 OnClose,
                 CairoFont.WhiteDetailText().WithFontSize(16),
                 ElementBounds.Fixed(0, 0, Width, 30),
@@ -101,7 +101,7 @@ public class GuiDialogAddictTrade : GuiDialog
             float y = 34f + i * RowHeight;
             string code = data.DrugCodes[i];
             int price = data.GearPrices[i];
-            string unit = i < (data.Units?.Length ?? 0) ? data.Units[i] : "ea";
+            bool perLitre = i < data.Units.Length && data.Units[i] == "/L";
 
             ElementBounds slotBounds = ElementBounds.Fixed(10, y, 32, 32);
             ElementBounds nameBounds = ElementBounds.Fixed(52, y + 6, 150, 20);
@@ -114,9 +114,9 @@ public class GuiDialogAddictTrade : GuiDialog
             compo = compo
                 .AddPassiveItemSlot(slotBounds, displayInventories[i], displayInventories[i][0], false, "slot" + i)
                 .AddStaticText(drugName, CairoFont.WhiteSmallText(), EnumTextOrientation.Left, nameBounds, "name" + i)
-                .AddStaticText(price + "g " + unit, CairoFont.WhiteSmallText(), EnumTextOrientation.Right, priceBounds, "price" + i)
-                .AddSmallButton("Sell 1", OnSellOne(code), sell1Bounds, EnumButtonStyle.Small, "sell1_" + i)
-                .AddSmallButton("Sell all", OnSellAll(code), sellAllBounds, EnumButtonStyle.Small, "sellall_" + i);
+                .AddStaticText(Lang.Get(perLitre ? "vs-dope:addict-trade-price-litre" : "vs-dope:addict-trade-price", price), CairoFont.WhiteSmallText(), EnumTextOrientation.Right, priceBounds, "price" + i)
+                .AddSmallButton(Lang.Get("vs-dope:addict-trade-sell-one"), OnSellOne(code), sell1Bounds, EnumButtonStyle.Small, "sell1_" + i)
+                .AddSmallButton(Lang.Get("vs-dope:addict-trade-sell-all"), OnSellAll(code), sellAllBounds, EnumButtonStyle.Small, "sellall_" + i);
         }
 
         SingleComposer = compo.Compose();
@@ -130,6 +130,7 @@ public class GuiDialogAddictTrade : GuiDialog
 
     private void SendSell(string code, int quantity)
     {
+        if (data == null) return;
         capi.Network.GetChannel("vs-dope.addicttrade")
             .SendPacket(new SellToAddictPacket
             {

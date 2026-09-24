@@ -1,5 +1,7 @@
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
+using VsDope.Items;
 
 namespace VsDope.Client;
 
@@ -9,8 +11,8 @@ namespace VsDope.Client;
 /// </summary>
 public class CocaVitaeEffectHudSystem : ModSystem
 {
-    private ICoreClientAPI capi;
-    private GuiDialogCocaVitaeEffect dialog;
+    private ICoreClientAPI capi = null!;
+    private GuiDialogCocaVitaeEffect? dialog;
     private long tickId;
 
     public override void StartClientSide(ICoreClientAPI api)
@@ -23,9 +25,9 @@ public class CocaVitaeEffectHudSystem : ModSystem
     private void OnTick(float dt)
     {
         var entity = capi.World.Player?.Entity;
-        if (entity == null) return;
+        if (entity == null || dialog == null) return;
 
-        double expires = entity.WatchedAttributes.GetDouble("vs-dope-coca-vitae-speed-expires-gamehour");
+        double expires = entity.WatchedAttributes.GetDouble(DrugConsumableItem.SpeedEffectKeyFor("coca-vitae") + "-expires-gamehour");
         double remaining = expires - capi.World.Calendar.TotalHours;
 
         if (remaining > 0)
@@ -49,16 +51,16 @@ public class CocaVitaeEffectHudSystem : ModSystem
 
 public class GuiDialogCocaVitaeEffect : GuiDialog
 {
-    private string remainingText = "Cocaine: 1h 00m";
+    private string remainingText = "";
 
     public GuiDialogCocaVitaeEffect(ICoreClientAPI capi) : base(capi) { }
 
-    public override string ToggleKeyCombinationCode => null;
+    public override string ToggleKeyCombinationCode => null!;
 
     public void SetRemaining(double gameHours)
     {
-        int totalMinutes = System.Math.Max(0, (int)System.Math.Ceiling(gameHours * 60));
-        remainingText = $"Cocaine: {totalMinutes / 60}h {totalMinutes % 60:00}m";
+        int totalMinutes = Math.Max(0, (int)Math.Ceiling(gameHours * 60));
+        remainingText = Lang.Get("vs-dope:coca-vitae-hud-remaining", totalMinutes / 60, (totalMinutes % 60).ToString("00"));
         Compose();
     }
 

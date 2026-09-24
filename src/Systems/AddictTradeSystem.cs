@@ -27,6 +27,7 @@ public class AddictTradeSystem
     };
 
     private const double OverdoseChancePerSale = 0.12;
+    private static readonly AssetLocation GearCode = new("game:gear-rusty");
 
     private ICoreServerAPI api = null!;
     private IServerNetworkChannel channel = null!;
@@ -94,19 +95,19 @@ public class AddictTradeSystem
         var addict = api.World.GetEntityById(packet.AddictEntityId) as EntityDrugAddict;
         if (addict == null || !addict.Alive)
         {
-            Tell(player, "The addict is gone.");
+            Tell(player, "addict-gone");
             return;
         }
         // Only trade with the addict that is currently dealing with you.
         if (!addict.Friendly || addict.TargetPlayerUid != player.PlayerUID)
         {
-            Tell(player, "They're not dealing with you.");
+            Tell(player, "addict-not-yours");
             return;
         }
         // After a sale the addict only lingers briefly before walking off.
         if (!addict.AcceptsTrade)
         {
-            player.SendLocalisedMessage(0, "vs-dope:addict-busy-leaving", Array.Empty<object>());
+            Tell(player, "addict-busy-leaving");
             return;
         }
 
@@ -116,9 +117,7 @@ public class AddictTradeSystem
         int available = CountUnits(player, code, liquid);
         if (available <= 0)
         {
-            Tell(player, liquid
-                ? "You have no container holding that."
-                : "You have none of that to sell.");
+            Tell(player, liquid ? "addict-sell-no-container" : "addict-sell-none");
             return;
         }
 
@@ -126,12 +125,12 @@ public class AddictTradeSystem
         int taken = TakeUnits(player, code, liquid, qty);
         if (taken <= 0)
         {
-            Tell(player, "The deal fell through.");
+            Tell(player, "addict-sell-failed");
             return;
         }
 
         long gears = (long)taken * pricePerUnit;
-        var gearItem = api.World.GetItem(new AssetLocation("game:gear-rusty"));
+        var gearItem = api.World.GetItem(GearCode);
         if (gearItem != null)
         {
             // Pay in chunks of up to the gear stack limit.
@@ -144,8 +143,7 @@ public class AddictTradeSystem
             }
         }
 
-        string unit = liquid ? (taken == 1 ? " litre" : " litres") : "";
-        Tell(player, $"Sold {taken}{unit} for {gears} rusty gears.");
+        Tell(player, liquid ? "addict-sold-litres" : "addict-sold", taken, gears);
         // Thanks the player and starts the leave timer: the addict lingers briefly (each sale
         // resets it) so the player can keep selling, then walks off and despawns out of sight.
         addict.OnPurchaseCompleted();
@@ -154,8 +152,8 @@ public class AddictTradeSystem
         if (rng.NextDouble() < OverdoseChancePerSale) addict.Overdose();
     }
 
-    private static void Tell(IServerPlayer player, string message)
-        => player.SendMessage(0, message, EnumChatType.Notification, null);
+    private static void Tell(IServerPlayer player, string langKey, params object[] args)
+        => player.SendLocalisedMessage(0, "vs-dope:" + langKey, args);
 
     private static int PriceOf(string code)
     {
@@ -189,7 +187,7 @@ public class AddictTradeSystem
     {
         foreach (string invName in new[] { GlobalConstants.hotBarInvClassName, GlobalConstants.backpackInvClassName })
         {
-            IInventory inv = player.InventoryManager?.GetOwnInventory(invName);
+            IInventory? inv = player.InventoryManager?.GetOwnInventory(invName);
             if (inv == null) continue;
             for (int i = 0; i < inv.Count; i++)
             {
@@ -199,7 +197,7 @@ public class AddictTradeSystem
         }
     }
 
-    private static bool Matches(ItemStack stack, AssetLocation code)
+    private static bool Matches(ItemStack? stack, AssetLocation code)
         => stack?.Collectible?.Code != null && stack.Collectible.Code.Equals(code);
 
     // Whole litres of `code` held in the liquid container in this slot, if any.
@@ -218,7 +216,7 @@ public class AddictTradeSystem
         {
             n += liquid
                 ? LitresOf(slot, code)
-                : (Matches(slot.Itemstack, code) ? slot.Itemstack.StackSize : 0);
+                : (Matches(slot.Itemstack, code) ? slot.StackSize : 0);
         }
         return n;
     }
@@ -247,7 +245,7 @@ public class AddictTradeSystem
             else
             {
                 if (!Matches(slot.Itemstack, code)) continue;
-                int move = Math.Min(slot.Itemstack.StackSize, want - taken);
+                int move = Math.Min(slot.StackSize, want - taken);
                 slot.TakeOut(move);
                 slot.MarkDirty();
                 taken += move;
