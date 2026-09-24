@@ -8,6 +8,8 @@
 4. **Native drinking hook:** `HeroinVesselDoseSystem` patches the 1.22.7 liquid-container drinking method for heroin only. Re-run `tests/OverdoseProbe` when upgrading the game.
 5. **Effect synchronization:** server expiry and client watched attributes must stay consistent.
 6. **Build dependency:** local builds require `VINTAGE_STORY` pointing at the target installation.
+7. **Addict junk codes:** `AddictPockets` uses hard-coded vanilla item codes. A missing code is skipped with a `[vs-dope] addict junk item` server warning. Re-run `tests/AddictProbe` when upgrading the game.
+8. **Addict speed:** the speed constants assume the 1.22.7 ground physics (see `EntityDrugAddict` tuning comment). Re-derive them if `PModuleOnGround`, `GlobalConstants.BaseMoveSpeed` or `SprintSpeedMultiplier` change.
 
 ## Navigation workflow
 
@@ -23,6 +25,9 @@ Before modifying a subsystem:
 8. Update the appropriate `docs/repo/` file when architecture changes.
 
 ## Search index
+
+- `vs-dope-addict-inv`: addict pockets (server-only entity Attributes)
+- `AddictPockets`: addict inventory, starting stock, payment
 
 - `coca-vitae`: finished coca product / tolerance ID
 - `vs-dope-coca-vitae-speed`: Coca movement effect key

@@ -1,0 +1,66 @@
+{
+  "creativeinventory": {
+    "general": [
+      "*"
+    ],
+    "items": [
+      "*"
+    ]
+  },
+  "maxstacksize": 64,
+  "textures": {
+    "leaf": {
+      "base": "block/marijuana/marijuana-atlas"
+    },
+    "bud": {
+      "base": "block/marijuana/marijuana-atlas"
+    },
+    "paper": {
+      "base": "block/marijuana/marijuana-atlas"
+    },
+    "stem": {
+      "base": "block/marijuana/marijuana-atlas"
+    }
+  },
+  "guiTransform": {
+    "rotation": {
+      "x": -20,
+      "y": -35,
+      "z": 12
+    },
+    "scale": 1.7
+  },
+  "groundTransform": {
+    "scale": 1.0
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 0.75
+  },
+  "fpHandTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 0.75
+  },
+  "code": "marijuana-buds",
+  "shape": {
+    "base": "item/marijuana-buds"
+  }
+}

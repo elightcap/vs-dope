@@ -1,0 +1,420 @@
+[
+  {
+    "op": "add",
+    "file": "game:shapes/entity/humanoid/seraph-faceless.json",
+    "path": "/animations/-",
+    "value": {
+      "name": "vsdope-smoke",
+      "code": "vsdope-smoke",
+      "quantityframes": 150,
+      "onActivityStopped": "EaseOut",
+      "onAnimationEnd": "Hold",
+      "keyframes": [
+        {
+          "frame": 0,
+          "elements": {
+            "UpperArmR": {
+              "rotationX": 0,
+              "rotationY": 0,
+              "rotationZ": 0
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 0,
+              "offsetZ": 0,
+              "rotationX": 0,
+              "rotationY": 0,
+              "rotationZ": 0
+            }
+          }
+        },
+        {
+          "frame": 27,
+          "elements": {
+            "UpperArmR": {
+              "rotationX": 0,
+              "rotationY": -25,
+              "rotationZ": -50
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -104,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        },
+        {
+          "frame": 130,
+          "elements": {
+            "UpperArmR": {
+              "rotationX": 0,
+              "rotationY": -25,
+              "rotationZ": -50
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -106,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        },
+        {
+          "frame": 149,
+          "elements": {
+            "UpperArmR": {
+              "rotationX": 0,
+              "rotationY": -25,
+              "rotationZ": -50
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -104,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:shapes/entity/humanoid/seraph.json",
+    "path": "/animations/-",
+    "value": {
+      "name": "vsdope-smoke",
+      "code": "vsdope-smoke",
+      "quantityframes": 150,
+      "onActivityStopped": "EaseOut",
+      "onAnimationEnd": "Hold",
+      "keyframes": [
+        {
+          "frame": 0,
+          "elements": {
+            "UpperArmR": {
+              "rotationX": 0,
+              "rotationY": 0,
+              "rotationZ": 0
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 0,
+              "offsetZ": 0,
+              "rotationX": 0,
+              "rotationY": 0,
+              "rotationZ": 0
+            }
+          }
+        },
+        {
+          "frame": 27,
+          "elements": {
+            "UpperArmR": {
+              "rotationX": 0,
+              "rotationY": -25,
+              "rotationZ": -50
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -104,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        },
+        {
+          "frame": 130,
+          "elements": {
+            "UpperArmR": {
+              "rotationX": 0,
+              "rotationY": -25,
+              "rotationZ": -50
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -106,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        },
+        {
+          "frame": 149,
+          "elements": {
+            "UpperArmR": {
+              "rotationX": 0,
+              "rotationY": -25,
+              "rotationZ": -50
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -104,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:entities/humanoid/player.json",
+    "path": "/client/animations/-",
+    "value": {
+      "code": "vsdope-smoke",
+      "animation": "vsdope-smoke",
+      "animationSpeed": 1,
+      "blendMode": "Add",
+      "easeInSpeed": 8,
+      "easeOutSpeed": 8,
+      "elementWeight": {
+        "UpperArmR": 15,
+        "LowerArmR": 15
+      },
+      "elementBlendMode": {
+        "UpperArmR": "AddAverage",
+        "LowerArmR": "AddAverage"
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:shapes/entity/humanoid/seraph-faceless.json",
+    "path": "/animations/-",
+    "value": {
+      "name": "vsdope-smoke-fp",
+      "code": "vsdope-smoke-fp",
+      "quantityframes": 150,
+      "onActivityStopped": "EaseOut",
+      "onAnimationEnd": "Hold",
+      "keyframes": [
+        {
+          "frame": 0,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 0,
+              "offsetY": 0,
+              "offsetZ": 0,
+              "rotationX": 0,
+              "rotationY": 0,
+              "rotationZ": 0
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 0,
+              "offsetZ": 0,
+              "rotationX": 0,
+              "rotationY": 0,
+              "rotationZ": 0
+            }
+          }
+        },
+        {
+          "frame": 27,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 3,
+              "offsetY": -2,
+              "offsetZ": 1,
+              "rotationX": -9,
+              "rotationY": -21,
+              "rotationZ": -80
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -104,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        },
+        {
+          "frame": 130,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 3,
+              "offsetY": -2,
+              "offsetZ": 1,
+              "rotationX": -9,
+              "rotationY": -21,
+              "rotationZ": -80
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -106,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        },
+        {
+          "frame": 149,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 3,
+              "offsetY": -2,
+              "offsetZ": 1,
+              "rotationX": -9,
+              "rotationY": -21,
+              "rotationZ": -80
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -104,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:shapes/entity/humanoid/seraph.json",
+    "path": "/animations/-",
+    "value": {
+      "name": "vsdope-smoke-fp",
+      "code": "vsdope-smoke-fp",
+      "quantityframes": 150,
+      "onActivityStopped": "EaseOut",
+      "onAnimationEnd": "Hold",
+      "keyframes": [
+        {
+          "frame": 0,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 0,
+              "offsetY": 0,
+              "offsetZ": 0,
+              "rotationX": 0,
+              "rotationY": 0,
+              "rotationZ": 0
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 0,
+              "offsetZ": 0,
+              "rotationX": 0,
+              "rotationY": 0,
+              "rotationZ": 0
+            }
+          }
+        },
+        {
+          "frame": 27,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 3,
+              "offsetY": -2,
+              "offsetZ": 1,
+              "rotationX": -9,
+              "rotationY": -21,
+              "rotationZ": -80
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -104,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        },
+        {
+          "frame": 130,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 3,
+              "offsetY": -2,
+              "offsetZ": 1,
+              "rotationX": -9,
+              "rotationY": -21,
+              "rotationZ": -80
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -106,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        },
+        {
+          "frame": 149,
+          "elements": {
+            "UpperArmR": {
+              "offsetX": 3,
+              "offsetY": -2,
+              "offsetZ": 1,
+              "rotationX": -9,
+              "rotationY": -21,
+              "rotationZ": -80
+            },
+            "LowerArmR": {
+              "offsetX": 0,
+              "offsetY": 1,
+              "offsetZ": 0,
+              "rotationX": -104,
+              "rotationY": 22.5,
+              "rotationZ": -22.5
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:entities/humanoid/player.json",
+    "path": "/client/animations/-",
+    "value": {
+      "code": "vsdope-smoke-fp",
+      "animation": "vsdope-smoke-fp",
+      "animationSpeed": 1,
+      "blendMode": "Add",
+      "easeInSpeed": 8,
+      "easeOutSpeed": 8,
+      "elementWeight": {
+        "UpperArmR": 15,
+        "LowerArmR": 15
+      },
+      "elementBlendMode": {
+        "UpperArmR": "AddAverage",
+        "LowerArmR": "AddAverage"
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:entities/humanoid/player.json",
+    "path": "/client/behaviors/-",
+    "value": {
+      "code": "vsdope-stonedeyes"
+    }
+  }
+]

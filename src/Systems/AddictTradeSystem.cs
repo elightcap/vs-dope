@@ -27,7 +27,6 @@ public class AddictTradeSystem
     };
 
     private const double OverdoseChancePerSale = 0.12;
-    private static readonly AssetLocation GearCode = new("game:gear-rusty");
 
     private ICoreServerAPI api = null!;
     private IServerNetworkChannel channel = null!;
@@ -60,18 +59,33 @@ public class AddictTradeSystem
         channel.SendPacket(new CloseAddictTradePacket { AddictEntityId = addict.EntityId }, new[] { player });
     }
 
-    public void OpenTradeFor(IServerPlayer player, EntityDrugAddict addict)
+    public void OpenTradeFor(IServerPlayer player, EntityDrugAddict addict) => SendState(player, addict, refresh: false);
+
+    // Snapshot of both sides of the deal: offers, what the player carries, and the addict's pockets.
+    // Sent on open and again after every sale (refresh) so the window stays live.
+    private void SendState(IServerPlayer player, EntityDrugAddict addict, bool refresh)
     {
         if (player == null || addict == null) return;
+        if (player.ConnectionState != EnumClientState.Playing) return;
 
         var codes = new string[Offers.Length];
         var prices = new int[Offers.Length];
         var units = new string[Offers.Length];
+        var held = new int[Offers.Length];
         for (int i = 0; i < Offers.Length; i++)
         {
+            bool liquid = IsLiquid(Offers[i].Code);
             codes[i] = Offers[i].Code;
             prices[i] = Offers[i].GearPrice;
-            units[i] = IsLiquid(Offers[i].Code) ? "/L" : "ea";
+            units[i] = liquid ? "/L" : "ea";
+            held[i] = CountUnits(player, new AssetLocation(Offers[i].Code), liquid);
+        }
+
+        var pockets = addict.Pockets;
+        var stacks = new List<AddictStackData>();
+        if (pockets != null)
+        {
+            foreach (var stack in pockets.Stacks) stacks.Add(new AddictStackData { Stack = stack.ToBytes() });
         }
 
         channel.SendPacket(new OpenAddictTradePacket
@@ -80,6 +94,12 @@ public class AddictTradeSystem
             DrugCodes = codes,
             GearPrices = prices,
             Units = units,
+            PlayerHeld = held,
+            PlayerGears = CountUnits(player, AddictPockets.GearCode, false),
+            AddictGears = pockets?.GearCount ?? 0,
+            AddictGoodsValue = pockets?.GoodsValue ?? 0,
+            AddictStacks = stacks.ToArray(),
+            Refresh = refresh,
         }, new[] { player });
     }
 
@@ -110,9 +130,21 @@ public class AddictTradeSystem
             Tell(player, "addict-busy-leaving");
             return;
         }
+        var pockets = addict.Pockets;
+        if (pockets == null)
+        {
+            Tell(player, "addict-sell-failed");
+            return;
+        }
 
         var code = new AssetLocation(packet.DrugCode);
         bool liquid = IsLiquid(packet.DrugCode);
+        var drugItem = api.World.GetItem(code);
+        if (drugItem == null)
+        {
+            Tell(player, "addict-sell-failed");
+            return;
+        }
 
         int available = CountUnits(player, code, liquid);
         if (available <= 0)
@@ -121,7 +153,17 @@ public class AddictTradeSystem
             return;
         }
 
-        int qty = packet.Quantity <= 0 ? available : Math.Min(packet.Quantity, available);
+        // The addict pays from its own pockets: gears first, scavenged goods for the rest.
+        int affordable = pockets.Wealth / pricePerUnit;
+        if (affordable <= 0)
+        {
+            Tell(player, "addict-cant-afford");
+            SendState(player, addict, refresh: true);
+            return;
+        }
+
+        int wanted = packet.Quantity <= 0 ? available : Math.Min(packet.Quantity, available);
+        int qty = Math.Min(wanted, affordable);
         int taken = TakeUnits(player, code, liquid, qty);
         if (taken <= 0)
         {
@@ -129,27 +171,50 @@ public class AddictTradeSystem
             return;
         }
 
-        long gears = (long)taken * pricePerUnit;
-        var gearItem = api.World.GetItem(GearCode);
-        if (gearItem != null)
+        // The drugs go into the addict's pockets (and drop if it dies). Liquids are poured into jugs.
+        if (liquid) pockets.AddLiquid(api.World, drugItem, taken);
+        else pockets.Add(api.World, new ItemStack(drugItem, taken));
+
+        var payment = pockets.TakePayment(api.World, taken * pricePerUnit, out int gearsPaid);
+        addict.SavePockets();
+
+        var goods = new List<string>();
+        foreach (var stack in payment)
         {
-            // Pay in chunks of up to the gear stack limit.
-            long remaining = gears;
-            while (remaining > 0)
-            {
-                int n = (int)Math.Min(remaining, gearItem.MaxStackSize);
-                player.InventoryManager.TryGiveItemstack(new ItemStack(gearItem, n), true);
-                remaining -= n;
-            }
+            if (!AddictPockets.IsGear(stack))
+                goods.Add(Lang.Get("vs-dope:addict-goods-entry", stack.StackSize, stack.GetName()));
+            Give(player, stack);
         }
 
-        Tell(player, liquid ? "addict-sold-litres" : "addict-sold", taken, gears);
+        if (taken < wanted) Tell(player, "addict-afford-partial", taken);
+        string unitKey = liquid ? "addict-sold-litres" : "addict-sold";
+        if (goods.Count > 0) Tell(player, unitKey + "-goods", taken, gearsPaid, string.Join(", ", goods));
+        else Tell(player, unitKey, taken, gearsPaid);
+
+        SendState(player, addict, refresh: true);
+
         // Thanks the player and starts the leave timer: the addict lingers briefly (each sale
         // resets it) so the player can keep selling, then walks off and despawns out of sight.
         addict.OnPurchaseCompleted();
 
-        // Chance the addict ODs on the high after a deal; it then dies on the spot instead.
+        // Chance the addict ODs on the high after a deal; it then dies on the spot instead
+        // (and drops everything it carries, including what it just bought).
         if (rng.NextDouble() < OverdoseChancePerSale) addict.Overdose();
+    }
+
+    // Hand a stack to the player; whatever doesn't fit lands at their feet.
+    private void Give(IServerPlayer player, ItemStack stack)
+    {
+        int max = Math.Max(1, stack.Collectible.MaxStackSize);
+        while (stack.StackSize > 0)
+        {
+            var part = stack.Clone();
+            part.StackSize = Math.Min(max, stack.StackSize);
+            stack.StackSize -= part.StackSize;
+            // TryGiveItemstack leaves the undelivered remainder in part.StackSize.
+            player.InventoryManager.TryGiveItemstack(part, true);
+            if (part.StackSize > 0) api.World.SpawnItemEntity(part, player.Entity.Pos.XYZ);
+        }
     }
 
     private static void Tell(IServerPlayer player, string langKey, params object[] args)

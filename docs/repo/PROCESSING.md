@@ -49,3 +49,9 @@ Alternatively right-click a placed liquid source (including an unsealed barrel),
 Hold right-click for 1.5 seconds to apply 0.1 litre. Ten applications empty a full syringe; the empty item can then be refilled with either supported liquid. Remaining volume and complete dose count appear in the tooltip.
 
 Tin and brass rods are added to the vanilla rod variants and rod smithing recipe by `patches/syringe-rod-metals.json`; the other four requested rod metals already exist in 1.22.7.
+
+## Marijuana chain
+
+Trader/creative marijuana seeds -> native nine-stage crop -> stage-9 Marijuana buds + seeds -> shapeless grid (one bud + one `game:paper-parchment`) -> one Joint. Both finished item models are 3D.
+
+Hold right-click for **five seconds** to smoke one Joint. Stoned: two calendar hours, -20% base movement, +0.5 HP per game minute. Reuse refreshes without stacking. There is no extra drying step, tolerance reduction or overdose roll in this new chain. See `docs/MARIJUANA.md`.

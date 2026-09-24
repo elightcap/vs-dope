@@ -75,3 +75,11 @@ Follow the JSON/texture conventions in `AGENTS.md`.
 `itemtypes/opium.json` now uses `textures/item/opium-paste-icon.png` as an extruded inventory sprite. The existing item code, quern yield, processing and effects are preserved; no separate paste ingredient is added. Legacy opium shape/texture assets remain available. The new artwork was generated with the built-in image generator and normalized to power-of-two 64px textures; see `docs/SYRINGES.md` for the prompt set.
 
 `patches/syringe-rod-metals.json` adds tin and brass variants to the vanilla `game:rod-*` item family and smithing recipe so all six requested metals are available on 1.22.7. It adds their density, recycling properties and English names.
+
+## Marijuana
+
+`blocktypes/marijuana-plant.json` maps nine `shapes/plant/marijuana_stage_*.json` stages. `itemtypes/marijuana-seeds.json` plants stage 1; only stage 9 drops `marijuana-buds`. `itemtypes/marijuana-buds.json` and `joint.json` map 3D item shapes for GUI/hand/ground. Shared 64x64 `textures/block/marijuana/marijuana-atlas.png` uses leaf/bud/paper/stem UV quadrants. Deterministic shapes: `tools/build_marijuana_models.py`; previews: `tools/preview_marijuana_models.py`.
+
+`patches/marijuana-player.json` adds 150-frame smoking animations and client eye behavior; `sounds/player/joint-drag.ogg` provides synthesized drag foley. `textures/entity/stoned-eyes.png` is the exact sclera overlay. `patches/marijuana-seed-traders.json` supplies seeds via existing coca-seed traders. See `docs/MARIJUANA.md` for UVs, provenance and client acceptance.
+
+Smoking keyframes require complete XYZ offset vectors, including zero X/Z for the lower arm and neutral offsets at frame 0. Both first- and third-person variants are patched into `seraph-faceless` and `seraph`. `tests/MarijuanaProbe/SmokingAnimationChecks.cs` resolves these actual shapes and runs the native 1.22.7 frame generator; parsing the patches alone will not detect the nullable-vector crash.

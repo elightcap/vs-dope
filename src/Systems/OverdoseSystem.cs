@@ -43,8 +43,8 @@ public sealed class OverdoseSystem
     /// <summary>Severity added per recent dose on top of the drug's base overdose severity.</summary>
     public const float SeverityPerRecentDose = 0.05f;
     public const float SeverityRecoveryPerGameHour = 0.5f;
-    public const float DamageSeverityGate = 0.35f;
-    public const float DamagePerSecondAtFullSeverity = 0.1f;
+    public const float DamageSeverityGate = 0.25f;
+    public const float DamagePerSecondAtFullSeverity = 0.5f;
     /// <summary>HUD shows a warning once the next dose's chance reaches this.</summary>
     public const float WarningChance = 0.15f;
     private const float MaxSpeedWhileOverdosing = 0.75f;

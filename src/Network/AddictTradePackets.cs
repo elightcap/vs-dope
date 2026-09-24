@@ -6,8 +6,9 @@ namespace VsDope.Network;
 // type that carries no contract ("Type is not expected, and no contract can be inferred").
 // ImplicitFields.AllPublic gives every public field a tag, so these stay plain POCOs.
 
-// Server -> Client: open the addict trading window for a specific addict entity.
-// Parallel arrays keep serialization trivial; index i pairs DrugCodes[i] with GearPrices[i].
+// Server -> Client: open (or, with Refresh, update) the addict trading window for one addict.
+// Parallel arrays keep serialization trivial; index i pairs DrugCodes[i] with GearPrices[i],
+// Units[i] and PlayerHeld[i]. Sent on open and again after every sale.
 [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
 public class OpenAddictTradePacket
 {
@@ -16,6 +17,24 @@ public class OpenAddictTradePacket
     public int[] GearPrices = System.Array.Empty<int>();
     // Price unit per row: "ea" for solid drugs, "/L" for liquids sold by the litre.
     public string[] Units = System.Array.Empty<string>();
+    // Units of each offer the player currently carries (items, or whole litres for liquids).
+    public int[] PlayerHeld = System.Array.Empty<int>();
+    public int PlayerGears;
+    // The addict's pockets: its gears, the gear-equivalent value of the goods it can pay with,
+    // and every stack it carries (ItemStack.ToBytes(); the client rebuilds with new ItemStack(byte[])).
+    public int AddictGears;
+    public int AddictGoodsValue;
+    public AddictStackData[] AddictStacks = System.Array.Empty<AddictStackData>();
+    // True for the post-sale update: only applied to a window that is already open for this addict.
+    public bool Refresh;
+}
+
+// One serialized ItemStack. Wrapped in a message because protobuf-net can't do byte[][].
+// Nested contract only; it is not a message type, so it is not registered on the channel.
+[ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+public class AddictStackData
+{
+    public byte[] Stack = System.Array.Empty<byte>();
 }
 
 // Client -> Server: player sells `Quantity` of `DrugCode` to the addict (Quantity <= 0 means "all").
