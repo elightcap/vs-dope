@@ -22,3 +22,7 @@
 - Hitbox 0.6 x 1.85 and eyeHeight 1.7 to match the seraph body (playerbot values).
 - Texture generated from vanilla `skin18` (pale grey-green) recoloured sallow, painted per UV rect read from seraph.json at run time.
 - CLAUDE.md is gitignored in this repo, so the two new verified facts (entity skin aspect exception; onControls <- synced Controls) are recorded here and in docs/repo/ASSETS.md + DEPENDENCIES.md instead.
+
+## 2026-09-24 fix: face and hair on the ground
+- In-game the addict's face and hair rendered at its feet. `seraph.json` keeps `eyesroot` and `Hair` as top-level elements with `stepParentName: "Head"`. Step-parenting only happens in `Shape.StepParentShape`, which a plain entity calls only for `client.shape.overlays` (`Entity.OnTesselation`, decompiled). Unresolved, they sit at the model origin.
+- Fix: base `game:entity/humanoid/seraph-faceless` + overlays `seraphskinparts/face/tired` and `seraphskinparts/hair-base/messy2` (a hair shape without `#null` faces). Overlay texture keys already in `client.textures` (`seraph`, `hair`) keep our textures; `TextureSizes` merge per key, so hair keeps 48x48.
