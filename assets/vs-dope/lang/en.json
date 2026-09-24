@@ -85,5 +85,20 @@
   "command-spawnaddict-desc": "Spawn drug addict NPCs near you (for testing)",
   "command-spawnaddict-noplayer": "This command must be run by a player in the world.",
   "command-spawnaddict-success": "Spawned {0}/{1} drug addict(s) near you.",
-  "command-spawnaddict-failed": "Spawned 0/{0} drug addicts ({1})."
+  "command-spawnaddict-failed": "Spawned 0/{0} drug addicts ({1}).",
+  "item-seeds-marijuana": "Marijuana seeds",
+  "item-marijuana-buds": "Marijuana buds",
+  "item-joint": "Joint",
+  "stoned-hud": "Stoned — {0}:{1} game hours\nMovement -20% · +0.5 HP/game minute",
+  "joint-tooltip": "Hold right-click for {0} seconds to smoke.\nStoned for 2 in-game hours: movement -20%, healing +0.5 HP per in-game minute. Smoking again refreshes the duration.",
+  "effect-stoned": "Stoned",
+  "block-crop-marijuana-1": "Marijuana plant (stage 1/9)",
+  "block-crop-marijuana-2": "Marijuana plant (stage 2/9)",
+  "block-crop-marijuana-3": "Marijuana plant (stage 3/9)",
+  "block-crop-marijuana-4": "Marijuana plant (stage 4/9)",
+  "block-crop-marijuana-5": "Marijuana plant (stage 5/9)",
+  "block-crop-marijuana-6": "Marijuana plant (stage 6/9)",
+  "block-crop-marijuana-7": "Marijuana plant (stage 7/9)",
+  "block-crop-marijuana-8": "Marijuana plant (stage 8/9)",
+  "block-crop-marijuana-9": "Marijuana plant (stage 9/9)"
 }

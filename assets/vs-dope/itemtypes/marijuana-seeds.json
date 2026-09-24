@@ -1,0 +1,27 @@
+{
+  "code": "seeds",
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": [
+        "marijuana"
+      ]
+    }
+  ],
+  "class": "ItemPlantableSeed",
+  "creativeinventory": {
+    "general": [
+      "*"
+    ],
+    "items": [
+      "*"
+    ]
+  },
+  "maxstacksize": 64,
+  "texture": {
+    "base": "item/poppy-seeds"
+  },
+  "attributes": {
+    "plantBlockCode": "vs-dope:crop-marijuana-1"
+  }
+}

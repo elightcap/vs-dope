@@ -1,0 +1,69 @@
+{
+  "creativeinventory": {
+    "general": [
+      "*"
+    ],
+    "items": [
+      "*"
+    ]
+  },
+  "maxstacksize": 64,
+  "textures": {
+    "leaf": {
+      "base": "block/marijuana/marijuana-atlas"
+    },
+    "bud": {
+      "base": "block/marijuana/marijuana-atlas"
+    },
+    "paper": {
+      "base": "block/marijuana/marijuana-atlas"
+    },
+    "stem": {
+      "base": "block/marijuana/marijuana-atlas"
+    }
+  },
+  "guiTransform": {
+    "rotation": {
+      "x": -35,
+      "y": 25,
+      "z": -35
+    },
+    "scale": 2.2
+  },
+  "groundTransform": {
+    "scale": 1.0
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": 0,
+      "y": -0.25,
+      "z": -0.15
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 0.7
+  },
+  "fpHandTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 0.75
+  },
+  "code": "joint",
+  "class": "vs-dope.joint",
+  "shape": {
+    "base": "item/joint"
+  },
+  "heldTpUseAnimation": "vsdope-smoke",
+  "heldTpIdleAnimation": "helditemready"
+}

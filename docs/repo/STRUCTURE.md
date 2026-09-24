@@ -71,3 +71,5 @@ vs-dope/
 When changing gameplay, first determine whether the behavior is JSON-driven, C#-driven, or both.
 
 `tests/OverdoseProbe`, `tests/SyringeProbe` and `tests/AddictProbe` are separate server test mods, excluded from production compilation. Overdose uses the game-bundled `Lib/0Harmony.dll`; liquid APIs use `Mods/VSSurvivalMod.dll`.
+
+Marijuana additions: `src/Items/JointItem.cs`, `src/Systems/StonedSystem.cs`, `src/Client/Stoned{HudSystem,EyesBehavior}.cs`; nine crop shapes plus bud/joint item models; `tools/build_marijuana_models.py`, `tools/preview_marijuana_models.py`, `tools/build_joint_audio.py`; live probe in `tests/MarijuanaProbe`. Documentation: `docs/MARIJUANA.md`.
