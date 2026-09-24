@@ -15,7 +15,8 @@ internal static class SmokingAnimationChecks
             var shape = api.Assets.Get(new AssetLocation(path)).ToObject<Shape>();
             shape.InitForAnimations(api.Logger, path);
 
-            foreach (string code in new[] { JointItem.AnimationCode, JointItem.AnimationCode + "-fp" })
+            foreach (string code in new[] { JointItem.AnimationCode, JointItem.AnimationCode + "-fp",
+                BongItem.AnimationCode, BongItem.AnimationCode + "-fp" })
             {
                 var animation = shape.Animations.Single(a => a.Code == code);
                 string context = $"{model}/{code}";
