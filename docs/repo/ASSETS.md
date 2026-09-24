@@ -26,6 +26,16 @@ Coca models use a tapered, bent leader, staggered branches, secondary twigs, and
 
 Keep leaves distributed along branches and secondary twigs, with varied orientations so they remain visible from side views. Petioles overlap the transparent texture margin. Avoid reverting to thick straight trunks, bare horizontal arms, or oversized flowers/fruit.
 
+## Drug addict entity
+
+`assets/vs-dope/entities/drugaddict.json` renders with the **vanilla seraph shape** `game:entity/humanoid/seraph` (the same body, rig and animation set as the player), so no addict shape lives in this repo any more. The old blocky placeholder shape `shapes/entity/drugaddict.json` was removed.
+
+- Texture keys must match the seraph shape: `seraph` -> `vs-dope:entity/drugaddict` (our skin; listed first because `deaddecay` particles read `FirstTexture`), `hair` -> `game:entity/humanoid/seraphskinparts/hair/rust3` (greasy dark brown).
+- `textures/entity/drugaddict.png` is **64x152**, the same size as vanilla seraph body skins (`seraphskinparts/body/skin*.png`): the shape's `textureSizes.seraph` is 32x76 UV units and the texture must keep that aspect ratio. This is an intentional exception to the power-of-two rule; vanilla entity skins are not power-of-two either.
+- `tools/build_addict_texture.py` regenerates it deterministically from vanilla `skin18` and the UVs it reads from `$VINTAGE_STORY/assets/game/shapes/entity/humanoid/seraph.json`: sallow grimy skin, eye rings, stubble, dull eyes, forearm track marks and sores, stained torn linen shirt with ragged short sleeves, patched trousers torn off at the shin, rag-wrapped feet. `--preview out.png` writes a flat front/back/texture sheet; the committed one is `docs/previews/drugaddict.png`.
+- The face is the head's **west** face; the eye/eyelid/mouth/brow elements sample the strip at x 56-63, y 0-27 of the texture.
+- Animations (all codes exist in the seraph shape): `walk` (Move), `sprint` (Move+SprintMode), `idle` -> `coldidle` shiver as the default anim (Idle), `jump` -> `newjump`, `swim`, `swimidle`, `hurt`, `die` (Dead). Triggers key off `EnumEntityActivity`, which the client derives from the server's synced `Controls` (`Forward` => Move, `Sprint` => SprintMode), so `EntityDrugAddict.Walk()` setting `Controls.Forward` is what plays `walk`.
+
 ## Items
 
 | Asset | Purpose | Runtime behavior |
