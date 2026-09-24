@@ -26,3 +26,11 @@ public class SellToAddictPacket
     public string DrugCode = "";
     public int Quantity;
 }
+
+// Server -> Client: close the trade window for this addict (it died, fled or walked away).
+// Registered after the other two on both sides; registration order must match.
+[ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+public class CloseAddictTradePacket
+{
+    public long AddictEntityId;
+}
