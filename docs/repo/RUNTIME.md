@@ -38,6 +38,26 @@ Progression timing: the daily withdrawal/decay pass is driven by in-game calenda
 
 Withdrawal applies a movement **slow** via additive walkspeed `-severity * 0.4f` (not a speedup); poison damage above severity 0.8.
 
+## Drug stat effects
+
+`Systems/DrugStatEffectSystem.cs` (server ModSystem) gives each drug a practical use through vanilla player stats, with a trade-off (issue #55). `Profiles` holds the durations (in-game hours), the stat modifiers and the damage mitigation. `DrugConsumableItem.ApplyDose` (opium, morphine item and syringe, coca vitae) and `AddictionSystem.ApplyHeroinDose` (vessel and syringe) call `Apply(entity, product, effectMultiplier, now)`. Values scale with the tolerance multiplier at dose time. A re-dose refreshes the timer and never stacks.
+
+| Product | Hours | Effect |
+| --- | --- | --- |
+| coca-vitae | 1 | miningSpeedMul +0.40, hungerrate -0.30 |
+| coca-crash | 1 (from the end of the high) | hungerrate +0.40, walkspeed -0.15, one-off `ConsumeSaturation(150)` |
+| opium | 1 | healingeffectivness +0.20, rangedWeaponsAcc -0.20, 10% damage mitigation |
+| morphine | 1.5 | +0.35 / -0.35, 20% mitigation |
+| heroin | 2 | +0.50 / -0.50, 30% mitigation |
+
+- Keys: stat modifier `vs-dope-stat-<product>` (persistent stat), watched `vs-dope-stat-<product>-expires-gamehour`, and entity `Attributes` `vs-dope-stat-<product>-mult` (the multiplier at dose time).
+- A 1 s tick ends expired effects. An expired coca high starts the crash (a new coca dose cancels a running crash). `PlayerNowPlaying` re-applies unexpired effects from the stored multiplier. Death and respawn clear everything.
+- Mitigation hooks `EntityBehaviorHealth.onDamaged` once per player entity (a `ConditionalWeakTable`). It uses the strongest active opioid, not the sum, and never reduces heals or `EnumDamageSource.Internal` damage (our overdose and withdrawal poison).
+- `healingeffectivness` only affects vanilla healing items (poultices, bandages), not our own `ReceiveDamage(Heal)`. `animalSeekingRange` above 1 has no effect, because AI searches only within its own seekingRange. That's why opioids don't make mobs notice you sooner.
+- Marijuana stats (`StonedStats`: hungerrate +0.30, animalSeekingRange -0.35) live under the `vs-dope-stoned` key and are applied, resumed and cleared by `StonedSystem` next to its walkspeed modifier.
+- Tooltips: `drug-effects-<product>` lang keys, shown by `DrugConsumableItem` and filled syringes. Marijuana uses `joint-tooltip`.
+- Probe: `tests/DrugStatsProbe` (look for `DRUGSTATS TEST SUMMARY`).
+
 ## Screen effects
 
 `Systems/DrugVisualEffects.cs` holds the per-dose `intoxication` (drunk sway) and `psychedelic` (colour warp) added by each product: coca vitae 0.05/0.15, opium 0.15/0.10, morphine 0.25/0.20, heroin 0.35/0.40 per 0.1 L. Amounts scale with the tolerance effect multiplier and are capped at the vanilla limits (1.1 and 2.0). They are not removed when the movement effect expires; vanilla `EntityBehaviorHunger.detox` fades both (about 0.6 per in-game hour). On join, values saved above the caps by older builds are clamped.
@@ -91,6 +111,6 @@ The project now references `Mods/VSSurvivalMod.dll` for the game's liquid-contai
 
 `JointItem` is registered as `vs-dope.joint`. Five-second right-click held use runs `vsdope-smoke` (150 frames, first-/third-person variants), broadcasts drag audio after 0.9s, then server-side consumes one joint and calls `StonedSystem.Apply`. Temporary stack flags prevent short, cancelled or duplicate-stop consumption.
 
-`StonedSystem` is an auto-loaded ModSystem with a 250ms server tick for fully playing players. Watched `vs-dope-stoned-expires-gamehour` persists a two-hour calendar expiry; entity `Attributes` key `vs-dope-stoned-last-gamehour` tracks the last healing interval. It applies additive walkspeed -0.2 under `vs-dope-stoned`, heals 0.5 HP/game minute including fractional intervals and final expiry, refreshes without stacking, and clears on death/respawn. `PlayerNowPlaying` resets the healing cursor, preventing offline grants. This separate effect does not roll marijuana tolerance/overdose.
+`StonedSystem` is an auto-loaded ModSystem with a 250ms server tick for fully playing players. Watched `vs-dope-stoned-expires-gamehour` persists a two-hour calendar expiry; entity `Attributes` key `vs-dope-stoned-last-gamehour` tracks the last healing interval. It applies additive walkspeed -0.2, hungerrate +0.3 and animalSeekingRange -0.35 under `vs-dope-stoned`, heals 0.5 HP/game minute including fractional intervals and final expiry, refreshes without stacking, and clears on death/respawn. `PlayerNowPlaying` resets the healing cursor, preventing offline grants. This separate effect does not roll marijuana tolerance/overdose.
 
 `StonedHudSystem` reads expiry and displays a noninteractive localized HUD. `StonedEyesBehavior` is appended after the vanilla client inventory/skin behaviors; it hooks `EntityBehaviorTexturedClothing.OnReloadSkin`, overlays vanilla sclera and requests recomposition on expiry changes, without altering saved customization. `VSEssentials.dll` is required for that public behavior API. Custom player atlases are skipped. See `docs/MARIJUANA.md` and `tests/MarijuanaProbe`.

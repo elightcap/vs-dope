@@ -34,7 +34,13 @@ public sealed class StonedSystem : ModSystem
         Tick(entity, now); // Settle the old interval before refreshing it.
         entity.WatchedAttributes.SetDouble(ExpiryKey, now + DurationHours);
         entity.Attributes.SetDouble(LastHourKey, now);
+        SetStats(entity);
+    }
+
+    private static void SetStats(EntityAgent entity)
+    {
         entity.Stats.Set("walkspeed", EffectKey, SpeedModifier, true);
+        DrugStatEffectSystem.SetStats(entity, EffectKey, DrugStatEffectSystem.StonedStats, 1f);
     }
 
     public static void Tick(EntityAgent entity, double now)
@@ -59,12 +65,13 @@ public sealed class StonedSystem : ModSystem
         // World time can pass while disconnected; expiry persists but offline healing is not banked.
         entity.Attributes.SetDouble(LastHourKey, now);
         if (!IsActive(entity, now)) Clear(entity);
-        else entity.Stats.Set("walkspeed", EffectKey, SpeedModifier, true);
+        else SetStats(entity);
     }
 
     public static void Clear(EntityAgent entity)
     {
         entity.Stats.Remove("walkspeed", EffectKey);
+        DrugStatEffectSystem.RemoveStats(entity, EffectKey, DrugStatEffectSystem.StonedStats);
         if (entity.WatchedAttributes.HasAttribute(ExpiryKey)) entity.WatchedAttributes.RemoveAttribute(ExpiryKey);
         entity.Attributes.RemoveAttribute(LastHourKey);
     }

@@ -9,7 +9,7 @@ Fictional Vintage Story 1.22.7 game content. Smoke a joint by holding right-clic
 - Only stage 9 yields `Marijuana buds` (average four) plus seeds (average 1.5). Earlier stages return a small seed chance. Buds and joints stack to 64.
 - Shapeless grid recipe: **1 Marijuana buds + 1 `game:paper-parchment` -> 1 Joint**.
 - Complete the five-second held use to consume exactly one joint. Cancelling or releasing early consumes nothing and grants no effect. Interactable NPC clicks are left available.
-- `Stoned` lasts **two in-game calendar hours**, applies **-0.20 additive walkspeed** (80% normal speed on an otherwise unmodified character) and heals **0.5 HP per in-game minute**. Fractional minutes accrue smoothly. This is 60 HP over a full uninterrupted effect, capped by normal maximum health.
+- `Stoned` lasts **two in-game calendar hours**, applies **-0.20 additive walkspeed** (80% normal speed on an otherwise unmodified character) and heals **0.5 HP per in-game minute**. It also sets **hungerrate +0.30** and **animalSeekingRange -0.35** (mobs have to be 35% closer to notice you; see `DrugStatEffectSystem.StonedStats`). Fractional minutes accrue smoothly. This is 60 HP over a full uninterrupted effect, capped by normal maximum health.
 - A second joint refreshes the two-hour expiry. Rates never stack. Other sources of movement modifiers remain intact.
 - The calendar controls timing even when its speed changes or pauses. No offline healing is banked. A surviving effect resumes on reconnect; one that expired while offline is removed. Death/respawn removes it.
 - This effect does not add an unrequested marijuana tolerance or overdose roll. Its healing rate is fixed, including during other status effects.

@@ -40,6 +40,10 @@ Heroin vessel/syringe dose ─────┘
 
 Products: opium, morphine, heroin, coca-vitae. Adding a product requires a row in `OverdoseSystem.Risks` and `DrugVisualEffects.PerDose`, and its `ToleranceProduct`. See `docs/OVERDOSE.md` for persistence and balance.
 
+## Drug stat effects
+
+`DrugConsumableItem.ApplyDose` / `AddictionSystem.ApplyHeroinDose` -> `DrugStatEffectSystem.Apply` (product = `ToleranceProduct`, or `"heroin"`). `StonedSystem.Apply/Resume/Clear` -> `DrugStatEffectSystem.SetStats/RemoveStats(StonedStats)`. Changing a profile means updating the `drug-effects-<product>` (or `joint-tooltip`) lang text and `tests/DrugStatsProbe`. A new product needs a `Profiles` row keyed by its `ToleranceProduct` and a `drug-effects-<product>` lang key.
+
 ## Crops
 
 ```text
@@ -57,6 +61,7 @@ seed item -> plantBlockCode -> crop blocktype
 | Tolerance balance | `AddictionSystem.cs` | all finished products |
 | Overdose chance/balance | `OverdoseSystem.cs` (`Risks`, constants) | `RecordDrugDose`, HUD warning, `tests/OverdoseProbe` |
 | New overdose-able product | `OverdoseSystem.Risks`, `DrugVisualEffects.PerDose` | tolerance key |
+| Drug stat effects (tools/trade-offs) | `DrugStatEffectSystem.Profiles`, `StonedStats` | `drug-effects-*` lang, `tests/DrugStatsProbe` |
 | Drug screen-effect strength | `DrugVisualEffects.cs` | `heroin.json` nutritionPropsPerLitre (kept in sync) |
 | New consumed product | item JSON + consumable C# | mod registration, lang, texture |
 | New liquid / creative filled vessel | liquid itemtype `creativeinventoryStacks` (`game:woodbucket`, `game:barrel`, `ucontents` with `vs-dope:` code) | `waterTightContainerProps`, shape `game:item/liquid`, lang |

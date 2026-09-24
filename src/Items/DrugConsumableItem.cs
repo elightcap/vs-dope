@@ -1,4 +1,6 @@
+using System.Text;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using VsDope.Systems;
 
@@ -16,6 +18,15 @@ public class DrugConsumableItem : Item
 
     /// <summary>Walkspeed stat key (and watched-attribute expiry prefix) for an item's movement effect.</summary>
     public static string SpeedEffectKeyFor(string itemPath) => $"vs-dope-{itemPath}-speed";
+
+    /// <summary>Tooltip line describing a product's stat effects and trade-offs.</summary>
+    public static string EffectsDescription(string product) => Lang.Get("vs-dope:drug-effects-" + product);
+
+    public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
+    {
+        base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
+        dsc.AppendLine(EffectsDescription(ToleranceProduct));
+    }
 
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
     {
@@ -67,6 +78,7 @@ public class DrugConsumableItem : Item
         // Screen effects are per product (see DrugVisualEffects) and fade through vanilla detox,
         // so they are not removed again when the movement effect expires.
         DrugVisualEffects.Apply(byEntity, ToleranceProduct, 1f, effectMultiplier);
+        DrugStatEffectSystem.Apply(byEntity, ToleranceProduct, effectMultiplier, byEntity.World.Calendar.TotalHours);
 
         // EntityStats movement values are additive: +1.0 doubles speed, -0.5 halves it.
         // Tolerance scales the item's modifier back toward neutral (0).

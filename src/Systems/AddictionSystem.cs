@@ -164,6 +164,7 @@ public class AddictionSystem : IDisposable
         if (!IsOverdosing(player))
             entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, HeroinHealPerLitre * litres * multiplier);
         DrugVisualEffects.Apply(entity, "heroin", doses, multiplier);
+        DrugStatEffectSystem.Apply(entity, "heroin", multiplier, api.World.Calendar.TotalHours);
     }
 
     /// <summary>The single entry point for every consumption route (items, syringes, vessels).

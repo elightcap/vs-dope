@@ -156,5 +156,6 @@ public class SyringeItem : Item
         int portions = Portions(inSlot.Itemstack);
         dsc.AppendLine(Lang.Get("vs-dope:syringe-volume", portions / 100.0, portions / Dose));
         dsc.AppendLine(Lang.Get("vs-dope:syringe-help"));
+        if (portions > 0) dsc.AppendLine(DrugConsumableItem.EffectsDescription(Code.Path.Replace("syringe-", "")));
     }
 }
