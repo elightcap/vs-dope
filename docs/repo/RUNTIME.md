@@ -8,7 +8,7 @@ If a JSON `class` changes or a new custom item class is introduced, inspect regi
 
 ## Consumables
 
-`src/Items/DrugConsumableItem.cs` is the primary path for directly consumed custom items. It owns held interaction, consumption, healing, intoxication/psychedelic attributes, movement modifiers, expiration, addiction recording, and product-specific tolerance.
+`src/Items/DrugConsumableItem.cs` is the primary path for directly consumed custom items. It owns held interaction, consumption, healing, movement modifiers, expiration, addiction recording, and product-specific tolerance. Screen effects come from `Systems/DrugVisualEffects.cs`.
 
 Current subclasses:
 - `OpiumItem`
@@ -38,19 +38,23 @@ Progression timing: the daily withdrawal/decay pass is driven by in-game calenda
 
 Withdrawal applies a movement **slow** via additive walkspeed `-severity * 0.4f` (not a speedup); poison damage above severity 0.8.
 
+## Screen effects
+
+`Systems/DrugVisualEffects.cs` holds the per-dose `intoxication` (drunk sway) and `psychedelic` (colour warp) added by each product: coca vitae 0.05/0.15, opium 0.15/0.10, morphine 0.25/0.20, heroin 0.35/0.40 per 0.1 L. Amounts scale with the tolerance effect multiplier and are capped at the vanilla limits (1.1 and 2.0). They are not removed when the movement effect expires; vanilla `EntityBehaviorHunger.detox` fades both (about 0.6 per in-game hour). On join, values saved above the caps by older builds are clamped.
+
 ## Overdose
 
-`Systems/OverdoseSystem.cs` owns acute load, recovery, risk, movement penalties and poison damage. All custom consumables and heroin consumption call `AddictionSystem.RecordDrugDose` once. Product load values are independent of visual intoxication: opium 3, morphine 6, heroin 5 per 0.1 L, Coca Vitae 5 per item.
+`Systems/OverdoseSystem.cs` owns the per-dose overdose roll, overdose severity, recovery, movement penalty and poison damage. Every consumption route (items, morphine/heroin syringes, heroin vessels) goes through `AddictionSystem.RecordDrugDose`, which rolls against the tolerance the player had before this dose and then records addiction and tolerance.
 
-Existing `vs-dope-load-<product>` watched keys are retained. `vs-dope-load-gamehour` in persistent entity attributes records the last processed calendar time. Each product loses 5 load units per elapsed in-game hour while online; pausing the calendar prevents metabolism. Joining resets only that timestamp, preserves load and does not create a dose. Death/respawn clears acute load and owned movement effects, preserving addiction/tolerance history.
+Chance per dose = `(base + perRecentDose * recentDoses) * (1 - 0.4 * tolerance)`, capped at 0.9. `recentDoses` counts doses of any drug in the last 2 in-game hours (persistent `vs-dope-recent-dose-hours` double array in entity `Attributes`, max 32 entries). Per-drug `Risks` table (base / per recent dose / base severity): opium 0.5% / 1.5% / 0.30, coca vitae 1% / 3% / 0.40, morphine 1.5% / 4% / 0.45, heroin 2% / 5% / 0.55. A vessel drink rolls once per 0.1 L consumed.
 
-Risk is the sum of each product's load divided by its tolerance-adjusted threshold (15 to at most 25). Warning begins at risk 0.75, overdose above 1. Severity is `clamp(risk - 1, 0, 1)`. A single combined movement correction caps speed below normal even with stimulant bonuses, with a 0.1 floor to prevent reverse movement. Above severity 0.35, poison damage is `0.2 * severity` per active second. Drug healing is disabled while overdosing. Recovery removes only the overdose correction. See `docs/OVERDOSE.md` for balance and validation.
+A successful roll adds `baseSeverity + 0.05 * recentDoses` (cap 1) to the current severity and sets `vs-dope-overdose`. Severity recovers 0.5 per elapsed in-game hour while online (`vs-dope-overdose-gamehour` clock; paused calendar and offline time do not recover). While overdosing: speed is capped at `0.75 - 0.6 * severity` (floor 0.1, stimulants cannot cancel it), drug healing is blocked, and above severity 0.35 the player takes `0.1 * severity` poison damage per second. Creative/spectator players ignore that damage (vanilla `EntityPlayer.ShouldReceiveDamage`).
 
-A 1s `RegisterGameTickListener` replaces the former low-level timer; entity changes run on the game thread and the listener is disposed on shutdown.
+Watched keys: `vs-dope-overdose` (bool), `vs-dope-overdose-severity`, `vs-dope-overdose-risk` (chance of the next dose of the last-used product), `vs-dope-recent-doses`. Legacy `vs-dope-load-<product>` / `vs-dope-load-gamehour` keys are removed on join. Death/respawn clears overdose state and recent doses and keeps tolerance/addiction. A 1s `RegisterGameTickListener` drives `OverdoseSystem.Tick`. See `docs/OVERDOSE.md` and `tests/OverdoseProbe`.
 
 ## Client UI
 
-`src/Client/OverdoseHudSystem.cs` reads `vs-dope-overdose`, `vs-dope-overdose-risk`, and `vs-dope-overdose-severity` to show high-load, overdose and damage warnings. It is a noninteractive HUD element with localized text.
+`src/Client/OverdoseHudSystem.cs` reads `vs-dope-overdose`, `vs-dope-overdose-risk`, and `vs-dope-overdose-severity` to show a next-dose risk warning (from 15%, with the percentage), overdose and damage warnings. It is a noninteractive HUD element with localized text.
 
 `src/Client/AddictionCharacterTabSystem.cs` adds the Addiction character tab and reads watched attributes synchronized by `AddictionSystem`.
 
@@ -63,7 +67,7 @@ If the Coca Vitae effect key or expiry attribute changes, update both server/ite
 
 `Items/SyringeItem.cs` handles the empty/heroin/morphine variants, server-side liquid transfer and held use. Each non-stackable syringe stores integer liquid portions in `ItemStack.Attributes["vs-dope-syringe-portions"]`: 100 portions = 1 litre, 10 portions = one dose. Filled creative/crafted variants default to 100; an empty variant always reads zero. These stack attributes persist through inventory moves, drops and saves. The transient `TempAttributes["vs-dope-syringe-applying"]` flag prevents cancelled/fill interactions from applying doses.
 
-Morphine syringes and oral morphine share `MorphineItem.ApplyDose`, including the overdose healing gate. Heroin syringes explicitly record each dose, including rapid repeats and capped psychedelic values; volume-based vessel consumption shares the same calendar-hour effect key. Syringe health/intoxication/psychedelic additions use the existing heroin liquid's per-litre values multiplied by 0.1; tolerance remains product-specific and overdose combines normalized exposure across products.
+Morphine syringes and oral morphine share `MorphineItem.ApplyDose`, including the overdose healing gate. Heroin syringes explicitly record each dose, including rapid repeats and capped psychedelic values; volume-based vessel consumption shares the same calendar-hour effect key. A heroin injection is 0.1 L: 2.4 health and the heroin row of `DrugVisualEffects`; a morphine injection equals one morphine item. Tolerance remains product-specific; overdose risk stacks across products through the shared recent-dose window.
 
 `Systems/SyringeRecipeSystem.cs` registers exact vessel-code shapeless filling recipes at AssetsLoaded (order 1.1). Uses vanilla liquid-container recipe attributes to remove 1 litre and preserve the vessel. A client/server recipe-matching guard requires a single vessel to avoid rounding losses from the vanilla stacked-vessel consumption path. Placed refill and off-hand refill use `ILiquidSource`; sealed barrels and claimed blocks are protected.
 

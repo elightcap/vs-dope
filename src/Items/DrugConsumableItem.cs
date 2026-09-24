@@ -1,5 +1,6 @@
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
+using VsDope.Systems;
 
 namespace VsDope.Items;
 
@@ -7,10 +8,8 @@ public class DrugConsumableItem : Item
 {
     protected virtual float HealAmount => 2f;
     protected virtual float SpeedMultiplier => 0.85f;
-    protected virtual float IntoxicationAmount => 4f;
     protected virtual int EffectDurationMs => 2500;
     protected virtual double EffectDurationGameHours => 0;
-    protected virtual bool Psychedelic => false;
     protected virtual string EffectKey => $"vs-dope-{Code?.Path ?? "drug"}-speed";
     protected virtual string ToleranceProduct => Code?.Path ?? "drug";
 
@@ -62,13 +61,9 @@ public class DrugConsumableItem : Item
                 effectMultiplier = VsDopeModSystem.AddictionSystem.GetEffectMultiplier(player, ToleranceProduct);
         }
 
-        float currentIntox = entity.WatchedAttributes.GetFloat("intoxication");
-        entity.WatchedAttributes.SetFloat("intoxication", GameMath.Clamp(currentIntox + IntoxicationAmount, 0f, 25f));
-        if (Psychedelic)
-        {
-            float currentPsych = entity.WatchedAttributes.GetFloat("psychedelic");
-            entity.WatchedAttributes.SetFloat("psychedelic", GameMath.Clamp(currentPsych + IntoxicationAmount * 1.5f, 0f, 25f));
-        }
+        // Screen effects are per product (see DrugVisualEffects) and fade through vanilla detox,
+        // so they are not removed again when the movement effect expires.
+        DrugVisualEffects.Apply(entity, ToleranceProduct, 1f, effectMultiplier);
 
         // EntityStats movement values are additive: +1.0 doubles speed, -0.5 halves it.
         // Tolerance scales the item's modifier back toward neutral (0).
@@ -77,7 +72,7 @@ public class DrugConsumableItem : Item
         entity.Stats.Set("walkspeed", effectKey, GameMath.Clamp(effectiveSpeedModifier, -0.7f, 1f));
         if (player != null) VsDopeModSystem.AddictionSystem.RecordDrugDose(player, ToleranceProduct);
         float effectiveHeal = HealAmount * effectMultiplier;
-        if (effectiveHeal > 0 && (player == null || !VsDope.Systems.AddictionSystem.IsOverdosing(player)))
+        if (effectiveHeal > 0 && (player == null || !AddictionSystem.IsOverdosing(player)))
             entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Heal }, effectiveHeal);
 
         long expiresAtMs = EffectDurationGameHours > 0
@@ -116,13 +111,6 @@ public class DrugConsumableItem : Item
             entity.Stats.Remove("walkspeed", effectKey);
             entity.WatchedAttributes.RemoveAttribute(effectKey + "-expires");
             entity.WatchedAttributes.RemoveAttribute(effectKey + "-expires-gamehour");
-            float intox = entity.WatchedAttributes.GetFloat("intoxication");
-            entity.WatchedAttributes.SetFloat("intoxication", GameMath.Max(0, intox - IntoxicationAmount));
-            if (Psychedelic)
-            {
-                float psych = entity.WatchedAttributes.GetFloat("psychedelic");
-                entity.WatchedAttributes.SetFloat("psychedelic", GameMath.Max(0, psych - IntoxicationAmount * 1.5f));
-            }
         }
 
         entity.World.RegisterCallback(CheckEffectExpiry, EffectDurationGameHours > 0 ? 1000 : EffectDurationMs);
@@ -133,7 +121,6 @@ public class OpiumItem : DrugConsumableItem
 {
     protected override float HealAmount => 2f;
     protected override float SpeedMultiplier => 0.9f;
-    protected override float IntoxicationAmount => 3f;
     protected override int EffectDurationMs => 2500;
     protected override string ToleranceProduct => "opium";
 }
@@ -142,7 +129,6 @@ public class MorphineItem : DrugConsumableItem
 {
     protected override float HealAmount => 5f;
     protected override float SpeedMultiplier => 0.8f;
-    protected override float IntoxicationAmount => 6f;
     protected override int EffectDurationMs => 5000;
     protected override string ToleranceProduct => "morphine";
 }
@@ -151,7 +137,6 @@ public class CocaVitaeItem : DrugConsumableItem
 {
     protected override float HealAmount => 4f;
     protected override float SpeedMultiplier => 2.0f;
-    protected override float IntoxicationAmount => 1f;
     protected override int EffectDurationMs => 30000;
     protected override double EffectDurationGameHours => 1.0;
     protected override string ToleranceProduct => "coca-vitae";

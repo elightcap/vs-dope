@@ -36,9 +36,9 @@ Heroin vessel/syringe dose ─────┘
 
 `DrugConsumableItem.ApplyDose` and `AddictionSystem.ApplyHeroinDose` -> `RecordDrugDose` -> `OverdoseSystem.RecordDose`. `HeroinVesselDoseSystem` hooks native `BlockLiquidContainerBase.tryEatStop` with game-bundled Harmony and reports exact consumed volume. It delegates all other liquids to the original method.
 
-`OverdoseSystem.Tick` -> calendar-based load decay -> combined normalized risk -> one movement correction and poison damage -> watched risk/severity/active keys -> `Client/OverdoseHudSystem`.
+`RecordDrugDose` -> tolerance before this dose -> `OverdoseSystem.RecordDose` (prune window, roll per dose, worsen severity) -> `RecordUse` / `RecordToleranceUse`. `OverdoseSystem.Tick` -> window pruning + calendar-based severity recovery -> one movement correction and poison damage -> watched risk/severity/active/recent keys -> `Client/OverdoseHudSystem`.
 
-Products: opium, morphine, heroin, coca-vitae. Adding a product requires its explicit load and inclusion in `OverdoseSystem.Products`. See `docs/OVERDOSE.md` for persistence and balance.
+Products: opium, morphine, heroin, coca-vitae. Adding a product requires a row in `OverdoseSystem.Risks` and `DrugVisualEffects.PerDose`, and its `ToleranceProduct`. See `docs/OVERDOSE.md` for persistence and balance.
 
 ## Crops
 
@@ -55,8 +55,9 @@ seed item -> plantBlockCode -> crop blocktype
 | --- | --- | --- |
 | Coca Vitae stats | `DrugConsumableItem.cs` | Coca HUD, tolerance |
 | Tolerance balance | `AddictionSystem.cs` | all finished products |
-| Overdose threshold/balance | `OverdoseSystem.cs` | `RecordDrugDose`, HUD stages |
-| New overdose-able product | `OverdoseSystem.cs` | explicit dose load, tolerance key |
+| Overdose chance/balance | `OverdoseSystem.cs` (`Risks`, constants) | `RecordDrugDose`, HUD warning, `tests/OverdoseProbe` |
+| New overdose-able product | `OverdoseSystem.Risks`, `DrugVisualEffects.PerDose` | tolerance key |
+| Drug screen-effect strength | `DrugVisualEffects.cs` | `heroin.json` nutritionPropsPerLitre (kept in sync) |
 | New consumed product | item JSON + consumable C# | mod registration, lang, texture |
 | New liquid / creative filled vessel | liquid itemtype `creativeinventoryStacks` (`game:woodbucket`, `game:barrel`, `ucontents` with `vs-dope:` code) | `waterTightContainerProps`, shape `game:item/liquid`, lang |
 | New crop | blocktype + seed item | shapes, textures, lang, drops |
@@ -64,8 +65,8 @@ seed item -> plantBlockCode -> crop blocktype
 | Crop drops | crop blocktype | item definitions |
 | Addiction UI | `AddictionCharacterTabSystem.cs` | watched attribute sync |
 | Coca countdown | `CocaVitaeEffectHudSystem.cs` | Coca expiry writes |
-| Overdose threshold/severity | `OverdoseSystem.cs` (`Refresh`) | per-product load attrs, tolerance plateau |
-| Overdose dose accumulation | `RecordDrugDose`, `HeroinVesselDoseSystem` | consumed volume, product IDs in `OverdoseSystem` |
+| Overdose severity/recovery/damage | `OverdoseSystem.cs` (`Apply`, `Advance`) | HUD severity gate |
+| Overdose dose counting | `RecordDrugDose`, `HeroinVesselDoseSystem` | consumed volume (0.1 L per roll), product IDs in `OverdoseSystem.Risks` |
 | Processing | `assets/vs-dope/recipes/` | input/output item JSON |
 | Localization | `assets/vs-dope/lang/en.json` | exact asset codes |
 

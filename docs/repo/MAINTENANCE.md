@@ -29,7 +29,8 @@ Before modifying a subsystem:
 - `ToleranceProduct`: per-product tolerance routing
 - `RecordToleranceUse`, `GetEffectMultiplier`: tolerance API
 - `RecordDrugDose`: shared consumption accounting
-- `OverdoseSystem`: combined risk, recovery, damage
+- `OverdoseSystem`: per-dose roll, recent-dose window, severity recovery, damage
+- `DrugVisualEffects`: per-drug intoxication/psychedelic strength
 - `HeroinVesselDoseSystem`: native volume-based drinking hook
 - `crop-coca`, `crop-poppy`: crop codes
 - `plantBlockCode`: seed-to-crop linkage
