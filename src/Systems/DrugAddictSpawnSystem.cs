@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Vintagestory.API.Config;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
@@ -17,9 +18,10 @@ public class DrugAddictSpawnSystem
     // Debug spawn lands closer so the tester sees it immediately.
     private const double DebugMinOffset = 6;
     private const double DebugMaxOffset = 14;
+    private const int MaxDebugSpawn = 20;
     private static readonly AssetLocation EntityCode = new("vs-dope", "drugaddict");
 
-    private ICoreServerAPI api;
+    private ICoreServerAPI api = null!;
     private int lastProcessedDay = -1;
     private readonly Random rng = new();
 
@@ -28,47 +30,29 @@ public class DrugAddictSpawnSystem
         api = serverApi;
         // Poll frequently; only act when the calendar day actually rolls over.
         api.Event.Timer(Check, 20);
-        api.RegisterCommand("spawnaddict", "Spawn a drug addict NPC near you (for testing)", "/spawnaddict [count]", OnSpawnCommand, Privilege.controlserver);
-
-        // One-shot diagnostic: confirm the entity asset registered after world load.
-        DumpRegistry("startup");
+        api.ChatCommands.Create("spawnaddict")
+            .WithDescription(Lang.Get("vs-dope:command-spawnaddict-desc"))
+            .RequiresPrivilege(Privilege.controlserver)
+            .RequiresPlayer()
+            .WithArgs(api.ChatCommands.Parsers.OptionalIntRange("count", 1, MaxDebugSpawn, 1))
+            .HandleWith(OnSpawnCommand);
     }
 
-    private void DumpRegistry(string tag)
+    private TextCommandResult OnSpawnCommand(TextCommandCallingArgs args)
     {
-        try
-        {
-            var codes = api?.World?.EntityTypeCodes;
-            if (codes == null) { api.Logger.Error($"[vs-dope-diag:{tag}] EntityTypeCodes is null"); return; }
-            var matches = codes.Where(c => c.Contains("dope", StringComparison.OrdinalIgnoreCase) || c.Contains("addict", StringComparison.OrdinalIgnoreCase)).ToList();
-            api.Logger.Event($"[vs-dope-diag:{tag}] entity type count={codes.Count}; vs-dope/addict matches=[{string.Join(", ", matches)}]; sample(first 25)=[{string.Join(", ", codes.Take(25))}]");
-        }
-        catch (Exception e) { api.Logger.Error($"[vs-dope-diag:{tag}] threw: {e}"); }
-    }
+        if (args.Caller.Player is not IServerPlayer player || player.Entity == null)
+            return TextCommandResult.Error(Lang.Get("vs-dope:command-spawnaddict-noplayer"));
 
-    private void OnSpawnCommand(IServerPlayer player, int groupId, CmdArgs args)
-    {
-        if (player?.Entity == null) return;
-
-        int count = 1;
-        if (args.Length > 0)
-        {
-            try { count = args.PopInt() ?? 1; } catch { count = 1; }
-        }
-        count = Math.Max(1, Math.Min(count, 20));
-
-        int spawned = SpawnNear(player, count, DebugMinOffset, DebugMaxOffset, out string reason);
-        string detail = spawned > 0 ? "" : (string.IsNullOrEmpty(reason) ? " unknown cause" : $" ({reason})");
-        player.SendMessage(
-            groupId,
-            $"[vs-dope] Spawned {spawned}/{count} drug addict(s) near you.{detail}",
-            spawned > 0 ? EnumChatType.CommandSuccess : EnumChatType.CommandError,
-            null);
+        int count = (int)args[0];
+        int spawned = SpawnNear(player, count, DebugMinOffset, DebugMaxOffset, out string? reason);
+        return spawned > 0
+            ? TextCommandResult.Success(Lang.Get("vs-dope:command-spawnaddict-success", spawned, count))
+            : TextCommandResult.Error(Lang.Get("vs-dope:command-spawnaddict-failed", count, reason ?? "unknown cause"));
     }
 
     private void Check()
     {
-        if (api?.World?.Calendar == null) return;
+        if (api.World?.Calendar == null) return;
         int today = (int)api.World.Calendar.TotalDays;
         if (today <= 0 || today == lastProcessedDay) return;
 
@@ -81,29 +65,26 @@ public class DrugAddictSpawnSystem
         var players = api.Server.Players.Where(p => p.ConnectionState == EnumClientState.Playing).ToList();
         if (players.Count == 0) return;
 
-        SpawnNear(players[rng.Next(players.Count)], count, MinOffset, MaxOffset);
+        SpawnNear(players[rng.Next(players.Count)], count, MinOffset, MaxOffset, out _);
     }
 
     // Places up to `count` addicts in a ring around the player. Returns how many actually spawned.
-    public int SpawnNear(IServerPlayer player, int count, double minOffset, double maxOffset)
-        => SpawnNear(player, count, minOffset, maxOffset, out _);
-
-    public int SpawnNear(IServerPlayer player, int count, double minOffset, double maxOffset, out string reason)
+    private int SpawnNear(IServerPlayer player, int count, double minOffset, double maxOffset, out string? reason)
     {
         reason = null;
-        var anchor = player?.Entity?.Pos;
-        if (anchor == null || api?.World == null) { reason = "no player/world"; return 0; }
+        var anchor = player.Entity?.Pos;
+        if (anchor == null) { reason = "no player/world"; return 0; }
 
-        EntityProperties props;
+        EntityProperties? props;
         try { props = api.World.GetEntityType(EntityCode); }
         catch (Exception e) { reason = $"GetEntityType threw: {e.Message}"; return 0; }
-        if (props == null) { reason = $"entitytype '{EntityCode}' not loaded"; DumpRegistry("command"); return 0; }
+        if (props == null) { reason = $"entitytype '{EntityCode}' not loaded"; return 0; }
 
         int spawned = 0;
-        string lastReason = null;
+        string? lastReason = null;
         for (int i = 0; i < count; i++)
         {
-            if (TrySpawnOnce(anchor, player.PlayerUID, minOffset, maxOffset, props, out string why))
+            if (TrySpawnOnce(anchor, player.PlayerUID, minOffset, maxOffset, props, out string? why))
                 spawned++;
             else lastReason = why;
         }
@@ -112,7 +93,7 @@ public class DrugAddictSpawnSystem
         return spawned;
     }
 
-    private bool TrySpawnOnce(EntityPos anchor, string targetUid, double minOffset, double maxOffset, EntityProperties props, out string reason)
+    private bool TrySpawnOnce(EntityPos anchor, string targetUid, double minOffset, double maxOffset, EntityProperties props, out string? reason)
     {
         reason = null;
         // Candidate spots: a ring around the player, then a guaranteed point right beside them.
@@ -134,17 +115,16 @@ public class DrugAddictSpawnSystem
 
             var pos = new Vec3d(x + 0.5, y, z + 0.5);
 
-            Entity entity;
+            Entity? entity;
             try { entity = api.ClassRegistry.CreateEntity(props); }
             catch (Exception e) { reason = $"CreateEntity threw: {e.Message}"; return false; }
 
             if (entity == null) { reason = "CreateEntity returned null"; return false; }
-            var addict = entity as EntityDrugAddict;
-            if (addict == null) { reason = $"class mismatch: created {entity.GetType().Name}, not EntityDrugAddict (check JSON \"class\" vs RegisterEntity)"; return false; }
+            if (entity is not EntityDrugAddict addict) { reason = $"class mismatch: created {entity.GetType().Name}, not EntityDrugAddict (check JSON \"class\" vs RegisterEntity)"; return false; }
 
             try
             {
-                addict.ServerPos.SetPos(pos);
+                addict.Pos.SetPos(pos);
                 addict.BindTarget(targetUid);
                 api.World.SpawnEntity(addict);
                 return true;

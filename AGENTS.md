@@ -140,6 +140,9 @@ Each of these was checked by decompiling or by a failed build/playtest in this r
 - `EntityPlayer` does **not** implement `IServerPlayer`, so `entityPlayer as IServerPlayer` is always null and the compiler doesn't warn you. Use `sapi.World.PlayerByUid(entityPlayer.PlayerUID) as IServerPlayer`.
 - `Entity.EntityId` is `long`.
 - `Entity.OnInteract(EntityAgent byEntity, ItemSlot slot, Vec3d hitPosition, EnumInteractMode mode)` is the current override.
+- `ICoreServerAPI.RegisterCommand` is `[Obsolete]`. Use `api.ChatCommands.Create(name).WithDescription(..).RequiresPrivilege(..).RequiresPlayer().WithArgs(api.ChatCommands.Parsers.OptionalIntRange(..)).HandleWith(args => TextCommandResult.Success(..))`. Parsed args are `args[i]`; the player is `args.Caller.Player`.
+- An entity's display name is lang key `item-creature-<code>` (and `item-dead-creature-<code>` once dead), read by `Entity.GetName()`. Keys like `entity-type-<code>` are never read.
+- `Func<,>` is ambiguous between `System` and `Vintagestory.API.Common`. Write `System.Func<...>`.
 - The spawn pipeline calls `entity.Initialize()` **after** your pre-spawn setup. Persist state into `WatchedAttributes` before spawning and don't let `Initialize` overwrite state that's already bound.
 - AI tasks **are** moddable: `AiTaskBase` lives in `VSEssentials.dll` (see section 1). An older note in `.planning/` says otherwise; that note is wrong.
 - Real trader classes (`EntityTrader`, `GuiDialogTrading`) are in game content and not meant for reuse. Our trade UI is a custom `GuiDialog` (see `src/Client/AddictTradeUiSystem.cs`).

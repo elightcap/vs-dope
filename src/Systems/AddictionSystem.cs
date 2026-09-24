@@ -2,14 +2,15 @@ using System;
 using System.Linq;
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
+using VsDope.Items;
 
 namespace VsDope.Systems;
 
 public class AddictionSystem : IDisposable
 {
-    public const string AttrAddictionLevel = "vs-dope-addiction-level";
+    private const string AttrAddictionLevel = "vs-dope-addiction-level";
     private const string AttrLastUseDay = "vs-dope-last-use-day";
-    public const string AttrDaysUsedConsecutively = "vs-dope-days-used";
+    private const string AttrDaysUsedConsecutively = "vs-dope-days-used";
     private const string AttrWithdrawalStartDay = "vs-dope-withdrawal-start";
 
     public const string WatchAddictionLevel = "vs-dope-addiction-level";
@@ -26,8 +27,20 @@ public class AddictionSystem : IDisposable
     /// <summary>One syringe application; also the unit for vessel drinking.</summary>
     public const float HeroinLitresPerDose = 0.1f;
     private const float HeroinHealPerLitre = 24f;
+    private const string WithdrawalEffectKey = "vs-dope-withdrawal";
+    private const float WithdrawalSlowPerSeverity = 0.4f;
+    private const float WithdrawalDamageSeverityGate = 0.8f;
+    private const float WithdrawalDamagePerSeverity = 1.5f;
 
-    public const string WatchOverdose = OverdoseSystem.WatchActive;
+    // Walkspeed modifiers from a single dose; cleared on death/respawn.
+    private static readonly string[] AcuteSpeedEffectKeys =
+    {
+        HeroinSpeedEffectKey,
+        DrugConsumableItem.SpeedEffectKeyFor("opium"),
+        DrugConsumableItem.SpeedEffectKeyFor("morphine"),
+        DrugConsumableItem.SpeedEffectKeyFor("coca-vitae"),
+    };
+
     public OverdoseSystem Overdose { get; } = new();
 
     // Tolerance is per finished product. The first two uses in an in-game day do not
@@ -54,18 +67,17 @@ public class AddictionSystem : IDisposable
     }
 
     public static string ToleranceKey(string product) => $"vs-dope-tolerance-{product}";
-    private static string TolKey(string product) => ToleranceKey(product);
     private static string TolDayKey(string product) => $"vs-dope-tolerance-day-{product}";
     private static string TolUsesKey(string product) => $"vs-dope-tolerance-uses-{product}";
 
     public float GetEffectMultiplier(IPlayer player, string product)
     {
         RecoverTolerance(player, product);
-        float tolerance = Math.Clamp(player.Entity.Attributes.GetFloat(TolKey(product)), 0f, MaxTolerance);
+        float tolerance = Math.Clamp(player.Entity.Attributes.GetFloat(ToleranceKey(product)), 0f, MaxTolerance);
         return Math.Max(MinimumEffectMultiplier, 1f - tolerance);
     }
 
-    public void RecordToleranceUse(IPlayer player, string product)
+    private void RecordToleranceUse(IPlayer player, string product)
     {
         RecoverTolerance(player, product);
         var attrs = player.Entity.Attributes;
@@ -78,9 +90,9 @@ public class AddictionSystem : IDisposable
 
         if (uses > FreeUsesPerDay)
         {
-            float tolerance = attrs.GetFloat(TolKey(product));
+            float tolerance = attrs.GetFloat(ToleranceKey(product));
             float bingeScale = 1f + Math.Min(1.5f, (uses - FreeUsesPerDay - 1) * 0.15f);
-            attrs.SetFloat(TolKey(product), Math.Min(MaxTolerance, tolerance + TolerancePerExcessUse * bingeScale));
+            attrs.SetFloat(ToleranceKey(product), Math.Min(MaxTolerance, tolerance + TolerancePerExcessUse * bingeScale));
         }
     }
 
@@ -92,8 +104,8 @@ public class AddictionSystem : IDisposable
         if (lastDay <= 0 || lastDay >= today) return;
 
         int unusedDays = today - lastDay;
-        float tolerance = Math.Max(0f, attrs.GetFloat(TolKey(product)) - unusedDays * ToleranceRecoveryPerUnusedDay);
-        attrs.SetFloat(TolKey(product), tolerance);
+        float tolerance = Math.Max(0f, attrs.GetFloat(ToleranceKey(product)) - unusedDays * ToleranceRecoveryPerUnusedDay);
+        attrs.SetFloat(ToleranceKey(product), tolerance);
         attrs.SetInt(TolDayKey(product), today);
         attrs.SetInt(TolUsesKey(product), 0);
     }
@@ -160,7 +172,7 @@ public class AddictionSystem : IDisposable
     public void RecordDrugDose(IPlayer player, string product, float doses = 1f)
     {
         RecoverTolerance(player, product);
-        float tolerance = Math.Clamp(player.Entity.Attributes.GetFloat(TolKey(product)), 0f, MaxTolerance);
+        float tolerance = Math.Clamp(player.Entity.Attributes.GetFloat(ToleranceKey(product)), 0f, MaxTolerance);
         Overdose.RecordDose(player, product, api.World.Calendar.TotalHours, tolerance, doses);
         RecordUse(player);
         RecordToleranceUse(player, product);
@@ -187,7 +199,7 @@ public class AddictionSystem : IDisposable
     {
         if (player.Entity == null) return;
         Overdose.Clear(player);
-        foreach (string key in new[] { HeroinSpeedEffectKey, "vs-dope-opium-speed", "vs-dope-morphine-speed", "vs-dope-coca-vitae-speed" })
+        foreach (string key in AcuteSpeedEffectKeys)
         {
             player.Entity.Stats.Remove("walkspeed", key);
             player.Entity.WatchedAttributes.RemoveAttribute(key + "-expires");
@@ -214,7 +226,7 @@ public class AddictionSystem : IDisposable
         SyncAddictionToClient(player);
     }
 
-    public void RecordUse(IPlayer player)
+    private void RecordUse(IPlayer player)
     {
         var attrs = player.Entity.Attributes;
         int currentDay = (int)api.World.Calendar.TotalDays;
@@ -250,8 +262,7 @@ public class AddictionSystem : IDisposable
         int lastUseDay = attrs.GetInt(AttrLastUseDay);
         if (currentDay - lastUseDay >= 1)
         {
-            float severity = WithdrawalSeverityBase + addictionLevel / 100f;
-            ApplyWithdrawalEffects(player, severity);
+            ApplyWithdrawalEffects(player, WithdrawalSeverity(addictionLevel));
             if (!attrs.HasAttribute(AttrWithdrawalStartDay)) attrs.SetInt(AttrWithdrawalStartDay, currentDay);
         }
     }
@@ -279,25 +290,25 @@ public class AddictionSystem : IDisposable
     {
         var entity = player.Entity;
         if (entity == null || !entity.Alive) return;
-        entity.Stats.Set("walkspeed", "vs-dope-withdrawal", -severity * 0.4f);
-        if (severity > 0.8f)
-            entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Poison }, severity * 1.5f);
+        entity.Stats.Set("walkspeed", WithdrawalEffectKey, -severity * WithdrawalSlowPerSeverity);
+        if (severity > WithdrawalDamageSeverityGate)
+            entity.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Poison }, severity * WithdrawalDamagePerSeverity);
     }
 
     private void ClearWithdrawalEffects(IServerPlayer player)
     {
         var entity = player.Entity;
-        if (entity != null) entity.Stats.Remove("walkspeed", "vs-dope-withdrawal");
+        entity?.Stats.Remove("walkspeed", WithdrawalEffectKey);
     }
 
-    public bool WithdrawalActive(IPlayer player)
+    private bool WithdrawalActive(IPlayer player)
     {
         var attrs = player.Entity.Attributes;
         if (attrs.GetInt(AttrAddictionLevel) <= 0) return false;
         return (int)api.World.Calendar.TotalDays - attrs.GetInt(AttrLastUseDay) >= 1;
     }
 
-    public void SyncAddictionToClient(IPlayer player)
+    private void SyncAddictionToClient(IPlayer player)
     {
         var entity = player.Entity;
         if (entity == null) return;
@@ -307,11 +318,5 @@ public class AddictionSystem : IDisposable
         entity.WatchedAttributes.SetBool(WatchWithdrawal, WithdrawalActive(player));
     }
 
-    public static int GetAddictionLevel(IPlayer player) => player.Entity.Attributes.GetInt(AttrAddictionLevel);
-    public static bool IsAddicted(IPlayer player) => player.Entity.Attributes.GetInt(AttrAddictionLevel) > 0;
-    public static float GetWithdrawalSeverity(IPlayer player)
-    {
-        int level = player.Entity.Attributes.GetInt(AttrAddictionLevel);
-        return level <= 0 ? 0f : WithdrawalSeverityBase + level / 100f;
-    }
+    private static float WithdrawalSeverity(int addictionLevel) => WithdrawalSeverityBase + addictionLevel / 100f;
 }

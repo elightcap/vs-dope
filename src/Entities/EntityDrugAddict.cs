@@ -4,6 +4,7 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
+using VsDope.Systems;
 
 namespace VsDope.Entities;
 
@@ -30,6 +31,9 @@ public class EntityDrugAddict : EntityAgent
     private const double MaxLifetimeSeconds = 900;     // hard cap regardless of state
     private const double RetaliateSeconds = 6;         // how long we fight back when attacked
     private const double HostileChance = 0.35;         // chance a first engagement turns into a mugging
+    private const float MugDamage = 3f;
+    private const float RetaliateDamage = 4f;
+    private const double AttackCooldownSeconds = 1.2;
 
     // Leaving.
     private const double LingerAfterSaleSeconds = 10;  // grace to sell more from the open window; reset by each sale
@@ -53,11 +57,12 @@ public class EntityDrugAddict : EntityAgent
     private static readonly Random Rng = new();
 
     private AddictState state = AddictState.Approach;
-    private string targetUid;
+    private string? targetUid;
     private bool engagedOnce;
     private double ageSeconds;
     private double waitSeconds;
     private double retaliateUntil = -1;   // absolute ageSeconds deadline while fighting back
+    private double lastAttackAge;
 
     private double lingerUntil = -1;      // absolute ageSeconds; stand around after a sale until then
     private bool leaveWalking;
@@ -67,7 +72,7 @@ public class EntityDrugAddict : EntityAgent
     private double stuckCheckX, stuckCheckZ;
 
     public bool Friendly { get; private set; }
-    public string TargetPlayerUid => targetUid;
+    public string? TargetPlayerUid => targetUid;
 
     // Trades are accepted while waiting on the player, and during the short linger after a sale.
     public bool AcceptsTrade =>
@@ -103,7 +108,7 @@ public class EntityDrugAddict : EntityAgent
     // Called by the spawn system right before spawning to bind this addict to a player.
     public void BindTarget(string playerUid) => SetTarget(playerUid);
 
-    private void SetTarget(string playerUid)
+    private void SetTarget(string? playerUid)
     {
         targetUid = playerUid;
         // Persist unconditionally so the binding survives Initialize(), chunk unload and relog.
@@ -124,7 +129,7 @@ public class EntityDrugAddict : EntityAgent
         WatchedAttributes.SetBool(AttrFriendly, friendly);
     }
 
-    private EntityPlayer TargetEntity()
+    private EntityPlayer? TargetEntity()
     {
         if (string.IsNullOrEmpty(targetUid)) return null;
         var player = World.PlayerByUid(targetUid) as IServerPlayer;
@@ -133,8 +138,8 @@ public class EntityDrugAddict : EntityAgent
 
     // EntityPlayer is the *entity*, not the player object, so `entityPlayer as IServerPlayer`
     // is always null. Resolve the real server player through the world's player registry.
-    private IServerPlayer ServerPlayerOf(EntityPlayer entityPlayer)
-        => entityPlayer == null ? null : World.PlayerByUid(entityPlayer.PlayerUID) as IServerPlayer;
+    private IServerPlayer? ServerPlayerOf(EntityPlayer entityPlayer)
+        => World.PlayerByUid(entityPlayer.PlayerUID) as IServerPlayer;
 
     public override void OnGameTick(float dt)
     {
@@ -184,7 +189,7 @@ public class EntityDrugAddict : EntityAgent
                 // Once the trade window is up the player needs time to dig through their
                 // bags, so a dealing addict is far more patient than one still waiting to
                 // be noticed. Walking off mid-trade is what used to strand the UI.
-                if (waitSeconds > (Friendly ? TradingWindowSeconds : InteractWindowSeconds)) BeginFlee("impatient");
+                if (waitSeconds > (Friendly ? TradingWindowSeconds : InteractWindowSeconds)) BeginFlee();
                 // If the player wanders off mid-conversation, chase a little.
                 else if (distSq > (EngageDistance * 2f) * (EngageDistance * 2f))
                     MoveToward(target.Pos.X, target.Pos.Z, WalkSpeed);
@@ -192,8 +197,7 @@ public class EntityDrugAddict : EntityAgent
                 break;
 
             case AddictState.Flee:
-                double away = distSq;
-                if (away > FleeDistance * FleeDistance) { DespawnSelf(); return; }
+                if (distSq > FleeDistance * FleeDistance) { DespawnSelf(); return; }
                 MoveAway(target.Pos.X, target.Pos.Z, FleeSpeed);
                 break;
         }
@@ -276,7 +280,7 @@ public class EntityDrugAddict : EntityAgent
             WatchedAttributes.SetDouble(AttrLeaveStartHours, World.Calendar.TotalHours);
 
         // The deal is over: take the trade window away instead of leaving it dangling.
-        VsDope.Systems.AddictTradeSystem.Instance?.CloseTradeFor(this);
+        AddictTradeSystem.Instance?.CloseTradeFor(this);
         if (Friendly && target != null) Say("vs-dope:addict-leaving");
     }
 
@@ -317,8 +321,7 @@ public class EntityDrugAddict : EntityAgent
         if (mode == EnumInteractMode.Attack) { base.OnInteract(byEntity, slot, hitPosition, mode); return; }
         if (World.Side != EnumAppSide.Server || !Alive) return;
 
-        var player = byEntity as EntityPlayer;
-        if (player == null) return;
+        if (byEntity is not EntityPlayer player) return;
 
         var serverPlayer = ServerPlayerOf(player);
         // Diagnostic: this line appearing in server-debug.log proves the right-click actually
@@ -348,7 +351,7 @@ public class EntityDrugAddict : EntityAgent
             StopMoving();
             Face(player.Pos.X, player.Pos.Z);
             Say("vs-dope:addict-greet");
-            VsDope.Systems.AddictTradeSystem.Instance?.OpenTradeFor(serverPlayer, this);
+            AddictTradeSystem.Instance?.OpenTradeFor(serverPlayer, this);
             return;
         }
 
@@ -359,7 +362,7 @@ public class EntityDrugAddict : EntityAgent
             waitSeconds = 0;
             StopMoving();
             Face(player.Pos.X, player.Pos.Z);
-            VsDope.Systems.AddictTradeSystem.Instance?.OpenTradeFor(serverPlayer, this);
+            AddictTradeSystem.Instance?.OpenTradeFor(serverPlayer, this);
         }
     }
 
@@ -394,7 +397,7 @@ public class EntityDrugAddict : EntityAgent
         bool wasAlive = Alive;
         base.Die(reason, damageSourceForDeath);
         // Dead addicts don't trade. The corpse itself is handled by the deaddecay behavior.
-        if (wasAlive && World.Side == EnumAppSide.Server) VsDope.Systems.AddictTradeSystem.Instance?.CloseTradeFor(this);
+        if (wasAlive && World.Side == EnumAppSide.Server) AddictTradeSystem.Instance?.CloseTradeFor(this);
     }
 
     private void DoMug(EntityAgent victim)
@@ -410,20 +413,19 @@ public class EntityDrugAddict : EntityAgent
             robbedSomething = true;
         }
 
-        victim.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Entity, SourceEntity = this, Type = EnumDamageType.BluntAttack }, 3f);
+        victim.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Entity, SourceEntity = this, Type = EnumDamageType.BluntAttack }, MugDamage);
 
         Say(robbedSomething ? "vs-dope:addict-robbed" : "vs-dope:addict-mugged");
-        BeginFlee("mugging");
+        BeginFlee();
     }
 
     private void AttackTarget(EntityPlayer target)
     {
         // Simple melee retaliation on a short cadence driven by the tick loop.
-        if (ageSeconds - lastAttackAge < 1.2f) return;
+        if (ageSeconds - lastAttackAge < AttackCooldownSeconds) return;
         lastAttackAge = ageSeconds;
-        target.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Entity, SourceEntity = this, Type = EnumDamageType.BluntAttack }, 4f);
+        target.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Entity, SourceEntity = this, Type = EnumDamageType.BluntAttack }, RetaliateDamage);
     }
-    private double lastAttackAge;
 
     public override bool ReceiveDamage(DamageSource damageSource, float damage)
     {
@@ -437,12 +439,12 @@ public class EntityDrugAddict : EntityAgent
         return result;
     }
 
-    private void BeginFlee(string reason)
+    private void BeginFlee()
     {
         if (state == AddictState.Flee) return;
         SetState(AddictState.Flee);
         StopMoving();
-        VsDope.Systems.AddictTradeSystem.Instance?.CloseTradeFor(this);
+        AddictTradeSystem.Instance?.CloseTradeFor(this);
     }
 
     // ---- movement helpers -------------------------------------------------
@@ -499,14 +501,13 @@ public class EntityDrugAddict : EntityAgent
     private void Say(string langKey)
     {
         if (World.Side != EnumAppSide.Server || string.IsNullOrEmpty(targetUid)) return;
-        var player = World.PlayerByUid(targetUid);
-        (player as IServerPlayer)?.SendLocalisedMessage(0, langKey, Array.Empty<object>());
+        (World.PlayerByUid(targetUid) as IServerPlayer)?.SendLocalisedMessage(0, langKey, Array.Empty<object>());
     }
 
     private void DespawnSelf()
     {
         if (World.Side != EnumAppSide.Server) return;
-        VsDope.Systems.AddictTradeSystem.Instance?.CloseTradeFor(this);
+        AddictTradeSystem.Instance?.CloseTradeFor(this);
         (World as IServerWorldAccessor)?.DespawnEntity(this, new EntityDespawnData { Reason = EnumDespawnReason.Removed });
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using VsDope.Systems;
 
@@ -10,7 +11,7 @@ public class AddictionCharacterTabSystem : ModSystem
 {
     private const string TabName = "addiction";
 
-    private ICoreClientAPI capi;
+    private ICoreClientAPI capi = null!;
     private long patchCallback;
     private int attempts;
     private readonly HashSet<GuiDialogCharacterBase> patched = new();
@@ -70,7 +71,7 @@ public class AddictionCharacterTabSystem : ModSystem
 
         int index = tabs.Count;
         tabs.Add(new GuiTab { Name = TabName, DataInt = index });
-        dlg.RenderTabHandlers.Add(composer => RenderAddiction(composer));
+        dlg.RenderTabHandlers.Add(RenderAddiction);
     }
 
     private void RenderAddiction(GuiComposer composer)
@@ -87,24 +88,24 @@ public class AddictionCharacterTabSystem : ModSystem
         double[] statusColor;
         if (level <= 0)
         {
-            status = "Not addicted";
+            status = Lang.Get("vs-dope:addiction-status-none");
             statusColor = ColorUtil.Hex2Doubles("#7fbf7f");
         }
         else if (withdrawal)
         {
-            status = "Withdrawing";
+            status = Lang.Get("vs-dope:addiction-status-withdrawal");
             statusColor = ColorUtil.Hex2Doubles("#e05c5c");
         }
         else
         {
-            status = "Dependent";
+            status = Lang.Get("vs-dope:addiction-status-dependent");
             statusColor = ColorUtil.Hex2Doubles("#e0a94f");
         }
 
         var titleBounds = ElementBounds.FixedSize(300, 28)
             .WithAlignment(EnumDialogArea.LeftTop)
             .WithFixedOffset(15, 15);
-        composer.AddStaticText("Addiction", CairoFont.WhiteMediumText(), titleBounds);
+        composer.AddStaticText(Lang.Get("vs-dope:addiction-tab-title"), CairoFont.WhiteMediumText(), titleBounds);
 
         var statusBounds = ElementBounds.FixedSize(300, 24)
             .WithAlignment(EnumDialogArea.LeftTop)
@@ -114,12 +115,12 @@ public class AddictionCharacterTabSystem : ModSystem
         var levelBounds = ElementBounds.FixedSize(300, 24)
             .WithAlignment(EnumDialogArea.LeftTop)
             .WithFixedOffset(15, 78);
-        composer.AddStaticText("Addiction level: " + level + " / 100", CairoFont.WhiteSmallishText(), levelBounds);
+        composer.AddStaticText(Lang.Get("vs-dope:addiction-tab-level", level), CairoFont.WhiteSmallishText(), levelBounds);
 
         var daysBounds = ElementBounds.FixedSize(300, 24)
             .WithAlignment(EnumDialogArea.LeftTop)
             .WithFixedOffset(15, 106);
-        composer.AddStaticText("Days used in a row: " + daysUsed, CairoFont.WhiteSmallishText(), daysBounds);
+        composer.AddStaticText(Lang.Get("vs-dope:addiction-tab-days", daysUsed), CairoFont.WhiteSmallishText(), daysBounds);
     }
 
     public override void Dispose()
