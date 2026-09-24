@@ -28,7 +28,7 @@ Keep leaves distributed along branches and secondary twigs, with varied orientat
 
 ## Drug addict entity
 
-`assets/vs-dope/entities/drugaddict.json` renders with the **vanilla seraph shape** `game:entity/humanoid/seraph` (the same body, rig and animation set as the player), so no addict shape lives in this repo any more. The old blocky placeholder shape `shapes/entity/drugaddict.json` was removed.
+`assets/vs-dope/entities/drugaddict.json` renders with the **vanilla seraph body** `game:entity/humanoid/seraph-faceless` (the same body, rig and animation set as the player) plus two `shape.overlays`, vanilla `seraphskinparts/face/tired` and `seraphskinparts/hair-base/messy2`. The overlays are required: face/hair elements are step-parented to `Head`, and only overlays get step-parented for a plain entity. Using `seraph.json` directly puts the face and hair on the ground at the feet, so no addict shape lives in this repo any more. The old blocky placeholder shape `shapes/entity/drugaddict.json` was removed.
 
 - Texture keys must match the seraph shape: `seraph` -> `vs-dope:entity/drugaddict` (our skin; listed first because `deaddecay` particles read `FirstTexture`), `hair` -> `game:entity/humanoid/seraphskinparts/hair/rust3` (greasy dark brown).
 - `textures/entity/drugaddict.png` is **64x152**, the same size as vanilla seraph body skins (`seraphskinparts/body/skin*.png`): the shape's `textureSizes.seraph` is 32x76 UV units and the texture must keep that aspect ratio. This is an intentional exception to the power-of-two rule; vanilla entity skins are not power-of-two either.
