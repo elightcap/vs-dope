@@ -1,0 +1,1152 @@
+{
+  "textureWidth": 64,
+  "textureHeight": 64,
+  "textures": {
+    "leaf": "block/marijuana/marijuana-atlas",
+    "bud": "block/marijuana/marijuana-atlas",
+    "paper": "block/marijuana/marijuana-atlas",
+    "stem": "block/marijuana/marijuana-atlas"
+  },
+  "elements": [
+    {
+      "name": "leader-0",
+      "from": [
+        8.0,
+        -0.075,
+        7.925
+      ],
+      "to": [
+        8.41992,
+        0.075,
+        8.075
+      ],
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        }
+      },
+      "rotationOrigin": [
+        8.0,
+        0.0,
+        8.0
+      ],
+      "rotationY": -9.00381,
+      "rotationZ": 72.28192
+    },
+    {
+      "name": "leader-1",
+      "from": [
+        8.12622,
+        0.338,
+        7.958
+      ],
+      "to": [
+        8.52685,
+        0.462,
+        8.082
+      ],
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        }
+      },
+      "rotationOrigin": [
+        8.12622,
+        0.4,
+        8.02
+      ],
+      "rotationY": -63.03764,
+      "rotationZ": 86.78921
+    },
+    {
+      "name": "leader-2",
+      "from": [
+        8.13639,
+        0.751,
+        7.991
+      ],
+      "to": [
+        8.55314,
+        0.849,
+        8.089
+      ],
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        }
+      },
+      "rotationOrigin": [
+        8.13639,
+        0.8,
+        8.04
+      ],
+      "rotationY": -170.15322,
+      "rotationZ": 73.70247
+    },
+    {
+      "name": "leader-3",
+      "from": [
+        8.02117,
+        1.164,
+        8.024
+      ],
+      "to": [
+        8.44371,
+        1.236,
+        8.096
+      ],
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        }
+      },
+      "rotationOrigin": [
+        8.02117,
+        1.2,
+        8.06
+      ],
+      "rotationY": -171.55381,
+      "rotationZ": 71.20076
+    },
+    {
+      "name": "leader-4",
+      "from": [
+        7.88648,
+        1.577,
+        8.057
+      ],
+      "to": [
+        8.28813,
+        1.623,
+        8.103
+      ],
+      "faces": {
+        "north": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "south": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "east": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "west": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "up": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        },
+        "down": {
+          "texture": "#stem",
+          "uv": [
+            32,
+            32,
+            64,
+            64
+          ]
+        }
+      },
+      "rotationOrigin": [
+        7.88648,
+        1.6,
+        8.08
+      ],
+      "rotationY": -146.58843,
+      "rotationZ": 84.81166
+    },
+    {
+      "name": "cotyledon-0-0",
+      "from": [
+        7.98377,
+        1.288,
+        8.0195
+      ],
+      "to": [
+        8.12177,
+        1.312,
+        8.1105
+      ],
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      },
+      "rotationOrigin": [
+        7.98377,
+        1.3,
+        8.065
+      ],
+      "rotationY": -25,
+      "rotationZ": 8
+    },
+    {
+      "name": "cotyledon-0-1",
+      "from": [
+        8.10044,
+        1.30609,
+        8.02191
+      ],
+      "to": [
+        8.23844,
+        1.33009,
+        8.21691
+      ],
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      },
+      "rotationOrigin": [
+        8.10044,
+        1.31809,
+        8.11941
+      ],
+      "rotationY": -25,
+      "rotationZ": 8
+    },
+    {
+      "name": "cotyledon-0-2",
+      "from": [
+        8.21712,
+        1.32419,
+        8.09906
+      ],
+      "to": [
+        8.35512,
+        1.34819,
+        8.24856
+      ],
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      },
+      "rotationOrigin": [
+        8.21712,
+        1.33619,
+        8.17381
+      ],
+      "rotationY": -25,
+      "rotationZ": 8
+    },
+    {
+      "name": "cotyledon-0-3",
+      "from": [
+        8.33379,
+        1.34228,
+        8.14697
+      ],
+      "to": [
+        8.47179,
+        1.36628,
+        8.30947
+      ],
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      },
+      "rotationOrigin": [
+        8.33379,
+        1.35428,
+        8.22822
+      ],
+      "rotationY": -25,
+      "rotationZ": 8
+    },
+    {
+      "name": "cotyledon-0-4",
+      "from": [
+        8.45046,
+        1.36037,
+        8.25012
+      ],
+      "to": [
+        8.58846,
+        1.38437,
+        8.31512
+      ],
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      },
+      "rotationOrigin": [
+        8.45046,
+        1.37237,
+        8.28262
+      ],
+      "rotationY": -25,
+      "rotationZ": 8
+    },
+    {
+      "name": "cotyledon-1-0",
+      "from": [
+        7.98377,
+        1.288,
+        8.0195
+      ],
+      "to": [
+        8.12177,
+        1.312,
+        8.1105
+      ],
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      },
+      "rotationOrigin": [
+        7.98377,
+        1.3,
+        8.065
+      ],
+      "rotationY": -205,
+      "rotationZ": 8
+    },
+    {
+      "name": "cotyledon-1-1",
+      "from": [
+        7.8671,
+        1.30609,
+        7.91309
+      ],
+      "to": [
+        8.0051,
+        1.33009,
+        8.10809
+      ],
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      },
+      "rotationOrigin": [
+        7.8671,
+        1.31809,
+        8.01059
+      ],
+      "rotationY": -205,
+      "rotationZ": 8
+    },
+    {
+      "name": "cotyledon-1-2",
+      "from": [
+        7.75042,
+        1.32419,
+        7.88144
+      ],
+      "to": [
+        7.88842,
+        1.34819,
+        8.03094
+      ],
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      },
+      "rotationOrigin": [
+        7.75042,
+        1.33619,
+        7.95619
+      ],
+      "rotationY": -205,
+      "rotationZ": 8
+    },
+    {
+      "name": "cotyledon-1-3",
+      "from": [
+        7.63375,
+        1.34228,
+        7.82053
+      ],
+      "to": [
+        7.77175,
+        1.36628,
+        7.98303
+      ],
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      },
+      "rotationOrigin": [
+        7.63375,
+        1.35428,
+        7.90178
+      ],
+      "rotationY": -205,
+      "rotationZ": 8
+    },
+    {
+      "name": "cotyledon-1-4",
+      "from": [
+        7.51708,
+        1.36037,
+        7.81488
+      ],
+      "to": [
+        7.65508,
+        1.38437,
+        7.87988
+      ],
+      "faces": {
+        "north": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "south": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "east": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "west": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "up": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        "down": {
+          "texture": "#leaf",
+          "uv": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      },
+      "rotationOrigin": [
+        7.51708,
+        1.37237,
+        7.84738
+      ],
+      "rotationY": -205,
+      "rotationZ": 8
+    }
+  ]
+}

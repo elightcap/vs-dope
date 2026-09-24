@@ -79,3 +79,12 @@ seed item -> plantBlockCode -> crop blocktype
 ## Drug addict
 
 `entities/drugaddict.json` (`class` = `vs-dope.drugaddict`) -> `VsDopeModSystem.Start` `RegisterEntity` -> `Entities/EntityDrugAddict.cs`. Client `textures.skin` must match the `#skin` key in `shapes/entity/drugaddict.json`. It is also required because `deaddecay` particles read `FirstTexture`. Client `animations` codes `hurt`/`die` must exist in the shape's `animations`. Animated elements are `root` -> `torso` -> `head`, and children use parent-relative coordinates. Trade packets live in `Network/AddictTradePackets.cs`. Registration order in `AddictTradeSystem.Initialize` and `AddictTradeUiSystem.StartClientSide` must match. `AddictStackData` is a nested contract only and is not registered. The addict inventory (`Entities/AddictPockets.cs`) hard-codes vanilla item codes (`game:gear-rusty`, the junk table, `game:jug-blue-fired` for bought liquids) and drug codes (`vs-dope:opium`, `vs-dope:morphine`, `vs-dope:coca-vitae`). Renaming a drug item means updating `AddictPockets.StartingDrugs` and `AddictTradeSystem.Offers`. `tests/AddictProbe` asserts that every one of these codes resolves. Bought liquids rely on the drug's `waterTightContainerProps.itemsPerLitre`. Addict chat lines, trade-window labels and trade results are unprefixed `addict-*` lang keys (looked up as `vs-dope:addict-*`). The addict's display name comes from `item-creature-drugaddict` / `item-dead-creature-drugaddict`, which `Entity.GetName()` reads by entity code, so renaming the entity code means renaming those keys too.
+
+## Marijuana change map
+
+- Stage/count/growth/drop changes: `blocktypes/marijuana-plant.json`, `itemtypes/marijuana-seeds.json`, `tools/build_marijuana_models.py`, language, previews.
+- Bud/joint meshes: `shapes/item/{marijuana-buds,joint}.json`, matching itemtypes and shared marijuana atlas.
+- Smoking hold time: `JointItem.SmokeSeconds`, player animation patch frame duration, synthesized audio duration/trigger, `tests/MarijuanaProbe`, `docs/MARIJUANA.md`. Current user requirement: **5 seconds**.
+- Stoned keys/timing: `Systems/StonedSystem.cs`, `Client/StonedHudSystem.cs`, `Client/StonedEyesBehavior.cs`, localization.
+- Seed access: separate `patches/marijuana-seed-traders.json`, using the same vanilla lists as coca seeds.
+- Eye cosmetics: register behavior in `VsDopeModSystem`, append after skin/inventory in player patch; retain VSEssentials reference and exact sclera mask.

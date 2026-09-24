@@ -1,0 +1,164 @@
+[
+  {
+    "op": "add",
+    "file": "game:config/tradelists/trader-agriculture.json",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "vs-dope:seeds-marijuana",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 5,
+        "var": 1.25
+      },
+      "price": {
+        "avg": 2,
+        "var": 0.5
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:config/tradelists/trader-artisan.json",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "vs-dope:seeds-marijuana",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 5,
+        "var": 1.25
+      },
+      "price": {
+        "avg": 2,
+        "var": 0.5
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:config/tradelists/trader-buildmaterials.json",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "vs-dope:seeds-marijuana",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 5,
+        "var": 1.25
+      },
+      "price": {
+        "avg": 2,
+        "var": 0.5
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:config/tradelists/trader-clothing.json",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "vs-dope:seeds-marijuana",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 5,
+        "var": 1.25
+      },
+      "price": {
+        "avg": 2,
+        "var": 0.5
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:config/tradelists/trader-commodities.json",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "vs-dope:seeds-marijuana",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 5,
+        "var": 1.25
+      },
+      "price": {
+        "avg": 2,
+        "var": 0.5
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:config/tradelists/trader-furniture.json",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "vs-dope:seeds-marijuana",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 5,
+        "var": 1.25
+      },
+      "price": {
+        "avg": 2,
+        "var": 0.5
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:config/tradelists/trader-luxuries.json",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "vs-dope:seeds-marijuana",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 5,
+        "var": 1.25
+      },
+      "price": {
+        "avg": 2,
+        "var": 0.5
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:config/tradelists/trader-survivalgoods.json",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "vs-dope:seeds-marijuana",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 5,
+        "var": 1.25
+      },
+      "price": {
+        "avg": 2,
+        "var": 0.5
+      }
+    }
+  },
+  {
+    "op": "add",
+    "file": "game:config/tradelists/trader-treasurehunter.json",
+    "path": "/selling/list/-",
+    "value": {
+      "code": "vs-dope:seeds-marijuana",
+      "type": "item",
+      "stacksize": 1,
+      "stock": {
+        "avg": 5,
+        "var": 1.25
+      },
+      "price": {
+        "avg": 2,
+        "var": 0.5
+      }
+    }
+  }
+]
