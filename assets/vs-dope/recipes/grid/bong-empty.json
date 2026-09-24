@@ -1,0 +1,9 @@
+{
+  "ingredientPattern": "___,_Q_,_Q_",
+  "width": 3,
+  "height": 3,
+  "ingredients": {
+    "Q": { "type": "item", "code": "game:clearquartz", "quantity": 1 }
+  },
+  "output": { "type": "item", "code": "vs-dope:bong-empty", "quantity": 1 }
+}

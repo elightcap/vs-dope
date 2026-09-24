@@ -20,6 +20,7 @@ public class VsDopeModSystem : ModSystem
         api.RegisterItemClass("vs-dope.cocavitaeitem", typeof(CocaVitaeItem));
         api.RegisterItemClass("vs-dope.syringe", typeof(SyringeItem));
         api.RegisterItemClass("vs-dope.joint", typeof(JointItem));
+        api.RegisterItemClass("vs-dope.bong", typeof(BongItem));
         api.RegisterEntityBehaviorClass("vsdope-stonedeyes", typeof(VsDope.Client.StonedEyesBehavior));
         api.RegisterEntity("vs-dope.drugaddict", typeof(EntityDrugAddict));
     }

@@ -1,0 +1,82 @@
+{
+  "code": "bong",
+  "class": "vs-dope.bong",
+  "variantgroups": [
+    {
+      "code": "contents",
+      "states": [
+        "empty",
+        "loaded"
+      ]
+    }
+  ],
+  "creativeinventory": {
+    "general": [
+      "*"
+    ],
+    "items": [
+      "*"
+    ]
+  },
+  "maxStackSize": 1,
+  "shapeByType": {
+    "*-empty": {
+      "base": "item/bong-empty"
+    },
+    "*-loaded": {
+      "base": "item/bong-loaded"
+    }
+  },
+  "textures": {
+    "glass": {
+      "base": "item/bong-glass"
+    },
+    "rim": {
+      "base": "item/bong-glass"
+    },
+    "bud": {
+      "base": "block/marijuana/marijuana-atlas"
+    },
+    "leaf": {
+      "base": "block/marijuana/marijuana-atlas"
+    }
+  },
+  "guiTransform": {
+    "rotation": {
+      "x": -15,
+      "y": -25,
+      "z": -10
+    },
+    "scale": 1.25
+  },
+  "groundTransform": {
+    "scale": 1
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": 0,
+      "y": -0.3,
+      "z": -0.15
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 0.7
+  },
+  "fpHandTransform": {
+    "translation": {
+      "x": 0,
+      "y": -0.2,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 0.7
+  },
+  "heldTpIdleAnimation": "helditemready"
+}
