@@ -3,7 +3,7 @@ using Vintagestory.API.Server;
 
 namespace VsDope.Systems;
 
-/// <summary>Calendar-based marijuana effect. Reapplication refreshes one timer, never stacks.</summary>
+/// <summary>Calendar-based cannabis effect. Reapplication refreshes one timer, never stacks.</summary>
 public sealed class StonedSystem : ModSystem
 {
     public const string EffectKey = "vs-dope-stoned";
@@ -36,8 +36,8 @@ public sealed class StonedSystem : ModSystem
         if (entity.World.Side != EnumAppSide.Server || !entity.Alive) return;
         Tick(entity, now); // Settle the old interval before refreshing it.
         var player = entity is EntityPlayer ep ? entity.World.PlayerByUid(ep.PlayerUID) : null;
-        float strength = player == null ? 1 : VsDopeModSystem.AddictionSystem.GetEffectMultiplier(player, "marijuana");
-        if (player != null) VsDopeModSystem.AddictionSystem.RecordToleranceUse(player, "marijuana");
+        float strength = player == null ? 1 : VsDopeModSystem.AddictionSystem.GetEffectMultiplier(player, "cannabis");
+        if (player != null) VsDopeModSystem.AddictionSystem.RecordToleranceUse(player, "cannabis");
         entity.WatchedAttributes.SetDouble(ExpiryKey, now + DurationHours);
         entity.WatchedAttributes.SetFloat(StrengthKey, strength);
         entity.Attributes.SetDouble(LastHourKey, now);

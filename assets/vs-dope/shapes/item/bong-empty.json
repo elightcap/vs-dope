@@ -4,8 +4,8 @@
   "textures": {
     "glass": "item/bong-glass",
     "rim": "item/bong-glass",
-    "bud": "block/marijuana/marijuana-atlas",
-    "leaf": "block/marijuana/marijuana-atlas"
+    "bud": "block/cannabis/cannabis-atlas",
+    "leaf": "block/cannabis/cannabis-atlas"
   },
   "elements": [
     {

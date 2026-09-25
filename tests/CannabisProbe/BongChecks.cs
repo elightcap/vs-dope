@@ -29,7 +29,7 @@ internal static class BongChecks
         var empty = world.GetItem(new AssetLocation("vs-dope:bong-empty")) as BongItem;
         var loaded = world.GetItem(new AssetLocation("vs-dope:bong-loaded")) as BongItem;
         var quartz = world.GetItem(new AssetLocation("game:clearquartz"));
-        var buds = world.GetItem(new AssetLocation("vs-dope:marijuana-buds"));
+        var buds = world.GetItem(new AssetLocation("vs-dope:cannabis-buds"));
         check(empty != null && loaded != null && quartz != null && buds != null, "bong variants and ingredients registered");
         check(empty!.MaxStackSize == 1 && loaded!.MaxStackSize == 1 && !empty.Loaded && loaded.Loaded,
             "empty and loaded bongs are non-stackable and have distinct states");

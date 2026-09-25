@@ -10,16 +10,16 @@
   "maxstacksize": 64,
   "textures": {
     "leaf": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     },
     "bud": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     },
     "paper": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     },
     "stem": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     }
   },
   "guiTransform": {
@@ -59,8 +59,8 @@
     },
     "scale": 0.75
   },
-  "code": "marijuana-buds",
+  "code": "cannabis-buds",
   "shape": {
-    "base": "item/marijuana-buds"
+    "base": "item/cannabis-buds"
   }
 }

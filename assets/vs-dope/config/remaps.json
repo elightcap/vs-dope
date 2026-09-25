@@ -1,0 +1,15 @@
+{
+  "vs-dope:marijuana-to-cannabis": [
+    "/iir remapq vs-dope:seeds-cannabis vs-dope:seeds-marijuana force",
+    "/iir remapq vs-dope:cannabis-buds vs-dope:marijuana-buds force",
+    "/bir remapq vs-dope:crop-cannabis-1 vs-dope:crop-marijuana-1 force",
+    "/bir remapq vs-dope:crop-cannabis-2 vs-dope:crop-marijuana-2 force",
+    "/bir remapq vs-dope:crop-cannabis-3 vs-dope:crop-marijuana-3 force",
+    "/bir remapq vs-dope:crop-cannabis-4 vs-dope:crop-marijuana-4 force",
+    "/bir remapq vs-dope:crop-cannabis-5 vs-dope:crop-marijuana-5 force",
+    "/bir remapq vs-dope:crop-cannabis-6 vs-dope:crop-marijuana-6 force",
+    "/bir remapq vs-dope:crop-cannabis-7 vs-dope:crop-marijuana-7 force",
+    "/bir remapq vs-dope:crop-cannabis-8 vs-dope:crop-marijuana-8 force",
+    "/bir remapq vs-dope:crop-cannabis-9 vs-dope:crop-marijuana-9 force"
+  ]
+}

@@ -1,9 +1,119 @@
 {
   "code": "seeds",
-  "variantgroups": [{ "code": "type", "states": ["coca"] }],
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": [
+        "coca"
+      ]
+    }
+  ],
   "class": "ItemPlantableSeed",
-  "creativeinventory": { "general": ["*"] },
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "ctrlKey": true,
+        "selectionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.1,
+          "z2": 1
+        },
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 0,
+          "y2": 0,
+          "z2": 0
+        },
+        "scale": 0.5
+      }
+    }
+  ],
+  "creativeinventory": {
+    "general": [
+      "*"
+    ]
+  },
   "maxstacksize": 64,
-  "texture": { "base": "item/poppy-seeds" },
-  "attributes": { "plantBlockCode": "vs-dope:crop-coca-1" }
+  "attributes": {
+    "plantBlockCode": "vs-dope:crop-coca-1",
+    "groundStorageTransform": {
+      "translation": {
+        "x": 0,
+        "y": -0.25,
+        "z": 0
+      },
+      "scale": 0.5
+    }
+  },
+  "shape": {
+    "base": "game:item/resource/seeds/seedbag"
+  },
+  "textures": {
+    "normal": {
+      "base": "game:block/cloth/basic/normal"
+    },
+    "reedrope": {
+      "base": "game:block/cloth/reedrope"
+    },
+    "seed": {
+      "base": "item/seeds/{type}"
+    }
+  },
+  "materialDensity": 450,
+  "guiTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 159,
+      "y": -152,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.53,
+      "y": 0.37,
+      "z": 0.5
+    },
+    "scale": 1.99
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": -1.67,
+      "y": -1.25,
+      "z": -0.8
+    },
+    "rotation": {
+      "x": 70,
+      "y": 11,
+      "z": -65
+    },
+    "scale": 0.41
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0.2,
+      "z": 0
+    },
+    "rotation": {
+      "x": -4,
+      "y": 8,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5299
+    },
+    "scale": 1.92
+  }
 }

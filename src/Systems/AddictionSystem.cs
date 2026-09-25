@@ -77,7 +77,7 @@ public class AddictionSystem : IDisposable
         return Math.Max(MinimumEffectMultiplier, 1f - tolerance);
     }
 
-    // Marijuana shares per-product tolerance without adding opiate addiction or overdose rolls.
+    // Cannabis shares per-product tolerance without adding opiate addiction or overdose rolls.
     public void RecordToleranceUse(IPlayer player, string product)
     {
         RecoverTolerance(player, product);

@@ -4,7 +4,7 @@
     {
       "code": "type",
       "states": [
-        "poppy"
+        "cannabis"
       ]
     }
   ],
@@ -39,15 +39,13 @@
     "general": [
       "*"
     ],
-    "plants": [
+    "items": [
       "*"
     ]
   },
   "maxstacksize": 64,
   "attributes": {
-    "seedingtype": [
-      "flower"
-    ],
+    "plantBlockCode": "vs-dope:crop-cannabis-1",
     "groundStorageTransform": {
       "translation": {
         "x": 0,

@@ -35,10 +35,10 @@
       "base": "item/bong-glass"
     },
     "bud": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     },
     "leaf": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     }
   },
   "guiTransform": {

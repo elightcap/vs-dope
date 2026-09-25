@@ -10,7 +10,7 @@
     {
       "code": "type",
       "states": [
-        "marijuana"
+        "cannabis"
       ]
     },
     {
@@ -39,31 +39,31 @@
   "renderpass": "OpaqueNoCull",
   "shapeByType": {
     "*-1": {
-      "base": "plant/marijuana_stage_01_sprout"
+      "base": "plant/cannabis_stage_01_sprout"
     },
     "*-2": {
-      "base": "plant/marijuana_stage_02_seedling"
+      "base": "plant/cannabis_stage_02_seedling"
     },
     "*-3": {
-      "base": "plant/marijuana_stage_03_young"
+      "base": "plant/cannabis_stage_03_young"
     },
     "*-4": {
-      "base": "plant/marijuana_stage_04_established"
+      "base": "plant/cannabis_stage_04_established"
     },
     "*-5": {
-      "base": "plant/marijuana_stage_05_branching"
+      "base": "plant/cannabis_stage_05_branching"
     },
     "*-6": {
-      "base": "plant/marijuana_stage_06_vegetative"
+      "base": "plant/cannabis_stage_06_vegetative"
     },
     "*-7": {
-      "base": "plant/marijuana_stage_07_early_flower"
+      "base": "plant/cannabis_stage_07_early_flower"
     },
     "*-8": {
-      "base": "plant/marijuana_stage_08_budding"
+      "base": "plant/cannabis_stage_08_budding"
     },
     "*-9": {
-      "base": "plant/marijuana_stage_09_harvestable"
+      "base": "plant/cannabis_stage_09_harvestable"
     }
   },
   "attributes": {
@@ -95,30 +95,30 @@
   },
   "textures": {
     "leaf": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     },
     "bud": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     },
     "paper": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     },
     "stem": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     }
   },
   "dropsByType": {
     "*-9": [
       {
         "type": "item",
-        "code": "vs-dope:marijuana-buds",
+        "code": "vs-dope:cannabis-buds",
         "quantity": {
           "avg": 4
         }
       },
       {
         "type": "item",
-        "code": "vs-dope:seeds-marijuana",
+        "code": "vs-dope:seeds-cannabis",
         "quantity": {
           "avg": 1.5
         }
@@ -127,7 +127,7 @@
     "*": [
       {
         "type": "item",
-        "code": "vs-dope:seeds-marijuana",
+        "code": "vs-dope:seeds-cannabis",
         "quantity": {
           "avg": 0.35
         }

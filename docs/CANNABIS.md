@@ -1,4 +1,4 @@
-# Marijuana crop, buds and joints
+# Cannabis crop, buds and joints
 
 Fictional Vintage Story 1.22.7 game content. Smoke a joint by holding right-click for **five seconds**.
 
@@ -7,14 +7,14 @@ An alternative reusable route is the **Bong**: craft it with clear quartz in the
 ## Gameplay
 
 - Seeds use the native `BlockCrop`/`ItemPlantableSeed` path, matching the coca crop: nine stages, nitrogen, 30 nutrient consumption, three growth months at native calendar/farmland rates.
-- Marijuana seeds are available in creative and through the same trader selling lists that already supply coca seeds. Prices and stock follow those seed entries.
-- Only stage 9 yields `Marijuana buds` (average four) plus seeds (average 1.5). Earlier stages return a small seed chance. Buds and joints stack to 64.
-- Shapeless grid recipe: **1 Marijuana buds + 1 `game:paper-parchment` -> 1 Joint**.
+- Cannabis seeds are available in creative and through the same trader selling lists that already supply coca seeds. Prices and stock follow those seed entries.
+- Only stage 9 yields `Cannabis buds` (average four) plus seeds (average 1.5). Earlier stages return a small seed chance. Buds and joints stack to 64.
+- Shapeless grid recipe: **1 Cannabis buds + 1 `game:paper-parchment` -> 1 Joint**.
 - Complete the five-second held use to consume exactly one joint. Cancelling or releasing early consumes nothing and grants no effect. Interactable NPC clicks are left available.
 - `Stoned` lasts **two in-game calendar hours**, applies **-0.20 additive walkspeed** (80% normal speed on an otherwise unmodified character) and heals **0.5 HP per in-game minute**. Fractional minutes accrue smoothly. This is 60 HP over a full uninterrupted effect, capped by normal maximum health.
 - A second joint refreshes the two-hour expiry. Rates never stack. Other sources of movement modifiers remain intact.
 - The calendar controls timing even when its speed changes or pauses. No offline healing is banked. A surviving effect resumes on reconnect; one that expired while offline is removed. Death/respawn removes it.
-- Issue #55 adds marijuana-specific tolerance through the existing product tolerance rules. Speed, healing, +25% hunger and -25% creature detection factor all scale by the pre-dose multiplier. It does not add opiate addiction or overdose rolls. See `DRUG_TOOLS.md` for native detection limits and lifecycle checks.
+- Issue #55 adds cannabis-specific tolerance through the existing product tolerance rules. Speed, healing, +25% hunger and -25% creature detection factor all scale by the pre-dose multiplier. It does not add opiate addiction or overdose rolls. See `DRUG_TOOLS.md` for native detection limits and lifecycle checks.
 - HUD shows `Stoned`, remaining game hours/minutes and effect values.
 
 ## Artwork and model files
@@ -33,11 +33,11 @@ Stages, with persistent branching topology:
 | 8 | budding | developing bud clusters |
 | 9 | harvestable | full green terminal and branch buds |
 
-`shapes/plant/marijuana_stage_01_*.json` through `_09_*.json` are plain editable Model Creator shapes. Geometry uses connected stems, petioles, pointed serrated fan leaflets and stepped bud volumes. Fans have multiple orientations to remain visible from different viewpoints. No local absolute texture paths are embedded.
+`shapes/plant/cannabis_stage_01_*.json` through `_09_*.json` are plain editable Model Creator shapes. Geometry uses connected stems, petioles, pointed serrated fan leaflets and stepped bud volumes. Fans have multiple orientations to remain visible from different viewpoints. No local absolute texture paths are embedded.
 
-`shapes/item/marijuana-buds.json` is a green bud cluster with sugar leaves and a short stem. `shapes/item/joint.json` is a narrow parchment roll with a twisted tip and an exposed bud end. Both are real 3D meshes used in inventory, in hand and as dropped items, with per-context transforms.
+`shapes/item/cannabis-buds.json` is a green bud cluster with sugar leaves and a short stem. `shapes/item/joint.json` is a narrow parchment roll with a twisted tip and an exposed bud end. Both are real 3D meshes used in inventory, in hand and as dropped items, with per-context transforms.
 
-All use `textures/block/marijuana/marijuana-atlas.png`, a 64x64 PNG. Logical shape texture dimensions are also 64x64. UV regions:
+All use `textures/block/cannabis/cannabis-atlas.png`, a 64x64 PNG. Logical shape texture dimensions are also 64x64. UV regions:
 
 | Key | UV rectangle | Material |
 | --- | --- | --- |
@@ -46,11 +46,11 @@ All use `textures/block/marijuana/marijuana-atlas.png`, a 64x64 PNG. Logical sha
 | paper | 0,32–32,64 | ivory parchment |
 | stem | 32,32–64,64 | fibrous green-brown stem |
 
-Set Model Creator's asset/texture root to this mod's assets when opening outside a Vintage Story project. No machine-specific folder is required. `tools/build_marijuana_models.py` deterministically rebuilds shapes/item/crop/recipe JSON; it preserves the original atlas. `tools/preview_marijuana_models.py` renders geometry and textures into `docs/previews/marijuana-*.png`. These are software previews, not game screenshots.
+Set Model Creator's asset/texture root to this mod's assets when opening outside a Vintage Story project. No machine-specific folder is required. `tools/build_cannabis_models.py` deterministically rebuilds shapes/item/crop/recipe JSON; it preserves the original atlas. `tools/preview_cannabis_models.py` renders geometry and textures into `docs/previews/cannabis-*.png`. These are software previews, not game screenshots.
 
 ## Animation, audio and eyes
 
-`patches/marijuana-player.json` appends `vsdope-smoke` and `vsdope-smoke-fp` animations to vanilla Seraph shapes and animation metadata to the player entity. The animation raises the right arm to the mouth, holds for the drag, then eases out when use stops. It lasts 150 frames at 30 fps, matching five seconds. Original vanilla animations remain intact.
+`patches/cannabis-player.json` appends `vsdope-smoke` and `vsdope-smoke-fp` animations to vanilla Seraph shapes and animation metadata to the player entity. The animation raises the right arm to the mouth, holds for the drag, then eases out when use stops. It lasts 150 frames at 30 fps, matching five seconds. Original vanilla animations remain intact.
 
 Every translated keyframe supplies all three offset axes, and translating arms start at explicit zero offsets in frame 0. Vintage Story 1.22.7 treats any supplied offset as a translation but then reads all three nullable values: the original lower-arm keyframes omitted X/Z and crashed on first use. The fix covers both camera variants on both `seraph-faceless` and `seraph` shapes.
 
@@ -60,7 +60,7 @@ The original synthesized `sounds/player/joint-drag.ogg` plays once from the serv
 
 ## Verification and client acceptance
 
-Automated server probe: `tests/MarijuanaProbe`. It uses the real 1.22.7 asset registry, actual recipe matcher/consumer and real ItemStacks. Player health, animation-start and network endpoints are stand-ins for item interactions. Separately, `SmokingAnimationChecks` resolves the actual patched Seraph shapes with `Shape.InitForAnimations` and calls the native `Animation.GenerateAllFrames` for both camera variants. This exercises the frame-generation code used by `ClientAnimator` without a graphical client. Build with `VINTAGE_STORY` set, copy its DLL and `modinfo.json` to a **test** server's separate Mods folder alongside the built mod, then start the server. Search its log for `MARIJUANA TEST SUMMARY` and ensure no `MARIJUANA TEST FAILED` appears. Never ship the probe inside the mod.
+Automated server probe: `tests/CannabisProbe`. It uses the real 1.22.7 asset registry, actual recipe matcher/consumer and real ItemStacks. Player health, animation-start and network endpoints are stand-ins for item interactions. Separately, `SmokingAnimationChecks` resolves the actual patched Seraph shapes with `Shape.InitForAnimations` and calls the native `Animation.GenerateAllFrames` for both camera variants. This exercises the frame-generation code used by `ClientAnimator` without a graphical client. Build with `VINTAGE_STORY` set, copy its DLL and `modinfo.json` to a **test** server's separate Mods folder alongside the built mod, then start the server. Search its log for `CANNABIS TEST SUMMARY` and ensure no `CANNABIS TEST FAILED` appears. Never ship the probe inside the mod.
 
 Current result: **61 checks passed** on 1.22.7 with the smoking-crash fix based on merged master `474916c`; 58 JSON patches applied without errors. The new frame-generation test first reproduced the original nullable exception at `Animation.cs:225` against the unfixed assets, then passed for all four patched animations after the offset fix.
 
@@ -74,7 +74,7 @@ Resolving the full vanilla `seraph.json` in the new probe also reports its exist
 
 A rendered client is still required for these acceptance checks:
 
-1. Restart the game with the updated DLL/assets. In creative, search `Marijuana`, place stages 1–9 side by side, and rotate around the mature model. Plant its seeds in farmland and confirm growth progression in normal farming.
+1. Restart the game with the updated DLL/assets. In creative, search `Cannabis`, place stages 1–9 side by side, and rotate around the mature model. Plant its seeds in farmland and confirm growth progression in normal farming.
 2. Harvest stage 9; inspect the bud model in the hotbar, inventory, first/third-person hand and as a dropped item. Check the handbook recipe with parchment in different grid positions.
 3. Hold a joint's right-click for five seconds. Confirm the arm raises to the mouth in first and third person, the drag is audible, exactly one joint disappears and the Stoned HUD shows 2:00. Release early and check nothing is consumed.
 4. With a second client (or third-person camera), check subtle bloodshot eyes while active and restoration afterward, including after changing clothes or reconnecting. Standard, immersive first-person and custom-player-model combinations need visual confirmation.
