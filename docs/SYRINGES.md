@@ -27,7 +27,7 @@ JSON parsing, recipe/variant/texture/localization cross-checks and PNG dimension
 
 Compiled successfully against the official Vintage Story 1.22.7 server assemblies using .NET SDK 10.0.401 (zero errors; six existing nullable warnings). The isolated server reached RunGame and all new JSON patches applied without errors. All 53 runtime integration checks passed for the registered recipes, both liquid types, volume transitions, refill conservation and serialization. Build with `VINTAGE_STORY` pointing at the installation root and `dotnet build`. References are `VintagestoryAPI.dll`, `VintagestoryLib.dll`, and `Mods/VSSurvivalMod.dll`.
 
-Client interaction, animation, movement-effect timing and multiplayer playtesting remain pending. Server startup reports the existing unrelated coca recipe reference to `game:aquavitaeportion`; this change does not alter that processing recipe.
+Client interaction, animation, movement-effect timing and multiplayer playtesting remain pending. Server startup reports the existing unrelated coca recipe reference to `game:aquavitaeportion` (fixed later: now `game:alcoholportion`); this change does not alter that processing recipe.
 
 ## In-game acceptance checks
 

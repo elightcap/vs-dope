@@ -68,7 +68,7 @@ The reusable bong addition extends this probe to **101 passing checks**, includi
 
 Verified: nine crop registrations and shape references, maturity-only bud drops, seed target, native shapeless ingredient matching and exact consumption, cancelled/short/duplicate held-use safety, five-second completion, 80% baseline speed, paused calendar, fractional-minute healing, late-tick expiry capped to 60 HP, non-stacking refresh, reconnect/expiry/death handling, preservation of unrelated speed modifiers, native first-/third-person animation frame generation on both Seraph shapes and packaged sound. Build is clean.
 
-The headless server emits an existing, unrelated warning for the coca barrel recipe's `game:aquavitaeportion` ingredient. This change does not edit that processing chain.
+The headless server emits an existing, unrelated warning for the coca barrel recipe's `game:aquavitaeportion` (fixed later: now `game:alcoholportion`) ingredient. This change does not edit that processing chain.
 
 Resolving the full vanilla `seraph.json` in the new probe also reports its existing duplicate `Eyes` attachment point; smoking patches only append animations. The actual player uses `seraph-faceless`. No animation exceptions occur with the fixed assets.
 

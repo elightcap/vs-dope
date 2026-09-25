@@ -7,7 +7,7 @@ This file describes fictional game mechanics, not real-world processing instruct
 ```text
 Poppy crop
   -> seedpod
-  -> quern (1 seedpod -> 2 opium)
+  -> quern (1 seedpod -> 1 opium)
   -> opium
   -> morphine
   -> morphine solution
@@ -16,7 +16,9 @@ Poppy crop
 
 Seedpods use Vintage Story grinding properties, so the conversion appears as a quern recipe.
 
-Recipe locations: opium -> morphine is `recipes/barrel/opium-to-morphine.json` (1 opium + 1 L limewater, 24 h). Morphine -> morphine solution is `recipes/barrel/morphine-to-solution.json` (1 morphine + 1 L alcohol, 12 h). Morphine solution -> heroin is **not** a barrel recipe. It is `distillationProps` on `itemtypes/morphine-solution.json` (still, ratio 0.1, like vanilla cider -> spirit). A "morphine solution + alcohol" barrel recipe cannot work, because a barrel has one solid slot (`ItemSlotBarrelInput`) and one liquid slot (`ItemSlotLiquidOnly`), so it cannot hold two different liquids.
+Recipe locations: opium -> morphine is `recipes/barrel/opium-to-morphine.json` (2 opium + 1 L limewater -> 1 morphine, 24 h). Morphine -> morphine solution is `recipes/barrel/morphine-to-solution.json` (1 morphine + 1 L alcohol -> 1 L, 12 h). Morphine solution -> heroin is **not** a barrel recipe. It is `distillationProps` on `itemtypes/morphine-solution.json` (still, ratio 0.1, like vanilla cider -> spirit). A "morphine solution + alcohol" barrel recipe cannot work, because a barrel has one solid slot (`ItemSlotBarrelInput`) and one liquid slot (`ItemSlotLiquidOnly`), so it cannot hold two different liquids.
+
+Yield (balance): a mature poppy drops ~2 seedpods, so one plant is ~2 opium, ~1 morphine, ~1 L morphine solution and ~0.1 L heroin. That is ~1 plant per 0.1 L heroin dose and ~10 plants per litre (one full syringe), 4x the original cost (the pre-balance chain was ~2.5 plants per litre). Scale crop fields, not ratios, if product feels scarce.
 
 Filled buckets and barrels of heroin and morphine solution appear in creative (see `ASSETS.md`, "Liquids in the creative inventory").
 
@@ -25,15 +27,16 @@ Filled buckets and barrels of heroin and morphine solution appear in creative (s
 ```text
 Coca crop
   -> coca leaf
-  -> sealed barrel with an equal amount of Aqua Vitae
+  -> quern (1 leaf -> 1 ground coca leaf)
+  -> sealed barrel (10 ground leaves + 1 L Aqua Vitae, 12 h)
   -> coca paste
   -> Dry transition
   -> Coca Vitae
 ```
 
-The barrel recipe is defined at a 1:1 game ratio: one coca leaf plus one litre of Aqua Vitae produces one coca paste. Barrel recipes scale, so 50 leaves plus 50 litres produce 50 paste. Coca paste then uses the game's `Dry` transition to become Coca Vitae at a 1:1 ratio.
+Coca leaves have `grindingProps` -> `vs-dope:coca-leaf-ground`. The barrel recipe (`recipes/barrel/coca-leaf-ground-to-paste.json`) is 10 ground leaves plus one litre of Aqua Vitae -> one coca paste. Barrel recipes need exact multiples (`BarrelRecipe.GetOutputSize`), so 50 ground leaves need exactly 5 litres for 5 paste. A mature plant drops ~5 leaves, so each Coca Vitae costs ~2 plants. Coca paste then uses the game's `Dry` transition to become Coca Vitae at a 1:1 ratio.
 
-The barrel recipe uses Vintage Story's Aqua Vitae liquid (`game:aquavitaeportion`).
+Aqua Vitae in 1.22.7 is `game:alcoholportion` (lang `item-alcoholportion`). There is no `aquavitaeportion`; the old recipe used it and silently failed to resolve.
 
 Keep processing fictional and game-mechanical; do not document real-world extraction chemistry.
 

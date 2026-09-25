@@ -12,8 +12,8 @@
           "var": 1.5
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -25,8 +25,8 @@
           "var": 1.25
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -38,8 +38,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 4,
-          "var": 1.0
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
@@ -51,8 +51,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 3,
-          "var": 0.75
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -64,12 +64,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 12,
-          "var": 3.0
+          "avg": 5,
+          "var": 1.25
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -82,19 +95,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 25,
-          "var": 6.25
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -103,8 +103,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 35,
-          "var": 8.75
+          "avg": 14,
+          "var": 3.5
         }
       },
       {
@@ -116,8 +116,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 30,
-          "var": 7.5
+          "avg": 12,
+          "var": 3.0
         }
       },
       {
@@ -129,8 +129,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 50,
-          "var": 12.5
+          "avg": 20,
+          "var": 5.0
         }
       }
     ],
@@ -176,8 +176,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -189,8 +189,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 1.5,
-          "var": 0.38
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -202,12 +202,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 6,
-          "var": 1.5
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -220,19 +233,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 12,
-          "var": 3.0
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -241,8 +241,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 17,
-          "var": 4.25
+          "avg": 7,
+          "var": 1.75
         }
       },
       {
@@ -254,8 +254,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 15,
-          "var": 3.75
+          "avg": 6,
+          "var": 1.5
         }
       },
       {
@@ -267,8 +267,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 25,
-          "var": 6.25
+          "avg": 10,
+          "var": 2.5
         }
       }
     ],
@@ -288,8 +288,8 @@
           "var": 1.5
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -301,8 +301,8 @@
           "var": 1.25
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -314,8 +314,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 4,
-          "var": 1.0
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
@@ -327,8 +327,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 3,
-          "var": 0.75
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -340,12 +340,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 12,
-          "var": 3.0
+          "avg": 5,
+          "var": 1.25
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -358,19 +371,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 25,
-          "var": 6.25
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -379,8 +379,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 35,
-          "var": 8.75
+          "avg": 14,
+          "var": 3.5
         }
       },
       {
@@ -392,8 +392,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 30,
-          "var": 7.5
+          "avg": 12,
+          "var": 3.0
         }
       },
       {
@@ -405,8 +405,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 50,
-          "var": 12.5
+          "avg": 20,
+          "var": 5.0
         }
       }
     ],
@@ -452,8 +452,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -465,8 +465,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 1.5,
-          "var": 0.38
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -478,12 +478,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 6,
-          "var": 1.5
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -496,19 +509,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 12,
-          "var": 3.0
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -517,8 +517,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 17,
-          "var": 4.25
+          "avg": 7,
+          "var": 1.75
         }
       },
       {
@@ -530,8 +530,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 15,
-          "var": 3.75
+          "avg": 6,
+          "var": 1.5
         }
       },
       {
@@ -543,8 +543,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 25,
-          "var": 6.25
+          "avg": 10,
+          "var": 2.5
         }
       }
     ],
@@ -564,8 +564,8 @@
           "var": 1.5
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -577,8 +577,8 @@
           "var": 1.25
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -590,8 +590,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 4,
-          "var": 1.0
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
@@ -603,8 +603,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 3,
-          "var": 0.75
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -616,12 +616,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 12,
-          "var": 3.0
+          "avg": 5,
+          "var": 1.25
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -634,19 +647,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 25,
-          "var": 6.25
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -655,8 +655,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 35,
-          "var": 8.75
+          "avg": 14,
+          "var": 3.5
         }
       },
       {
@@ -668,8 +668,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 30,
-          "var": 7.5
+          "avg": 12,
+          "var": 3.0
         }
       },
       {
@@ -681,8 +681,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 50,
-          "var": 12.5
+          "avg": 20,
+          "var": 5.0
         }
       }
     ],
@@ -728,8 +728,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -741,8 +741,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 1.5,
-          "var": 0.38
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -754,12 +754,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 6,
-          "var": 1.5
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -772,19 +785,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 12,
-          "var": 3.0
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -793,8 +793,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 17,
-          "var": 4.25
+          "avg": 7,
+          "var": 1.75
         }
       },
       {
@@ -806,8 +806,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 15,
-          "var": 3.75
+          "avg": 6,
+          "var": 1.5
         }
       },
       {
@@ -819,8 +819,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 25,
-          "var": 6.25
+          "avg": 10,
+          "var": 2.5
         }
       }
     ],
@@ -840,8 +840,8 @@
           "var": 1.5
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -853,8 +853,8 @@
           "var": 1.25
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -866,8 +866,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 4,
-          "var": 1.0
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
@@ -879,8 +879,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 3,
-          "var": 0.75
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -892,12 +892,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 12,
-          "var": 3.0
+          "avg": 5,
+          "var": 1.25
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -910,19 +923,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 25,
-          "var": 6.25
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -931,8 +931,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 35,
-          "var": 8.75
+          "avg": 14,
+          "var": 3.5
         }
       },
       {
@@ -944,8 +944,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 30,
-          "var": 7.5
+          "avg": 12,
+          "var": 3.0
         }
       },
       {
@@ -957,8 +957,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 50,
-          "var": 12.5
+          "avg": 20,
+          "var": 5.0
         }
       }
     ],
@@ -1004,8 +1004,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1017,8 +1017,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 1.5,
-          "var": 0.38
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1030,12 +1030,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 6,
-          "var": 1.5
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -1048,19 +1061,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 12,
-          "var": 3.0
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -1069,8 +1069,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 17,
-          "var": 4.25
+          "avg": 7,
+          "var": 1.75
         }
       },
       {
@@ -1082,8 +1082,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 15,
-          "var": 3.75
+          "avg": 6,
+          "var": 1.5
         }
       },
       {
@@ -1095,8 +1095,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 25,
-          "var": 6.25
+          "avg": 10,
+          "var": 2.5
         }
       }
     ],
@@ -1116,8 +1116,8 @@
           "var": 1.5
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1129,8 +1129,8 @@
           "var": 1.25
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1142,8 +1142,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 4,
-          "var": 1.0
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
@@ -1155,8 +1155,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 3,
-          "var": 0.75
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1168,12 +1168,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 12,
-          "var": 3.0
+          "avg": 5,
+          "var": 1.25
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -1186,19 +1199,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 25,
-          "var": 6.25
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -1207,8 +1207,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 35,
-          "var": 8.75
+          "avg": 14,
+          "var": 3.5
         }
       },
       {
@@ -1220,8 +1220,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 30,
-          "var": 7.5
+          "avg": 12,
+          "var": 3.0
         }
       },
       {
@@ -1233,8 +1233,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 50,
-          "var": 12.5
+          "avg": 20,
+          "var": 5.0
         }
       }
     ],
@@ -1280,8 +1280,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1293,8 +1293,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 1.5,
-          "var": 0.38
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1306,12 +1306,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 6,
-          "var": 1.5
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -1324,19 +1337,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 12,
-          "var": 3.0
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -1345,8 +1345,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 17,
-          "var": 4.25
+          "avg": 7,
+          "var": 1.75
         }
       },
       {
@@ -1358,8 +1358,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 15,
-          "var": 3.75
+          "avg": 6,
+          "var": 1.5
         }
       },
       {
@@ -1371,8 +1371,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 25,
-          "var": 6.25
+          "avg": 10,
+          "var": 2.5
         }
       }
     ],
@@ -1392,8 +1392,8 @@
           "var": 1.5
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1405,8 +1405,8 @@
           "var": 1.25
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1418,8 +1418,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 4,
-          "var": 1.0
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
@@ -1431,8 +1431,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 3,
-          "var": 0.75
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1444,12 +1444,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 12,
-          "var": 3.0
+          "avg": 5,
+          "var": 1.25
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -1462,19 +1475,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 25,
-          "var": 6.25
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -1483,8 +1483,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 35,
-          "var": 8.75
+          "avg": 14,
+          "var": 3.5
         }
       },
       {
@@ -1496,8 +1496,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 30,
-          "var": 7.5
+          "avg": 12,
+          "var": 3.0
         }
       },
       {
@@ -1509,8 +1509,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 50,
-          "var": 12.5
+          "avg": 20,
+          "var": 5.0
         }
       }
     ],
@@ -1556,8 +1556,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1569,8 +1569,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 1.5,
-          "var": 0.38
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1582,12 +1582,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 6,
-          "var": 1.5
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -1600,19 +1613,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 12,
-          "var": 3.0
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -1621,8 +1621,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 17,
-          "var": 4.25
+          "avg": 7,
+          "var": 1.75
         }
       },
       {
@@ -1634,8 +1634,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 15,
-          "var": 3.75
+          "avg": 6,
+          "var": 1.5
         }
       },
       {
@@ -1647,8 +1647,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 25,
-          "var": 6.25
+          "avg": 10,
+          "var": 2.5
         }
       }
     ],
@@ -1668,8 +1668,8 @@
           "var": 1.5
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1681,8 +1681,8 @@
           "var": 1.25
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1694,8 +1694,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 4,
-          "var": 1.0
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
@@ -1707,8 +1707,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 3,
-          "var": 0.75
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1720,12 +1720,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 12,
-          "var": 3.0
+          "avg": 5,
+          "var": 1.25
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -1738,19 +1751,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 25,
-          "var": 6.25
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -1759,8 +1759,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 35,
-          "var": 8.75
+          "avg": 14,
+          "var": 3.5
         }
       },
       {
@@ -1772,8 +1772,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 30,
-          "var": 7.5
+          "avg": 12,
+          "var": 3.0
         }
       },
       {
@@ -1785,8 +1785,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 50,
-          "var": 12.5
+          "avg": 20,
+          "var": 5.0
         }
       }
     ],
@@ -1832,8 +1832,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1845,8 +1845,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 1.5,
-          "var": 0.38
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1858,12 +1858,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 6,
-          "var": 1.5
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -1876,19 +1889,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 12,
-          "var": 3.0
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -1897,8 +1897,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 17,
-          "var": 4.25
+          "avg": 7,
+          "var": 1.75
         }
       },
       {
@@ -1910,8 +1910,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 15,
-          "var": 3.75
+          "avg": 6,
+          "var": 1.5
         }
       },
       {
@@ -1923,8 +1923,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 25,
-          "var": 6.25
+          "avg": 10,
+          "var": 2.5
         }
       }
     ],
@@ -1944,8 +1944,8 @@
           "var": 1.5
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1957,8 +1957,8 @@
           "var": 1.25
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1970,8 +1970,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 4,
-          "var": 1.0
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
@@ -1983,8 +1983,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 3,
-          "var": 0.75
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -1996,12 +1996,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 12,
-          "var": 3.0
+          "avg": 5,
+          "var": 1.25
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -2014,19 +2027,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 25,
-          "var": 6.25
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -2035,8 +2035,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 35,
-          "var": 8.75
+          "avg": 14,
+          "var": 3.5
         }
       },
       {
@@ -2048,8 +2048,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 30,
-          "var": 7.5
+          "avg": 12,
+          "var": 3.0
         }
       },
       {
@@ -2061,8 +2061,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 50,
-          "var": 12.5
+          "avg": 20,
+          "var": 5.0
         }
       }
     ],
@@ -2108,8 +2108,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -2121,8 +2121,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 1.5,
-          "var": 0.38
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -2134,12 +2134,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 6,
-          "var": 1.5
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -2152,19 +2165,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 12,
-          "var": 3.0
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -2173,8 +2173,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 17,
-          "var": 4.25
+          "avg": 7,
+          "var": 1.75
         }
       },
       {
@@ -2186,8 +2186,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 15,
-          "var": 3.75
+          "avg": 6,
+          "var": 1.5
         }
       },
       {
@@ -2199,8 +2199,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 25,
-          "var": 6.25
+          "avg": 10,
+          "var": 2.5
         }
       }
     ],
@@ -2220,8 +2220,8 @@
           "var": 1.5
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -2233,8 +2233,8 @@
           "var": 1.25
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -2246,8 +2246,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 4,
-          "var": 1.0
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
@@ -2259,8 +2259,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 3,
-          "var": 0.75
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -2272,12 +2272,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 12,
-          "var": 3.0
+          "avg": 5,
+          "var": 1.25
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 4,
+          "var": 1.0
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -2290,19 +2303,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 25,
-          "var": 6.25
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -2311,8 +2311,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 35,
-          "var": 8.75
+          "avg": 14,
+          "var": 3.5
         }
       },
       {
@@ -2324,8 +2324,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 30,
-          "var": 7.5
+          "avg": 12,
+          "var": 3.0
         }
       },
       {
@@ -2337,8 +2337,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 50,
-          "var": 12.5
+          "avg": 20,
+          "var": 5.0
         }
       }
     ],
@@ -2384,8 +2384,8 @@
           "var": 1.0
         },
         "price": {
-          "avg": 2,
-          "var": 0.5
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -2397,8 +2397,8 @@
           "var": 0.75
         },
         "price": {
-          "avg": 1.5,
-          "var": 0.38
+          "avg": 1,
+          "var": 0.25
         }
       },
       {
@@ -2410,12 +2410,25 @@
           "var": 0.5
         },
         "price": {
-          "avg": 6,
-          "var": 1.5
+          "avg": 2,
+          "var": 0.5
         }
       },
       {
         "code": "vs-dope:coca-paste",
+        "type": "item",
+        "stacksize": 1,
+        "stock": {
+          "avg": 1,
+          "var": 0.25
+        },
+        "price": {
+          "avg": 2,
+          "var": 0.5
+        }
+      },
+      {
+        "code": "vs-dope:morphine",
         "type": "item",
         "stacksize": 1,
         "stock": {
@@ -2428,19 +2441,6 @@
         }
       },
       {
-        "code": "vs-dope:morphine",
-        "type": "item",
-        "stacksize": 1,
-        "stock": {
-          "avg": 1,
-          "var": 0.25
-        },
-        "price": {
-          "avg": 12,
-          "var": 3.0
-        }
-      },
-      {
         "code": "vs-dope:morphine-solution",
         "type": "item",
         "stacksize": 1,
@@ -2449,8 +2449,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 17,
-          "var": 4.25
+          "avg": 7,
+          "var": 1.75
         }
       },
       {
@@ -2462,8 +2462,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 15,
-          "var": 3.75
+          "avg": 6,
+          "var": 1.5
         }
       },
       {
@@ -2475,8 +2475,8 @@
           "var": 0.25
         },
         "price": {
-          "avg": 25,
-          "var": 6.25
+          "avg": 10,
+          "var": 2.5
         }
       }
     ],

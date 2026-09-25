@@ -56,6 +56,8 @@ For custom items, inspect both JSON and C# class registration.
 
 The two liquids follow the vanilla liquid pattern (`$VINTAGE_STORY/assets/survival/itemtypes/liquid/*.json`): the liquid itemtype itself declares `creativeinventoryStacks` holding a filled container. Vanilla containers do not list their own filled variants. Each liquid lists `game:woodbucket` and `game:barrel` with `attributes.ucontents: [{ type: "item", code: "vs-dope:<liquid>", makefull: true }]` in the `general` and `liquids` tabs. `BlockContainer.ResolveUcontents` resolves `ucontents` with the **container's** domain (`game`), so the liquid code must keep the `vs-dope:` prefix. `makefull` fills to the container's `CapacityLitres` (bucket 10 L, barrel 50 L, so 5000 portions at 100/L, which equals `maxStackSize`). A barrel places the single content stack into its solid slot, and `BlockEntityBarrel.OnBlockPlaced` then moves it to the liquid slot. The raw portion items remain listed through `creativeinventory`.
 
+Both liquids also set `attributes.handbook.ignoreCreativeInvStacks: true`, like vanilla `alcoholportion`. Without it `CollectibleObject.GetHandBookStacks` uses the filled bucket/barrel stacks as the handbook pages, so the barrel recipe (morphine solution) and distillation (heroin) never match and the handbook shows no way to make them.
+
 The liquid shape must be `game:item/liquid`. A bare `item/liquid` resolves to `vs-dope:shapes/item/liquid.json`, which does not exist.
 
 ## Other assets

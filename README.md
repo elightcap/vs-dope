@@ -11,18 +11,18 @@ You grow poppies from seeds, harvest them, and refine the raw product into progr
 ```
 poppy seeds ──grow──▶ poppy plant ──harvest──▶ seedpods + seeds
                                                     │
-                                       quern grind  ▼
+                                  quern grind (1:1) ▼
                                                    opium
                                                     │
-                              barrel (+ limewater, 24h)
+                    barrel (2 opium + limewater, 24h)
                                                     ▼
                                                morphine
                                                     │
-                            barrel (+ aqua vitae, 12h)
+               barrel (1 morphine + 1 L alcohol, 12h)
                                                     ▼
                                           morphine solution
                                                     │
-                                  distillery (6h)     ▼
+                           still (10 L → 1 L)       ▼
                                                  heroin
 ```
 

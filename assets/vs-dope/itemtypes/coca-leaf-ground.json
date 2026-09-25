@@ -1,0 +1,17 @@
+{
+  "code": "coca-leaf-ground",
+  "creativeinventory": {
+    "general": [
+      "*"
+    ]
+  },
+  "maxStackSize": 64,
+  "texture": {
+    "base": "vs-dope:item/coca-leaf-ground"
+  },
+  "attributes": {
+    "handbook": {
+      "include": true
+    }
+  }
+}
