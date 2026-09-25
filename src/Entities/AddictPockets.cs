@@ -16,8 +16,8 @@ namespace VsDope.Entities;
 public class AddictPockets
 {
     // ---- starting stock (balance) -----------------------------------------
-    public const int MinStartingGears = 6;
-    public const int MaxStartingGears = 45;
+    public const int MinStartingGears = 2;
+    public const int MaxStartingGears = 18;
     public const int MinJunkKinds = 2;
     public const int MaxJunkKinds = 4;
     public const double StartingDrugChance = 0.3;

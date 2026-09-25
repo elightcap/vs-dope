@@ -16,7 +16,7 @@
     "groundStack": {
       "type": "item",
       "code": "vs-dope:opium",
-      "stackSize": 2
+      "stackSize": 1
     }
   }
 }

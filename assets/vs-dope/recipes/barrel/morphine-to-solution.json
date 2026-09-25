@@ -2,7 +2,7 @@
   "code": "morphine-to-solution",
   "sealHours": 12,
   "ingredients": [
-    { "type": "item", "code": "vs-dope:morphine", "quantity": 1 },
+    { "type": "item", "code": "vs-dope:morphine", "quantity": 2 },
     { "type": "item", "code": "game:alcoholportion", "litres": 1 }
   ],
   "output": { "type": "item", "code": "vs-dope:morphine-solution", "litres": 1 }

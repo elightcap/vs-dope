@@ -40,7 +40,7 @@ public class EntityDrugAddict : EntityAgent
     private const double TradingWindowSeconds = 240;   // patience once the trade window is up
     private const double MaxLifetimeSeconds = 900;     // hard cap regardless of state
     private const double RetaliateSeconds = 6;         // how long we fight back when attacked
-    private const double HostileChance = 0.35;         // chance a first engagement turns into a mugging
+    private const double HostileChance = 0.12;         // chance a first engagement turns into a mugging
     private const float MugDamage = 3f;
     private const float RetaliateDamage = 4f;
     private const double AttackCooldownSeconds = 1.2;

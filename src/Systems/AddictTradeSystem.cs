@@ -20,10 +20,10 @@ public class AddictTradeSystem
     // holds them (heroin is an ItemLiquidPortion and never sits in a slot as a loose stack).
     private static readonly (string Code, int GearPrice)[] Offers =
     {
-        ("vs-dope:opium", 12),
-        ("vs-dope:morphine", 30),
-        ("vs-dope:coca-vitae", 40),
-        ("vs-dope:heroin", 75),
+        ("vs-dope:opium", 5),
+        ("vs-dope:morphine", 12),
+        ("vs-dope:coca-vitae", 16),
+        ("vs-dope:heroin", 30),
     };
 
     private const double OverdoseChancePerSale = 0.12;
