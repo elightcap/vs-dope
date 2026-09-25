@@ -2,7 +2,7 @@
   "code": "opium-to-morphine",
   "sealHours": 24,
   "ingredients": [
-    { "type": "item", "code": "vs-dope:opium", "quantity": 5 },
+    { "type": "item", "code": "vs-dope:opium", "quantity": 2 },
     { "type": "item", "code": "game:limewaterportion", "litres": 1 }
   ],
   "output": { "type": "item", "code": "vs-dope:morphine", "stackSize": 1 }

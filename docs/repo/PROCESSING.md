@@ -16,9 +16,9 @@ Poppy crop
 
 Seedpods use Vintage Story grinding properties, so the conversion appears as a quern recipe.
 
-Recipe locations: opium -> morphine is `recipes/barrel/opium-to-morphine.json` (5 opium + 1 L limewater -> 1 morphine, 24 h). Morphine -> morphine solution is `recipes/barrel/morphine-to-solution.json` (2 morphine + 1 L alcohol -> 1 L, 12 h). Morphine solution -> heroin is **not** a barrel recipe. It is `distillationProps` on `itemtypes/morphine-solution.json` (still, ratio 0.1, like vanilla cider -> spirit). A "morphine solution + alcohol" barrel recipe cannot work, because a barrel has one solid slot (`ItemSlotBarrelInput`) and one liquid slot (`ItemSlotLiquidOnly`), so it cannot hold two different liquids.
+Recipe locations: opium -> morphine is `recipes/barrel/opium-to-morphine.json` (2 opium + 1 L limewater -> 1 morphine, 24 h). Morphine -> morphine solution is `recipes/barrel/morphine-to-solution.json` (1 morphine + 1 L alcohol -> 1 L, 12 h). Morphine solution -> heroin is **not** a barrel recipe. It is `distillationProps` on `itemtypes/morphine-solution.json` (still, ratio 0.1, like vanilla cider -> spirit). A "morphine solution + alcohol" barrel recipe cannot work, because a barrel has one solid slot (`ItemSlotBarrelInput`) and one liquid slot (`ItemSlotLiquidOnly`), so it cannot hold two different liquids.
 
-Yield (balance): a mature poppy drops ~2 seedpods, so one plant is ~2 opium, ~0.4 morphine, ~0.2 L morphine solution and ~0.02 L heroin. That is ~2.5 plants per morphine, ~5 plants per 0.1 L heroin dose and ~50 plants per litre (one full syringe). Scale crop fields, not ratios, if product feels scarce.
+Yield (balance): a mature poppy drops ~2 seedpods, so one plant is ~2 opium, ~1 morphine, ~1 L morphine solution and ~0.1 L heroin. That is ~1 plant per 0.1 L heroin dose and ~10 plants per litre (one full syringe), 4x the original cost (the pre-balance chain was ~2.5 plants per litre). Scale crop fields, not ratios, if product feels scarce.
 
 Filled buckets and barrels of heroin and morphine solution appear in creative (see `ASSETS.md`, "Liquids in the creative inventory").
 

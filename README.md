@@ -14,11 +14,11 @@ poppy seeds ──grow──▶ poppy plant ──harvest──▶ seedpods + se
                                   quern grind (1:1) ▼
                                                    opium
                                                     │
-                    barrel (5 opium + limewater, 24h)
+                    barrel (2 opium + limewater, 24h)
                                                     ▼
                                                morphine
                                                     │
-               barrel (2 morphine + 1 L alcohol, 12h)
+               barrel (1 morphine + 1 L alcohol, 12h)
                                                     ▼
                                           morphine solution
                                                     │
