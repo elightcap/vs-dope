@@ -1,11 +1,11 @@
 """Portable Vintage Story item shapes. Glass bitmap is kept separately; no external texture paths."""
 import math
-from build_marijuana_models import ASSETS, bud, write
+from build_cannabis_models import ASSETS, bud, write
 
 # Small, quiet atlas regions keep narrow faces readable instead of stretching the whole tile.
 UV = {'glass': [43, 41, 45, 43], 'rim': [35, 52, 37, 54]}
 TEXTURES = {'glass': 'item/bong-glass', 'rim': 'item/bong-glass',
-            'bud': 'block/marijuana/marijuana-atlas', 'leaf': 'block/marijuana/marijuana-atlas'}
+            'bud': 'block/cannabis/cannabis-atlas', 'leaf': 'block/cannabis/cannabis-atlas'}
 
 
 def box(elements, name, lo, hi, texture='glass', origin=None, yaw=0, pitch=0):

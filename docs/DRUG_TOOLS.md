@@ -8,12 +8,12 @@ pre-dose tolerance multiplier. First two uses per game day add no tolerance.
 | Coca Vitae | 1 | +25% stone/ore mining; -20% hunger rate | Afterwards: 150 satiety once and -20% speed for 0.5 game hours |
 | Opium | 0.5 | +15% bandage/poultice healing; -10% physical attack damage | -15% ranged accuracy stat; +15% creature detection factor |
 | Morphine, oral or injected | 1 | +30% bandage/poultice healing; -20% physical attack damage | -30% ranged accuracy stat; +25% creature detection factor |
-| Marijuana | 2 | -25% creature detection factor; existing 0.5 HP/game-minute healing | +25% hunger rate; existing -20% speed |
+| Cannabis | 2 | -25% creature detection factor; existing 0.5 HP/game-minute healing | +25% hunger rate; existing -20% speed |
 
 Coca's +100% speed for one game hour and heroin's -50% speed for one game hour
 remain unchanged at zero tolerance. Opium/morphine retain their existing brief
 movement penalties (2.5/5 real seconds); the new support effects use the longer
-calendar durations above. Marijuana now uses its own tolerance counter for all
+calendar durations above. Cannabis now uses its own tolerance counter for all
 effect magnitudes, without contributing to opiate addiction or overdose rolls.
 
 Repeated doses refresh one timer per product; they do not stack that product's
@@ -58,7 +58,7 @@ cost on return, while the crash countdown remains tied to the original expiry:
 it does not restart after a long absence. Redosing does not remove an active
 crash. Death/respawn removes these records without a crash charge.
 
-`StonedSystem` owns marijuana's hunger/detection/movement sources and watched
+`StonedSystem` owns cannabis's hunger/detection/movement sources and watched
 `vs-dope-stoned-strength`. It settles healing at the old strength before a
 refresh. Existing saved Stoned effects without strength default to 1. Its
 existing reconnect behavior still prevents offline healing. All cleanup removes
@@ -69,9 +69,9 @@ only this mod's sources and preserves other mods' stat modifiers.
 `tests/OverdoseProbe/ToolEffectChecks.cs` extends the existing server probe. It
 checks actual native pickaxe/poultice consumption and the installed native health
 hook, plus refresh, tolerance, calendar expiry, crash cost, reconnect, mixed
-opiates, syringe routing, marijuana counters, death, and unrelated stat sources.
+opiates, syringe routing, cannabis counters, death, and unrelated stat sources.
 Player/network endpoints are test doubles; this is not a graphical playtest.
-Run alongside `tests/MarijuanaProbe` on a disposable server and inspect both
+Run alongside `tests/CannabisProbe` on a disposable server and inspect both
 summary lines and error logs. Never ship either probe.
 
 Client acceptance after a full restart:

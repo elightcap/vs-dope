@@ -152,21 +152,21 @@ internal static class ToolEffectChecks
         syringe.OnHeldInteractStop(1.5f, syringeSlot, injected.Entity, null!, null!);
         check(Near(injected.Entity.Stats.GetBlended("healingeffectivness"), 1.3), "tools: morphine syringe enters the shared tool-effect path");
 
-        var marijuana = makePlayer();
-        StonedSystem.Apply(marijuana.Entity, now);
-        check(Near(marijuana.Entity.Stats.GetBlended("hungerrate"), 1.25) && Near(marijuana.Entity.Stats.GetBlended("animalSeekingRange"), 0.75), "tools: marijuana hunger and detection trade-offs");
-        check(OverdoseSystem.RecentDoseHours(marijuana).Count == 0 && marijuana.Entity.Attributes.GetInt("vs-dope-days-used") == 0, "tools: marijuana does not create overdose or opiate addiction");
-        check(marijuana.Entity.Attributes.GetInt("vs-dope-tolerance-uses-marijuana") == 1, "tools: marijuana records product tolerance once");
-        marijuana.Entity.Attributes.SetFloat(AddictionSystem.ToleranceKey("marijuana"), 0.75f);
-        StonedSystem.Apply(marijuana.Entity, now);
-        StonedSystem.Tick(marijuana.Entity, now + 1.0 / 60);
-        check(Near(marijuana.Entity.Stats.GetBlended("hungerrate"), 1.0625) && Near(marijuana.Entity.Stats.GetBlended("walkspeed"), 0.95)
-            && Near(((ProbePlayer)marijuana.Entity).Healing, 0.125), "tools: marijuana tolerance scales hunger, movement and healing");
-        marijuana.Entity.Stats = new EntityStats(marijuana.Entity);
-        StonedSystem.Resume(marijuana.Entity, now + 0.5);
-        check(Near(marijuana.Entity.Stats.GetBlended("animalSeekingRange"), 0.9375), "tools: marijuana reconnect restores dose strength");
-        StonedSystem.Tick(marijuana.Entity, now + 2);
-        check(Near(marijuana.Entity.Stats.GetBlended("hungerrate"), 1) && Near(marijuana.Entity.Stats.GetBlended("animalSeekingRange"), 1), "tools: marijuana expiry cleans up utility stats");
+        var cannabis = makePlayer();
+        StonedSystem.Apply(cannabis.Entity, now);
+        check(Near(cannabis.Entity.Stats.GetBlended("hungerrate"), 1.25) && Near(cannabis.Entity.Stats.GetBlended("animalSeekingRange"), 0.75), "tools: cannabis hunger and detection trade-offs");
+        check(OverdoseSystem.RecentDoseHours(cannabis).Count == 0 && cannabis.Entity.Attributes.GetInt("vs-dope-days-used") == 0, "tools: cannabis does not create overdose or opiate addiction");
+        check(cannabis.Entity.Attributes.GetInt("vs-dope-tolerance-uses-cannabis") == 1, "tools: cannabis records product tolerance once");
+        cannabis.Entity.Attributes.SetFloat(AddictionSystem.ToleranceKey("cannabis"), 0.75f);
+        StonedSystem.Apply(cannabis.Entity, now);
+        StonedSystem.Tick(cannabis.Entity, now + 1.0 / 60);
+        check(Near(cannabis.Entity.Stats.GetBlended("hungerrate"), 1.0625) && Near(cannabis.Entity.Stats.GetBlended("walkspeed"), 0.95)
+            && Near(((ProbePlayer)cannabis.Entity).Healing, 0.125), "tools: cannabis tolerance scales hunger, movement and healing");
+        cannabis.Entity.Stats = new EntityStats(cannabis.Entity);
+        StonedSystem.Resume(cannabis.Entity, now + 0.5);
+        check(Near(cannabis.Entity.Stats.GetBlended("animalSeekingRange"), 0.9375), "tools: cannabis reconnect restores dose strength");
+        StonedSystem.Tick(cannabis.Entity, now + 2);
+        check(Near(cannabis.Entity.Stats.GetBlended("hungerrate"), 1) && Near(cannabis.Entity.Stats.GetBlended("animalSeekingRange"), 1), "tools: cannabis expiry cleans up utility stats");
 
         var smoking = makePlayer();
         var bong = (BongItem)api.World.GetItem(new AssetLocation("vs-dope:bong-loaded"))!;
@@ -181,7 +181,7 @@ internal static class ToolEffectChecks
             item.OnHeldInteractStop(5, slot, smoking.Entity, null!, null!);
             if (dose % 2 == 0) check(slot.Itemstack?.Collectible.Code.Path == "bong-empty", "tools: tolerant smoking still returns one empty bong");
         }
-        check(smoking.Entity.Attributes.GetInt("vs-dope-tolerance-uses-marijuana") == 4
+        check(smoking.Entity.Attributes.GetInt("vs-dope-tolerance-uses-cannabis") == 4
             && Near(StonedSystem.Strength(smoking.Entity), 0.92), "tools: joints and bongs share tolerance and duplicate stops never count twice");
 
         var death = makePlayer();
@@ -195,6 +195,6 @@ internal static class ToolEffectChecks
         check(!death.Entity.WatchedAttributes.HasAttribute(DrugToolEffects.CrashExpiryKey)
             && !death.Entity.WatchedAttributes.HasAttribute(DrugToolEffects.ExpiryKey("opium"))
             && !death.Entity.WatchedAttributes.HasAttribute(StonedSystem.StrengthKey), "tools: death clears tool timers without triggering crash");
-        check(death.Entity.Attributes.GetInt("vs-dope-tolerance-uses-marijuana") == 1, "tools: death preserves long-term tolerance");
+        check(death.Entity.Attributes.GetInt("vs-dope-tolerance-uses-cannabis") == 1, "tools: death preserves long-term tolerance");
     }
 }

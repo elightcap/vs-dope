@@ -2,10 +2,10 @@
   "textureWidth": 64,
   "textureHeight": 64,
   "textures": {
-    "leaf": "block/marijuana/marijuana-atlas",
-    "bud": "block/marijuana/marijuana-atlas",
-    "paper": "block/marijuana/marijuana-atlas",
-    "stem": "block/marijuana/marijuana-atlas"
+    "leaf": "block/cannabis/cannabis-atlas",
+    "bud": "block/cannabis/cannabis-atlas",
+    "paper": "block/cannabis/cannabis-atlas",
+    "stem": "block/cannabis/cannabis-atlas"
   },
   "elements": [
     {

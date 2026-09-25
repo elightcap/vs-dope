@@ -60,7 +60,7 @@ internal static class BongPresentationChecks
                 var mouth = new Matrixf().Set(animator.GetPosebyName("Head").AnimModelMatrix)
                     .TransformVector(new Vec4f(-.02f, .75f / 16, 2.5f / 16, 1));
                 double distance = Distance(held.TransformVector(Rim), mouth);
-                api.Logger.Notification($"MARIJUANA pose {context}: rim-to-mouth {distance:F4} blocks");
+                api.Logger.Notification($"CANNABIS pose {context}: rim-to-mouth {distance:F4} blocks");
                 check(distance < .04, context + " blended smoking pose brings the mouthpiece to the face");
                 for (int i = 0; i < 210; i++) animator.OnFrame(active, 1f / 60);
                 check(HeldMatrix(item.TpHandTransform, hand).TransformVector(Rim).Y < mouth.Y - .3,

@@ -27,7 +27,7 @@ internal static class SmokingAnimationChecks
 
                 // Parsing JSON or mocking StartAnimation misses incomplete nullable vectors.
                 // This is the native frame generator called by ClientAnimator on first use.
-                api.Logger.Notification("MARIJUANA generating animation: " + context);
+                api.Logger.Notification("CANNABIS generating animation: " + context);
                 animation.GenerateAllFrames(shape.Elements, shape.JointsById);
                 check(animation.QuantityFrames == 150 &&
                     animation.PrevNextKeyFrameByFrame.Length == 150 &&

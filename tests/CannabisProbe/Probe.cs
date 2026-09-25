@@ -4,7 +4,7 @@ using Vintagestory.API.Server;
 using VsDope.Items;
 using VsDope.Systems;
 
-public sealed class MarijuanaProbe : ModSystem
+public sealed class CannabisProbe : ModSystem
 {
     public override bool ShouldLoad(EnumAppSide side) => side == EnumAppSide.Server;
     public override void StartServerSide(ICoreServerAPI api) =>
@@ -17,27 +17,33 @@ public sealed class MarijuanaProbe : ModSystem
         {
             if (!condition) throw new Exception(message);
             checks++;
-            api.Logger.Notification("MARIJUANA PASS: " + message);
+            api.Logger.Notification("CANNABIS PASS: " + message);
         }
         bool Near(double a, double b) => Math.Abs(a - b) < .0001;
         try
         {
             var world = api.World;
-            var buds = world.GetItem(new AssetLocation("vs-dope:marijuana-buds"));
+            var buds = world.GetItem(new AssetLocation("vs-dope:cannabis-buds"));
             var paper = world.GetItem(new AssetLocation("game:paper-parchment"));
             var joint = (JointItem)world.GetItem(new AssetLocation("vs-dope:joint"))!;
-            var seeds = world.GetItem(new AssetLocation("vs-dope:seeds-marijuana"));
+            var seeds = world.GetItem(new AssetLocation("vs-dope:seeds-cannabis"));
             Check(buds != null && paper != null && joint != null && seeds != null, "buds, parchment, joint and seeds registered");
-            Check(seeds!.Attributes["plantBlockCode"].AsString() == "vs-dope:crop-marijuana-1", "seeds plant stage one");
+            Check(seeds!.Attributes["plantBlockCode"].AsString() == "vs-dope:crop-cannabis-1", "seeds plant stage one");
+            foreach (var type in new[] { "poppy", "coca", "cannabis" })
+            {
+                var seedItem = world.GetItem(new AssetLocation("vs-dope:seeds-" + type));
+                Check(seedItem?.Shape?.Base?.ToString() == "game:item/resource/seeds/seedbag", type + " seeds use the vanilla seedbag shape");
+                Check(api.Assets.Exists(new AssetLocation("vs-dope:textures/item/seeds/" + type + ".png")), type + " seed label texture exists");
+            }
             for (int stage = 1; stage <= 9; stage++)
             {
-                var crop = world.GetBlock(new AssetLocation("vs-dope:crop-marijuana-" + stage));
+                var crop = world.GetBlock(new AssetLocation("vs-dope:crop-cannabis-" + stage));
                 Check(crop != null && crop.CropProps != null, "crop stage " + stage + " registered with growth properties");
                 Check(api.Assets.TryGet(crop!.Shape!.Base.Clone().WithPathPrefixOnce("shapes/").WithPathAppendixOnce(".json")) != null, "stage " + stage + " shape resolves");
-                Check(crop.Drops!.Any(d => d.Code?.ToString() == "vs-dope:marijuana-buds") == (stage == 9), "buds drop only at maturity: " + stage);
+                Check(crop.Drops!.Any(d => d.Code?.ToString() == "vs-dope:cannabis-buds") == (stage == 9), "buds drop only at maturity: " + stage);
             }
             var trades = api.Assets.Get(new AssetLocation("game:config/tradelists/trader-agriculture.json")).ToObject<Newtonsoft.Json.Linq.JObject>();
-            Check(trades["selling"]!["list"]!.Any(entry => entry["code"]?.ToString() == "vs-dope:seeds-marijuana"), "native agriculture trader can supply marijuana seeds");
+            Check(trades["selling"]!["list"]!.Any(entry => entry["code"]?.ToString() == "vs-dope:seeds-cannabis"), "native agriculture trader can supply cannabis seeds");
             var recipe = world.GridRecipes.Single(r => r.Output?.Code?.ToString() == "vs-dope:joint");
             Check(recipe.Shapeless && recipe.Output!.StackSize == 1, "one-joint shapeless recipe loaded");
             var player = MakePlayer(api);
@@ -101,9 +107,9 @@ public sealed class MarijuanaProbe : ModSystem
             VsDope.Tests.SmokingAnimationChecks.Verify(api, Check);
             VsDope.Tests.BongChecks.Verify(api, MakePlayer(api), Check);
             Check(api.Assets.TryGet(new AssetLocation("vs-dope:sounds/player/joint-drag.ogg"))!=null, "drag sound packaged");
-            api.Logger.Notification("MARIJUANA TEST SUMMARY: " + checks + " checks passed");
+            api.Logger.Notification("CANNABIS TEST SUMMARY: " + checks + " checks passed");
         }
-        catch (Exception ex) { api.Logger.Error("MARIJUANA TEST FAILED: " + ex); }
+        catch (Exception ex) { api.Logger.Error("CANNABIS TEST FAILED: " + ex); }
     }
     private static IServerPlayer MakePlayer(ICoreServerAPI api)
     {

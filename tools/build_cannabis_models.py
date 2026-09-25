@@ -5,7 +5,7 @@ from build_coca_models import add, mul, direction
 ROOT=Path(__file__).resolve().parents[1]
 ASSETS=ROOT/'assets/vs-dope'
 UV={'leaf':[0,0,32,32], 'bud':[32,0,64,32], 'paper':[0,32,32,64], 'stem':[32,32,64,64]}
-TEXTURES={k:'block/marijuana/marijuana-atlas' for k in UV}
+TEXTURES={k:'block/cannabis/cannabis-atlas' for k in UV}
 NAMES=['sprout','seedling','young','established','branching','vegetative','early_flower','budding','harvestable']
 def box(es,name,lo,hi,tex,faces=None,origin=None,yaw=0,pitch=0):
  e={'name':name,'from':list(lo),'to':list(hi),'faces':{f:{'texture':'#'+tex,'uv':UV[tex]} for f in (faces or ['north','south','east','west','up','down'])}}
@@ -72,12 +72,12 @@ def write(path,data):
  path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(data,indent=2)+'\n')
 def main():
  for stage,name in enumerate(NAMES,1):
-  d=model(stage);write(ASSETS/f'shapes/plant/marijuana_stage_{stage:02}_{name}.json',d);print(stage,len(d['elements']))
+  d=model(stage);write(ASSETS/f'shapes/plant/cannabis_stage_{stage:02}_{name}.json',d);print(stage,len(d['elements']))
  es=[];rod(es,'bud-stem',(8,3,8),(8,5.8,8),.30)
  bud(es,'main-bud',(8,4,8),1.8,6.5)
  bud(es,'bud-lobe-a',(6.85,4.3,8.2),.85,3.6)
  bud(es,'bud-lobe-b',(9.0,5.5,7.7),.95,3.8)
- write(ASSETS/'shapes/item/marijuana-buds.json',shape(es))
+ write(ASSETS/'shapes/item/cannabis-buds.json',shape(es))
  es=[]
  # Slender octagonal-ish parchment roll, visibly irregular, folded at one tip.
  for i in range(8):
@@ -87,17 +87,17 @@ def main():
  box(es,'twisted-tip',(7.86,7.86,2.55),(8.14,8.14,3.05),'paper')
  write(ASSETS/'shapes/item/joint.json',shape(es))
  crop=json.loads((ASSETS/'blocktypes/coca-plant.json').read_text())
- crop['variantgroups'][0]['states']=['marijuana']
- crop['shapeByType']={f'*-{s}':{'base':f'plant/marijuana_stage_{s:02}_{n}'} for s,n in enumerate(NAMES,1)}
+ crop['variantgroups'][0]['states']=['cannabis']
+ crop['shapeByType']={f'*-{s}':{'base':f'plant/cannabis_stage_{s:02}_{n}'} for s,n in enumerate(NAMES,1)}
  crop['textures']={k:{'base':v} for k,v in TEXTURES.items()}
- crop['dropsByType']={'*-9':[{'type':'item','code':'vs-dope:marijuana-buds','quantity':{'avg':4}},{'type':'item','code':'vs-dope:seeds-marijuana','quantity':{'avg':1.5}}],'*':[{'type':'item','code':'vs-dope:seeds-marijuana','quantity':{'avg':.35}}]}
- write(ASSETS/'blocktypes/marijuana-plant.json',crop)
- write(ASSETS/'itemtypes/marijuana-seeds.json',{'code':'seeds','variantgroups':[{'code':'type','states':['marijuana']}],'class':'ItemPlantableSeed','creativeinventory':{'general':['*'],'items':['*']},'maxstacksize':64,'texture':{'base':'item/poppy-seeds'},'attributes':{'plantBlockCode':'vs-dope:crop-marijuana-1'}})
+ crop['dropsByType']={'*-9':[{'type':'item','code':'vs-dope:cannabis-buds','quantity':{'avg':4}},{'type':'item','code':'vs-dope:seeds-cannabis','quantity':{'avg':1.5}}],'*':[{'type':'item','code':'vs-dope:seeds-cannabis','quantity':{'avg':.35}}]}
+ write(ASSETS/'blocktypes/cannabis-plant.json',crop)
+ # itemtypes/cannabis-seeds.json is hand-maintained (seedbag shape; label from tools/build_seed_icons.py).
  common={'creativeinventory':{'general':['*'],'items':['*']},'maxstacksize':64,'textures':{k:{'base':v} for k,v in TEXTURES.items()},'guiTransform':{'rotation':{'x':-20,'y':-35,'z':12},'scale':1.7},'groundTransform':{'scale':1.0},'tpHandTransform':{'translation':{'x':0,'y':0,'z':0},'rotation':{'x':0,'y':0,'z':0},'scale':.75},'fpHandTransform':{'translation':{'x':0,'y':0,'z':0},'rotation':{'x':0,'y':0,'z':0},'scale':.75}}
- write(ASSETS/'itemtypes/marijuana-buds.json',dict(common,code='marijuana-buds',shape={'base':'item/marijuana-buds'}))
+ write(ASSETS/'itemtypes/cannabis-buds.json',dict(common,code='cannabis-buds',shape={'base':'item/cannabis-buds'}))
  joint=dict(common,code='joint',**{'class':'vs-dope.joint'},shape={'base':'item/joint'},heldTpUseAnimation='vsdope-smoke',heldTpIdleAnimation='helditemready')
  joint['guiTransform']={'rotation':{'x':-35,'y':25,'z':-35},'scale':2.2}
  joint['tpHandTransform']={'translation':{'x':0,'y':-.25,'z':-.15},'rotation':{'x':0,'y':0,'z':0},'scale':.7}
  write(ASSETS/'itemtypes/joint.json',joint)
- write(ASSETS/'recipes/grid/joint.json',{'ingredientPattern':'BP','width':2,'height':1,'shapeless':True,'ingredients':{'B':{'type':'item','code':'vs-dope:marijuana-buds','quantity':1},'P':{'type':'item','code':'game:paper-parchment','quantity':1}},'output':{'type':'item','code':'vs-dope:joint','quantity':1}})
+ write(ASSETS/'recipes/grid/joint.json',{'ingredientPattern':'BP','width':2,'height':1,'shapeless':True,'ingredients':{'B':{'type':'item','code':'vs-dope:cannabis-buds','quantity':1},'P':{'type':'item','code':'game:paper-parchment','quantity':1}},'output':{'type':'item','code':'vs-dope:joint','quantity':1}})
 if __name__=='__main__':main()

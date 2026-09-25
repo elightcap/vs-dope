@@ -10,16 +10,16 @@
   "maxstacksize": 64,
   "textures": {
     "leaf": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     },
     "bud": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     },
     "paper": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     },
     "stem": {
-      "base": "block/marijuana/marijuana-atlas"
+      "base": "block/cannabis/cannabis-atlas"
     }
   },
   "guiTransform": {

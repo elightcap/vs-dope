@@ -5,7 +5,7 @@
   "shapeless": true,
   "ingredients": {
     "B": { "type": "item", "code": "vs-dope:bong-empty", "quantity": 1 },
-    "M": { "type": "item", "code": "vs-dope:marijuana-buds", "quantity": 1 }
+    "M": { "type": "item", "code": "vs-dope:cannabis-buds", "quantity": 1 }
   },
   "output": { "type": "item", "code": "vs-dope:bong-loaded", "quantity": 1 }
 }
