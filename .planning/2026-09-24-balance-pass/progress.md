@@ -1,2 +1,3 @@
 - 2026-09-24: applied all changes, dotnet build 0 errors, deployed.
 - 2026-09-24: retuned poppy chain to ~10 plants per litre of heroin per user feedback.
+- 2026-09-24: fixed coca recipe liquid code, added quern step + ground coca item, handbook flag on liquids. Disposable server: 93 barrel recipes, 0 failed.
