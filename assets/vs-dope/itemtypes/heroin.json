@@ -17,6 +17,7 @@
   "shape": { "base": "game:item/liquid" },
   "texture": { "base": "item/heroin", "alpha": 180 },
   "attributes": {
+    "handbook": { "ignoreCreativeInvStacks": true },
     "waterTightContainerProps": {
       "containable": true,
       "itemsPerLitre": 100,

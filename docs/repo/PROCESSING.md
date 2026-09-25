@@ -27,15 +27,16 @@ Filled buckets and barrels of heroin and morphine solution appear in creative (s
 ```text
 Coca crop
   -> coca leaf
-  -> sealed barrel (10 leaves + 1 L Aqua Vitae)
+  -> quern (1 leaf -> 1 ground coca leaf)
+  -> sealed barrel (10 ground leaves + 1 L Aqua Vitae, 12 h)
   -> coca paste
   -> Dry transition
   -> Coca Vitae
 ```
 
-The barrel recipe is 10 coca leaves plus one litre of Aqua Vitae -> one coca paste. Barrel recipes scale, so 50 leaves plus 5 litres produce 5 paste. A mature plant drops ~5 leaves, so each Coca Vitae costs ~2 plants. Coca paste then uses the game's `Dry` transition to become Coca Vitae at a 1:1 ratio.
+Coca leaves have `grindingProps` -> `vs-dope:coca-leaf-ground`. The barrel recipe (`recipes/barrel/coca-leaf-ground-to-paste.json`) is 10 ground leaves plus one litre of Aqua Vitae -> one coca paste. Barrel recipes need exact multiples (`BarrelRecipe.GetOutputSize`), so 50 ground leaves need exactly 5 litres for 5 paste. A mature plant drops ~5 leaves, so each Coca Vitae costs ~2 plants. Coca paste then uses the game's `Dry` transition to become Coca Vitae at a 1:1 ratio.
 
-The barrel recipe uses Vintage Story's Aqua Vitae liquid (`game:aquavitaeportion`).
+Aqua Vitae in 1.22.7 is `game:alcoholportion` (lang `item-alcoholportion`). There is no `aquavitaeportion`; the old recipe used it and silently failed to resolve.
 
 Keep processing fictional and game-mechanical; do not document real-world extraction chemistry.
 

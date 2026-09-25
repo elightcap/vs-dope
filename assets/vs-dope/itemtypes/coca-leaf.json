@@ -4,5 +4,8 @@
   "maxstacksize": 64,
   "shape": { "base": "item/coca-leaf" },
   "texture": { "base": "item/coca-leaf" },
-  "attributes": { "handbook": { "include": true } }
+  "attributes": { "handbook": { "include": true } },
+  "grindingProps": {
+    "groundStack": { "type": "item", "code": "vs-dope:coca-leaf-ground", "stackSize": 1 }
+  }
 }

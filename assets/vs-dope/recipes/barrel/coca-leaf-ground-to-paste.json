@@ -1,15 +1,15 @@
 {
-  "code": "coca-leaf-to-paste",
+  "code": "coca-leaf-ground-to-paste",
   "sealHours": 12,
   "ingredients": [
     {
       "type": "item",
-      "code": "vs-dope:coca-leaf",
+      "code": "vs-dope:coca-leaf-ground",
       "quantity": 10
     },
     {
       "type": "item",
-      "code": "game:aquavitaeportion",
+      "code": "game:alcoholportion",
       "litres": 1
     }
   ],

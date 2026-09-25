@@ -17,6 +17,7 @@
   "shape": { "base": "game:item/liquid" },
   "texture": { "base": "item/morphine-solution", "alpha": 180 },
   "attributes": {
+    "handbook": { "ignoreCreativeInvStacks": true },
     "distillationProps": {
       "distilledStack": { "type": "item", "code": "vs-dope:heroin" },
       "ratio": 0.1
