@@ -74,9 +74,11 @@ def main():
         # Native held rendering: T(origin) S T(translation) R T(-origin).
         # Put the neck grip (6.5, 7, 8 model units) at the RightHand attachment.
         # Translation is -origin/scale; rotation counters the idle forearm's lean.
+        # With attachment Y=-180, (0, 0, -45) is the previous rotation followed
+        # by a local-Y half-turn: bowl outward, neck/grip/mouthpiece unchanged.
         **{key: {'origin': {'x': 6.5 / 16, 'y': 7 / 16, 'z': 8 / 16},
                  'translation': {'x': -6.5 / 16 / .65, 'y': -7 / 16 / .65, 'z': -8 / 16 / .65},
-                 'rotation': {'x': 0, 'y': 180, 'z': 45}, 'scale': .65}
+                 'rotation': {'x': 0, 'y': 0, 'z': -45}, 'scale': .65}
            for key in ('tpHandTransform', 'fpHandTransform')},
         'heldTpIdleAnimation': 'helditemready'
     })

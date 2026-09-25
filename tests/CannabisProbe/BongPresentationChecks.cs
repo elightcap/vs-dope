@@ -49,6 +49,7 @@ internal static class BongPresentationChecks
                     context + " neck grip coincides with the actual animated hand attachment");
                 check(held.TransformVector(Rim).Y > held.TransformVector(Base).Y + .45,
                     context + " idle bong stands upright in the hand");
+                check(BowlFacesForward(held, animator), context + " idle bowl and downstem face away from the player");
 
                 var use = metadata.Single(a => a.Code == code).Clone().Init();
                 // PlayerAnimationManager.StartHeldUseAnim stops the held idle/ready animation.
@@ -62,11 +63,25 @@ internal static class BongPresentationChecks
                 double distance = Distance(held.TransformVector(Rim), mouth);
                 api.Logger.Notification($"CANNABIS pose {context}: rim-to-mouth {distance:F4} blocks");
                 check(distance < .04, context + " blended smoking pose brings the mouthpiece to the face");
+                check(BowlFacesForward(held, animator), context + " smoking bowl and downstem face away from the player");
                 for (int i = 0; i < 210; i++) animator.OnFrame(active, 1f / 60);
                 check(HeldMatrix(item.TpHandTransform, hand).TransformVector(Rim).Y < mouth.Y - .3,
                     context + " lowers the bong before the completion exhale");
             }
         }
+    }
+
+    private static bool BowlFacesForward(Matrixf held, ClientAnimator animator)
+    {
+        // Bowl centre x=11.2 projects out from the neck axis x=6.5. Compare this
+        // model-space direction with the native Seraph's negative-X face direction.
+        var bowl = held.TransformVector(new Vec4f((11.2f - 6.5f) / 16, 0, 0, 0));
+        var forward = new Matrixf().Set(animator.GetPosebyName("Head").AnimModelMatrix)
+            .TransformVector(new Vec4f(-1, 0, 0, 0));
+        double dot = bowl.X * forward.X + bowl.Y * forward.Y + bowl.Z * forward.Z;
+        double lengths = Math.Sqrt((bowl.X * bowl.X + bowl.Y * bowl.Y + bowl.Z * bowl.Z) *
+            (forward.X * forward.X + forward.Y * forward.Y + forward.Z * forward.Z));
+        return dot > .5 * lengths;
     }
 
     // Exact 1.22.7 EntityShapeRenderer.RenderItem transform order. Both current camera modes
