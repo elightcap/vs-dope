@@ -68,14 +68,47 @@ def main():
         'creativeinventory': {'general': ['*'], 'items': ['*']}, 'maxStackSize': 1,
         'shapeByType': {f'*-{state}': {'base': f'item/bong-{state}'} for state in ('empty', 'loaded')},
         'textures': {key: {'base': value} for key, value in TEXTURES.items()},
-        'guiTransform': {'rotation': {'x': -15, 'y': -25, 'z': -10}, 'scale': 1.25},
-        'groundTransform': {'scale': 1},
-        'tpHandTransform': {'translation': {'x': 0, 'y': -.30, 'z': -.15},
-                            'rotation': {'x': 0, 'y': 0, 'z': 0}, 'scale': .70},
-        'fpHandTransform': {'translation': {'x': 0, 'y': -.20, 'z': 0},
-                            'rotation': {'x': 0, 'y': 0, 'z': 0}, 'scale': .70},
+        # GUI Y points downward. Unlike blocks, items get no automatic 180-degree flip.
+        'guiTransform': {'rotation': {'x': 165, 'y': -25, 'z': -10}, 'scale': 1.25},
+        'groundTransform': {'rotation': {'x': 0, 'y': 0, 'z': 0}, 'scale': 1},
+        # Native held rendering: T(origin) S T(translation) R T(-origin).
+        # Put the neck grip (6.5, 7, 8 model units) at the RightHand attachment.
+        # Translation is -origin/scale; rotation counters the idle forearm's lean.
+        **{key: {'origin': {'x': 6.5 / 16, 'y': 7 / 16, 'z': 8 / 16},
+                 'translation': {'x': -6.5 / 16 / .65, 'y': -7 / 16 / .65, 'z': -8 / 16 / .65},
+                 'rotation': {'x': 0, 'y': 180, 'z': 45}, 'scale': .65}
+           for key in ('tpHandTransform', 'fpHandTransform')},
         'heldTpIdleAnimation': 'helditemready'
     })
+    patches = []
+    rest = {'UpperArmR': (8, -2, -17), 'LowerArmR': (-8, 0, -28), 'ItemAnchor': (0, 0, 0)}
+    # Bend the elbow below the hand; the wrist/attachment tips the vessel toward the mouth.
+    inhale = {'UpperArmR': (18.83, -14.65, -13.69), 'LowerArmR': (-122.33, 32.02, -8.37),
+              'ItemAnchor': (30.79, 42.19, 49.52)}
+    for code in ('vsdope-bong', 'vsdope-bong-fp'):
+        camera_rest = ({'UpperArmR': (9, -13, -37), 'LowerArmR': (-15, 3, -39), 'ItemAnchor': (0, 0, 0)}
+                       if code.endswith('-fp') else rest)
+        animation = {'name': code, 'code': code, 'quantityframes': 150,
+                     'onActivityStopped': 'EaseOut', 'onAnimationEnd': 'Hold',
+                     'keyframes': [{'frame': frame, 'elements': {
+                         arm: {**{f'rotation{axis}': angle for axis, angle in zip('XYZ', angles)},
+                               **{f'offset{axis}': 0 for axis in 'XYZ'}}
+                         for arm, angles in pose.items()}}
+                         for frame, pose in ((0, camera_rest), (27, inhale), (130, inhale), (149, camera_rest))]}
+        if code.endswith('-fp'):
+            for frame in (animation['keyframes'][0], animation['keyframes'][-1]):
+                frame['elements']['UpperArmR'].update(offsetX=1.3, offsetY=-2.7, offsetZ=-7)
+        for model in ('seraph-faceless', 'seraph'):
+            patches.append({'op': 'add', 'file': f'game:shapes/entity/humanoid/{model}.json',
+                            'path': '/animations/-', 'value': animation})
+        patches.append({'op': 'add', 'file': 'game:entities/humanoid/player.json',
+                        'path': '/client/animations/-', 'value': {
+                            'code': code, 'animation': code, 'animationSpeed': 1,
+                            'blendMode': 'Add', 'easeInSpeed': 8, 'easeOutSpeed': 8,
+                            # Dominate body-idle blending so the narrow rim stays at the mouth.
+                            'elementWeight': {arm: 100 for arm in rest},
+                            'elementBlendMode': {arm: 'AddAverage' for arm in rest}}})
+    write(ASSETS / 'patches/bong-player.json', patches)
 
 
 if __name__ == '__main__':
