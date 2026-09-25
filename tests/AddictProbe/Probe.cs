@@ -71,6 +71,9 @@ public class Probe : ModSystem
             Check(jugs.Count == 2 && jugs.Sum(j => jugBlock.GetCurrentLitres(j)) == 5, "5 L = 2 jugs");
             Check(liquid.AddLiquid(world, heroin, 1) == 1 && liquid.Stacks.Count == 2 && liquid.Stacks.Sum(j => jugBlock.GetCurrentLitres(j)) == 6, "1 L tops up existing jug");
             Check(AddictPockets.PaymentValueOf(jugs[0]) == 0 && liquid.Wealth == 0, "bought drugs are never payment");
+            var doses = new AddictPockets();
+            Check(doses.AddLiquidPortions(world, heroin, 30) == 30 && doses.AddLiquidPortions(world, heroin, 10) == 10, "heroin doses (portions) stored");
+            Check(doses.Stacks.Count == 1 && Math.Abs(jugBlock.GetCurrentLitres(doses.Stacks[0]) - 0.4f) < 1e-3, "4 doses = 0.4 L in one jug");
 
             // Persistence + packet roundtrip.
             var tree = p.ToTree();

@@ -9,3 +9,4 @@
 - Probe run 2 failed to bind: previous server still running. Run 3: ADDICT TEST SUMMARY 231 checks passed (128 pockets + 86 ledger + entity binding, texture index, nametag, stale copy, legacy adoption, death once). No vs-dope warnings/errors in the log.
 - Texture: base drugaddict.png byte-identical after refactor; eye-ring strength reduced after preview (stage 3 read as a mask).
 - Deployed with ./deploy.sh. Client-side rendering (alternates, nametag, window title) not verifiable here: in-game steps given to the user.
+- User: nobody can afford heroin. Simulated starting wealth: median 21 gears-equivalent, only ~11% could pay 30 for 1 L (8% at trusted x1.35). Heroin now sells per 0.1 L dose at 3 (same per-litre value); decline exposure 0.4/dose. AddictPockets.AddLiquidPortions added. Probe: 233 checks passed.

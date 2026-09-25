@@ -17,15 +17,20 @@ public class AddictTradeSystem
 
     // Above-market gear price a stranger pays per sellable unit, in menu order. Known customers
     // pay more (AddictLedger.PriceFor).
-    // Solid drugs sell per item; liquid drugs sell per litre out of whatever container
+    // Solid drugs sell per item; liquid drugs sell per dose (DoseLitres) out of whatever container
     // holds them (heroin is an ItemLiquidPortion and never sits in a slot as a loose stack).
+    // Heroin used to sell by the litre at 30: only ~1 in 10 addicts could afford a single litre.
+    // 3 per dose is the same price per litre, but addicts can buy what they can afford.
     private static readonly (string Code, int GearPrice)[] Offers =
     {
         ("vs-dope:opium", 5),
         ("vs-dope:morphine", 12),
         ("vs-dope:coca-vitae", 16),
-        ("vs-dope:heroin", 30),
+        ("vs-dope:heroin", 3),
     };
+
+    // One dose of a liquid drug: the same 0.1 L as a syringe injection (AddictionSystem.ApplyHeroinDose).
+    public const float DoseLitres = 0.1f;
 
     private const double OverdoseChancePerSale = 0.12;
 
@@ -78,7 +83,7 @@ public class AddictTradeSystem
             bool liquid = IsLiquid(Offers[i].Code);
             codes[i] = Offers[i].Code;
             prices[i] = PriceFor(addict, player.PlayerUID, Offers[i].Code);
-            units[i] = liquid ? "/L" : "ea";
+            units[i] = liquid ? "dose" : "ea";
             held[i] = CountUnits(player, new AssetLocation(Offers[i].Code), liquid);
         }
 
@@ -175,7 +180,7 @@ public class AddictTradeSystem
         }
 
         // The drugs go into the addict's pockets (and drop if it dies). Liquids are poured into jugs.
-        if (liquid) pockets.AddLiquid(api.World, drugItem, taken);
+        if (liquid) pockets.AddLiquidPortions(api.World, drugItem, taken * DosePortions(drugItem));
         else pockets.Add(api.World, new ItemStack(drugItem, taken));
 
         var payment = pockets.TakePayment(api.World, taken * pricePerUnit, out int gearsPaid);
@@ -198,7 +203,7 @@ public class AddictTradeSystem
         }
 
         if (taken < wanted) Tell(player, "addict-afford-partial", taken);
-        string unitKey = liquid ? "addict-sold-litres" : "addict-sold";
+        string unitKey = liquid ? "addict-sold-doses" : "addict-sold";
         if (goods.Count > 0) Tell(player, unitKey + "-goods", taken, gearsPaid, string.Join(", ", goods));
         else Tell(player, unitKey, taken, gearsPaid);
 
@@ -286,13 +291,22 @@ public class AddictTradeSystem
     private static bool Matches(ItemStack? stack, AssetLocation code)
         => stack?.Collectible?.Code != null && stack.Collectible.Code.Equals(code);
 
-    // Whole litres of `code` held in the liquid container in this slot, if any.
-    private static int LitresOf(ItemSlot slot, AssetLocation code)
+    // Liquid portions in one dose of this liquid (heroin: 100 per litre -> 10).
+    private static int DosePortions(CollectibleObject liquid)
+    {
+        var props = BlockLiquidContainerBase.GetContainableProps(new ItemStack(liquid));
+        return props == null || props.ItemsPerLitre <= 0 ? 0 : Math.Max(1, (int)Math.Round(props.ItemsPerLitre * DoseLitres));
+    }
+
+    // Whole doses of `code` held in the liquid container in this slot, if any.
+    private static int DosesOf(ItemSlot slot, AssetLocation code)
     {
         var stack = slot.Itemstack;
         if (stack?.Block is not BlockLiquidContainerBase container) return 0;
-        if (!Matches(container.GetContent(stack), code)) return 0;
-        return (int)container.GetCurrentLitres(stack);
+        var content = container.GetContent(stack);
+        if (content == null || !Matches(content, code)) return 0;
+        int perDose = DosePortions(content.Collectible);
+        return perDose <= 0 ? 0 : content.StackSize / perDose;
     }
 
     private static int CountUnits(IServerPlayer player, AssetLocation code, bool liquid)
@@ -301,7 +315,7 @@ public class AddictTradeSystem
         foreach (var slot in CarriedSlots(player))
         {
             n += liquid
-                ? LitresOf(slot, code)
+                ? DosesOf(slot, code)
                 : (Matches(slot.Itemstack, code) ? slot.StackSize : 0);
         }
         return n;
@@ -317,14 +331,12 @@ public class AddictTradeSystem
             if (liquid)
             {
                 if (slot.Itemstack?.Block is not BlockLiquidContainerBase container) continue;
-                int litres = LitresOf(slot, code);
-                if (litres <= 0) continue;
+                int doses = DosesOf(slot, code);
+                if (doses <= 0) continue;
 
-                var props = BlockLiquidContainerBase.GetContainableProps(container.GetContent(slot.Itemstack));
-                if (props == null || props.ItemsPerLitre <= 0) continue;
-
-                int move = Math.Min(litres, want - taken);
-                container.TryTakeContent(slot.Itemstack, (int)Math.Round(move * props.ItemsPerLitre));
+                int move = Math.Min(doses, want - taken);
+                // DosesOf > 0 means the container holds this liquid.
+                container.TryTakeContent(slot.Itemstack, move * DosePortions(container.GetContent(slot.Itemstack)!.Collectible));
                 slot.MarkDirty();
                 taken += move;
             }

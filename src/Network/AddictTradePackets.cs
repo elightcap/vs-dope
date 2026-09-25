@@ -15,7 +15,7 @@ public class OpenAddictTradePacket
     public long AddictEntityId;
     public string[] DrugCodes = System.Array.Empty<string>();
     public int[] GearPrices = System.Array.Empty<int>();
-    // Price unit per row: "ea" for solid drugs, "/L" for liquids sold by the litre.
+    // Price unit per row: "ea" for solid drugs, "dose" for liquids sold by the 0.1 L dose.
     public string[] Units = System.Array.Empty<string>();
     // Units of each offer the player currently carries (items, or whole litres for liquids).
     public int[] PlayerHeld = System.Array.Empty<int>();

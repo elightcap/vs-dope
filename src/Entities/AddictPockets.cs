@@ -174,9 +174,22 @@ public class AddictPockets
         if (litres <= 0) return 0;
         var props = BlockLiquidContainerBase.GetContainableProps(new ItemStack(liquid));
         if (props == null || props.ItemsPerLitre <= 0) return 0;
+        int stored = AddLiquidPortions(world, liquid, (int)Math.Round(litres * props.ItemsPerLitre));
+        return (int)Math.Round(stored / props.ItemsPerLitre);
+    }
+
+    /// <summary>
+    /// Same as <see cref="AddLiquid"/> in liquid portions (item units; heroin has 100 per litre),
+    /// for doses smaller than a litre. Returns the portions actually stored.
+    /// </summary>
+    public int AddLiquidPortions(IWorldAccessor world, Item liquid, int portions)
+    {
+        if (portions <= 0) return 0;
+        var props = BlockLiquidContainerBase.GetContainableProps(new ItemStack(liquid));
+        if (props == null || props.ItemsPerLitre <= 0) return 0;
         if (world.GetBlock(LiquidJugCode) is not BlockLiquidContainerBase jug) return 0;
 
-        int portionsLeft = (int)Math.Round(litres * props.ItemsPerLitre);
+        int portionsLeft = portions;
         int stored = 0;
 
         foreach (var existing in stacks)
@@ -202,7 +215,7 @@ public class AddictPockets
             stored += moved;
         }
 
-        return (int)Math.Round(stored / props.ItemsPerLitre);
+        return stored;
     }
 
     // ---- paying ------------------------------------------------------------

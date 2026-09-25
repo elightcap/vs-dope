@@ -42,7 +42,7 @@ public class AddictReputationSystem
         ["vs-dope:opium"] = 1f,
         ["vs-dope:morphine"] = 2f,
         ["vs-dope:coca-vitae"] = 2f,
-        ["vs-dope:heroin"] = 4f,
+        ["vs-dope:heroin"] = 0.4f,   // per 0.1 L dose (4 per litre)
     };
 
     private ICoreServerAPI api = null!;
