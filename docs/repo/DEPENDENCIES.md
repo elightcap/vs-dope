@@ -66,7 +66,7 @@ seed item -> plantBlockCode -> crop blocktype
 | Crop appearance | `shapes/plant/` | blocktype texture aliases |
 | Crop drops | crop blocktype | item definitions |
 | Addiction UI | `AddictionCharacterTabSystem.cs` | watched attribute sync |
-| Coca countdown | `CocaVitaeEffectHudSystem.cs` | Coca expiry writes |
+| Coca countdown / mouse input | `CocaVitaeEffectHudSystem.cs` | Coca/crash expiry writes, native `HudElement` input behavior, `tests/HudInputProbe` |
 | Overdose severity/recovery/damage | `OverdoseSystem.cs` (`Apply`, `Advance`) | HUD severity gate |
 | Overdose dose counting | `RecordDrugDose`, `HeroinVesselDoseSystem` | consumed volume (0.1 L per roll), product IDs in `OverdoseSystem.Risks` |
 | Processing | `assets/vs-dope/recipes/` | input/output item JSON |

@@ -21,12 +21,14 @@ public class CocaVitaeEffectHudSystem : ModSystem
         capi = api;
         dialog = new GuiDialogCocaVitaeEffect(api);
         tickId = capi.Event.RegisterGameTickListener(OnTick, 250);
+        capi.Event.LeftWorld += Close;
     }
 
     private void OnTick(float dt)
     {
         var entity = capi.World.Player?.Entity;
-        if (entity == null || dialog == null) return;
+        if (entity?.Alive != true) { Close(); return; }
+        if (dialog == null) return;
 
         double expires = entity.WatchedAttributes.GetDouble(DrugConsumableItem.SpeedEffectKeyFor("coca-vitae") + "-expires-gamehour");
         double remaining = expires - capi.World.Calendar.TotalHours;
@@ -37,21 +39,28 @@ public class CocaVitaeEffectHudSystem : ModSystem
             dialog.SetRemaining(remaining, crashRemaining);
             if (!dialog.IsOpened()) dialog.TryOpen();
         }
-        else if (dialog.IsOpened())
+        else
         {
-            dialog.TryClose();
+            Close();
         }
     }
 
+    private void Close() => dialog?.TryClose();
+
     public override void Dispose()
     {
-        if (capi?.Event != null && tickId != 0) capi.Event.UnregisterGameTickListener(tickId);
+        if (capi != null)
+        {
+            if (tickId != 0) capi.Event.UnregisterGameTickListener(tickId);
+            capi.Event.LeftWorld -= Close;
+        }
+        Close();
         dialog?.Dispose();
         base.Dispose();
     }
 }
 
-public class GuiDialogCocaVitaeEffect : GuiDialog
+public class GuiDialogCocaVitaeEffect : HudElement
 {
     private string remainingText = "";
 
@@ -59,21 +68,28 @@ public class GuiDialogCocaVitaeEffect : GuiDialog
 
     public override string ToggleKeyCombinationCode => null!;
 
+    // A countdown must never release mouse-look or intercept inventory/gameplay input.
+    public override bool Focusable => false;
+    public override bool ShouldReceiveMouseEvents() => false;
+
     public void SetRemaining(double gameHours, double crashHours)
     {
         int totalMinutes = Math.Max(0, (int)Math.Ceiling(gameHours * 60));
-        remainingText = gameHours > 0 ? Lang.Get("vs-dope:coca-vitae-hud-remaining", totalMinutes / 60, (totalMinutes % 60).ToString("00")) : "";
+        string nextText = gameHours > 0 ? Lang.Get("vs-dope:coca-vitae-hud-remaining", totalMinutes / 60, (totalMinutes % 60).ToString("00")) : "";
         if (crashHours > 0)
         {
             int crashMinutes = Math.Max(0, (int)Math.Ceiling(crashHours * 60));
-            if (remainingText.Length > 0) remainingText += "\n";
-            remainingText += Lang.Get("vs-dope:coca-crash-hud", crashMinutes);
+            if (nextText.Length > 0) nextText += "\n";
+            nextText += Lang.Get("vs-dope:coca-crash-hud", crashMinutes);
         }
+        if (remainingText == nextText) return;
+        remainingText = nextText;
         Compose();
     }
 
     private void Compose()
     {
+        SingleComposer?.Dispose();
         ElementBounds textBounds = ElementBounds.FixedSize(250, remainingText.Contains('\n') ? 55 : 30);
         ElementBounds dialogBounds = ElementStdBounds.AutosizedMainDialog
             .WithAlignment(EnumDialogArea.RightTop)
@@ -84,11 +100,5 @@ public class GuiDialogCocaVitaeEffect : GuiDialog
             .AddShadedDialogBG(ElementBounds.Fill, false)
             .AddStaticText(remainingText, CairoFont.WhiteSmallText(), textBounds)
             .Compose();
-    }
-
-    public override bool TryOpen()
-    {
-        Compose();
-        return base.TryOpen();
     }
 }
