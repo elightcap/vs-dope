@@ -200,7 +200,7 @@ Write the folder name into `.planning/.active_plan`. Update `progress.md` as you
   # when merged: git worktree remove ../vs-dope-<slug>
   ```
 - **Commit verified work** before you finish. Stage only the files you meant to change.
-- **Ask before pushing or opening a PR.** Never force-push.
+- **You may always commit, push your task branch, and open a draft PR** without asking. Never force-push.
 
 ## 8. Definition of done
 
