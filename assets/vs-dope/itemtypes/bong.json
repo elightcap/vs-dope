@@ -43,40 +43,55 @@
   },
   "guiTransform": {
     "rotation": {
-      "x": -15,
+      "x": 165,
       "y": -25,
       "z": -10
     },
     "scale": 1.25
   },
   "groundTransform": {
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
     "scale": 1
   },
   "tpHandTransform": {
+    "origin": {
+      "x": 0.40625,
+      "y": 0.4375,
+      "z": 0.5
+    },
     "translation": {
-      "x": 0,
-      "y": -0.3,
-      "z": -0.15
+      "x": -0.625,
+      "y": -0.673076923076923,
+      "z": -0.7692307692307692
     },
     "rotation": {
       "x": 0,
-      "y": 0,
-      "z": 0
+      "y": 180,
+      "z": 45
     },
-    "scale": 0.7
+    "scale": 0.65
   },
   "fpHandTransform": {
+    "origin": {
+      "x": 0.40625,
+      "y": 0.4375,
+      "z": 0.5
+    },
     "translation": {
-      "x": 0,
-      "y": -0.2,
-      "z": 0
+      "x": -0.625,
+      "y": -0.673076923076923,
+      "z": -0.7692307692307692
     },
     "rotation": {
       "x": 0,
-      "y": 0,
-      "z": 0
+      "y": 180,
+      "z": 45
     },
-    "scale": 0.7
+    "scale": 0.65
   },
   "heldTpIdleAnimation": "helditemready"
 }

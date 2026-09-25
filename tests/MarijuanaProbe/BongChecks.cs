@@ -11,6 +11,21 @@ internal static class BongChecks
     {
         var world = api.World;
         var entity = (ProbePlayer)player.Entity;
+        var emissions = new List<SimpleParticleProperties>();
+        entity.Pos.X = 24;
+        entity.Pos.Y = 120;
+        entity.Pos.Z = 36;
+        entity.Pos.Yaw = 0;
+        entity.Pos.Pitch = 0;
+        entity.World = Proxy<IWorldAccessor>.Create((method, args) =>
+        {
+            if (method.Name == "SpawnParticles" && args?[0] is SimpleParticleProperties smoke)
+            {
+                check(args[1] == null, "exhale broadcast includes the smoking player");
+                emissions.Add(smoke);
+            }
+            return method.Invoke(world, args);
+        });
         var empty = world.GetItem(new AssetLocation("vs-dope:bong-empty")) as BongItem;
         var loaded = world.GetItem(new AssetLocation("vs-dope:bong-loaded")) as BongItem;
         var quartz = world.GetItem(new AssetLocation("game:clearquartz"));
@@ -90,8 +105,8 @@ internal static class BongChecks
         Finish(loaded!);
         check(slot.Itemstack.Collectible == loaded && NoEffect(), "stop without start cannot consume loaded bowl");
         Start(loaded!);
-        check(handling == EnumHandHandling.PreventDefault && entity.LastAnimation == JointItem.AnimationCode,
-            "loaded bong starts the tested smoking animation");
+        check(handling == EnumHandHandling.PreventDefault && entity.LastAnimation == BongItem.AnimationCode,
+            "loaded bong starts its dedicated vessel smoking animation");
         Finish(loaded!, 4.99f);
         check(slot.Itemstack.Collectible == loaded && NoEffect(), "early release preserves loaded bong and grants no effect");
         Start(loaded!);
@@ -112,6 +127,7 @@ internal static class BongChecks
         Finish(loaded);
         check(slot.StackSize == 2 && slot.Itemstack.Collectible == loaded && NoEffect(),
             "invalid oversized bong stack cannot consume or duplicate vessels");
+        check(emissions.Count == 0, "empty, early, cancelled, dead, switched and invalid uses emit no smoke");
 
         // Actual recipe input consumption followed by item use, repeated with the same returned vessel.
         slot.Itemstack = new ItemStack(empty);
@@ -129,6 +145,7 @@ internal static class BongChecks
                 loaded.OnHeldInteractStep(4.99f, slot, entity, null!, null!) &&
                 !loaded.OnHeldInteractStep(5, slot, entity, null!, null!), $"reuse cycle {cycle}: smoking ends at five seconds");
             Finish(loaded);
+            check(emissions.Count == cycle, $"reuse cycle {cycle}: completion emits one smoke burst");
             check(slot.StackSize == 1 && slot.Itemstack?.Collectible == empty &&
                 Enumerable.Range(1, 8).All(i => inventory[i].StackSize == 64 && inventory[i].Itemstack?.Collectible == buds),
                 $"reuse cycle {cycle}: exactly one empty bong returns in-place with all other slots full");
@@ -140,7 +157,30 @@ internal static class BongChecks
             Finish(loaded);
             check(ReferenceEquals(returned, slot.Itemstack) && entity.WatchedAttributes.GetDouble(StonedSystem.ExpiryKey) == expiry,
                 $"reuse cycle {cycle}: duplicate stop cannot return another bong or refresh effect");
+            check(emissions.Count == cycle, $"reuse cycle {cycle}: duplicate stop emits no extra smoke");
         }
+        var puff = emissions[0];
+        check(Math.Abs(puff.MinPos.X - entity.Pos.X - entity.LocalEyePos.X) < .001 &&
+            Math.Abs(puff.MinPos.Y - entity.Pos.InternalY - entity.LocalEyePos.Y + .12) < .001 &&
+            Math.Abs(puff.MinPos.Z - entity.Pos.Z - entity.LocalEyePos.Z + .22) < .001 &&
+            puff.MinVelocity.Z < 0 && puff.MinVelocity.Y > 0,
+            "exhale starts at the mouth and travels forward with upward drift");
+        using (var stream = new MemoryStream())
+        {
+            using var writer = new BinaryWriter(stream, System.Text.Encoding.UTF8, true);
+            puff.ToBytes(writer);
+            writer.Flush();
+            stream.Position = 0;
+            var decoded = new SimpleParticleProperties();
+            using var reader = new BinaryReader(stream, System.Text.Encoding.UTF8, true);
+            decoded.FromBytes(reader, world);
+            check(decoded.ParticleModel == EnumParticleModel.Quad && decoded.MinQuantity == 24 &&
+                decoded.LifeLength > 0 && decoded.GravityEffect == 0 &&
+                decoded.OpacityEvolve.nextFloat(120, 1.4f) <= 0 &&
+                decoded.SizeEvolve.nextFloat(.5f, 1) > .5f && decoded.MinPos.Z == puff.MinPos.Z,
+                "native particle packet preserves location, expanding quads and full fade-out");
+        }
+        entity.World = world;
         double now = world.Calendar.TotalHours;
         StonedSystem.Tick(entity, now + 1.0 / 60);
         check(Math.Abs(entity.Healing - .5) < .0001, "bong Stoned heals 0.5 HP in one game minute");
@@ -159,5 +199,6 @@ internal static class BongChecks
         }
         check(api.Assets.TryGet(new AssetLocation("vs-dope:sounds/player/bong-bubbles.ogg")) != null,
             "distinct bong bubbling sound is packaged");
+        BongPresentationChecks.Verify(api, check);
     }
 }
