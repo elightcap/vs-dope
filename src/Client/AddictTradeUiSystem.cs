@@ -149,7 +149,9 @@ public class GuiDialogAddictTrade : GuiDialog
         var compo = capi.Gui.CreateCompo("addicttrade", dialogBounds)
             .AddShadedDialogBG(fill, false)
             .AddDialogTitleBarWithBg(
-                Lang.Get("vs-dope:item-creature-drugaddict"),
+                string.IsNullOrEmpty(data.AddictName)
+                    ? Lang.Get("vs-dope:item-creature-drugaddict")
+                    : Lang.Get("vs-dope:addict-trade-title", data.AddictName, Lang.Get(data.AddictTierKey)),
                 OnClose,
                 CairoFont.WhiteDetailText().WithFontSize(16),
                 ElementBounds.Fixed(0, 0, Width, 30),

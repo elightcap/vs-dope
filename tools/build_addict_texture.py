@@ -9,6 +9,11 @@ Look: sallow, grimy skin (vanilla skin18 recoloured), dark eye rings, stubble, d
 eyes, needle track marks and sores on the forearms, a stained and torn linen shirt with
 ragged short sleeves, patched drab trousers cut off ragged at the shin, and rag-wrapped feet.
 
+Decline stages (issue #51): drugaddict-decline1..3.png are the same addict after long use, the
+entity's texture alternates (textureIndex = stage). Each stage paints on top of the finished base
+with its own RNG, so the base texture never changes: greyer skin, deeper eye rings, hollow cheeks,
+ribs showing through the tears, more sores and track marks, and dirtier, more torn clothes.
+
 Usage:  python3 tools/build_addict_texture.py [--preview OUT.png]
 Needs Pillow and a Vintage Story install ($VINTAGE_STORY, default /opt/vintagestory).
 Deterministic (fixed seed).
@@ -24,6 +29,7 @@ SHAPE = GAME / 'shapes/entity/humanoid/seraph.json'
 BASE_SKIN = GAME / 'textures/entity/humanoid/seraphskinparts/body/skin18.png'
 HAIR = GAME / 'textures/entity/humanoid/seraphskinparts/hair/rust3.png'  # preview only; keep in sync with drugaddict.json
 OUT = ROOT / 'assets/vs-dope/textures/entity/drugaddict.png'
+DECLINE_STAGES = 3  # keep in sync with the alternates in drugaddict.json and AddictLedger.DeclineThresholds
 PX = 2  # texture pixels per shape UV unit (64x152 texture / 32x76 shape)
 
 rng = random.Random(3606)  # issue #36
@@ -166,6 +172,7 @@ def hole(img, box, n, skin_img):
 
 
 def build():
+    rng.seed(3606)
     shape = load_shape()
     els = elements(shape)
     img = Image.open(BASE_SKIN).convert('RGBA')
@@ -300,7 +307,95 @@ def build():
                 for x in range(x1, x2):
                     if (x + y) % 3 == 0:
                         px[x, y] = mix(px[x, y][:3], (60, 55, 48), 0.4) + (255,)
-    return img, shape, els
+    return img, skin_only, shape, els
+
+
+WASTED = (150, 152, 124)   # grey-green pallor of a body giving out
+RIB = (70, 58, 56)
+
+
+def decline(base, skin_only, els, stage):
+    """Paint decline stage 1..3 over the finished base texture."""
+    global rng
+    saved, rng = rng, random.Random(5100 + stage)
+    try:
+        skin = skin_only.copy()
+        sp = skin.load()
+        fx1, fy2 = int(28 * PX), 28          # face-feature strip (eyes, lids, lips, brows)
+
+        def feature(x, y):
+            return x >= fx1 and y < fy2
+
+        # Pallor, deepening with each stage (keeps the grain of the base skin).
+        for y in range(skin.height):
+            for x in range(skin.width):
+                if feature(x, y):
+                    continue
+                c = sp[x, y][:3]
+                sp[x, y] = clamp(tuple(v * (1 - 0.07 * stage) for v in mix(c, WASTED, 0.16 * stage))) + (255,)
+        # Heavier, darker eyelids.
+        for y in range(12, 16):
+            for x in range(fx1, 64):
+                sp[x, y] = mix(sp[x, y][:3], (60, 40, 56), 0.2 * stage) + (255,)
+
+        head = els['Head']
+        hx1, hy1, hx2, hy2 = face_box(head, 'west')
+        h = hy2 - hy1
+        ring_y = hy1 + int(round((5 - 1.75) / 5 * h))
+        for x in range(hx1 + 1, hx2 - 1):
+            for y, a in ((ring_y, 0.12), (ring_y + 1, 0.07)):
+                sp[x, y] = mix(sp[x, y][:3], BRUISE, a * stage) + (255,)
+        # Hollow cheeks: shadow the sides of the face below the eyes.
+        for x in (hx1, hx1 + 1, hx2 - 2, hx2 - 1):
+            for y in range(ring_y + 2, hy2 - 1):
+                sp[x, y] = mix(sp[x, y][:3], (54, 48, 46), 0.12 * stage) + (255,)
+        splotch(skin, (hx1, hy1, hx2, hy2), SORE, stage, (1, 1), (0.5, 0.75))
+
+        # Ribs on the chest and back, visible through the collar and the tears.
+        if stage >= 2:
+            ut = els['UpperTorso']
+            for side in ('west', 'east'):
+                x1, y1, x2, y2 = face_box(ut, side)
+                for y in range(y1 + 3, y2 - 1, 2):
+                    for x in range(x1 + 1, x2 - 1):
+                        if abs(x - (x1 + x2) // 2) > 0:
+                            sp[x, y] = mix(sp[x, y][:3], RIB, 0.18 * stage) + (255,)
+
+        # More track marks and sores; by stage 3 the upper arms are used too.
+        arms = [('LowerArmR', 'east'), ('LowerArmL', 'west')]
+        if stage >= 3:
+            arms += [('UpperArmR', 'east'), ('UpperArmL', 'west')]
+        for arm, inner in arms:
+            x1, y1, x2, y2 = face_box(els[arm], inner)
+            for _ in range(2 * stage):
+                sp[rng.randrange(x1, x2), rng.randrange(y1, y2)] = clamp(TRACK) + (255,)
+            splotch(skin, (x1, y1, x2, y2), BRUISE, stage, (1, 3), (0.3, 0.5))
+        for name in ('LowerArmR', 'LowerArmL', 'LowerFootR', 'LowerFootL', 'Neck'):
+            for _, f in side_faces(els[name]):
+                splotch(skin, rect(f), SORE, stage, (1, 2), (0.45, 0.75))
+
+        # Composite: declined skin wherever the base shows bare skin, clothes elsewhere.
+        img = base.copy()
+        px, bp, so = img.load(), base.load(), skin_only.load()
+        for y in range(img.height):
+            for x in range(img.width):
+                if bp[x, y] == so[x, y]:
+                    px[x, y] = sp[x, y]
+
+        # Clothes: filthier and more torn, tears showing the declined skin.
+        ut, lt = els['UpperTorso'], els['LowerTorso']
+        for name in ('west', 'east', 'north', 'south'):
+            splotch(img, face_box(ut, name), SHIRT_STAIN, 2 * stage, (2, 4), (0.3, 0.6))
+            splotch(img, face_box(ut, name), GRIME, stage, (1, 3), (0.3, 0.5))
+        for name in ('west', 'east'):
+            hole(img, face_box(ut, name), stage, skin)
+        for leg in ('UpperFootR', 'UpperFootL'):
+            splotch(img, face_box(els[leg], 'west'), TROUSER_DARK, 2 * stage, (2, 3), (0.3, 0.6))
+            hole(img, face_box(els[leg], 'west'), stage - 1, skin)
+        hole(img, face_box(lt, 'west'), stage - 1, skin)
+        return img
+    finally:
+        rng = saved
 
 
 # ---- preview: flat orthographic front/back render (rest pose, ignores rotations) --------------
@@ -372,13 +467,23 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--preview', help='also write a preview sheet (front, back, flat texture)')
     args = ap.parse_args()
-    img, shape, els = build()
+    img, skin_only, shape, els = build()
     OUT.parent.mkdir(parents=True, exist_ok=True)
     img.save(OUT)
     print(f'wrote {OUT.relative_to(ROOT)} {img.size}')
+    stages = [img]
+    for stage in range(1, DECLINE_STAGES + 1):
+        out = OUT.with_name(f'{OUT.stem}-decline{stage}.png')
+        stages.append(decline(img, skin_only, els, stage))
+        stages[-1].save(out)
+        print(f'wrote {out.relative_to(ROOT)}')
     if args.preview:
-        preview(img, els, args.preview)
-        print(f'wrote {args.preview}')
+        sheets = []
+        for i, tex in enumerate(stages):
+            path = Path(args.preview)
+            path = path if i == 0 else path.with_name(f'{path.stem}-decline{i}{path.suffix}')
+            preview(tex, els, path)
+            print(f'wrote {path}')
 
 
 if __name__ == '__main__':

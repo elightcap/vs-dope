@@ -15,7 +15,8 @@ public class AddictTradeSystem
 {
     public static AddictTradeSystem Instance = null!;
 
-    // Above-market gear price the addict pays per sellable unit, in menu order.
+    // Above-market gear price a stranger pays per sellable unit, in menu order. Known customers
+    // pay more (AddictLedger.PriceFor).
     // Solid drugs sell per item; liquid drugs sell per litre out of whatever container
     // holds them (heroin is an ItemLiquidPortion and never sits in a slot as a loose stack).
     private static readonly (string Code, int GearPrice)[] Offers =
@@ -76,7 +77,7 @@ public class AddictTradeSystem
         {
             bool liquid = IsLiquid(Offers[i].Code);
             codes[i] = Offers[i].Code;
-            prices[i] = Offers[i].GearPrice;
+            prices[i] = PriceFor(addict, player.PlayerUID, Offers[i].Code);
             units[i] = liquid ? "/L" : "ea";
             held[i] = CountUnits(player, new AssetLocation(Offers[i].Code), liquid);
         }
@@ -99,6 +100,8 @@ public class AddictTradeSystem
             AddictGears = pockets?.GearCount ?? 0,
             AddictGoodsValue = pockets?.GoodsValue ?? 0,
             AddictStacks = stacks.ToArray(),
+            AddictName = addict.Record is { } record ? AddictReputationSystem.NameOf(record) : "",
+            AddictTierKey = addict.Record is { } r ? AddictReputationSystem.TierLangKey(AddictLedger.TierOf(r, player.PlayerUID)) : "",
             Refresh = refresh,
         }, new[] { player });
     }
@@ -107,8 +110,7 @@ public class AddictTradeSystem
     {
         if (player?.Entity == null || packet == null) return;
 
-        int pricePerUnit = PriceOf(packet.DrugCode);
-        if (pricePerUnit <= 0) return;
+        if (PriceOf(packet.DrugCode) <= 0) return;
 
         // Every rejection below reports back. Silent returns here are what made a broken
         // trade look like a dead button.
@@ -136,6 +138,7 @@ public class AddictTradeSystem
             Tell(player, "addict-sell-failed");
             return;
         }
+        int pricePerUnit = PriceFor(addict, player.PlayerUID, packet.DrugCode);
 
         var code = new AssetLocation(packet.DrugCode);
         bool liquid = IsLiquid(packet.DrugCode);
@@ -178,6 +181,14 @@ public class AddictTradeSystem
         var payment = pockets.TakePayment(api.World, taken * pricePerUnit, out int gearsPaid);
         addict.SavePockets();
 
+        // The addict remembers who sold to it; the first sale of a visit counts towards its tier.
+        var record = addict.Record;
+        if (record != null && AddictReputationSystem.Instance is { } rep)
+        {
+            rep.Ledger.RecordSale(record, player.PlayerUID, taken, taken * pricePerUnit,
+                AddictReputationSystem.ExposureOf(packet.DrugCode), addict.ConsumeFirstSaleOfVisit(), rep.Today);
+        }
+
         var goods = new List<string>();
         foreach (var stack in payment)
         {
@@ -199,7 +210,9 @@ public class AddictTradeSystem
 
         // Chance the addict ODs on the high after a deal; it then dies on the spot instead
         // (and drops everything it carries, including what it just bought).
-        if (rng.NextDouble() < OverdoseChancePerSale) addict.Overdose();
+        // A body already wrecked by long use is more likely to give out.
+        double odChance = record != null ? AddictLedger.OverdoseChanceFor(OverdoseChancePerSale, record) : OverdoseChancePerSale;
+        if (rng.NextDouble() < odChance) addict.Overdose();
     }
 
     // Hand a stack to the player; whatever doesn't fit lands at their feet.
@@ -219,6 +232,14 @@ public class AddictTradeSystem
 
     private static void Tell(IServerPlayer player, string langKey, params object[] args)
         => player.SendLocalisedMessage(0, "vs-dope:" + langKey, args);
+
+    // What this addict pays this player per unit: the base price, raised for known customers.
+    private static int PriceFor(EntityDrugAddict addict, string playerUid, string code)
+    {
+        int basePrice = PriceOf(code);
+        var record = addict.Record;
+        return record == null || basePrice <= 0 ? basePrice : AddictLedger.PriceFor(basePrice, AddictLedger.TierOf(record, playerUid));
+    }
 
     private static int PriceOf(string code)
     {

@@ -32,6 +32,9 @@ public class VsDopeModSystem : ModSystem
         AddictionSystem = new AddictionSystem();
         AddictionSystem.Initialize(api);
 
+        var reputationSystem = new AddictReputationSystem();
+        reputationSystem.Initialize(api);
+
         var spawnSystem = new DrugAddictSpawnSystem();
         spawnSystem.Initialize(api);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using VsDope.Systems;
@@ -40,7 +41,6 @@ public class EntityDrugAddict : EntityAgent
     private const double TradingWindowSeconds = 240;   // patience once the trade window is up
     private const double MaxLifetimeSeconds = 900;     // hard cap regardless of state
     private const double RetaliateSeconds = 6;         // how long we fight back when attacked
-    private const double HostileChance = 0.12;         // chance a first engagement turns into a mugging
     private const float MugDamage = 3f;
     private const float RetaliateDamage = 4f;
     private const double AttackCooldownSeconds = 1.2;
@@ -65,6 +65,12 @@ public class EntityDrugAddict : EntityAgent
     private const string AttrLeaveStartHours = "vs-dope-addict-leave-hours";
     // Server-only (Entity.Attributes, saved with the entity, never synced): the addict's pockets.
     private const string AttrPockets = "vs-dope-addict-inv";
+    // Server-only: which ledger identity this entity plays, and per-visit flags for it.
+    private const string AttrAddictId = "vs-dope-addict-id";
+    private const string AttrSoldThisVisit = "vs-dope-addict-sold";
+    private const string AttrRumourTried = "vs-dope-addict-rumour";
+    // Vanilla: picks the alternate texture (0 = base). We use it for the decline stage.
+    private const string AttrTextureIndex = "textureIndex";
 
     private static readonly Random Rng = new();
 
@@ -84,6 +90,8 @@ public class EntityDrugAddict : EntityAgent
     private double stuckCheckX, stuckCheckZ;
 
     private AddictPockets? pockets;       // server only; loaded lazily, see Pockets
+    private bool identityChecked;         // server only; ledger identity verified since load
+    private bool overdosing;              // the next death is Overdose(), not a kill
 
     public bool Friendly { get; private set; }
     public string? TargetPlayerUid => targetUid;
@@ -108,6 +116,9 @@ public class EntityDrugAddict : EntityAgent
             else
             {
                 pockets.RollStartingStock(World, Rng);
+                // Regulars come with extra gears so they can actually pay their better prices.
+                int bonus = Record is { } r ? AddictLedger.BonusGearsFor(AddictLedger.TierOf(r, targetUid)) : 0;
+                if (bonus > 0 && World.GetItem(AddictPockets.GearCode) is { } gear) pockets.Add(World, new ItemStack(gear, bonus));
                 SavePockets();
             }
             return pockets;
@@ -118,6 +129,88 @@ public class EntityDrugAddict : EntityAgent
     public void SavePockets()
     {
         if (pockets != null) Attributes[AttrPockets] = pockets.ToTree();
+    }
+
+    // ---- identity (see AddictReputationSystem / AddictLedger) --------------------
+
+    /// <summary>The ledger identity this entity plays (server only; null before it is known).</summary>
+    public AddictRecord? Record
+    {
+        get
+        {
+            int id = Attributes.GetInt(AttrAddictId, 0);
+            return id > 0 ? AddictReputationSystem.Instance?.Ledger.Get(id) : null;
+        }
+    }
+
+    /// <summary>
+    /// Called by the spawn system before spawning: which addict this is, how it looks (decline
+    /// stage as the texture alternate) and its name tag. All of it survives Initialize().
+    /// </summary>
+    public void BindIdentity(AddictRecord record)
+    {
+        Attributes.SetInt(AttrAddictId, record.Id);
+        WatchedAttributes.SetInt(AttrTextureIndex, AddictLedger.DeclineStage(record));
+        SetNameTag(AddictReputationSystem.NameOf(record));
+    }
+
+    // The vanilla nametag behavior reads WatchedAttributes["nametag"]["name"] and only creates
+    // the tree when it is missing, so a tree written before spawning survives its constructor.
+    private void SetNameTag(string name)
+    {
+        var tree = WatchedAttributes.GetTreeAttribute("nametag") ?? new TreeAttribute();
+        tree.SetString("name", name);
+        WatchedAttributes["nametag"] = tree;
+        WatchedAttributes.MarkPathDirty("nametag");
+    }
+
+    /// <summary>First sale of this visit? Counts the visit towards the addict's tier once.</summary>
+    public bool ConsumeFirstSaleOfVisit()
+    {
+        if (Attributes.GetBool(AttrSoldThisVisit)) return false;
+        Attributes.SetBool(AttrSoldThisVisit, true);
+        return true;
+    }
+
+    // Once per load: adopt an identity (addicts spawned before the ledger existed, or a lost
+    // ledger), or despawn if another entity now plays this addict. Returns false if despawned.
+    private bool EnsureIdentity()
+    {
+        if (identityChecked) return true;
+        var rep = AddictReputationSystem.Instance;
+        if (rep == null) return true;
+        identityChecked = true;
+
+        var record = Record;
+        if (record == null)
+        {
+            record = rep.Ledger.Create(rep.Today, rep.Rng);
+            Attributes.SetInt(AttrAddictId, record.Id);
+            SetNameTag(AddictReputationSystem.NameOf(record));
+            rep.Ledger.MarkActive(record, EntityId, rep.Today);
+            return true;
+        }
+        if (!AddictLedger.IsStaleEntity(record, EntityId)) return true;
+        if (record.Alive && record.ActiveEntityId == 0)
+        {
+            // Released while this entity sat in an unloaded chunk, and nobody else took it.
+            rep.Ledger.MarkActive(record, EntityId, rep.Today);
+            return true;
+        }
+        // Dead, or another entity plays this addict now: this is a leftover copy.
+        (World as IServerWorldAccessor)?.DespawnEntity(this, new EntityDespawnData { Reason = EnumDespawnReason.Removed });
+        return false;
+    }
+
+    private AddictTier TierWith(string? playerUid)
+        => Record is { } r ? AddictLedger.TierOf(r, playerUid) : AddictTier.Stranger;
+
+    // A known customer is greeted by name.
+    private void Greet()
+    {
+        var record = Record;
+        if (record == null || TierWith(targetUid) == AddictTier.Stranger) Say("vs-dope:addict-greet");
+        else Say("vs-dope:addict-greet-known", AddictReputationSystem.NameOf(record));
     }
 
     // Entity.Die calls this only for EnumDespawnReason.Death (player kill or Overdose()), so a
@@ -137,6 +230,10 @@ public class EntityDrugAddict : EntityAgent
 
     public override void Initialize(EntityProperties properties, ICoreAPI api, long InChunkIndex3d)
     {
+        // Entity.Initialize gives a random texture alternate to any entity without a textureIndex.
+        // Ours are decline stages, so an addict saved before they existed must stay healthy-looking.
+        if (api.Side == EnumAppSide.Server && !WatchedAttributes.HasAttribute(AttrTextureIndex))
+            WatchedAttributes.SetInt(AttrTextureIndex, 0);
         base.Initialize(properties, api, InChunkIndex3d);
         // IWorldAccessor.SpawnEntity() calls Initialize() *after* the spawn system has
         // already called BindTarget(), so only adopt the persisted uid when nothing is
@@ -203,6 +300,7 @@ public class EntityDrugAddict : EntityAgent
         if (World.Side != EnumAppSide.Server || !Alive) return;
 
         ageSeconds += dt;
+        if (!EnsureIdentity()) return;
         _ = Pockets; // roll/load the inventory early so it exists before anyone trades or kills us
 
         if (ageSeconds > MaxLifetimeSeconds) { DespawnSelf(); return; }
@@ -232,7 +330,7 @@ public class EntityDrugAddict : EntityAgent
                     waitSeconds = 0;
                     StopMoving();
                     Face(target.Pos.X, target.Pos.Z);
-                    Say("vs-dope:addict-greet");
+                    Greet();
                 }
                 else
                 {
@@ -400,14 +498,14 @@ public class EntityDrugAddict : EntityAgent
         // First engagement decides the addict's fate: mug, or open the trading window.
         if (!engagedOnce)
         {
-            if (Rng.NextDouble() < HostileChance) { SetEngaged(false); DoMug(byEntity); return; }
+            if (Rng.NextDouble() < AddictLedger.MugChance(TierWith(player.PlayerUID))) { SetEngaged(false); DoMug(byEntity); return; }
 
             SetEngaged(true);
             SetState(AddictState.WaitInteract);
             waitSeconds = 0;
             StopMoving();
             Face(player.Pos.X, player.Pos.Z);
-            Say("vs-dope:addict-greet");
+            Greet();
             AddictTradeSystem.Instance?.OpenTradeFor(serverPlayer, this);
             return;
         }
@@ -429,7 +527,23 @@ public class EntityDrugAddict : EntityAgent
     public void OnPurchaseCompleted()
     {
         Say("vs-dope:addict-trade-thanks");
+        TryShareRumour();
         BeginLeave(LingerAfterSaleSeconds);
+    }
+
+    // A trusted regular sometimes tells the player where it scavenged. At most one roll per visit.
+    private void TryShareRumour()
+    {
+        var rep = AddictReputationSystem.Instance;
+        var record = Record;
+        if (rep == null || record == null || targetUid == null || Attributes.GetBool(AttrRumourTried)) return;
+        if (TierWith(targetUid) < AddictTier.Trusted) return;
+        Attributes.SetBool(AttrRumourTried, true);
+        if (Rng.NextDouble() >= AddictLedger.RumourChance) return;
+        if (World.PlayerByUid(targetUid) is not IServerPlayer player || player.Entity == null) return;
+
+        string? rumour = rep.TryRumour(record, player.Entity.Pos.AsBlockPos);
+        if (rumour != null) player.SendMessage(GlobalConstants.GeneralChatGroup, rumour, EnumChatType.Notification);
     }
 
     private void BeginLeave(double lingerSeconds)
@@ -446,6 +560,7 @@ public class EntityDrugAddict : EntityAgent
     {
         if (World.Side != EnumAppSide.Server || !Alive) return;
         Say("vs-dope:addict-overdose");
+        overdosing = true;
         Die(EnumDespawnReason.Death, new DamageSource { Source = EnumDamageSource.Internal, Type = EnumDamageType.Poison });
     }
 
@@ -453,9 +568,35 @@ public class EntityDrugAddict : EntityAgent
     {
         bool wasAlive = Alive;
         base.Die(reason, damageSourceForDeath);
+        if (!wasAlive || World.Side != EnumAppSide.Server) return;
         // Dead addicts don't trade. The corpse itself is handled by the deaddecay behavior.
-        if (wasAlive && World.Side == EnumAppSide.Server) AddictTradeSystem.Instance?.CloseTradeFor(this);
+        AddictTradeSystem.Instance?.CloseTradeFor(this);
+        if (reason == EnumDespawnReason.Death) RecordDeath(damageSourceForDeath);
     }
+
+    // The ledger records each death once. Overdosing on a sale counts against the seller (the
+    // current target); a kill counts against the killer unless this addict just mugged them.
+    private void RecordDeath(DamageSource? source)
+    {
+        var rep = AddictReputationSystem.Instance;
+        var record = Record;
+        if (rep == null || record == null) return;
+
+        if (overdosing)
+        {
+            rep.RecordDeath(record, AddictDeathCause.Overdose, targetUid, selfDefence: false);
+            return;
+        }
+        if (source?.GetCauseEntity() is EntityPlayer killer)
+        {
+            rep.RecordDeath(record, AddictDeathCause.Killed, killer.PlayerUID, MuggedThisVisit(killer.PlayerUID));
+            return;
+        }
+        rep.RecordDeath(record, AddictDeathCause.Other, null, selfDefence: false);
+    }
+
+    // Hitting (or killing) an addict that just robbed you is self-defence, not violence that spreads.
+    private bool MuggedThisVisit(string playerUid) => engagedOnce && !Friendly && targetUid == playerUid;
 
     private void DoMug(EntityAgent victim)
     {
@@ -477,6 +618,7 @@ public class EntityDrugAddict : EntityAgent
         }
 
         victim.ReceiveDamage(new DamageSource { Source = EnumDamageSource.Entity, SourceEntity = this, Type = EnumDamageType.BluntAttack }, MugDamage);
+        if (player != null && Record is { } record) AddictReputationSystem.Instance?.Ledger.RecordMugging(record, player.PlayerUID);
 
         Say(robbedSomething ? "vs-dope:addict-robbed" : "vs-dope:addict-mugged");
         BeginFlee();
@@ -498,6 +640,13 @@ public class EntityDrugAddict : EntityAgent
             // Fight back for a while, then disengage and flee.
             retaliateUntil = ageSeconds + RetaliateSeconds;
             if (state == AddictState.WaitInteract) StopMoving();
+
+            // Unprovoked violence gets around (a killing blow is recorded by Die instead).
+            if (damageSource.GetCauseEntity() is EntityPlayer attacker && !MuggedThisVisit(attacker.PlayerUID) &&
+                Record is { } record && World.PlayerByUid(attacker.PlayerUID) is IServerPlayer sp)
+            {
+                AddictReputationSystem.Instance?.RecordAssault(record, sp);
+            }
         }
         return result;
     }
@@ -567,16 +716,18 @@ public class EntityDrugAddict : EntityAgent
         return dx * dx + dz * dz;
     }
 
-    private void Say(string langKey)
+    private void Say(string langKey, params object[] args)
     {
         if (World.Side != EnumAppSide.Server || string.IsNullOrEmpty(targetUid)) return;
-        (World.PlayerByUid(targetUid) as IServerPlayer)?.SendLocalisedMessage(0, langKey, Array.Empty<object>());
+        (World.PlayerByUid(targetUid) as IServerPlayer)?.SendLocalisedMessage(0, langKey, args);
     }
 
     private void DespawnSelf()
     {
         if (World.Side != EnumAppSide.Server) return;
         AddictTradeSystem.Instance?.CloseTradeFor(this);
+        // The addict goes back into the pool; it may turn up again another day.
+        if (Record is { } record && AddictReputationSystem.Instance is { } rep) rep.Ledger.Release(record, EntityId, rep.Today);
         (World as IServerWorldAccessor)?.DespawnEntity(this, new EntityDespawnData { Reason = EnumDespawnReason.Removed });
     }
 }

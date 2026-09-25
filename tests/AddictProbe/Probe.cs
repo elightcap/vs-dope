@@ -88,6 +88,9 @@ public class Probe : ModSystem
 
             api.Logger.Notification("ADDICT TEST POCKETS: " + checks + " checks passed");
 
+            LedgerChecks.Rules(Check);
+            api.Logger.Notification("ADDICT TEST LEDGER: " + checks + " checks passed");
+
             // Entity half needs a loaded chunk: load the spawn column, then spawn real addicts.
             var spawn = world.DefaultSpawnPosition;
             int size = GlobalConstants.ChunkSize;
@@ -125,6 +128,9 @@ public class Probe : ModSystem
                 world.SpawnEntity(addict);
                 return addict;
             }
+
+            int lx = (int)spawn.X + 24, lz = (int)spawn.Z;
+            LedgerChecks.Entity(api, props, new Vec3d(lx + 0.5, world.BlockAccessor.GetRainMapHeightAt(lx, lz) + 1, lz + 0.5), Check);
 
             var killed = SpawnAt(0);
             var despawned = SpawnAt(12);

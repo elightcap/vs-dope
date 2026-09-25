@@ -41,6 +41,8 @@ vs-dope/
 │   ├── Entities/AddictPockets.cs
 │   ├── Network/AddictTradePackets.cs
 │   ├── Systems/AddictTradeSystem.cs
+│   ├── Systems/AddictLedger.cs
+│   ├── Systems/AddictReputationSystem.cs
 │   ├── Systems/DrugAddictSpawnSystem.cs
 │   ├── Systems/AddictionSystem.cs
 │   ├── Systems/OverdoseSystem.cs

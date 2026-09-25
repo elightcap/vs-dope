@@ -9,7 +9,9 @@ using VsDope.Entities;
 
 namespace VsDope.Systems;
 
-// Spawns 0-3 drug addicts near players once per in-game day, plus a debug slash command.
+// Spawns 0-3 drug addicts near a player once per in-game day, plus regulars who come looking
+// for their dealers, plus a debug slash command. Who turns up comes from the addict ledger
+// (AddictReputationSystem): a returning face or a new one, fewer after violence or a death.
 public class DrugAddictSpawnSystem
 {
     private const int MaxPerDay = 3;
@@ -34,7 +36,8 @@ public class DrugAddictSpawnSystem
             .WithDescription(Lang.Get("vs-dope:command-spawnaddict-desc"))
             .RequiresPrivilege(Privilege.controlserver)
             .RequiresPlayer()
-            .WithArgs(api.ChatCommands.Parsers.OptionalIntRange("count", 1, MaxDebugSpawn, 1))
+            .WithArgs(api.ChatCommands.Parsers.OptionalIntRange("count", 1, MaxDebugSpawn, 1),
+                      api.ChatCommands.Parsers.OptionalBool("returning"))
             .HandleWith(OnSpawnCommand);
     }
 
@@ -44,7 +47,9 @@ public class DrugAddictSpawnSystem
             return TextCommandResult.Error(Lang.Get("vs-dope:command-spawnaddict-noplayer"));
 
         int count = (int)args[0];
-        int spawned = SpawnNear(player, count, DebugMinOffset, DebugMaxOffset, out string? reason);
+        // "returning" prefers addicts this player already knows, to test regulars without waiting days.
+        bool returning = args.Parsers[1].IsMissing ? false : (bool)args[1];
+        int spawned = SpawnNear(player, count, DebugMinOffset, DebugMaxOffset, returning, out string? reason);
         return spawned > 0
             ? TextCommandResult.Success(Lang.Get("vs-dope:command-spawnaddict-success", spawned, count))
             : TextCommandResult.Error(Lang.Get("vs-dope:command-spawnaddict-failed", count, reason ?? "unknown cause"));
@@ -61,39 +66,61 @@ public class DrugAddictSpawnSystem
         lastProcessedDay = today;
         if (firstRun) return;
 
-        int count = rng.Next(0, MaxPerDay + 1); // 0..3 inclusive
         var players = api.Server.Players.Where(p => p.ConnectionState == EnumClientState.Playing).ToList();
         if (players.Count == 0) return;
 
-        SpawnNear(players[rng.Next(players.Count)], count, MinOffset, MaxOffset, out _);
+        // Routine visitors near one random player, fewer when word of violence or a death is around.
+        var chosen = players[rng.Next(players.Count)];
+        int count = rng.Next(0, MaxPerDay + 1); // 0..3 inclusive
+        if (AddictReputationSystem.Instance is { } rep)
+        {
+            double scaled = count * rep.Ledger.SpawnMultiplier(chosen.PlayerUID, rep.Today);
+            count = (int)scaled + (rng.NextDouble() < scaled - (int)scaled ? 1 : 0);
+        }
+        SpawnNear(chosen, count, MinOffset, MaxOffset, false, out _);
+
+        // Regulars come back on their own to whoever they buy from.
+        if (AddictReputationSystem.Instance is not { } reputation) return;
+        foreach (var player in players)
+        {
+            foreach (var record in reputation.Ledger.PickRegularVisits(player.PlayerUID, reputation.Today, rng))
+                SpawnNear(player, record, MinOffset, MaxOffset, out _);
+        }
     }
 
     // Places up to `count` addicts in a ring around the player. Returns how many actually spawned.
-    private int SpawnNear(IServerPlayer player, int count, double minOffset, double maxOffset, out string? reason)
+    private int SpawnNear(IServerPlayer player, int count, double minOffset, double maxOffset, bool preferReturning, out string? reason)
     {
         reason = null;
-        var anchor = player.Entity?.Pos;
-        if (anchor == null) { reason = "no player/world"; return 0; }
-
-        EntityProperties? props;
-        try { props = api.World.GetEntityType(EntityCode); }
-        catch (Exception e) { reason = $"GetEntityType threw: {e.Message}"; return 0; }
-        if (props == null) { reason = $"entitytype '{EntityCode}' not loaded"; return 0; }
-
         int spawned = 0;
-        string? lastReason = null;
         for (int i = 0; i < count; i++)
         {
-            if (TrySpawnOnce(anchor, player.PlayerUID, minOffset, maxOffset, props, out string? why))
-                spawned++;
-            else lastReason = why;
+            // Pick per spawn so the same addict is never chosen twice (it is active once spawned).
+            var record = AddictReputationSystem.Instance is { } rep
+                ? rep.Ledger.PickForSpawn(player.PlayerUID, rep.Today, rep.Rng, preferReturning)
+                : null;
+            if (SpawnNear(player, record, minOffset, maxOffset, out string? why)) spawned++;
+            else reason = why;
         }
-
-        reason = lastReason;
         return spawned;
     }
 
-    private bool TrySpawnOnce(EntityPos anchor, string targetUid, double minOffset, double maxOffset, EntityProperties props, out string? reason)
+    // Spawns one addict (a known identity, or none when the ledger is unavailable) near the player.
+    private bool SpawnNear(IServerPlayer player, AddictRecord? record, double minOffset, double maxOffset, out string? reason)
+    {
+        reason = null;
+        var anchor = player.Entity?.Pos;
+        if (anchor == null) { reason = "no player/world"; return false; }
+
+        EntityProperties? props;
+        try { props = api.World.GetEntityType(EntityCode); }
+        catch (Exception e) { reason = $"GetEntityType threw: {e.Message}"; return false; }
+        if (props == null) { reason = $"entitytype '{EntityCode}' not loaded"; return false; }
+
+        return TrySpawnOnce(anchor, player.PlayerUID, record, minOffset, maxOffset, props, out reason);
+    }
+
+    private bool TrySpawnOnce(EntityPos anchor, string targetUid, AddictRecord? record, double minOffset, double maxOffset, EntityProperties props, out string? reason)
     {
         reason = null;
         // Candidate spots: a ring around the player, then a guaranteed point right beside them.
@@ -126,7 +153,10 @@ public class DrugAddictSpawnSystem
             {
                 addict.Pos.SetPos(pos);
                 addict.BindTarget(targetUid);
+                if (record != null) addict.BindIdentity(record);
                 api.World.SpawnEntity(addict);
+                // EntityId is assigned (and possibly reassigned) inside SpawnEntity.
+                if (record != null && AddictReputationSystem.Instance is { } rep) rep.Ledger.MarkActive(record, addict.EntityId, rep.Today);
                 return true;
             }
             catch (Exception e) { reason = $"SpawnEntity threw: {e.Message}"; return false; }
