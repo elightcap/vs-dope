@@ -16,10 +16,18 @@
       ]
     },
     "textures": {
-      "seraph": { "base": "entity/drugaddict" },
+      "seraph": {
+        "base": "entity/drugaddict",
+        "alternates": [
+          { "base": "entity/drugaddict-decline1" },
+          { "base": "entity/drugaddict-decline2" },
+          { "base": "entity/drugaddict-decline3" }
+        ]
+      },
       "hair": { "base": "game:entity/humanoid/seraphskinparts/hair/rust3" }
     },
     "behaviors": [
+      { "code": "nametag", "showtagonlywhentargeted": true },
       { "code": "repulseagents" },
       { "code": "controlledphysics", "stepHeight": 1.05 },
       { "code": "interpolateposition" }
@@ -81,6 +89,7 @@
   },
   "server": {
     "behaviors": [
+      { "code": "nametag", "showtagonlywhentargeted": true },
       { "code": "repulseagents" },
       { "code": "controlledphysics", "stepHeight": 1.05 },
       { "code": "health", "currenthealth": 15, "maxhealth": 15 },

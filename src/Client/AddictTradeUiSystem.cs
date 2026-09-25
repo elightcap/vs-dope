@@ -149,7 +149,9 @@ public class GuiDialogAddictTrade : GuiDialog
         var compo = capi.Gui.CreateCompo("addicttrade", dialogBounds)
             .AddShadedDialogBG(fill, false)
             .AddDialogTitleBarWithBg(
-                Lang.Get("vs-dope:item-creature-drugaddict"),
+                string.IsNullOrEmpty(data.AddictName)
+                    ? Lang.Get("vs-dope:item-creature-drugaddict")
+                    : Lang.Get("vs-dope:addict-trade-title", data.AddictName, Lang.Get(data.AddictTierKey)),
                 OnClose,
                 CairoFont.WhiteDetailText().WithFontSize(16),
                 ElementBounds.Fixed(0, 0, Width, 30),
@@ -188,16 +190,16 @@ public class GuiDialogAddictTrade : GuiDialog
             float y = yRows + i * RowHeight;
             string code = data.DrugCodes[i];
             int price = data.GearPrices[i];
-            bool perLitre = i < data.Units.Length && data.Units[i] == "/L";
+            bool perDose = i < data.Units.Length && data.Units[i] == "dose";
             int held = i < data.PlayerHeld.Length ? data.PlayerHeld[i] : 0;
             string drugName = offerInventories[i][0]?.Itemstack?.GetName() ?? code;
 
             compo = compo
                 .AddPassiveItemSlot(ElementBounds.Fixed(Pad, y, 32, 32), offerInventories[i], offerInventories[i][0], false, "slot" + i)
                 .AddStaticText(drugName, small, EnumTextOrientation.Left, ElementBounds.Fixed(52, y + 6, 128, 20), "name" + i)
-                .AddStaticText(Lang.Get(perLitre ? "vs-dope:addict-trade-held-litre" : "vs-dope:addict-trade-held", held), detail,
+                .AddStaticText(Lang.Get(perDose ? "vs-dope:addict-trade-held-dose" : "vs-dope:addict-trade-held", held), detail,
                     EnumTextOrientation.Left, ElementBounds.Fixed(184, y + 8, 88, 20), "held" + i)
-                .AddStaticText(Lang.Get(perLitre ? "vs-dope:addict-trade-price-litre" : "vs-dope:addict-trade-price", price), small,
+                .AddStaticText(Lang.Get(perDose ? "vs-dope:addict-trade-price-dose" : "vs-dope:addict-trade-price", price), small,
                     EnumTextOrientation.Right, ElementBounds.Fixed(272, y + 6, 70, 20), "price" + i)
                 .AddSmallButton(Lang.Get("vs-dope:addict-trade-sell-one"), OnSellOne(code), ElementBounds.Fixed(348, y + 4, 50, 24), EnumButtonStyle.Small, "sell1_" + i)
                 .AddSmallButton(Lang.Get("vs-dope:addict-trade-sell-all"), OnSellAll(code), ElementBounds.Fixed(402, y + 4, 58, 24), EnumButtonStyle.Small, "sellall_" + i);

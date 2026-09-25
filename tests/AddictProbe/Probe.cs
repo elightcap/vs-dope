@@ -71,6 +71,9 @@ public class Probe : ModSystem
             Check(jugs.Count == 2 && jugs.Sum(j => jugBlock.GetCurrentLitres(j)) == 5, "5 L = 2 jugs");
             Check(liquid.AddLiquid(world, heroin, 1) == 1 && liquid.Stacks.Count == 2 && liquid.Stacks.Sum(j => jugBlock.GetCurrentLitres(j)) == 6, "1 L tops up existing jug");
             Check(AddictPockets.PaymentValueOf(jugs[0]) == 0 && liquid.Wealth == 0, "bought drugs are never payment");
+            var doses = new AddictPockets();
+            Check(doses.AddLiquidPortions(world, heroin, 30) == 30 && doses.AddLiquidPortions(world, heroin, 10) == 10, "heroin doses (portions) stored");
+            Check(doses.Stacks.Count == 1 && Math.Abs(jugBlock.GetCurrentLitres(doses.Stacks[0]) - 0.4f) < 1e-3, "4 doses = 0.4 L in one jug");
 
             // Persistence + packet roundtrip.
             var tree = p.ToTree();
@@ -87,6 +90,9 @@ public class Probe : ModSystem
             Check(all.Count == 2 && liquid.Stacks.Count == 0, "TakeAll empties pockets");
 
             api.Logger.Notification("ADDICT TEST POCKETS: " + checks + " checks passed");
+
+            LedgerChecks.Rules(Check);
+            api.Logger.Notification("ADDICT TEST LEDGER: " + checks + " checks passed");
 
             // Entity half needs a loaded chunk: load the spawn column, then spawn real addicts.
             var spawn = world.DefaultSpawnPosition;
@@ -125,6 +131,9 @@ public class Probe : ModSystem
                 world.SpawnEntity(addict);
                 return addict;
             }
+
+            int lx = (int)spawn.X + 24, lz = (int)spawn.Z;
+            LedgerChecks.Entity(api, props, new Vec3d(lx + 0.5, world.BlockAccessor.GetRainMapHeightAt(lx, lz) + 1, lz + 0.5), Check);
 
             var killed = SpawnAt(0);
             var despawned = SpawnAt(12);

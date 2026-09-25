@@ -153,6 +153,8 @@ Each of these was checked by decompiling or by a failed build/playtest in this r
 - Every packet class needs `[ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]`. protobuf-net 2.4.0 throws "no contract can be inferred" on plain POCOs, and it only fails at runtime.
 - Setup: `api.Network.RegisterChannel("vs-dope.x").RegisterMessageType<T>()` on **both** sides, then `SetMessageHandler<T>`.
 - Server send: `channel.SendPacket(packet, serverPlayer)`. The packet comes **first**, then the player(s).
+- **Persisted** protobuf data (save data, `SerializerUtil`): use explicit `[ProtoMember(n)]` (implicit fields are numbered alphabetically, so a new field shifts old tags). protobuf-net omits a value equal to the member default and then keeps the field initializer on load, so a field initialized to anything but 0/false/null needs a matching `[DefaultValue]` (e.g. `bool Alive = true` saved as `false` loads as `true`).
+- Entity texture `alternates` are chosen per entity by `WatchedAttributes["textureIndex"]` (0 = base). Server `Entity.Initialize` sets a **random** index when the key is missing, so set it before spawning (and before `base.Initialize` for entities saved without it).
 
 **GUI**
 - `EnumButtonStyle` = `None, MainMenu, Normal, Small`.
