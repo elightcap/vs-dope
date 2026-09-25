@@ -20,13 +20,13 @@ public class AddictTradeSystem
     // Solid drugs sell per item; liquid drugs sell per dose (DoseLitres) out of whatever container
     // holds them (heroin is an ItemLiquidPortion and never sits in a slot as a loose stack).
     // Heroin used to sell by the litre at 30: only ~1 in 10 addicts could afford a single litre.
-    // 3 per dose is the same price per litre, but addicts can buy what they can afford.
+    // At 9 per dose nearly every addict can afford one, and a typical visit buys about two.
     private static readonly (string Code, int GearPrice)[] Offers =
     {
         ("vs-dope:opium", 5),
         ("vs-dope:morphine", 12),
         ("vs-dope:coca-vitae", 16),
-        ("vs-dope:heroin", 3),
+        ("vs-dope:heroin", 9),
     };
 
     // One dose of a liquid drug: the same 0.1 L as a syringe injection (AddictionSystem.ApplyHeroinDose).
